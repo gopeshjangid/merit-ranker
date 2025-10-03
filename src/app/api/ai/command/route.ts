@@ -1,7 +1,4 @@
-import type {
-  ChatMessage,
-  ToolName,
-} from '@/components/editor/use-chat';
+import type { ChatMessage, ToolName } from '@/components/editor/use-chat';
 import type { NextRequest } from 'next/server';
 
 import { google } from '@ai-sdk/google';
