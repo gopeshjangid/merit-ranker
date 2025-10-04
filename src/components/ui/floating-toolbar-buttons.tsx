@@ -3,10 +3,12 @@
 import * as React from 'react';
 
 import {
+  BaselineIcon,
   BoldIcon,
-  Code2Icon,
+  // Code2Icon,
   ItalicIcon,
-  StrikethroughIcon,
+  PaintBucketIcon,
+  // StrikethroughIcon,
   UnderlineIcon,
   WandSparklesIcon,
 } from 'lucide-react';
@@ -22,6 +24,7 @@ import { MoreToolbarButton } from './more-toolbar-button';
 import { SuggestionToolbarButton } from './suggestion-toolbar-button';
 import { ToolbarGroup } from './toolbar';
 import { TurnIntoToolbarButton } from './turn-into-toolbar-button';
+import { FontColorToolbarButton } from './font-color-toolbar-button';
 
 export function FloatingToolbarButtons() {
   const readOnly = useEditorReadOnly();
@@ -40,6 +43,17 @@ export function FloatingToolbarButtons() {
           <ToolbarGroup>
             <TurnIntoToolbarButton />
 
+            <FontColorToolbarButton nodeType={KEYS.color} tooltip="Text color">
+                          <BaselineIcon />
+                        </FontColorToolbarButton>
+            
+                        <FontColorToolbarButton
+                          nodeType={KEYS.backgroundColor}
+                          tooltip="Background color"
+                        >
+                          <PaintBucketIcon />
+                        </FontColorToolbarButton>
+
             <MarkToolbarButton nodeType={KEYS.bold} tooltip="Bold (⌘+B)">
               <BoldIcon />
             </MarkToolbarButton>
@@ -55,7 +69,7 @@ export function FloatingToolbarButtons() {
               <UnderlineIcon />
             </MarkToolbarButton>
 
-            <MarkToolbarButton
+            {/* <MarkToolbarButton
               nodeType={KEYS.strikethrough}
               tooltip="Strikethrough (⌘+⇧+M)"
             >
@@ -64,7 +78,7 @@ export function FloatingToolbarButtons() {
 
             <MarkToolbarButton nodeType={KEYS.code} tooltip="Code (⌘+E)">
               <Code2Icon />
-            </MarkToolbarButton>
+            </MarkToolbarButton> */}
 
             <InlineEquationToolbarButton />
 
