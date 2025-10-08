@@ -3,7 +3,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "@/features/presentations/components/ui/collapsible";
 import { ChevronsUpDownIcon, Loader2, SearchIcon } from "lucide-react";
 
 export interface SearchResult {

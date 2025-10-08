@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/features/presentations/components/ui/skeleton";
 import { usePresentationState } from "@/states/presentation-state";
 import {
   closestCenter,

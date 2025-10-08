@@ -1,12 +1,12 @@
 import {
   Searched,
   type SearchResult,
-} from "@/components/presentation/outline/Search";
+} from "@/features/presentations/components/presentation/outline/Search";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "@/features/presentations/components/ui/collapsible";
 import { usePresentationState } from "@/states/presentation-state";
 import { Loader2, Search } from "lucide-react";
 import { useState } from "react";

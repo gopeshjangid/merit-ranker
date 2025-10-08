@@ -1,4 +1,4 @@
-import ProseMirrorEditor from "@/components/prose-mirror/ProseMirrorEditor";
+import ProseMirrorEditor from "@/features/presentations/components/prose-mirror/ProseMirrorEditor";
 import { cn } from "@/lib/utils";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
