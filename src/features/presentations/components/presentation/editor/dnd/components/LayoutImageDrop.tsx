@@ -1,4 +1,4 @@
-import { type LayoutType } from "@/components/presentation/utils/parser";
+import { type LayoutType } from "@/features/presentations/components/presentation/utils/parser";
 import { cn } from "@/lib/utils";
 import { usePresentationState } from "@/states/presentation-state";
 import { DRAG_ITEM_BLOCK } from "@platejs/dnd";

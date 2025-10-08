@@ -6,7 +6,7 @@ import { NodeApi, PathApi } from "platejs";
 import { type DragItemNode } from "@platejs/dnd";
 import { type UseDropNodeOptions } from "../hooks/useDropNode";
 
-import { MultiDndPlugin } from "@/components/plate/plugins/dnd-kit";
+import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
 import { getDropPath } from "../utils/getDropPath";
 
 /**

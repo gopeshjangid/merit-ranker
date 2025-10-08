@@ -14,7 +14,7 @@ import {
   type FileDragItemNode,
 } from "@platejs/dnd";
 
-import { MultiDndPlugin } from "@/components/plate/plugins/dnd-kit";
+import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
 import { onDropNode } from "../transforms/onDropNode";
 import { onHoverNode } from "../transforms/onHoverNode";
 import { getDropPath } from "../utils/getDropPath";

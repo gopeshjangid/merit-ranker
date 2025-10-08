@@ -1,4 +1,4 @@
-import { MultiDndPlugin } from "@/components/plate/plugins/dnd-kit";
+import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
 import { type DragItemNode } from "@platejs/dnd";
 import { type TElement } from "platejs";
 import { type PlateEditor } from "platejs/react";

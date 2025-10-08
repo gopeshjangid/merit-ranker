@@ -3,7 +3,7 @@ import { type DropTargetMonitor } from "react-dnd";
 
 import { type NodeEntry, type Path, type TElement, PathApi } from "platejs";
 
-import { MultiDndPlugin } from "@/components/plate/plugins/dnd-kit";
+import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
 import { type DragItemNode } from "@platejs/dnd";
 import { type UseDropNodeOptions } from "../hooks";
 import { getHoverDirection } from "./getHoverDirection";

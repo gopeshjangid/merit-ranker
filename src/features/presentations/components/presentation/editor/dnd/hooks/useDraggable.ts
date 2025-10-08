@@ -38,7 +38,8 @@ export const useDraggable = (props: UseDndNodeOptions): DraggableState => {
 
   if (!editor.plugins.dnd) return {} as any;
 
-  // biome-ignore lint/correctness/useHookAtTopLevel: We don't need to calculate anything when props are not available
+// We don't need to calculate anything when props are not available
+// eslint-disable-next-line react-hooks/rules-of-hooks 
   const { dragRef, isAboutToDrag, isDragging } = useDndNode({
     multiplePreviewRef,
     nodeRef,

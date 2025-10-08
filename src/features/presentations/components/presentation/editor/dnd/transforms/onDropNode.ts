@@ -7,7 +7,7 @@ import { type TElement } from "platejs";
 import { type ElementDragItemNode } from "@platejs/dnd";
 import { type UseDropNodeOptions } from "../hooks";
 
-import { MultiDndPlugin } from "@/components/plate/plugins/dnd-kit";
+import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
 import { getDropPath } from "../utils/getDropPath";
 import { updateSiblingsAfterDrop } from "../utils/updateSiblingsForcefully";
 
