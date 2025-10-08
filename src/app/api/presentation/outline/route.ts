@@ -1,4 +1,4 @@
-import { modelPicker } from "@/lib/model-picker";
+import { modelPicker } from "@/features/presentations/lib/model-picker";
 import { auth } from "@/server/auth";
 import { streamText } from "ai";
 import { NextResponse } from "next/server";
@@ -107,7 +107,7 @@ export async function POST(req: Request) {
       prompt: formattedPrompt,
     });
 
-    return result.toDataStreamResponse();
+    return result.toTextStreamResponse();
   } catch (error) {
     console.error("Error in outline generation:", error);
     return NextResponse.json(

@@ -1,4 +1,4 @@
-import { modelPicker } from "@/lib/model-picker";
+import { modelPicker } from "@/features/presentations/lib/model-picker";
 import { auth } from "@/server/auth";
 import { streamText } from "ai";
 import { NextResponse } from "next/server";
@@ -117,11 +117,11 @@ export async function POST(req: Request) {
       tools: {
         webSearch: search_tool,
       },
-      maxSteps: 5, // Allow up to 5 tool calls
+      // maxSteps: 5, // Allow up to 5 tool calls
       toolChoice: "auto", // Let the model decide when to use tools
     });
 
-    return result.toDataStreamResponse();
+    return result.toTextStreamResponse();
   } catch (error) {
     console.error("Error in outline generation with search:", error);
     return NextResponse.json(
