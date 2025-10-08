@@ -7,7 +7,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/features/presentations/components/ui/card";
 import { signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 

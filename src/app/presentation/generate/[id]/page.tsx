@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { getPresentation } from "@/app/_actions/presentation/presentationActions";
-import { getCustomThemeById } from "@/app/_actions/presentation/theme-actions";
-import { ThinkingDisplay } from "@/components/presentation/dashboard/ThinkingDisplay";
-import { Header } from "@/components/presentation/outline/Header";
-import { OutlineList } from "@/components/presentation/outline/OutlineList";
-import { PromptInput } from "@/components/presentation/outline/PromptInput";
-import { ToolCallDisplay } from "@/components/presentation/outline/ToolCallDisplay";
-import { ThemeBackground } from "@/components/presentation/theme/ThemeBackground";
-import { ThemeSettings } from "@/components/presentation/theme/ThemeSettings";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+import { getPresentation } from '@/app/_actions/presentation/presentationActions';
+import { getCustomThemeById } from '@/app/_actions/presentation/theme-actions';
+import { ThinkingDisplay } from '@/features/presentations/components/presentation/dashboard/ThinkingDisplay';
+import { Header } from '@/features/presentations/components/presentation/outline/Header';
+import { OutlineList } from '@/features/presentations/components/presentation/outline/OutlineList';
+import { PromptInput } from '@/features/presentations/components/presentation/outline/PromptInput';
+import { ToolCallDisplay } from '@/features/presentations/components/presentation/outline/ToolCallDisplay';
+import { ThemeBackground } from '@/features/presentations/components/presentation/theme/ThemeBackground';
+import { ThemeSettings } from '@/features/presentations/components/presentation/theme/ThemeSettings';
+import { Button } from '@/features/presentations/components/ui/button';
+import { Spinner } from '@/features/presentations/components/ui/spinner';
 import {
   themes,
   type ThemeProperties,
   type Themes,
-} from "@/lib/presentation/themes";
-import { usePresentationState } from "@/states/presentation-state";
-import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, Wand2 } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+} from '@/features/presentations/lib/presentation/themes';
+import { usePresentationState } from '@/states/presentation-state';
+import { useQuery } from '@tanstack/react-query';
+import { ArrowLeft, Wand2 } from 'lucide-react';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 
-export const PRESENTATION_GENERATION_COOKIE = "presentation_generation_pending";
+export const PRESENTATION_GENERATION_COOKIE = 'presentation_generation_pending';
 
 export default function PresentationGenerateWithIdPage() {
   const router = useRouter();
@@ -52,26 +52,26 @@ export default function PresentationGenerateWithIdPage() {
   // Use React Query to fetch presentation data
   const { data: presentationData, isLoading: isLoadingPresentation } = useQuery(
     {
-      queryKey: ["presentation", id],
+      queryKey: ['presentation', id],
       queryFn: async () => {
         const result = await getPresentation(id);
         if (!result.success) {
-          throw new Error(result.message ?? "Failed to load presentation");
+          throw new Error(result.message ?? 'Failed to load presentation');
         }
         return result.presentation;
       },
       enabled: !!id,
-    },
+    }
   );
 
   // Function to clear the cookie
   const clearPresentationCookie = () => {
-    if (typeof document === "undefined") return;
+    if (typeof document === 'undefined') return;
 
     const domain =
-      window.location.hostname === "localhost" ? "localhost" : ".allweone.com";
+      window.location.hostname === 'localhost' ? 'localhost' : '.allweone.com';
 
-    document.cookie = `${PRESENTATION_GENERATION_COOKIE}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ${domain !== "localhost" ? `domain=${domain}; ` : ""}`;
+    document.cookie = `${PRESENTATION_GENERATION_COOKIE}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ${domain !== 'localhost' ? `domain=${domain}; ` : ''}`;
   };
 
   // Clear the cookie when the page loads
@@ -89,7 +89,7 @@ export default function PresentationGenerateWithIdPage() {
     // If isGeneratingOutline is true but generation hasn't been started yet,
     // this indicates we just came from the dashboard and should start generation
     if (isGeneratingOutline && !generationStarted.current) {
-      console.log("Starting outline generation after navigation");
+      console.log('Starting outline generation after navigation');
       generationStarted.current = true;
 
       // Give the component time to fully mount and establish connections
@@ -105,7 +105,7 @@ export default function PresentationGenerateWithIdPage() {
     if (presentationData && !isLoadingPresentation && !isGeneratingOutline) {
       setCurrentPresentation(presentationData.id, presentationData.title);
       setPresentationInput(
-        presentationData.presentation?.prompt ?? presentationData.title,
+        presentationData.presentation?.prompt ?? presentationData.title
       );
 
       if (presentationData.presentation?.outline) {
@@ -116,14 +116,14 @@ export default function PresentationGenerateWithIdPage() {
       if (presentationData.presentation?.searchResults) {
         try {
           const searchResults = Array.isArray(
-            presentationData.presentation.searchResults,
+            presentationData.presentation.searchResults
           )
             ? presentationData.presentation.searchResults
             : JSON.parse(presentationData.presentation.searchResults as string);
           setWebSearchEnabled(true);
           setSearchResults(searchResults);
         } catch (error) {
-          console.error("Failed to parse search results:", error);
+          console.error('Failed to parse search results:', error);
           setSearchResults([]);
         }
       }
@@ -147,14 +147,14 @@ export default function PresentationGenerateWithIdPage() {
                 setTheme(themeId, themeData);
               } else {
                 // Fallback to default theme if custom theme not found
-                console.warn("Custom theme not found:", themeId);
-                setTheme("mystique");
+                console.warn('Custom theme not found:', themeId);
+                setTheme('mystique');
               }
             })
             .catch((error) => {
-              console.error("Failed to load custom theme:", error);
+              console.error('Failed to load custom theme:', error);
               // Fallback to default theme on error
-              setTheme("mystique");
+              setTheme('mystique');
             });
         }
       }
@@ -166,7 +166,7 @@ export default function PresentationGenerateWithIdPage() {
 
       if (presentationData?.presentation?.imageSource) {
         setImageSource(
-          presentationData.presentation.imageSource as "ai" | "stock",
+          presentationData.presentation.imageSource as 'ai' | 'stock'
         );
       }
 
@@ -211,7 +211,7 @@ export default function PresentationGenerateWithIdPage() {
     <ThemeBackground>
       <Button
         variant="ghost"
-        className="absolute left-4 top-4 flex items-center gap-2 text-muted-foreground hover:text-foreground"
+        className="absolute top-4 left-4 flex items-center gap-2 text-muted-foreground hover:text-foreground"
         onClick={() => router.back()}
       >
         <ArrowLeft className="h-4 w-4" />
@@ -243,7 +243,7 @@ export default function PresentationGenerateWithIdPage() {
         {/* <GoogleAdsBanner isVertical={true} /> */}
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center border-t bg-background/80 p-4 backdrop-blur-sm">
+      <div className="absolute right-0 bottom-0 left-0 flex justify-center border-t bg-background/80 p-4 backdrop-blur-sm">
         <Button
           size="lg"
           className="gap-2 px-8"
@@ -251,7 +251,7 @@ export default function PresentationGenerateWithIdPage() {
           disabled={isGeneratingPresentation}
         >
           <Wand2 className="h-5 w-5" />
-          {isGeneratingPresentation ? "Generating..." : "Generate Presentation"}
+          {isGeneratingPresentation ? 'Generating...' : 'Generate Presentation'}
         </Button>
       </div>
     </ThemeBackground>
