@@ -12,8 +12,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
+import { ScrollArea } from "@/features/presentations/components/ui/scroll-area";
+import { Skeleton } from "@/features/presentations/components/ui/skeleton";
 import { ChevronDown, Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";

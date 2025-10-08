@@ -1,5 +1,5 @@
 import { createOpenAI } from "@ai-sdk/openai";
-import { type LanguageModelV1 } from "ai";
+import { type LanguageModel } from "ai";
 import { createOllama } from "ollama-ai-provider";
 
 /**
@@ -9,11 +9,11 @@ import { createOllama } from "ollama-ai-provider";
 export function modelPicker(
   modelProvider: string,
   modelId?: string,
-): LanguageModelV1 {
+): LanguageModel {
   if (modelProvider === "ollama" && modelId) {
     // Use Ollama AI provider
     const ollama = createOllama();
-    return ollama(modelId) as unknown as LanguageModelV1;
+    return ollama(modelId) as unknown as LanguageModel;
   }
 
   if (modelProvider === "lmstudio" && modelId) {
@@ -23,10 +23,10 @@ export function modelPicker(
       baseURL: "http://localhost:1234/v1",
       apiKey: "lmstudio",
     });
-    return lmstudio(modelId) as unknown as LanguageModelV1;
+    return lmstudio(modelId) as unknown as LanguageModel;
   }
 
   // Default to OpenAI
   const openai = createOpenAI();
-  return openai("gpt-4o-mini") as unknown as LanguageModelV1;
+  return openai("gpt-4o-mini") as unknown as LanguageModel;
 }

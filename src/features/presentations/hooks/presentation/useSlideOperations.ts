@@ -1,6 +1,6 @@
 "use client";
 
-import { type PlateSlide } from "@/components/presentation/utils/parser";
+import { type PlateSlide } from "@/features/presentations/components/presentation/utils/parser";
 import { usePresentationState } from "@/states/presentation-state";
 import { nanoid } from "nanoid";
 

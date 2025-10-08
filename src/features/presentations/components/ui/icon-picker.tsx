@@ -7,7 +7,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "@/features/presentations/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState, type ReactNode } from "react";

@@ -8,7 +8,7 @@ import {
 } from "next-themes";
 
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@/features/presentations/components/ui/switch";
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;

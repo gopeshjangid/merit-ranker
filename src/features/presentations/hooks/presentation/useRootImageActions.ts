@@ -1,13 +1,13 @@
 "use client";
 
-import { useDraggable } from "@/components/presentation/editor/dnd/hooks/useDraggable";
+import { useDraggable } from "@/features/presentations/components/presentation/editor/dnd/hooks/useDraggable";
 import {
   type LayoutType,
   type PlateSlide,
   type RootImage,
-} from "@/components/presentation/utils/parser";
-import { type ImageCropSettings } from "@/components/presentation/utils/types";
-import { useDebouncedSave } from "@/hooks/presentation/useDebouncedSave";
+} from "@/features/presentations/components/presentation/utils/parser";
+import { type ImageCropSettings } from "@/features/presentations/components/presentation/utils/types";
+import { useDebouncedSave } from "@/features/presentations/hooks/presentation/useDebouncedSave";
 import { usePresentationState } from "@/states/presentation-state";
 import { DndPlugin, type DragItemNode } from "@platejs/dnd";
 import { ImagePlugin } from "@platejs/media/react";
