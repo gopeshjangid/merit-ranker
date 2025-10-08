@@ -1,6 +1,6 @@
 "use server";
 
-import { type PlateSlide } from "@/components/presentation/utils/parser";
+import { type PlateSlide } from "@/features/presentations/components/presentation/utils/parser";
 import { auth } from "@/server/auth";
 import { db } from "@/server/db";
 import { type InputJsonValue } from "@prisma/client/runtime/library";
