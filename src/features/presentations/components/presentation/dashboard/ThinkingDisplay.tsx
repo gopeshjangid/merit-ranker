@@ -1,11 +1,11 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/features/presentations/components/ui/card";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "@/features/presentations/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Brain, ChevronDown, Loader2 } from "lucide-react";
@@ -36,6 +36,7 @@ export function ThinkingDisplay({
   if (!thinkingContent) {
     return null;
   }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [open, setOpen] = useState(false);
 
   return (

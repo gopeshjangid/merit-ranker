@@ -3,15 +3,15 @@
 import { fetchPresentations } from "@/app/_actions/presentation/fetchPresentations";
 import { deletePresentations } from "@/app/_actions/presentation/presentationActions";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/features/presentations/components/ui/scroll-area";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useToast } from "@/components/ui/use-toast";
+} from "@/features/presentations/components/ui/sheet";
+import { Skeleton } from "@/features/presentations/components/ui/skeleton";
+import { useToast } from "@/features/presentations/components/ui/use-toast";
 import { usePresentationState } from "@/states/presentation-state";
 import { type Prisma } from "@prisma/client";
 import {

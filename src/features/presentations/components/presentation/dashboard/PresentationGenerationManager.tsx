@@ -3,7 +3,7 @@
 import { generateImageAction } from "@/app/_actions/image/generate";
 import { getImageFromUnsplash } from "@/app/_actions/image/unsplash";
 import { updatePresentation } from "@/app/_actions/presentation/presentationActions";
-import { extractThinking } from "@/lib/thinking-extractor";
+import { extractThinking } from "@/features/presentations/lib/thinking-extractor";
 import { usePresentationState } from "@/states/presentation-state";
 import { useChat, useCompletion } from "@ai-sdk/react";
 import { useEffect, useRef } from "react";

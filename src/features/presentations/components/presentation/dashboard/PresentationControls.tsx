@@ -4,7 +4,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/features/presentations/components/ui/select";
 import { usePresentationState } from "@/states/presentation-state";
 import { Layout } from "lucide-react";
 import { ModelPicker } from "./ModelPicker";

@@ -7,13 +7,13 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-} from "@/components/ui/select";
+} from "@/features/presentations/components/ui/select";
 import {
   fallbackModels,
   getSelectedModel,
   setSelectedModel,
   useLocalModels,
-} from "@/hooks/presentation/useLocalModels";
+} from "@/features/presentations/hooks/presentation/useLocalModels";
 import { usePresentationState } from "@/states/presentation-state";
 import { Bot, Cpu, Loader2, Monitor } from "lucide-react";
 import { useEffect, useRef } from "react";

@@ -1,5 +1,5 @@
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { Label } from "@/features/presentations/components/ui/label";
+import { Switch } from "@/features/presentations/components/ui/switch";
 import { usePresentationState } from "@/states/presentation-state";
 import { Globe } from "lucide-react";
 
