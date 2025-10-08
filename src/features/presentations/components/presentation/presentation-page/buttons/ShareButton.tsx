@@ -10,8 +10,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { Label } from "@/features/presentations/components/ui/label";
+import { Switch } from "@/features/presentations/components/ui/switch";
 import { usePresentationState } from "@/states/presentation-state";
 import { useMutation } from "@tanstack/react-query";
 import { Check, Copy, Share } from "lucide-react";
