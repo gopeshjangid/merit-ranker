@@ -6,7 +6,7 @@ import {
 } from "uploadthing/types";
 
 import { type OurFileRouter } from "@/app/api/uploadthing/core";
-import { uploadFiles } from "@/hooks/globals/useUploadthing";
+import { uploadFiles } from "@/features/presentations/hooks/globals/useUploadthing";
 import { toast } from "sonner";
 import { z } from "zod";
 

@@ -2,8 +2,8 @@
 
 import { createPlatePlugin } from "platejs/react";
 
-import { FixedToolbar } from "@/components/plate/ui/fixed-toolbar";
-import { FixedToolbarButtons } from "@/components/plate/ui/fixed-toolbar-buttons";
+import { FixedToolbar } from "@/features/presentations/components/plate/ui/fixed-toolbar";
+import { FixedToolbarButtons } from "@/features/presentations/components/plate/ui/fixed-toolbar-buttons";
 
 export const FixedToolbarKit = [
   createPlatePlugin({

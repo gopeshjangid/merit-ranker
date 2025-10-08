@@ -2,7 +2,7 @@
 
 import { CalloutPlugin } from "@platejs/callout/react";
 
-import { CalloutElement } from "@/components/plate/ui/callout-node";
+import { CalloutElement } from "@/features/presentations/components/plate/ui/callout-node";
 
 export const CalloutKit = [
   CalloutPlugin.configure({

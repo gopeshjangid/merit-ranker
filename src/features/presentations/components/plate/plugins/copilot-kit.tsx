@@ -5,7 +5,7 @@ import { type TElement } from "platejs";
 import { CopilotPlugin } from "@platejs/ai/react";
 import { serializeMd, stripMarkdown } from "@platejs/markdown";
 
-import { GhostText } from "@/components/plate/ui/ghost-text";
+import { GhostText } from "@/features/presentations/components/plate/ui/ghost-text";
 
 import { MarkdownKit } from "./markdown-kit";
 

@@ -4,7 +4,7 @@
 import { BlockSelectionPlugin } from "@platejs/selection/react";
 import { getPluginTypes, KEYS, type TElement } from "platejs";
 
-import { BlockSelection } from "@/components/plate/ui/block-selection";
+import { BlockSelection } from "@/features/presentations/components/plate/ui/block-selection";
 
 export const BlockSelectionKit = [
   BlockSelectionPlugin.configure(({ editor }) => ({

@@ -5,7 +5,7 @@ import { ColumnItemPlugin, ColumnPlugin } from "@platejs/layout/react";
 import {
   ColumnElement,
   ColumnGroupElement,
-} from "@/components/plate/ui/column-node";
+} from "@/features/presentations/components/plate/ui/column-node";
 
 export const ColumnKit = [
   ColumnPlugin.withComponent(ColumnGroupElement),

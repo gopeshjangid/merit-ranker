@@ -1,15 +1,15 @@
 "use client";
 
 import { type AIChatPluginConfig } from "@platejs/ai/react";
-import { type UseChatOptions } from "ai/react";
-
-import { streamInsertChunk, withAIBatch } from "@platejs/ai";
+import { type UseChatOptions } from "@ai-sdk/react";
+import { withAIBatch } from "@platejs/ai";
+import { streamInsertChunk } from "@platejs/ai/react";
 import { AIChatPlugin, AIPlugin, useChatChunk } from "@platejs/ai/react";
 import { KEYS, PathApi } from "platejs";
 import { usePluginOption } from "platejs/react";
 
-import { AILoadingBar, AIMenu } from "@/components/plate/ui/ai-menu";
-import { AIAnchorElement, AILeaf } from "@/components/plate/ui/ai-node";
+import { AILoadingBar, AIMenu } from "@/features/presentations/components/plate/ui/ai-menu";
+import { AIAnchorElement, AILeaf } from "@/features/presentations/components/plate/ui/ai-node";
 
 import { CursorOverlayKit } from "./cursor-overlay-kit";
 import { MarkdownKit } from "./markdown-kit";
