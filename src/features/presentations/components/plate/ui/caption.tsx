@@ -12,7 +12,7 @@ import {
 } from "@platejs/caption/react";
 import { cva } from "class-variance-authority";
 
-import { Button } from "@/components/plate/ui/button";
+import { Button } from "@/features/presentations/components/plate/ui/button";
 import { cn } from "@/lib/utils";
 import { createPrimitiveComponent } from "platejs/react";
 

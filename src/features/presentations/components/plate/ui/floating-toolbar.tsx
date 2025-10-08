@@ -15,7 +15,7 @@ import {
 
 import { cn } from "@/lib/utils";
 
-import { BLOCKS } from "@/components/presentation/editor/lib";
+import { BLOCKS } from "@/features/presentations/components/presentation/editor/lib";
 import { type MyEditor } from "../editor-kit";
 import {
   useFloatingToolbar,

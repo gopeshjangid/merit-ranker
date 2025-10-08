@@ -10,7 +10,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/plate/ui/dialog";
+} from "@/features/presentations/components/plate/ui/dialog";
 import { cn } from "@/lib/utils";
 
 function Command({

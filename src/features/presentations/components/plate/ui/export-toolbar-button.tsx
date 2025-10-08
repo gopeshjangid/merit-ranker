@@ -9,14 +9,14 @@ import { ArrowDownToLineIcon } from "lucide-react";
 import { createSlateEditor, serializeHtml } from "platejs";
 import { useEditorRef } from "platejs/react";
 
-import { BaseEditorKit } from "@/components/plate/editor-base-kit";
+import { BaseEditorKit } from "@/features/presentations/components/plate/editor-base-kit";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/plate/ui/dropdown-menu";
+} from "@/features/presentations/components/plate/ui/dropdown-menu";
 
 import { EditorStatic } from "./editor-static";
 import { ToolbarButton } from "./toolbar";

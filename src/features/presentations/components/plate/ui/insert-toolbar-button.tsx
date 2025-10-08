@@ -34,11 +34,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/plate/ui/dropdown-menu";
+} from "@/features/presentations/components/plate/ui/dropdown-menu";
 import {
   insertBlock,
   insertInlineElement,
-} from "@/components/plate/utils/transforms";
+} from "@/features/presentations/components/plate/utils/transforms";
 
 import { ToolbarButton, ToolbarMenuGroup } from "./toolbar";
 

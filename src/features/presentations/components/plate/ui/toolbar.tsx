@@ -11,9 +11,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuSeparator,
-} from "@/components/plate/ui/dropdown-menu";
-import { Separator } from "@/components/plate/ui/separator";
-import { Tooltip, TooltipTrigger } from "@/components/plate/ui/tooltip";
+} from "@/features/presentations/components/plate/ui/dropdown-menu";
+import { Separator } from "@/features/presentations/components/plate/ui/separator";
+import { Tooltip, TooltipTrigger } from "@/features/presentations/components/plate/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 export function Toolbar({

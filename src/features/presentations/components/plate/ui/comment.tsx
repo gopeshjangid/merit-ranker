@@ -30,24 +30,24 @@ import {
   usePluginOption,
 } from "platejs/react";
 
-import { BasicMarksKit } from "@/components/plate/plugins/basic-marks-kit";
+import { BasicMarksKit } from "@/features/presentations/components/plate/plugins/basic-marks-kit";
 import {
   type TDiscussion,
   discussionPlugin,
-} from "@/components/plate/plugins/discussion-kit";
+} from "@/features/presentations/components/plate/plugins/discussion-kit";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/plate/ui/avatar";
-import { Button } from "@/components/plate/ui/button";
+} from "@/features/presentations/components/plate/ui/avatar";
+import { Button } from "@/features/presentations/components/plate/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/plate/ui/dropdown-menu";
+} from "@/features/presentations/components/plate/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
 import { Editor, EditorContainer } from "./editor";

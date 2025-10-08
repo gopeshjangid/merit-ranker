@@ -29,14 +29,14 @@ import { useEditorPlugin, usePluginOption } from "platejs/react";
 import {
   type TDiscussion,
   discussionPlugin,
-} from "@/components/plate/plugins/discussion-kit";
-import { suggestionPlugin } from "@/components/plate/plugins/suggestion-kit";
+} from "@/features/presentations/components/plate/plugins/discussion-kit";
+import { suggestionPlugin } from "@/features/presentations/components/plate/plugins/suggestion-kit";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/plate/ui/avatar";
-import { Button } from "@/components/plate/ui/button";
+} from "@/features/presentations/components/plate/ui/avatar";
+import { Button } from "@/features/presentations/components/plate/ui/button";
 import { cn } from "@/lib/utils";
 
 import {

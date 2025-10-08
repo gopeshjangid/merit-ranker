@@ -36,18 +36,18 @@ import {
   usePluginOption,
 } from "platejs/react";
 
-import { Button } from "@/components/plate/ui/button";
+import { Button } from "@/features/presentations/components/plate/ui/button";
 import {
   Command,
   CommandGroup,
   CommandItem,
   CommandList,
-} from "@/components/plate/ui/command";
+} from "@/features/presentations/components/plate/ui/command";
 import {
   Popover,
   PopoverAnchor,
   PopoverContent,
-} from "@/components/plate/ui/popover";
+} from "@/features/presentations/components/plate/ui/popover";
 import { cn } from "@/lib/utils";
 
 import { useChat } from "@ai-sdk/react";

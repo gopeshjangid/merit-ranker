@@ -3,7 +3,7 @@
 import { MessageSquareTextIcon } from "lucide-react";
 import { useEditorRef } from "platejs/react";
 
-import { commentPlugin } from "@/components/plate/plugins/comment-kit";
+import { commentPlugin } from "@/features/presentations/components/plate/plugins/comment-kit";
 
 import { ToolbarButton } from "./toolbar";
 

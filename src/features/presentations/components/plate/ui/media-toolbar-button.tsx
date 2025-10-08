@@ -26,15 +26,15 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/plate/ui/alert-dialog";
+} from "@/features/presentations/components/plate/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/plate/ui/dropdown-menu";
-import { Input } from "@/components/plate/ui/input";
+} from "@/features/presentations/components/plate/ui/dropdown-menu";
+import { Input } from "@/features/presentations/components/plate/ui/input";
 
 import {
   ToolbarSplitButton,

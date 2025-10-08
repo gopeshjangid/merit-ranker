@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { DndPlugin } from "@platejs/dnd";
-import { expandListItemsWithChildren } from "@platejs/list";
-import { BlockSelectionPlugin } from "@platejs/selection/react";
-import { GripHorizontal, GripVertical } from "lucide-react";
+import { DndPlugin } from '@platejs/dnd';
+import { expandListItemsWithChildren } from '@platejs/list';
+import { BlockSelectionPlugin } from '@platejs/selection/react';
+import { GripHorizontal, GripVertical } from 'lucide-react';
 import {
   type TElement,
   getContainerTypes,
   isType,
   KEYS,
   PathApi,
-} from "platejs";
+} from 'platejs';
 import {
   type PlateEditor,
   type PlateElementProps,
@@ -21,20 +21,20 @@ import {
   usePath,
   usePluginOption,
   useSelected,
-} from "platejs/react";
-import * as React from "react";
+} from 'platejs/react';
+import * as React from 'react';
 
-import { Button } from "@/components/plate/ui/button";
+import { Button } from '@/features/presentations/components/plate/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/plate/ui/tooltip";
-import { useDraggable } from "@/components/presentation/editor/dnd/hooks/useDraggable";
-import { useDropLine } from "@/components/presentation/editor/dnd/hooks/useDropLine";
-import { getGridClassForElement } from "@/components/presentation/editor/lib";
-import { cn } from "@/lib/utils";
-import { MultiDndPlugin } from "../plugins/dnd-kit";
+} from '@/features/presentations/components/plate/ui/tooltip';
+import { useDraggable } from '@/features/presentations/components/presentation/editor/dnd/hooks/useDraggable';
+import { useDropLine } from '@/features/presentations/components/presentation/editor/dnd/hooks/useDropLine';
+import { getGridClassForElement } from '@/features/presentations/components/presentation/editor/lib';
+import { cn } from '@/lib/utils';
+import { MultiDndPlugin } from '../plugins/dnd-kit';
 
 // Configuration constants
 const UNDRAGGABLE_KEYS = [KEYS.tr, KEYS.td];
@@ -42,7 +42,7 @@ const UNDRAGGABLE_KEYS = [KEYS.tr, KEYS.td];
 // Elements that should have horizontal orientation
 
 // Elements that can only drop within same parent (sibling-only drops)
-const SIBLING_ONLY_DROP_ELEMENTS = ["column", "table-row", "list-item"];
+const SIBLING_ONLY_DROP_ELEMENTS = ['column', 'table-row', 'list-item'];
 
 // Helper function to determine element orientation
 
@@ -56,7 +56,7 @@ export const BlockDraggable: RenderNodeWrapper = (props) => {
 
   if (!props) return;
 
-  // biome-ignore lint/correctness/useHookAtTopLevel: We don't need to calculate anything when props are not available
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const enabled = React.useMemo(() => {
     if (editor.dom.readOnly) return false;
     if (!path) return false;
@@ -89,7 +89,6 @@ export const BlockDraggable: RenderNodeWrapper = (props) => {
 
   if (!enabled) return;
 
-   
   return (props) => <Draggable {...props} />;
 };
 
@@ -97,7 +96,7 @@ export function Draggable(props: PlateElementProps) {
   const { children, editor, element, path } = props;
   const blockSelectionApi = editor.getApi(BlockSelectionPlugin).blockSelection;
 
-  let orientation: "vertical" | "horizontal" | undefined;
+  let orientation: 'vertical' | 'horizontal' | undefined;
   const { isAboutToDrag, isDragging, nodeRef, previewRef, handleRef } =
     useDraggable({
       element,
@@ -160,7 +159,7 @@ export function Draggable(props: PlateElementProps) {
   const isInTable = path.length === 4;
 
   if (path.length === 2) {
-    orientation = "horizontal";
+    orientation = 'horizontal';
   }
 
   const [previewTop, setPreviewTop] = React.useState(0);
@@ -168,7 +167,7 @@ export function Draggable(props: PlateElementProps) {
   const resetPreview = () => {
     if (previewRef.current) {
       previewRef.current.replaceChildren();
-      previewRef.current?.classList.add("hidden");
+      previewRef.current?.classList.add('hidden');
     }
   };
 
@@ -181,41 +180,41 @@ export function Draggable(props: PlateElementProps) {
 
   React.useEffect(() => {
     if (isAboutToDrag) {
-      previewRef.current?.classList.remove("opacity-0");
+      previewRef.current?.classList.remove('opacity-0');
     }
   }, [isAboutToDrag, previewRef]);
 
   return (
     <div
       className={cn(
-        path?.length === 1 && "px-16",
+        path?.length === 1 && 'px-16',
         // path?.length === 2 && "pl-8",
         getGridClassForElement(
           editor as unknown as PlateEditor,
-          element as unknown as TElement,
-        ),
+          element as unknown as TElement
+        )
       )}
       ref={nodeRef}
     >
       <div
         className={cn(
-          "relative h-full",
-          isDragging && "opacity-50",
-          "after:absolute after:-inset-1 after:pointer-events-none hover:after:border hover:after:border-blue-400",
+          'relative h-full',
+          isDragging && 'opacity-50',
+          'after:pointer-events-none after:absolute after:-inset-1 hover:after:border hover:after:border-blue-400',
           getContainerTypes(editor).includes(element.type)
-            ? "group/container"
-            : "group",
+            ? 'group/container'
+            : 'group'
         )}
       >
         {!isInTable && (
           <Gutter orientation={orientation}>
             <div
               className={cn(
-                "slate-blockToolbarWrapper",
-                "flex",
-                orientation === "horizontal"
-                  ? "h-6 w-full justify-center"
-                  : "h-[1.5em]",
+                'slate-blockToolbarWrapper',
+                'flex',
+                orientation === 'horizontal'
+                  ? 'h-6 w-full justify-center'
+                  : 'h-[1.5em]',
                 isType(editor, element, [
                   KEYS.h1,
                   KEYS.h2,
@@ -223,25 +222,25 @@ export function Draggable(props: PlateElementProps) {
                   KEYS.h4,
                   KEYS.h5,
                 ]) &&
-                  orientation === "vertical" &&
-                  "h-[1.3em]",
-                isInColumn && orientation === "vertical" && "h-4",
+                  orientation === 'vertical' &&
+                  'h-[1.3em]',
+                isInColumn && orientation === 'vertical' && 'h-4'
               )}
             >
               <div
                 className={cn(
-                  "slate-blockToolbar",
-                  "pointer-events-auto flex items-center",
-                  orientation === "horizontal" ? "mb-1" : "mr-1",
-                  isInColumn && orientation === "vertical" && "mr-1.5",
+                  'slate-blockToolbar',
+                  'pointer-events-auto flex items-center',
+                  orientation === 'horizontal' ? 'mb-1' : 'mr-1',
+                  isInColumn && orientation === 'vertical' && 'mr-1.5'
                 )}
               >
                 <Button
                   ref={handleRef}
                   variant="ghost"
                   className={cn(
-                    "p-0 bg-background/50",
-                    orientation === "horizontal" ? "h-5 w-6" : "h-6 w-5",
+                    'bg-background/50 p-0',
+                    orientation === 'horizontal' ? 'h-5 w-6' : 'h-6 w-5'
                   )}
                   data-plate-prevent-deselect
                 >
@@ -260,7 +259,7 @@ export function Draggable(props: PlateElementProps) {
 
         <div
           ref={previewRef}
-          className={cn("pointer-events-none absolute -left-0 hidden w-full")}
+          className={cn('pointer-events-none absolute -left-0 hidden w-full')}
           style={{ top: `${-previewTop}px` }}
           contentEditable={false}
         />
@@ -284,15 +283,15 @@ export function Draggable(props: PlateElementProps) {
 function Gutter({
   children,
   className,
-  orientation = "vertical",
+  orientation = 'vertical',
   ...props
-}: React.ComponentProps<"div"> & { orientation?: "horizontal" | "vertical" }) {
+}: React.ComponentProps<'div'> & { orientation?: 'horizontal' | 'vertical' }) {
   const editor = useEditorRef();
   const element = useElement();
   const path = usePath();
   const isSelectionAreaVisible = usePluginOption(
     BlockSelectionPlugin,
-    "isSelectionAreaVisible",
+    'isSelectionAreaVisible'
   );
 
   const selected = useSelected();
@@ -304,37 +303,37 @@ function Gutter({
     <div
       {...props}
       className={cn(
-        "slate-gutterLeft",
-        "absolute z-50 flex cursor-text hover:opacity-100 sm:opacity-0",
-        orientation === "horizontal"
-          ? "left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
-          : "left-0 top-0 h-full -translate-x-full",
+        'slate-gutterLeft',
+        'absolute z-50 flex cursor-text hover:opacity-100 sm:opacity-0',
+        orientation === 'horizontal'
+          ? 'top-0 left-1/2 -translate-x-1/2 -translate-y-1/2'
+          : 'top-0 left-0 h-full -translate-x-full',
         getContainerTypes(editor).includes(element.type)
-          ? "group-hover/container:opacity-100"
-          : "group-hover:opacity-100",
-        isSelectionAreaVisible && "hidden",
-        !selected && "opacity-0",
+          ? 'group-hover/container:opacity-100'
+          : 'group-hover:opacity-100',
+        isSelectionAreaVisible && 'hidden',
+        !selected && 'opacity-0',
         // Vertical orientation specific styles
-        orientation === "vertical" && [
-          isNodeType(KEYS.h1) && "pb-1 text-[1.875em]",
-          isNodeType(KEYS.h2) && "pb-1 text-[1.5em]",
-          isNodeType(KEYS.h3) && "pb-1 pt-[2px] text-[1.25em]",
-          isNodeType([KEYS.h4, KEYS.h5]) && "pb-0 pt-1 text-[1.1em]",
-          isNodeType(KEYS.h6) && "pb-0",
-          isNodeType(KEYS.p) && "pb-0 pt-1",
-          isNodeType(KEYS.blockquote) && "pb-0",
-          isNodeType(KEYS.codeBlock) && "pb-0 pt-6",
+        orientation === 'vertical' && [
+          isNodeType(KEYS.h1) && 'pb-1 text-[1.875em]',
+          isNodeType(KEYS.h2) && 'pb-1 text-[1.5em]',
+          isNodeType(KEYS.h3) && 'pt-[2px] pb-1 text-[1.25em]',
+          isNodeType([KEYS.h4, KEYS.h5]) && 'pt-1 pb-0 text-[1.1em]',
+          isNodeType(KEYS.h6) && 'pb-0',
+          isNodeType(KEYS.p) && 'pt-1 pb-0',
+          isNodeType(KEYS.blockquote) && 'pb-0',
+          isNodeType(KEYS.codeBlock) && 'pt-6 pb-0',
           isNodeType([
             KEYS.img,
             KEYS.mediaEmbed,
             KEYS.excalidraw,
             KEYS.toggle,
             KEYS.column,
-          ]) && "py-0",
-          isNodeType([KEYS.placeholder, KEYS.table]) && "pb-0 pt-3",
-          isInColumn && "mt-2 h-4 pt-0",
+          ]) && 'py-0',
+          isNodeType([KEYS.placeholder, KEYS.table]) && 'pt-3 pb-0',
+          isInColumn && 'mt-2 h-4 pt-0',
         ],
-        className,
+        className
       )}
       contentEditable={false}
     >
@@ -344,13 +343,13 @@ function Gutter({
 }
 
 const DragHandle = React.memo(function DragHandle({
-  orientation = "vertical",
+  orientation = 'vertical',
   isDragging,
   previewRef,
   resetPreview,
   setPreviewTop,
 }: {
-  orientation?: "horizontal" | "vertical";
+  orientation?: 'horizontal' | 'vertical';
   isDragging: boolean;
   previewRef: React.RefObject<HTMLDivElement | null>;
   resetPreview: () => void;
@@ -365,7 +364,7 @@ const DragHandle = React.memo(function DragHandle({
     if (e.button !== 0 || e.shiftKey) return;
 
     // Set mouse down state to prevent toolbar from showing
-    editor.setOption(MultiDndPlugin, "isMouseDown", true);
+    editor.setOption(MultiDndPlugin, 'isMouseDown', true);
 
     const blockSelection = editor
       .getApi(BlockSelectionPlugin)
@@ -374,7 +373,7 @@ const DragHandle = React.memo(function DragHandle({
     let selectionNodes =
       blockSelection.length > 0
         ? blockSelection
-        : editor.api.blocks({ mode: "highest" });
+        : editor.api.blocks({ mode: 'highest' });
 
     // If current block is not in selection, use it as the starting point
     if (!selectionNodes.some(([node]) => node.id === element.id)) {
@@ -383,7 +382,7 @@ const DragHandle = React.memo(function DragHandle({
 
     // Process selection nodes to include list children
     const blocks = expandListItemsWithChildren(editor, selectionNodes).map(
-      ([node]) => node,
+      ([node]) => node
     );
 
     if (blockSelection.length === 0) {
@@ -393,9 +392,9 @@ const DragHandle = React.memo(function DragHandle({
 
     const elements = createDragPreviewElements(editor, blocks);
     previewRef.current?.append(...elements);
-    previewRef.current?.classList.remove("hidden");
-    previewRef.current?.classList.add("opacity-0");
-    editor.setOption(DndPlugin, "multiplePreviewRef", previewRef);
+    previewRef.current?.classList.remove('hidden');
+    previewRef.current?.classList.add('opacity-0');
+    editor.setOption(DndPlugin, 'multiplePreviewRef', previewRef);
 
     editor
       .getApi(BlockSelectionPlugin)
@@ -406,7 +405,7 @@ const DragHandle = React.memo(function DragHandle({
     resetPreview();
 
     // Reset mouse down state to allow toolbar to show
-    editor.setOption(MultiDndPlugin, "isMouseDown", false);
+    editor.setOption(MultiDndPlugin, 'isMouseDown', false);
 
     // Show toolbar on mouse up (if not dragging)
     if (!isDragging) {
@@ -424,7 +423,7 @@ const DragHandle = React.memo(function DragHandle({
     let selectedBlocks =
       blockSelection.length > 0
         ? blockSelection
-        : editor.api.blocks({ mode: "highest" });
+        : editor.api.blocks({ mode: 'highest' });
 
     // If current block is not in selection, use it as the starting point
     if (!selectedBlocks.some(([node]) => node.id === element.id)) {
@@ -458,7 +457,7 @@ const DragHandle = React.memo(function DragHandle({
           role="button"
           data-plate-prevent-deselect
         >
-          {orientation === "horizontal" ? (
+          {orientation === 'horizontal' ? (
             <GripHorizontal className="text-muted-foreground" />
           ) : (
             <GripVertical className="text-muted-foreground" />
@@ -473,7 +472,7 @@ const DragHandle = React.memo(function DragHandle({
 const DropLine = React.memo(function DropLine({
   className,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<'div'>) {
   const { dropLine } = useDropLine();
 
   if (!dropLine) return null;
@@ -482,19 +481,19 @@ const DropLine = React.memo(function DropLine({
     <div
       {...props}
       className={cn(
-        "slate-dropLine",
-        "absolute opacity-100 transition-opacity",
-        "bg-blue-500",
+        'slate-dropLine',
+        'absolute opacity-100 transition-opacity',
+        'bg-blue-500',
         // Horizontal line styles for vertical drops
-        (dropLine === "top" || dropLine === "bottom") && "inset-x-0 h-0.5",
+        (dropLine === 'top' || dropLine === 'bottom') && 'inset-x-0 h-0.5',
         // Vertical line styles for horizontal drops
-        (dropLine === "left" || dropLine === "right") && "inset-y-0 w-0.5",
+        (dropLine === 'left' || dropLine === 'right') && 'inset-y-0 w-0.5',
         // Positioning
-        dropLine === "top" && "-top-px",
-        dropLine === "bottom" && "-bottom-px",
-        dropLine === "left" && "-left-px",
-        dropLine === "right" && "-right-px",
-        className,
+        dropLine === 'top' && '-top-px',
+        dropLine === 'bottom' && '-bottom-px',
+        dropLine === 'left' && '-left-px',
+        dropLine === 'right' && '-right-px',
+        className
       )}
     />
   );
@@ -502,7 +501,7 @@ const DropLine = React.memo(function DropLine({
 
 const createDragPreviewElements = (
   editor: PlateEditor,
-  blocks: TElement[],
+  blocks: TElement[]
 ): HTMLElement[] => {
   const elements: HTMLElement[] = [];
   const ids: string[] = [];
@@ -514,8 +513,8 @@ const createDragPreviewElements = (
   const removeDataAttributes = (element: HTMLElement) => {
     Array.from(element.attributes).forEach((attr) => {
       if (
-        attr.name.startsWith("data-slate") ||
-        attr.name.startsWith("data-block-id")
+        attr.name.startsWith('data-slate') ||
+        attr.name.startsWith('data-block-id')
       ) {
         element.removeAttribute(attr.name);
       }
@@ -533,18 +532,18 @@ const createDragPreviewElements = (
     // Apply visual compensation for horizontal scroll
     const applyScrollCompensation = (
       original: Element,
-      cloned: HTMLElement,
+      cloned: HTMLElement
     ) => {
       const scrollLeft = original.scrollLeft;
 
       if (scrollLeft > 0) {
         // Create a wrapper to handle the scroll offset
-        const scrollWrapper = document.createElement("div");
-        scrollWrapper.style.overflow = "hidden";
+        const scrollWrapper = document.createElement('div');
+        scrollWrapper.style.overflow = 'hidden';
         scrollWrapper.style.width = `${original.clientWidth}px`;
 
         // Create inner container with the full content
-        const innerContainer = document.createElement("div");
+        const innerContainer = document.createElement('div');
         innerContainer.style.transform = `translateX(-${scrollLeft}px)`;
         innerContainer.style.width = `${original.scrollWidth}px`;
 
@@ -555,7 +554,7 @@ const createDragPreviewElements = (
 
         // Apply the original element's styles to maintain appearance
         const originalStyles = window.getComputedStyle(original);
-        cloned.style.padding = "0";
+        cloned.style.padding = '0';
         innerContainer.style.padding = originalStyles.padding;
 
         scrollWrapper.append(innerContainer);
@@ -566,9 +565,9 @@ const createDragPreviewElements = (
     applyScrollCompensation(domNode, newDomNode);
 
     ids.push(node.id as string);
-    const wrapper = document.createElement("div");
+    const wrapper = document.createElement('div');
     wrapper.append(newDomNode);
-    wrapper.style.display = "flow-root";
+    wrapper.style.display = 'flow-root';
 
     const lastDomNode = blocks[index - 1];
 
@@ -593,7 +592,7 @@ const createDragPreviewElements = (
 
   blocks.forEach((node, index) => resolveElement(node, index));
 
-  editor.setOption(DndPlugin, "draggingId", ids);
+  editor.setOption(DndPlugin, 'draggingId', ids);
 
   return elements;
 };
@@ -606,7 +605,7 @@ const calculatePreviewTop = (
   }: {
     blocks: TElement[];
     element: TElement;
-  },
+  }
 ): number => {
   const child = editor.api.toDOMNode(element)!;
   const editable = editor.api.toDOMNode(editor)!;
@@ -615,7 +614,7 @@ const calculatePreviewTop = (
   const firstDomNode = editor.api.toDOMNode(firstSelectedChild)!;
   // Get editor's top padding
   const editorPaddingTop = Number(
-    window.getComputedStyle(editable).paddingTop.replace("px", ""),
+    window.getComputedStyle(editable).paddingTop.replace('px', '')
   );
 
   // Calculate distance from first selected node to editor top
@@ -626,7 +625,7 @@ const calculatePreviewTop = (
 
   // Get margin top of first selected node
   const firstMarginTopString = window.getComputedStyle(firstDomNode).marginTop;
-  const marginTop = Number(firstMarginTopString.replace("px", ""));
+  const marginTop = Number(firstMarginTopString.replace('px', ''));
 
   // Calculate distance from current node to editor top
   const currentToEditorDistance =
@@ -635,7 +634,7 @@ const calculatePreviewTop = (
     editorPaddingTop;
 
   const currentMarginTopString = window.getComputedStyle(child).marginTop;
-  const currentMarginTop = Number(currentMarginTopString.replace("px", ""));
+  const currentMarginTop = Number(currentMarginTopString.replace('px', ''));
 
   const previewElementsTopDistance =
     currentToEditorDistance -

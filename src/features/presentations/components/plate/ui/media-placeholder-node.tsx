@@ -16,7 +16,7 @@ import { KEYS } from "platejs";
 import { PlateElement, useEditorPlugin, withHOC } from "platejs/react";
 import { useFilePicker } from "use-file-picker";
 
-import { useUploadFile } from "@/components/plate/hooks/use-upload-file";
+import { useUploadFile } from "@/features/presentations/components/plate/hooks/use-upload-file";
 import { cn } from "@/lib/utils";
 
 const CONTENT: Record<

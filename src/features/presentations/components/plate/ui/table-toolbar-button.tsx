@@ -29,10 +29,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/plate/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
-
-import { ToolbarButton } from "./toolbar";
+} from "@/features/presentations/components/plate/ui/dropdown-menu";
+import { ToolbarButton } from "@/features/presentations/components/plate/ui/toolbar";
+import { cn } from "@/features/presentations/lib/utils";
 
 export function TableToolbarButton(props: DropdownMenuProps) {
   const tableSelected = useEditorSelector(

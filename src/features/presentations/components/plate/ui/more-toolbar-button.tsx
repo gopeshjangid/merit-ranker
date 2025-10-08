@@ -19,7 +19,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/plate/ui/dropdown-menu";
+} from "@/features/presentations/components/plate/ui/dropdown-menu";
 
 import { ToolbarButton } from "./toolbar";
 
