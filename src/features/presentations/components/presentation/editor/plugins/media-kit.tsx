@@ -11,13 +11,13 @@ import {
 } from "@platejs/media/react";
 import { KEYS } from "platejs";
 
-import { AudioElement } from "@/components/plate/ui/media-audio-node";
-import { MediaEmbedElement } from "@/components/plate/ui/media-embed-node";
-import { FileElement } from "@/components/plate/ui/media-file-node";
-import { PlaceholderElement } from "@/components/plate/ui/media-placeholder-node";
-import { MediaPreviewDialog } from "@/components/plate/ui/media-preview-dialog";
-import { MediaUploadToast } from "@/components/plate/ui/media-upload-toast";
-import { VideoElement } from "@/components/plate/ui/media-video-node";
+import { AudioElement } from "@/features/presentations/components/plate/ui/media-audio-node";
+import { MediaEmbedElement } from "@/features/presentations/components/plate/ui/media-embed-node";
+import { FileElement } from "@/features/presentations/components/plate/ui/media-file-node";
+import { PlaceholderElement } from "@/features/presentations/components/plate/ui/media-placeholder-node";
+import { MediaPreviewDialog } from "@/features/presentations/components/plate/ui/media-preview-dialog";
+import { MediaUploadToast } from "@/features/presentations/components/plate/ui/media-upload-toast";
+import { VideoElement } from "@/features/presentations/components/plate/ui/media-video-node";
 import { PresentationImageElement } from "../custom-elements/presentation-image-element";
 
 export const MediaKit = [
