@@ -1,6 +1,6 @@
 "use client";
 
-import { IconPicker } from "@/components/ui/icon-picker";
+import { IconPicker } from "@/features/presentations/components/ui/icon-picker";
 import { cn } from "@/lib/utils";
 import {
   PlateElement,

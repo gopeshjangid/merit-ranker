@@ -4,11 +4,11 @@ import {
   generateImageAction,
   type ImageModelList,
 } from "@/app/_actions/image/generate";
-import { ImageSourceSelector } from "@/components/presentation/theme/ImageSourceSelector";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { ImageSourceSelector } from "@/features/presentations/components/presentation/theme/ImageSourceSelector";
+import { Alert, AlertDescription } from "@/features/presentations/components/ui/alert";
+import { Button } from "@/features/presentations/components/ui/button";
+import { Label } from "@/features/presentations/components/ui/label";
+import { Textarea } from "@/features/presentations/components/ui/textarea";
 import { usePresentationState } from "@/states/presentation-state";
 import { AlertTriangle, RefreshCw, Wand2 } from "lucide-react";
 import { type TElement } from "platejs";

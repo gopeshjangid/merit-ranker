@@ -2,11 +2,11 @@
 
 import type React from "react";
 
-import { useUploadFile } from "@/components/plate/hooks/use-upload-file";
-import { ImageSourceSelector } from "@/components/presentation/theme/ImageSourceSelector";
+import { useUploadFile } from "@/features/presentations/components/plate/hooks/use-upload-file";
+import { ImageSourceSelector } from "@/features/presentations/components/presentation/theme/ImageSourceSelector";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/features/presentations/components/ui/label";
 import {
   Popover,
   PopoverContent,

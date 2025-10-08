@@ -5,7 +5,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/components/ui/chart";
+} from "@/features/presentations/components/ui/chart";
 import { cn } from "@/lib/utils";
 import { PlateElement, type PlateElementProps } from "platejs/react";
 import { Cell, Legend, Pie, PieChart } from "recharts";

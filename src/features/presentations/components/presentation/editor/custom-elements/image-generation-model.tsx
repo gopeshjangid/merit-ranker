@@ -13,14 +13,14 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/features/presentations/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/features/presentations/components/ui/select";
 import { ImagePlugin } from "@platejs/media/react";
 import { useEditorRef } from "platejs/react";
 import { useState } from "react";

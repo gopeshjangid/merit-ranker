@@ -60,7 +60,7 @@ import {
   withHOC,
 } from "platejs/react";
 
-import { Button } from "@/components/plate/ui/button";
+import { Button } from "@/features/presentations/components/plate/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -69,16 +69,16 @@ import {
   DropdownMenuItem,
   DropdownMenuPortal,
   DropdownMenuTrigger,
-} from "@/components/plate/ui/dropdown-menu";
-import { Popover, PopoverContent } from "@/components/plate/ui/popover";
+} from "@/features/presentations/components/plate/ui/dropdown-menu";
+import { Popover, PopoverContent } from "@/features/presentations/components/plate/ui/popover";
 import { cn } from "@/lib/utils";
 
-import { blockSelectionVariants } from "@/components/plate/ui/block-selection";
+import { blockSelectionVariants } from "@/features/presentations/components/plate/ui/block-selection";
 import {
   ColorDropdownMenuItems,
   DEFAULT_COLORS,
-} from "@/components/plate/ui/font-color-toolbar-button";
-import { ResizeHandle } from "@/components/plate/ui/resize-handle";
+} from "@/features/presentations/components/plate/ui/font-color-toolbar-button";
+import { ResizeHandle } from "@/features/presentations/components/plate/ui/resize-handle";
 import {
   BorderAllIcon,
   BorderBottomIcon,
@@ -86,13 +86,13 @@ import {
   BorderNoneIcon,
   BorderRightIcon,
   BorderTopIcon,
-} from "@/components/plate/ui/table-icons";
+} from "@/features/presentations/components/plate/ui/table-icons";
 import {
   Toolbar,
   ToolbarButton,
   ToolbarGroup,
   ToolbarMenuGroup,
-} from "@/components/plate/ui/toolbar";
+} from "@/features/presentations/components/plate/ui/toolbar";
 import { PresentationElement } from "../custom-elements/presentation-element";
 
 export const PresentationTableElement = withHOC(

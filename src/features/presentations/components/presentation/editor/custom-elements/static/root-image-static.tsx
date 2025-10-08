@@ -1,11 +1,11 @@
 /** biome-ignore-all lint/performance/noImgElement: This is a valid use case */
 "use client";
 
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "@/features/presentations/components/ui/spinner";
 import {
   BASE_HEIGHT,
   BASE_WIDTH_PERCENTAGE,
-} from "@/hooks/presentation/useRootImageActions";
+} from "@/features/presentations/hooks/presentation/useRootImageActions";
 import { cn } from "@/lib/utils";
 import { usePresentationState } from "@/states/presentation-state";
 import ImagePlaceholder from "../image-placeholder";

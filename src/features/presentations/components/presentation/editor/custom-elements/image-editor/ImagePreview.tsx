@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
+import { Slider } from "@/features/presentations/components/ui/slider";
 import {
   BASE_HEIGHT,
   BASE_WIDTH_PERCENTAGE,
-} from "@/hooks/presentation/useRootImageActions";
+} from "@/features/presentations/hooks/presentation/useRootImageActions";
 import { Download, Image as ImageIcon } from "lucide-react";
 import { type TElement } from "platejs";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";

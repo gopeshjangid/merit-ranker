@@ -6,8 +6,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Spinner } from "@/components/ui/spinner";
-import { useRootImageActions } from "@/hooks/presentation/useRootImageActions";
+import { Spinner } from "@/features/presentations/components/ui/spinner";
+import { useRootImageActions } from "@/features/presentations/hooks/presentation/useRootImageActions";
 import { cn } from "@/lib/utils";
 import { usePresentationState } from "@/states/presentation-state";
 import { Edit, ImageOff, Trash2 } from "lucide-react";
