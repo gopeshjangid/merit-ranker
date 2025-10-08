@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { createEmptyPresentation } from "@/app/_actions/presentation/presentationActions";
-import { Button } from "@/features/presentations/components/ui/button";
-import { usePresentationState } from "@/states/presentation-state";
-import { Wand2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { toast } from "sonner";
-import { PresentationControls } from "./PresentationControls";
-import { PresentationExamples } from "./PresentationExamples";
-import { PresentationHeader } from "./PresentationHeader";
-import { PresentationInput } from "./PresentationInput";
-import { PresentationsSidebar } from "./PresentationsSidebar";
-import { RecentPresentations } from "./RecentPresentations";
+import { createEmptyPresentation } from '@/app/_actions/presentation/presentationActions';
+import { Button } from '@/features/presentations/components/ui/button';
+import { usePresentationState } from '@/states/presentation-state';
+import { Wand2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { toast } from 'sonner';
+import { PresentationControls } from './PresentationControls';
+import { PresentationExamples } from './PresentationExamples';
+import { PresentationHeader } from './PresentationHeader';
+import { PresentationInput } from './PresentationInput';
+import { PresentationsSidebar } from './PresentationsSidebar';
+import { RecentPresentations } from './RecentPresentations';
 
 export function PresentationDashboard({
   sidebarSide,
 }: {
-  sidebarSide?: "left" | "right";
+  sidebarSide?: 'left' | 'right';
 }) {
   const router = useRouter();
   const {
@@ -31,7 +31,7 @@ export function PresentationDashboard({
   } = usePresentationState();
 
   useEffect(() => {
-    setCurrentPresentation("", "");
+    setCurrentPresentation('', '');
     // Make sure to reset any generation flags when landing on dashboard
     setIsGeneratingOutline(false);
     setShouldStartOutlineGeneration(false);
@@ -39,7 +39,7 @@ export function PresentationDashboard({
 
   const handleGenerate = async () => {
     if (!presentationInput.trim()) {
-      toast.error("Please enter a topic for your presentation");
+      toast.error('Please enter a topic for your presentation');
       return;
     }
 
@@ -48,26 +48,26 @@ export function PresentationDashboard({
 
     try {
       const result = await createEmptyPresentation(
-        presentationInput.substring(0, 50) || "Untitled Presentation",
+        presentationInput.substring(0, 50) || 'Untitled Presentation',
         theme,
-        language,
+        language
       );
 
       if (result.success && result.presentation) {
         // Set the current presentation
         setCurrentPresentation(
           result.presentation.id,
-          result.presentation.title,
+          result.presentation.title
         );
         router.push(`/presentation/generate/${result.presentation.id}`);
       } else {
         setIsGeneratingOutline(false);
-        toast.error(result.message || "Failed to create presentation");
+        toast.error(result.message || 'Failed to create presentation');
       }
     } catch (error) {
       setIsGeneratingOutline(false);
-      console.error("Error creating presentation:", error);
-      toast.error("Failed to create presentation");
+      console.error('Error creating presentation:', error);
+      toast.error('Failed to create presentation');
     }
   };
 
@@ -86,7 +86,7 @@ export function PresentationDashboard({
               <Button
                 onClick={handleGenerate}
                 disabled={!presentationInput.trim() || isGeneratingOutline}
-                variant={isGeneratingOutline ? "loading" : "default"}
+                variant={isGeneratingOutline ? 'loading' : 'default'}
                 className="gap-2"
               >
                 <Wand2 className="h-4 w-4" />
