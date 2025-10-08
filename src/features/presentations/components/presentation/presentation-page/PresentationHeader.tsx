@@ -1,6 +1,6 @@
 "use client";
-import SideBarDropdown from "@/components/auth/Dropdown";
-import { Brain } from "@/components/ui/icons";
+import SideBarDropdown from "@/features/presentations/components/auth/Dropdown";
+import { Brain } from "@/features/presentations/components/ui/icons";
 import { usePresentationState } from "@/states/presentation-state";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // Import our new components
-import AllweoneText from "@/components/globals/allweone-logo";
+import AllweoneText from "@/features/presentations/components/globals/allweone-logo";
 import { Button } from "@/components/ui/button";
 import * as motion from "framer-motion/client";
 import { ExportButton } from "./buttons/ExportButton";

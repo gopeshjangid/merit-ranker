@@ -6,13 +6,13 @@ import {
   updatePresentationTheme,
 } from "@/app/_actions/presentation/presentationActions";
 import { getCustomThemeById } from "@/app/_actions/presentation/theme-actions";
-import { type PlateSlide } from "@/components/presentation/utils/parser";
+import { type PlateSlide } from "@/features/presentations/components/presentation/utils/parser";
 import {
   setThemeVariables,
   type ThemeProperties,
   type Themes,
   themes,
-} from "@/lib/presentation/themes";
+} from "@/features/presentations/lib/presentation/themes";
 import { usePresentationState } from "@/states/presentation-state";
 import { useQuery } from "@tanstack/react-query";
 import debounce from "lodash.debounce";

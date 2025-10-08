@@ -1,8 +1,8 @@
 "use client";
 
-import { SlideContainer } from "@/components/presentation/presentation-page/SlideContainer";
-import { usePresentationSlides } from "@/hooks/presentation/usePresentationSlides";
-import { useSlideChangeWatcher } from "@/hooks/presentation/useSlideChangeWatcher";
+import { SlideContainer } from "@/features/presentations/components/presentation/presentation-page/SlideContainer";
+import { usePresentationSlides } from "@/features/presentations/hooks/presentation/usePresentationSlides";
+import { useSlideChangeWatcher } from "@/features/presentations/hooks/presentation/useSlideChangeWatcher";
 import { cn } from "@/lib/utils";
 import { usePresentationState } from "@/states/presentation-state";
 import { DndContext, closestCenter } from "@dnd-kit/core";

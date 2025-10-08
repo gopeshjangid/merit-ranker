@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import ColorPicker from "@/components/ui/color-picker";
+import ColorPicker from "@/features/presentations/components/ui/color-picker";
 import {
   Popover,
   PopoverContent,

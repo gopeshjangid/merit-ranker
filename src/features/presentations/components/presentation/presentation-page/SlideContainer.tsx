@@ -12,7 +12,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { useSlideOperations } from "@/hooks/presentation/useSlideOperations";
+import { useSlideOperations } from "@/features/presentations/hooks/presentation/useSlideOperations";
 import { cn } from "@/lib/utils";
 import { usePresentationState } from "@/states/presentation-state";
 import { useSortable } from "@dnd-kit/sortable";
