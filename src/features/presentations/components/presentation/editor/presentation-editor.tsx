@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { Editor } from "@/components/plate/ui/editor";
-import debounce from "lodash.debounce";
-import { type Value } from "platejs";
-import { Plate } from "platejs/react";
-import React, { useCallback, useEffect, useState } from "react";
+import { Editor } from '@/features/presentations/components/plate/ui/editor';
+import debounce from 'lodash.debounce';
+import { type Value } from 'platejs';
+import { Plate } from 'platejs/react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { usePlateEditor } from "@/components/plate/hooks/usePlateEditor";
-import { TooltipProvider } from "@/components/plate/ui/tooltip";
-import { extractFontsFromEditor } from "@/components/plate/utils/extractFontsFromEditor";
-import { FontLoader } from "@/components/plate/utils/font-loader";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import "@/styles/presentation.css";
-import { type TElement } from "platejs";
-import { type PlateNode, type PlateSlide } from "../utils/parser";
-import ImageGenerationModel from "./custom-elements/image-generation-model";
-import RootImage from "./custom-elements/root-image";
-import LayoutImageDrop from "./dnd/components/LayoutImageDrop";
-import { presentationPlugins } from "./plugins";
-import PresentationEditorStaticView from "./presentation-editor-static";
+import { usePlateEditor } from '@/features/presentations/components/plate/hooks/usePlateEditor';
+import { TooltipProvider } from '@/features/presentations/components/plate/ui/tooltip';
+import { extractFontsFromEditor } from '@/features/presentations/components/plate/utils/extractFontsFromEditor';
+import { FontLoader } from '@/features/presentations/components/plate/utils/font-loader';
+import { cn } from '@/features/presentations/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import '@/styles/presentation.css';
+import { type TElement } from 'platejs';
+import { type PlateNode, type PlateSlide } from '../utils/parser';
+import ImageGenerationModel from './custom-elements/image-generation-model';
+import RootImage from './custom-elements/root-image';
+import LayoutImageDrop from './dnd/components/LayoutImageDrop';
+import { presentationPlugins } from './plugins';
+import PresentationEditorStaticView from './presentation-editor-static';
 
 function slideSignature(slide?: PlateSlide): string {
   try {
@@ -33,7 +33,7 @@ function slideSignature(slide?: PlateSlide): string {
       bgColor: slide?.bgColor,
     });
   } catch {
-    return String(slide?.id ?? "");
+    return String(slide?.id ?? '');
   }
 }
 interface PresentationEditorProps {
@@ -60,7 +60,7 @@ const PresentationEditor = React.memo(
   }: PresentationEditorProps) => {
     const isPresenting = usePresentationState((s) => s.isPresenting);
     const setCurrentSlideIndex = usePresentationState(
-      (s) => s.setCurrentSlideIndex,
+      (s) => s.setCurrentSlideIndex
     );
     const editor = usePlateEditor({
       plugins: presentationPlugins,
@@ -100,7 +100,7 @@ const PresentationEditor = React.memo(
           setSlides(updatedSlides);
         }
       },
-      [],
+      []
     );
 
     const debouncedOnChange = debounce(
@@ -111,7 +111,7 @@ const PresentationEditor = React.memo(
         handleSlideChange(value, index);
       },
       100,
-      { maxWait: 200 },
+      { maxWait: 200 }
     );
 
     // Cleanup debounce on unmount
@@ -125,30 +125,30 @@ const PresentationEditor = React.memo(
       <TooltipProvider>
         <div
           className={cn(
-            "flex min-h-[500px]",
-            "scrollbar-thumb-muted-foreground/20 hover:scrollbar-thumb-muted-foreground/30 overflow-hidden p-0 scrollbar-thin scrollbar-track-transparent",
-            "relative text-foreground",
-            "focus-within:ring-2 focus-within:ring-primary focus-within:ring-opacity-50",
+            'flex min-h-[500px]',
+            'scrollbar-thumb-muted-foreground/20 hover:scrollbar-thumb-muted-foreground/30 scrollbar-thin scrollbar-track-transparent overflow-hidden p-0',
+            'relative text-foreground',
+            'focus-within:ring-opacity-50 focus-within:ring-2 focus-within:ring-primary',
             className,
-            initialContent?.layoutType === "right" && "flex-row",
-            initialContent?.layoutType === "vertical" && "flex-col-reverse",
-            initialContent?.layoutType === "left" && "flex-row-reverse",
-            initialContent?.layoutType === "background" && "flex-col",
-            "presentation-slide",
+            initialContent?.layoutType === 'right' && 'flex-row',
+            initialContent?.layoutType === 'vertical' && 'flex-col-reverse',
+            initialContent?.layoutType === 'left' && 'flex-row-reverse',
+            initialContent?.layoutType === 'background' && 'flex-col',
+            'presentation-slide'
           )}
           style={{
-            borderRadius: "var(--presentation-border-radius, 0.5rem)",
+            borderRadius: 'var(--presentation-border-radius, 0.5rem)',
             backgroundColor: initialContent?.bgColor || undefined,
             backgroundImage:
-              initialContent?.layoutType === "background" &&
+              initialContent?.layoutType === 'background' &&
               initialContent?.rootImage?.url
                 ? `url(${initialContent.rootImage.url})`
                 : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
           }}
-          data-is-presenting={readOnly && isPresenting ? "true" : "false"}
+          data-is-presenting={readOnly && isPresenting ? 'true' : 'false'}
           data-slide-content="true"
         >
           <FontLoader fontsToLoad={fontsToLoad} />
@@ -177,12 +177,12 @@ const PresentationEditor = React.memo(
               <Editor
                 className={cn(
                   className,
-                  "flex flex-col border-none !bg-transparent py-12 outline-none h-full",
-                  (readOnly || isGenerating) && "px-16",
-                  !initialContent?.alignment && "justify-center",
-                  initialContent?.alignment === "start" && "justify-start",
-                  initialContent?.alignment === "center" && "justify-center",
-                  initialContent?.alignment === "end" && "justify-end",
+                  'flex h-full flex-col border-none !bg-transparent py-12 outline-none',
+                  (readOnly || isGenerating) && 'px-16',
+                  !initialContent?.alignment && 'justify-center',
+                  initialContent?.alignment === 'start' && 'justify-start',
+                  initialContent?.alignment === 'center' && 'justify-center',
+                  initialContent?.alignment === 'end' && 'justify-end'
                 )}
                 id={id}
                 autoFocus={autoFocus && !readOnly}
@@ -198,7 +198,7 @@ const PresentationEditor = React.memo(
 
               {initialContent?.rootImage &&
                 initialContent.layoutType !== undefined &&
-                initialContent.layoutType !== "background" && (
+                initialContent.layoutType !== 'background' && (
                   <RootImage
                     image={initialContent.rootImage}
                     slideIndex={slideIndex}
@@ -231,16 +231,16 @@ const PresentationEditor = React.memo(
     if (prev.slideIndex !== next.slideIndex) return false;
     // Intentionally ignore function prop identity (onChange) differences
     return true;
-  },
+  }
 );
 
-PresentationEditor.displayName = "PresentationEditor";
+PresentationEditor.displayName = 'PresentationEditor';
 
 export default PresentationEditor;
 
 function PaletteInsertionListener() {
   const { pendingInsertNode, setPendingInsertNode } = usePresentationState();
-  const editor = usePlateEditor({ id: "presentation" });
+  const editor = usePlateEditor({ id: 'presentation' });
   useEffect(() => {
     if (!pendingInsertNode || !editor) return;
     try {
