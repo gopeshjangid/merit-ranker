@@ -1,4 +1,4 @@
-import { type Themes } from "@/lib/presentation/themes";
+import { type Themes } from "@/features/presentations/lib/presentation/themes";
 
 export type ThemeFormValues = {
   name: string;

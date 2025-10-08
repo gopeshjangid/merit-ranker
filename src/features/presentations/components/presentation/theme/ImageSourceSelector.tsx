@@ -1,7 +1,7 @@
 "use client";
 
 import { type ImageModelList } from "@/app/_actions/image/generate";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/features/presentations/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -10,7 +10,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/features/presentations/components/ui/select";
 import { Image, Wand2 } from "lucide-react";
 
 export const IMAGE_MODELS: { value: ImageModelList; label: string }[] = [

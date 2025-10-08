@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/features/presentations/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { type Themes, themes } from "@/lib/presentation/themes";
+} from "@/features/presentations/components/ui/select";
+import { type Themes, themes } from "@/features/presentations/lib/presentation/themes";
 import { cn } from "@/lib/utils";
 import { usePresentationState } from "@/states/presentation-state";
 import { useTheme } from "next-themes";

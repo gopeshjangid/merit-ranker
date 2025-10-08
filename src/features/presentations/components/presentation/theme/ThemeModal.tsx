@@ -10,10 +10,10 @@ import {
   DialogClose,
   DialogContent,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { type ThemeProperties } from "@/lib/presentation/themes";
+} from "@/features/presentations/components/ui/dialog";
+import { Skeleton } from "@/features/presentations/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/presentations/components/ui/tabs";
+import { type ThemeProperties } from "@/features/presentations/lib/presentation/themes";
 import { usePresentationState } from "@/states/presentation-state";
 import { useQuery } from "@tanstack/react-query";
 import { Plus, X } from "lucide-react";

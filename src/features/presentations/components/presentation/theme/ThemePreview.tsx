@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/features/presentations/components/ui/card";
 import { type ThemeFormValues } from "./types";
 
 interface ThemePreviewProps {

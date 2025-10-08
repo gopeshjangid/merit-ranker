@@ -2,7 +2,7 @@ import {
   setThemeVariables,
   themes,
   type ThemeProperties,
-} from "@/lib/presentation/themes";
+} from "@/features/presentations/lib/presentation/themes";
 import { cn } from "@/lib/utils";
 import { usePresentationState } from "@/states/presentation-state";
 import { useTheme } from "next-themes";

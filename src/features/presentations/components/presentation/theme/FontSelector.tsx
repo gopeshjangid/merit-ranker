@@ -1,7 +1,7 @@
 "use client";
 
-import { FontPicker } from "@/components/ui/font-picker";
-import { Label } from "@/components/ui/label";
+import { FontPicker } from "@/features/presentations/components/ui/font-picker";
+import { Label } from "@/features/presentations/components/ui/label";
 interface FontSelectorProps {
   value: string;
   onChange: (value: string) => void;
