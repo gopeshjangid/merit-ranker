@@ -9,13 +9,43 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "@/provider/theme-provider";
 import { LogOut, User } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+// import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+
+// Dummy session object for testing
+const dummySession = {
+  status: "authenticated" as const,
+  data: {
+    user: {
+      id: "test-user-123",
+      name: "John Doe",
+      email: "john.doe@example.com",
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=JohnDoe",
+    },
+  },
+};
+
+// Dummy useSession hook
+function useSession() {
+  return dummySession;
+}
+
+// Dummy signOut function
+async function signOut() {
+  console.log("🚪 User signing out...");
+  console.log("Session data:", dummySession.data);
+  // Simulate async operation
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  console.log("✅ Sign out complete");
+}
+
+
 export function getInitials(name: string): string {
   // Split the name by spaces to get individual words
   const words = name.split(" ");

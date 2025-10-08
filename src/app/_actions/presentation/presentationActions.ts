@@ -1,7 +1,7 @@
 "use server";
 
 import { type PlateSlide } from "@/features/presentations/components/presentation/utils/parser";
-import { auth } from "@/server/auth";
+// import { auth } from "@/server/auth";
 import { db } from "@/server/db";
 import { type InputJsonValue } from "@prisma/client/runtime/library";
 
@@ -24,12 +24,12 @@ export async function createPresentation({
   presentationStyle?: string;
   language?: string;
 }) {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
-  const userId = session.user.id;
-
+  // const session = await auth();
+  // if (!session?.user) {
+  //   throw new Error("Unauthorized");
+  // }
+ // const userId = session.user.id;
+  const userId = "clh3v1z6f0000l6s4qz6qz8xv"; // Temporary hardcoded user ID for testing
   try {
     const presentation = await db.baseDocument.create({
       data: {
