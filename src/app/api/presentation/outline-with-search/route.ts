@@ -1,5 +1,5 @@
 import { modelPicker } from "@/features/presentations/lib/model-picker";
-import { auth } from "@/server/auth";
+// import { auth } from "@/server/auth";
 import { streamText } from "ai";
 import { NextResponse } from "next/server";
 import { search_tool } from "./search_tool";
@@ -56,10 +56,10 @@ Remember: Use web search strategically to enhance the outline with current, rele
 
 export async function POST(req: Request) {
   try {
-    const session = await auth();
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    // const session = await auth();
+    // if (!session) {
+    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // }
 
     const {
       prompt,
@@ -121,7 +121,7 @@ export async function POST(req: Request) {
       toolChoice: "auto", // Let the model decide when to use tools
     });
 
-    return result.toTextStreamResponse();
+    return result.toUIMessageStreamResponse();
   } catch (error) {
     console.error("Error in outline generation with search:", error);
     return NextResponse.json(
