@@ -9,7 +9,7 @@ import { useChat, useCompletion } from "@ai-sdk/react";
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { SlideParser } from "../utils/parser";
-
+import { DefaultChatTransport } from "ai";
 function stripXmlCodeBlock(input: string): string {
   let result = input.trim();
   if (result.startsWith("```xml")) {
@@ -187,67 +187,65 @@ export function PresentationGenerationManager() {
   };
 
   // Function to process messages and extract data (optimized - only process last message)
-  const processMessages = (messages: typeof outlineMessages): void => {
-    if (messages.length <= 1) return;
+const processMessages = (messages: typeof outlineMessages): void => {
+  if (messages.length <= 1) return;
 
-    // Get the last message - this is where all the current data is
-    const lastMessage = messages[messages.length - 1];
-    if (!lastMessage) return;
+  // Get the last message - this is where all the current data is
+  const lastMessage = messages[messages.length - 1];
+  if (!lastMessage) return;
 
-    // Extract search results from the last message only (much more efficient)
-    if (webSearchEnabled && lastMessage.parts) {
-      const searchResults: Array<{ query: string; results: unknown[] }> = [];
+  // Extract search results from the last message only (much more efficient)
+  if (webSearchEnabled && lastMessage.parts) {
+    const searchResults: Array<{ query: string; results: unknown[] }> = [];
 
-      for (const part of lastMessage.parts) {
-        if (part.type === "tool-invocation" && part.toolInvocation) {
-          const invocation = part.toolInvocation;
-          if (
-            invocation.toolName === "webSearch" &&
-            invocation.state === "result" &&
-            "result" in invocation &&
-            invocation.result
-          ) {
-            const query =
-              typeof invocation.args?.query === "string"
-                ? invocation.args.query
-                : "Unknown query";
+    for (const part of lastMessage.parts) {
+      if (part.type === "tool-webSearch") {
+        if (part.state === "output-available" && part.output) {
+          const toolInput = part.input as { query?: string };
+const query = typeof toolInput?.query === "string"
+  ? toolInput.query
+  : "Unknown query";
 
-            // Parse the search result
-            let parsedResult;
-            try {
-              parsedResult =
-                typeof invocation.result === "string"
-                  ? JSON.parse(invocation.result)
-                  : invocation.result;
-            } catch {
-              parsedResult = invocation.result;
-            }
-
-            searchResults.push({
-              query,
-              results: parsedResult?.results || [],
-            });
+          // Parse the search result
+          let parsedResult;
+          try {
+            parsedResult =
+              typeof part.output === "string"
+                ? JSON.parse(part.output)
+                : part.output;
+          } catch {
+            parsedResult = part.output;
           }
-        }
-      }
 
-      // Store search results in buffer (only if we found any)
-      if (searchResults.length > 0) {
-        searchResultsBufferRef.current = searchResults;
+          searchResults.push({
+            query,
+            results: parsedResult?.results || [],
+          });
+        }
       }
     }
 
-    // Extract outline from the last assistant message
-    if (lastMessage.role === "assistant" && lastMessage.content) {
-      // Extract <think> content from assistant message and keep only the remainder for parsing
-      const thinkingExtract = extractThinking(lastMessage.content);
+    // Store search results in buffer (only if we found any)
+    if (searchResults.length > 0) {
+      searchResultsBufferRef.current = searchResults;
+    }
+  }
+
+  if (lastMessage.role === "assistant" && lastMessage.parts) {
+    const textParts = lastMessage.parts
+      .filter((part) => part.type === "text")
+      .map((part) => part.text)
+      .join("");
+
+    if (textParts) {
+      const thinkingExtract = extractThinking(textParts);
       if (thinkingExtract.hasThinking) {
         setOutlineThinking(thinkingExtract.thinking);
       }
 
       let cleanContent = thinkingExtract.hasThinking
         ? thinkingExtract.content
-        : lastMessage.content;
+        : textParts;
 
       // Only extract title if we haven't done it yet
       if (!titleExtractedRef.current) {
@@ -280,7 +278,9 @@ export function PresentationGenerationManager() {
         outlineBufferRef.current = outlineItems;
       }
     }
-  };
+  }
+};
+
 
   // Function to update outline and search results using requestAnimationFrame
   const updateOutlineWithRAF = (): void => {
@@ -303,7 +303,8 @@ export function PresentationGenerationManager() {
   };
 
   // Outline generation with or without web search
-  const { messages: outlineMessages, append: appendOutlineMessage } = useChat({
+  const { messages: outlineMessages, sendMessage: sendOutlineMessage } = useChat({
+    transport: new DefaultChatTransport({
     api: webSearchEnabled
       ? "/api/presentation/outline-with-search"
       : "/api/presentation/outline",
@@ -313,7 +314,8 @@ export function PresentationGenerationManager() {
       language,
       modelProvider,
       modelId,
-    },
+    },  
+  }),
     onFinish: () => {
       setIsGeneratingOutline(false);
       setShouldStartOutlineGeneration(false);
@@ -397,19 +399,18 @@ export function PresentationGenerationManager() {
               requestAnimationFrame(updateOutlineWithRAF);
           }
 
-          await appendOutlineMessage(
-            {
-              role: "user",
-              content: presentationInput,
-            },
-            {
-              body: {
-                prompt: presentationInput,
-                numberOfCards: numSlides,
-                language,
-              },
-            },
-          );
+          await sendOutlineMessage(
+  {
+    text: presentationInput,
+  },
+  {
+    body: {
+      prompt: presentationInput,
+      numberOfCards: numSlides,
+      language,
+    },
+  },
+);
         } catch (error) {
           console.log(error);
           // Error is handled by onError callback
