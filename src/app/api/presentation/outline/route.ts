@@ -1,5 +1,5 @@
 import { modelPicker } from "@/features/presentations/lib/model-picker";
-import { auth } from "@/server/auth";
+// import { auth } from "@/server/auth";
 import { streamText } from "ai";
 import { NextResponse } from "next/server";
 
@@ -51,10 +51,10 @@ Make sure the topics:
 
 export async function POST(req: Request) {
   try {
-    const session = await auth();
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    // const session = await auth();
+    // if (!session) {
+    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // }
 
     const {
       prompt,
@@ -107,7 +107,7 @@ export async function POST(req: Request) {
       prompt: formattedPrompt,
     });
 
-    return result.toTextStreamResponse();
+    return result.toUIMessageStreamResponse();
   } catch (error) {
     console.error("Error in outline generation:", error);
     return NextResponse.json(

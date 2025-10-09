@@ -29,7 +29,7 @@ export async function createPresentation({
   //   throw new Error("Unauthorized");
   // }
  // const userId = session.user.id;
-  const userId = "clh3v1z6f0000l6s4qz6qz8xv"; // Temporary hardcoded user ID for testing
+  const userId = "cmgi94l4c0000teq0hejotfen"; // Temporary hardcoded user ID for testing
   try {
     const presentation = await db.baseDocument.create({
       data: {
@@ -110,10 +110,12 @@ export async function updatePresentation({
   language?: string;
   thumbnailUrl?: string;
 }) {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+  // const session = await auth();
+  // if (!session?.user) {
+  //   throw new Error("Unauthorized");
+  // }
+ // const userId = session.user.id;
+  const userId = "cmgi94l4c0000teq0hejotfen"; // Temporary hardcoded user ID for testing
 
   try {
     // Extract values from content if provided there
@@ -161,10 +163,12 @@ export async function updatePresentation({
 }
 
 export async function updatePresentationTitle(id: string, title: string) {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+  // const session = await auth();
+  // if (!session?.user) {
+  //   throw new Error("Unauthorized");
+  // }
+ // const userId = session.user.id;
+  const userId = "cmgi94l4c0000teq0hejotfen"; // Temporary hardcoded user ID for testing
 
   try {
     const presentation = await db.baseDocument.update({
@@ -194,10 +198,12 @@ export async function deletePresentation(id: string) {
 }
 
 export async function deletePresentations(ids: string[]) {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+  // const session = await auth();
+  // if (!session?.user) {
+  //   throw new Error("Unauthorized");
+  // }
+ // const userId = session.user.id;
+  const userId = "cmgi94l4c0000teq0hejotfen"; // Temporary hardcoded user ID for testing
 
   try {
     // Delete the base documents using deleteMany (this will cascade delete the presentations)
@@ -206,7 +212,7 @@ export async function deletePresentations(ids: string[]) {
         id: {
           in: ids,
         },
-        userId: session.user.id, // Ensure only user's own presentations can be deleted
+        userId: userId, // Ensure only user's own presentations can be deleted
       },
     });
 
@@ -242,10 +248,12 @@ export async function deletePresentations(ids: string[]) {
 
 // Get the presentation with the presentation content
 export async function getPresentation(id: string) {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+ // const session = await auth();
+  // if (!session?.user) {
+  //   throw new Error("Unauthorized");
+  // }
+ // const userId = session.user.id;
+  const userId = "cmgi94l4c0000teq0hejotfen"; // Temporary hardcoded user ID for testing
 
   try {
     const presentation = await db.baseDocument.findUnique({
@@ -269,10 +277,12 @@ export async function getPresentation(id: string) {
 }
 
 export async function getPresentationContent(id: string) {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+  // const session = await auth();
+  // if (!session?.user) {
+  //   throw new Error("Unauthorized");
+  // }
+ // const userId = session.user.id;
+  const userId = "cmgi94l4c0000teq0hejotfen"; // Temporary hardcoded user ID for testing
 
   try {
     const presentation = await db.baseDocument.findUnique({
@@ -297,7 +307,7 @@ export async function getPresentationContent(id: string) {
     }
 
     // Check if the user has access to this presentation
-    if (presentation.userId !== session.user.id && !presentation.isPublic) {
+    if (presentation.userId !== userId && !presentation.isPublic) {
       return {
         success: false,
         message: "Unauthorized access",
@@ -318,10 +328,12 @@ export async function getPresentationContent(id: string) {
 }
 
 export async function updatePresentationTheme(id: string, theme: string) {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+// const session = await auth();
+  // if (!session?.user) {
+  //   throw new Error("Unauthorized");
+  // }
+ // const userId = session.user.id;
+  const userId = "cmgi94l4c0000teq0hejotfen"; // Temporary hardcoded user ID for testing
 
   try {
     const presentation = await db.presentation.update({
@@ -344,10 +356,12 @@ export async function updatePresentationTheme(id: string, theme: string) {
 }
 
 export async function duplicatePresentation(id: string, newTitle?: string) {
-  const session = await auth();
-  if (!session?.user) {
-    throw new Error("Unauthorized");
-  }
+  // const session = await auth();
+  // if (!session?.user) {
+  //   throw new Error("Unauthorized");
+  // }
+ // const userId = session.user.id;
+  const userId = "cmgi94l4c0000teq0hejotfen"; // Temporary hardcoded user ID for testing
 
   try {
     // Get the original presentation
@@ -371,7 +385,7 @@ export async function duplicatePresentation(id: string, newTitle?: string) {
         type: "PRESENTATION",
         documentType: "presentation",
         title: newTitle ?? `${original.title} (Copy)`,
-        userId: session.user.id,
+        userId: userId,
         isPublic: false,
         presentation: {
           create: {

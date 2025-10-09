@@ -2,7 +2,7 @@
 
 import { type LayoutType } from "@/features/presentations/components/presentation/utils/parser";
 import { env } from "@/env";
-import { auth } from "@/server/auth";
+// import { auth } from "@/server/auth";
 
 export interface UnsplashImage {
   id: string;
@@ -35,12 +35,12 @@ export async function getImageFromUnsplash(
   layoutType?: LayoutType,
 ): Promise<{ success: boolean; imageUrl?: string; error?: string }> {
   // Get the current session
-  const session = await auth();
+  // const session = await auth();
 
   // Check if user is authenticated
-  if (!session?.user?.id) {
-    return { success: false, error: "You must be logged in to get images" };
-  }
+  // if (!session?.user?.id) {
+  //   return { success: false, error: "You must be logged in to get images" };
+  // }
   const orientationQuery =
     layoutType === "vertical"
       ? "&orientation=landscape"

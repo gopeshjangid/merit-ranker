@@ -1,5 +1,5 @@
 import { modelPicker } from "@/features/presentations/lib/model-picker";
-import { auth } from "@/server/auth";
+// import { auth } from "@/server/auth";
 import { streamText } from "ai";
 import { NextResponse } from "next/server";
 // Use AI SDK types for proper type safety
@@ -233,10 +233,10 @@ Now create a complete XML presentation with {TOTAL_SLIDES} slides that significa
 
 export async function POST(req: Request) {
   try {
-    const session = await auth();
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    // const session = await auth();
+    // if (!session) {
+    //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // }
 
     const {
       title,
