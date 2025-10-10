@@ -1,6 +1,6 @@
 'use client';
 
-import { useDraggable } from '@/features/presentations/editor/dnd/hooks/useDraggable';
+import { useDraggable } from '@/hooks/presentation/useDraggable';
 import {
   type LayoutType,
   type PlateSlide,

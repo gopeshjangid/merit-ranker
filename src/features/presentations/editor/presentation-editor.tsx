@@ -6,10 +6,10 @@ import { type Value } from 'platejs';
 import { Plate } from 'platejs/react';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { usePlateEditor } from '@/features/presentations/components/plate/hooks/usePlateEditor';
+import { usePlateEditor } from '@/hooks/usePlateEditor';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { extractFontsFromEditor } from '@/features/presentations/components/plate/utils/extractFontsFromEditor';
-import { FontLoader } from '@/features/presentations/components/plate/utils/font-loader';
+import { extractFontsFromEditor } from '@/features/presentations/plate/utils/extractFontsFromEditor';
+import { FontLoader } from '@/features/presentations/plate/utils/font-loader';
 import { cn } from '@/lib/utils';
 import { usePresentationState } from '@/states/presentation-state';
 import '@/styles/presentation.css';

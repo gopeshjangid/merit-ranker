@@ -1,6 +1,6 @@
 "use client";
 
-import { type MyEditor } from "@/features/presentations/components/plate/editor-kit";
+import { type MyEditor } from "@/features/presentations/plate/editor-kit";
 import { BlockSelectionPlugin } from "@platejs/selection/react";
 import { type TElement } from "@platejs/slate";
 import { KEYS } from "platejs";

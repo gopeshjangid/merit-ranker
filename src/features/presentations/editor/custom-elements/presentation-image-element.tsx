@@ -17,7 +17,7 @@ import { Resizable, ResizableProvider, ResizeHandle } from '@platejs/resizable';
 import { type TImageElement } from 'platejs';
 import { type RootImage } from '../../utils/parser';
 import { type ImageCropSettings } from '../../utils/types';
-import { useDraggable } from '../dnd/hooks/useDraggable';
+import { useDraggable } from '@/hooks/presentation/useDraggable';
 import { PresentationImageEditor } from './presentation-image-editor';
 
 // ImageCropSettings imported from shared types; includes optional zoom

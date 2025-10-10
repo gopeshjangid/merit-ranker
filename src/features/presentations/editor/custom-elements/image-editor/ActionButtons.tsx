@@ -1,6 +1,6 @@
 "use client";
 
-import { useUploadFile } from "@/features/presentations/components/plate/hooks/use-upload-file";
+import { useUploadFile } from "@/hooks/use-upload-file";
 import { Button } from "@/components/ui/button";
 import { usePresentationState } from "@/states/presentation-state";
 import { Crop, Loader2, Upload } from "lucide-react";

@@ -15,9 +15,9 @@ import {
 } from '@platejs/dnd';
 
 import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
-import { onDropNode } from '../transforms/onDropNode';
-import { onHoverNode } from '../transforms/onHoverNode';
-import { getDropPath } from '../utils/getDropPath';
+import { onDropNode } from '@/features/presentations/editor/dnd/transforms/onDropNode';
+import { onHoverNode } from '@/features/presentations/editor/dnd/transforms/onHoverNode';
+import { getDropPath } from '@/features/presentations/editor/dnd/utils/getDropPath';
 export type CanDropCallback = (args: {
   dragEntry: NodeEntry<TElement>;
   dragItem: DragItemNode;
