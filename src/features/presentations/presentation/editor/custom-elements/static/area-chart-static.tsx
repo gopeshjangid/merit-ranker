@@ -5,7 +5,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from '@/features/presentations/components/ui/chart';
+} from '@/components/ui/chart';
 import { cn } from '@/lib/utils';
 import { SlateElement, type SlateElementProps } from 'platejs';
 import { Area, AreaChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';

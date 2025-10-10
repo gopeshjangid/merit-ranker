@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/features/presentations/components/ui/chart";
-import { cn } from "@/lib/utils";
-import { PlateElement, type PlateElementProps } from "platejs/react";
+} from '@/components/ui/chart';
+import { cn } from '@/lib/utils';
+import { PlateElement, type PlateElementProps } from 'platejs/react';
 import {
   CartesianGrid,
   Scatter,
@@ -15,29 +15,29 @@ import {
   XAxis,
   YAxis,
   ZAxis,
-} from "recharts";
-import { type TChartNode } from "../plugins/chart-plugin";
+} from 'recharts';
+import { type TChartNode } from '../plugins/chart-plugin';
 
 type AnyRecord = Record<string, unknown>;
 
 function getXKey(data: unknown[]): string {
-  if (data.length === 0) return "x";
+  if (data.length === 0) return 'x';
   const sample = data[0] as AnyRecord;
-  if ("x" in sample) return "x";
-  if ("X" in sample) return "X";
-  return "x";
+  if ('x' in sample) return 'x';
+  if ('X' in sample) return 'X';
+  return 'x';
 }
 
 function getYKey(data: unknown[]): string {
-  if (data.length === 0) return "y";
+  if (data.length === 0) return 'y';
   const sample = data[0] as AnyRecord;
-  if ("y" in sample) return "y";
-  if ("Y" in sample) return "Y";
-  return "y";
+  if ('y' in sample) return 'y';
+  if ('Y' in sample) return 'Y';
+  return 'y';
 }
 
 export default function ScatterPlotElement(
-  props: PlateElementProps<TChartNode>,
+  props: PlateElementProps<TChartNode>
 ) {
   const rawData = (props.element as TChartNode).data as unknown;
   const dataArray = Array.isArray(rawData) ? (rawData as AnyRecord[]) : [];
@@ -45,20 +45,20 @@ export default function ScatterPlotElement(
   const yKey = getYKey(dataArray);
 
   const chartConfig: ChartConfig = {
-    [xKey]: { label: "X", color: "hsl(var(--chart-1))" },
-    [yKey]: { label: "Y", color: "hsl(var(--chart-2))" },
+    [xKey]: { label: 'X', color: 'hsl(var(--chart-1))' },
+    [yKey]: { label: 'Y', color: 'hsl(var(--chart-2))' },
   };
 
   return (
     <PlateElement {...props}>
       <div
         className={cn(
-          "relative mb-4 w-full rounded-lg border bg-card p-2 shadow-sm",
+          'relative mb-4 w-full rounded-lg border bg-card p-2 shadow-sm'
         )}
         style={{
-          backgroundColor: "var(--presentation-background)",
-          color: "var(--presentation-text)",
-          borderColor: "hsl(var(--border))",
+          backgroundColor: 'var(--presentation-background)',
+          color: 'var(--presentation-text)',
+          borderColor: 'hsl(var(--border))',
         }}
         contentEditable={false}
       >

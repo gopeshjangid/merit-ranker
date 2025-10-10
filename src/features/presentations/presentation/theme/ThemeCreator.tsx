@@ -1,55 +1,55 @@
-"use client";
+'use client';
 
-import { createCustomTheme } from "@/app/_actions/presentation/theme-actions";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/features/presentations/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/features/presentations/components/ui/radio-group";
-import { Switch } from "@/features/presentations/components/ui/switch";
-import { Textarea } from "@/features/presentations/components/ui/textarea";
-import { useToast } from "@/features/presentations/components/ui/use-toast";
-import { useUploadThing } from "@/features/presentations/hooks/globals/useUploadthing";
-import { themes } from "@/features/presentations/lib/presentation/themes";
-import { Loader2, Plus } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { createCustomTheme } from '@/app/_actions/presentation/theme-actions';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import { useUploadThing } from '@/features/presentations/hooks/globals/useUploadthing';
+import { themes } from '@/features/presentations/lib/presentation/themes';
+import { Loader2, Plus } from 'lucide-react';
+import { useEffect, useState, type ReactNode } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
-import { usePresentationState } from "@/states/presentation-state";
-import { ColorPicker } from "./ColorPicker";
-import { FontSelector } from "./FontSelector";
-import { LogoUploader } from "./LogoUploader";
-import { ThemePreview } from "./ThemePreview";
-import { type ColorKey, type ThemeFormValues } from "./types";
+import { usePresentationState } from '@/states/presentation-state';
+import { ColorPicker } from './ColorPicker';
+import { FontSelector } from './FontSelector';
+import { LogoUploader } from './LogoUploader';
+import { ThemePreview } from './ThemePreview';
+import { type ColorKey, type ThemeFormValues } from './types';
 
 // Define steps for the stepper
 const STEPS = [
-  { id: "base", label: "Base Theme", icon: "🎨" },
-  { id: "colors", label: "Colors", icon: "🎭" },
-  { id: "typography", label: "Typography", icon: "T" },
-  { id: "logo", label: "Logo", icon: "🖼️" },
-  { id: "preview", label: "Finish", icon: "👁️" },
+  { id: 'base', label: 'Base Theme', icon: '🎨' },
+  { id: 'colors', label: 'Colors', icon: '🎭' },
+  { id: 'typography', label: 'Typography', icon: 'T' },
+  { id: 'logo', label: 'Logo', icon: '🖼️' },
+  { id: 'preview', label: 'Finish', icon: '👁️' },
 ];
 
 export function ThemeCreator({ children }: { children?: ReactNode }) {
   const { isThemeCreatorOpen, setIsThemeCreatorOpen } = usePresentationState();
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(0);
-  const [activeColorTab, setActiveColorTab] = useState<"light" | "dark">(
-    "light",
+  const [activeColorTab, setActiveColorTab] = useState<'light' | 'dark'>(
+    'light'
   );
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { startUpload } = useUploadThing("imageUploader");
+  const { startUpload } = useUploadThing('imageUploader');
 
   const form = useForm<ThemeFormValues>({
     defaultValues: {
-      name: "",
-      description: "",
+      name: '',
+      description: '',
       isPublic: false,
-      themeBase: "mystique",
+      themeBase: 'mystique',
       colors: {
         light: { ...themes.mystique.colors.light },
         dark: { ...themes.mystique.colors.dark },
@@ -65,54 +65,54 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
   });
 
   const { control, handleSubmit, watch, setValue } = form;
-  const watchedThemeBase = watch("themeBase");
+  const watchedThemeBase = watch('themeBase');
 
   useEffect(() => {
-    if (watchedThemeBase === "blank") {
+    if (watchedThemeBase === 'blank') {
       // Default values for blank theme - proper light/dark mode
-      setValue("colors", {
+      setValue('colors', {
         light: {
-          primary: "#3B82F6", // Blue
-          secondary: "#6B7280", // Gray
-          accent: "#60A5FA", // Light blue
-          background: "#FFFFFF", // White
-          text: "#1F2937", // Dark gray
-          heading: "#111827", // Almost black
-          muted: "#9CA3AF", // Medium gray
+          primary: '#3B82F6', // Blue
+          secondary: '#6B7280', // Gray
+          accent: '#60A5FA', // Light blue
+          background: '#FFFFFF', // White
+          text: '#1F2937', // Dark gray
+          heading: '#111827', // Almost black
+          muted: '#9CA3AF', // Medium gray
         },
         dark: {
-          primary: "#60A5FA", // Light blue
-          secondary: "#9CA3AF", // Medium gray
-          accent: "#93C5FD", // Lighter blue
-          background: "#111827", // Dark blue/gray
-          text: "#F9FAFB", // Almost white
-          heading: "#FFFFFF", // White
-          muted: "#6B7280", // Gray
+          primary: '#60A5FA', // Light blue
+          secondary: '#9CA3AF', // Medium gray
+          accent: '#93C5FD', // Lighter blue
+          background: '#111827', // Dark blue/gray
+          text: '#F9FAFB', // Almost white
+          heading: '#FFFFFF', // White
+          muted: '#6B7280', // Gray
         },
       });
-      setValue("fonts", {
-        heading: "Inter, sans-serif",
-        body: "Inter, sans-serif",
+      setValue('fonts', {
+        heading: 'Inter, sans-serif',
+        body: 'Inter, sans-serif',
       });
-      setValue("borderRadius", "0.5rem");
-      setValue("transitions", { default: "all 0.2s ease-in-out" });
-      setValue("shadows", {
+      setValue('borderRadius', '0.5rem');
+      setValue('transitions', { default: 'all 0.2s ease-in-out' });
+      setValue('shadows', {
         light: {
-          card: "0 1px 3px rgba(0,0,0,0.05)",
-          button: "0 1px 2px rgba(0,0,0,0.03)",
+          card: '0 1px 3px rgba(0,0,0,0.05)',
+          button: '0 1px 2px rgba(0,0,0,0.03)',
         },
         dark: {
-          card: "0 1px 3px rgba(0,0,0,0.05)",
-          button: "0 1px 2px rgba(0,0,0,0.03)",
+          card: '0 1px 3px rgba(0,0,0,0.05)',
+          button: '0 1px 2px rgba(0,0,0,0.03)',
         },
       });
     } else {
       const selectedTheme = themes[watchedThemeBase];
-      setValue("colors", { ...selectedTheme.colors });
-      setValue("fonts", { ...selectedTheme.fonts });
-      setValue("borderRadius", selectedTheme.borderRadius);
-      setValue("transitions", { ...selectedTheme.transitions });
-      setValue("shadows", { ...selectedTheme.shadows });
+      setValue('colors', { ...selectedTheme.colors });
+      setValue('fonts', { ...selectedTheme.fonts });
+      setValue('borderRadius', selectedTheme.borderRadius);
+      setValue('transitions', { ...selectedTheme.transitions });
+      setValue('shadows', { ...selectedTheme.shadows });
     }
   }, [watchedThemeBase, setValue]);
 
@@ -141,7 +141,7 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
       if (logoFile) {
         const uploadResult = await startUpload([logoFile]);
         if (uploadResult?.[0]?.url) {
-          logoUrl = uploadResult[0].url ?? "";
+          logoUrl = uploadResult[0].url ?? '';
         }
       }
 
@@ -159,26 +159,26 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
       const result = await createCustomTheme(themeData);
       if (result.success) {
         toast({
-          title: "Success",
-          description: "Theme created successfully!",
+          title: 'Success',
+          description: 'Theme created successfully!',
         });
       } else {
         toast({
-          title: "Error",
-          description: result.message || "Failed to create theme",
-          variant: "destructive",
+          title: 'Error',
+          description: result.message || 'Failed to create theme',
+          variant: 'destructive',
         });
       }
     } catch {
       toast({
-        title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive",
+        title: 'Error',
+        description: 'An unexpected error occurred',
+        variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);
       setCurrentStep(0);
-      setActiveColorTab("light");
+      setActiveColorTab('light');
       setLogoFile(null);
       setLogoPreview(null);
       form.reset();
@@ -237,9 +237,9 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
                           <Label
                             htmlFor="blank"
                             className={`flex h-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed bg-card p-4 hover:bg-accent/50 ${
-                              field.value === "blank"
-                                ? "border-indigo-600"
-                                : "border-border"
+                              field.value === 'blank'
+                                ? 'border-indigo-600'
+                                : 'border-border'
                             }`}
                           >
                             <div className="flex flex-col items-center">
@@ -270,8 +270,8 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
                                 htmlFor={theme}
                                 className={`block h-full cursor-pointer rounded-lg border bg-card p-4 hover:bg-accent/50 ${
                                   field.value === theme
-                                    ? "border-indigo-600"
-                                    : "border-border"
+                                    ? 'border-indigo-600'
+                                    : 'border-border'
                                 }`}
                               >
                                 <div className="flex flex-col space-y-1">
@@ -303,11 +303,11 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
 
                                   <div className="mt-2 text-xs text-muted-foreground">
                                     <p>
-                                      Heading:{" "}
-                                      {themeData.fonts.heading.split(",")[0]}
+                                      Heading:{' '}
+                                      {themeData.fonts.heading.split(',')[0]}
                                     </p>
                                     <p>
-                                      Body: {themeData.fonts.body.split(",")[0]}
+                                      Body: {themeData.fonts.body.split(',')[0]}
                                     </p>
                                   </div>
                                 </div>
@@ -329,18 +329,18 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
                       variant="outline"
                       onClick={() =>
                         setActiveColorTab(
-                          activeColorTab === "light" ? "dark" : "light",
+                          activeColorTab === 'light' ? 'dark' : 'light'
                         )
                       }
                     >
-                      {activeColorTab === "light" ? "Dark Mode" : "Light Mode"}
+                      {activeColorTab === 'light' ? 'Dark Mode' : 'Light Mode'}
                     </Button>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     {Object.entries(
-                      activeColorTab === "light"
-                        ? watch("colors.light")
-                        : watch("colors.dark"),
+                      activeColorTab === 'light'
+                        ? watch('colors.light')
+                        : watch('colors.dark')
                     ).map(([key]) => (
                       <Controller
                         key={key}
@@ -451,9 +451,9 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
             {/* Right Side - Preview */}
             <div className="grid w-1/2 place-items-center overflow-y-auto p-6">
               <ThemePreview
-                colors={watch("colors")}
-                fonts={watch("fonts")}
-                borderRadius={watch("borderRadius")}
+                colors={watch('colors')}
+                fonts={watch('fonts')}
+                borderRadius={watch('borderRadius')}
                 logoPreview={logoPreview}
                 activeColorTab={activeColorTab}
               />
@@ -472,10 +472,10 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
                   <div
                     className={`flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-border ${
                       index === currentStep
-                        ? "bg-indigo-600 text-white"
+                        ? 'bg-indigo-600 text-white'
                         : index < currentStep
-                          ? "bg-indigo-600/70 text-white"
-                          : "bg-transparent text-foreground"
+                          ? 'bg-indigo-600/70 text-white'
+                          : 'bg-transparent text-foreground'
                     }`}
                   >
                     <span className="text-lg">{step.icon}</span>
@@ -483,8 +483,8 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
                   <span
                     className={`text-sm ${
                       index <= currentStep
-                        ? "text-foreground"
-                        : "text-muted-foreground"
+                        ? 'text-foreground'
+                        : 'text-muted-foreground'
                     }`}
                   >
                     {step.label}

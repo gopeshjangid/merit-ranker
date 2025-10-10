@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/features/presentations/components/ui/chart";
-import { cn } from "@/lib/utils";
-import { PlateElement, type PlateElementProps } from "platejs/react";
-import { Area, AreaChart, CartesianGrid, Legend, XAxis, YAxis } from "recharts";
-import { type TChartNode } from "../plugins/chart-plugin";
+} from '@/components/ui/chart';
+import { cn } from '@/lib/utils';
+import { PlateElement, type PlateElementProps } from 'platejs/react';
+import { Area, AreaChart, CartesianGrid, Legend, XAxis, YAxis } from 'recharts';
+import { type TChartNode } from '../plugins/chart-plugin';
 
 type AnyRecord = Record<string, unknown>;
 
 function getLabelKey(data: unknown[]): string {
-  if (data.length === 0) return "label";
+  if (data.length === 0) return 'label';
   const sample = data[0] as AnyRecord;
-  if ("label" in sample) return "label";
-  if ("name" in sample) return "name";
-  return "label";
+  if ('label' in sample) return 'label';
+  if ('name' in sample) return 'name';
+  return 'label';
 }
 
 function getValueKey(data: unknown[]): string {
-  if (data.length === 0) return "value";
+  if (data.length === 0) return 'value';
   const sample = data[0] as AnyRecord;
-  if ("value" in sample) return "value";
-  if ("y" in sample) return "y";
-  return "value";
+  if ('value' in sample) return 'value';
+  if ('y' in sample) return 'y';
+  return 'value';
 }
 
 export default function AreaChartElement(props: PlateElementProps<TChartNode>) {
@@ -37,8 +37,8 @@ export default function AreaChartElement(props: PlateElementProps<TChartNode>) {
 
   const chartConfig: ChartConfig = {
     [valueKey]: {
-      label: "Value",
-      color: "hsl(var(--chart-1))",
+      label: 'Value',
+      color: 'hsl(var(--chart-1))',
     },
   };
 
@@ -46,12 +46,12 @@ export default function AreaChartElement(props: PlateElementProps<TChartNode>) {
     <PlateElement {...props}>
       <div
         className={cn(
-          "relative mb-4 w-full rounded-lg border bg-card p-2 shadow-sm",
+          'relative mb-4 w-full rounded-lg border bg-card p-2 shadow-sm'
         )}
         style={{
-          backgroundColor: "var(--presentation-background)",
-          color: "var(--presentation-text)",
-          borderColor: "hsl(var(--border))",
+          backgroundColor: 'var(--presentation-background)',
+          color: 'var(--presentation-text)',
+          borderColor: 'hsl(var(--border))',
         }}
         contentEditable={false}
       >

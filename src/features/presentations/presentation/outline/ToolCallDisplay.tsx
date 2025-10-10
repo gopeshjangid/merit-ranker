@@ -1,15 +1,15 @@
 import {
   Searched,
   type SearchResult,
-} from "@/features/presentations/components/presentation/outline/Search";
+} from '@/features/presentations/components/presentation/outline/Search';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/features/presentations/components/ui/collapsible";
-import { usePresentationState } from "@/states/presentation-state";
-import { Loader2, Search } from "lucide-react";
-import { useState } from "react";
+} from '@/components/ui/collapsible';
+import { usePresentationState } from '@/states/presentation-state';
+import { Loader2, Search } from 'lucide-react';
+import { useState } from 'react';
 
 export function ToolCallDisplay() {
   const { searchResults, isGeneratingOutline, webSearchEnabled } =
@@ -27,7 +27,7 @@ export function ToolCallDisplay() {
     <div className="space-y-2">
       <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
         <CollapsibleTrigger asChild>
-          <button className="flex w-full items-center justify-between rounded-lg border bg-muted/30 p-3 text-left hover:bg-muted/50 transition-colors">
+          <button className="flex w-full items-center justify-between rounded-lg border bg-muted/30 p-3 text-left transition-colors hover:bg-muted/50">
             <div className="flex items-center gap-2">
               <Search className="h-4 w-4 text-blue-500" />
               <span className="text-sm font-medium">
@@ -39,25 +39,25 @@ export function ToolCallDisplay() {
                 <Loader2 className="h-4 w-4 animate-spin text-blue-500" />
               )}
               <span className="text-xs text-muted-foreground">
-                {isExpanded ? "Hide" : "Show"}
+                {isExpanded ? 'Hide' : 'Show'}
               </span>
             </div>
           </button>
         </CollapsibleTrigger>
 
-        <CollapsibleContent className="space-y-2 pt-2 px-4">
+        <CollapsibleContent className="space-y-2 px-4 pt-2">
           {searchResults.map((searchItem, index) => {
             // Convert our search results to the format expected by the Searched component
             const formattedResults: SearchResult[] = Array.isArray(
-              searchItem.results,
+              searchItem.results
             )
               ? searchItem.results.map((result: unknown) => {
                   const searchResult = result as Record<string, unknown>;
                   return {
-                    url: (searchResult.url as string) || "",
-                    title: (searchResult.title as string) || "No title",
-                    published_date: "", // Not available in our format
-                    content: (searchResult.content as string) || "No content",
+                    url: (searchResult.url as string) || '',
+                    title: (searchResult.title as string) || 'No title',
+                    published_date: '', // Not available in our format
+                    content: (searchResult.content as string) || 'No content',
                   };
                 })
               : [];

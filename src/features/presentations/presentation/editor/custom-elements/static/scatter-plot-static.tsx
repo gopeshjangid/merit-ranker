@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/features/presentations/components/ui/chart";
-import { cn } from "@/lib/utils";
-import { SlateElement, type SlateElementProps } from "platejs";
+} from '@/components/ui/chart';
+import { cn } from '@/lib/utils';
+import { SlateElement, type SlateElementProps } from 'platejs';
 import {
   CartesianGrid,
   Scatter,
@@ -15,24 +15,24 @@ import {
   XAxis,
   YAxis,
   ZAxis,
-} from "recharts";
+} from 'recharts';
 
 type AnyRecord = Record<string, unknown>;
 
 function getXKey(data: unknown[]): string {
-  if (data.length === 0) return "x";
+  if (data.length === 0) return 'x';
   const sample = data[0] as AnyRecord;
-  if ("x" in sample) return "x";
-  if ("X" in sample) return "X";
-  return "x";
+  if ('x' in sample) return 'x';
+  if ('X' in sample) return 'X';
+  return 'x';
 }
 
 function getYKey(data: unknown[]): string {
-  if (data.length === 0) return "y";
+  if (data.length === 0) return 'y';
   const sample = data[0] as AnyRecord;
-  if ("y" in sample) return "y";
-  if ("Y" in sample) return "Y";
-  return "y";
+  if ('y' in sample) return 'y';
+  if ('Y' in sample) return 'Y';
+  return 'y';
 }
 
 export default function ScatterPlotStatic(props: SlateElementProps) {
@@ -42,20 +42,20 @@ export default function ScatterPlotStatic(props: SlateElementProps) {
   const yKey = getYKey(dataArray);
 
   const chartConfig: ChartConfig = {
-    [xKey]: { label: "X", color: "hsl(var(--chart-1))" },
-    [yKey]: { label: "Y", color: "hsl(var(--chart-2))" },
+    [xKey]: { label: 'X', color: 'hsl(var(--chart-1))' },
+    [yKey]: { label: 'Y', color: 'hsl(var(--chart-2))' },
   };
 
   return (
     <SlateElement {...props}>
       <div
         className={cn(
-          "relative mb-4 w-full rounded-lg border bg-card p-2 shadow-sm",
+          'relative mb-4 w-full rounded-lg border bg-card p-2 shadow-sm'
         )}
         style={{
-          backgroundColor: "var(--presentation-background)",
-          color: "var(--presentation-text)",
-          borderColor: "hsl(var(--border))",
+          backgroundColor: 'var(--presentation-background)',
+          color: 'var(--presentation-text)',
+          borderColor: 'hsl(var(--border))',
         }}
       >
         <ChartContainer className="h-64 w-full" config={chartConfig}>

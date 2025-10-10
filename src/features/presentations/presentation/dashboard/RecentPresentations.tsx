@@ -1,10 +1,10 @@
-"use client";
-import { fetchPresentations } from "@/app/_actions/presentation/fetchPresentations";
+'use client';
+import { fetchPresentations } from '@/app/_actions/presentation/fetchPresentations';
 import {
   deletePresentations,
   getPresentationContent,
   updatePresentationTitle,
-} from "@/app/_actions/presentation/presentationActions";
+} from '@/app/_actions/presentation/presentationActions';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,25 +14,25 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/features/presentations/components/ui/card";
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Skeleton } from "@/features/presentations/components/ui/skeleton";
-import { useToast } from "@/features/presentations/components/ui/use-toast";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { type BaseDocument } from "@prisma/client";
+} from '@/components/ui/dropdown-menu';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/components/ui/use-toast';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { type BaseDocument } from '@prisma/client';
 import {
   useInfiniteQuery,
   useMutation,
   useQueryClient,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 import {
   Calendar,
   ChevronRight,
@@ -40,17 +40,17 @@ import {
   MoreHorizontal,
   Pencil,
   Trash2,
-} from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+} from 'lucide-react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export function RecentPresentations() {
   const router = useRouter();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const setCurrentPresentation = usePresentationState(
-    (state) => state.setCurrentPresentation,
+    (state) => state.setCurrentPresentation
   );
   const setIsSheetOpen = usePresentationState((state) => state.setIsSheetOpen);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -60,7 +60,7 @@ export function RecentPresentations() {
   const [isNavigating, setIsNavigating] = useState<string | null>(null);
 
   const { data, isLoading, isError } = useInfiniteQuery({
-    queryKey: ["presentations-all"],
+    queryKey: ['presentations-all'],
     queryFn: async ({ pageParam = 0 }) => {
       const response = await fetchPresentations(pageParam);
       return response;
@@ -73,56 +73,56 @@ export function RecentPresentations() {
     mutationFn: async (id: string) => {
       const result = await deletePresentations([id]);
       if (!result.success && !result.partialSuccess) {
-        throw new Error(result.message ?? "Failed to delete presentation");
+        throw new Error(result.message ?? 'Failed to delete presentation');
       }
       return result;
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["presentations-all"],
+        queryKey: ['presentations-all'],
       });
-      await queryClient.invalidateQueries({ queryKey: ["recent-items"] });
+      await queryClient.invalidateQueries({ queryKey: ['recent-items'] });
       setDeleteDialogOpen(false);
       toast({
-        title: "Success",
-        description: "Presentation deleted successfully",
+        title: 'Success',
+        description: 'Presentation deleted successfully',
       });
     },
     onError: (error) => {
-      console.error("Failed to delete presentation:", error);
+      console.error('Failed to delete presentation:', error);
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to delete presentation",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Failed to delete presentation',
       });
     },
   });
 
   const { mutate: renameMutation } = useMutation({
     mutationFn: async (params: { id: string; currentTitle: string }) => {
-      const newTitle = prompt("Enter new title", params.currentTitle || "");
+      const newTitle = prompt('Enter new title', params.currentTitle || '');
       if (!newTitle) return null;
 
       const result = await updatePresentationTitle(params.id, newTitle);
       if (!result.success) {
-        throw new Error(result.message ?? "Failed to rename presentation");
+        throw new Error(result.message ?? 'Failed to rename presentation');
       }
       return result;
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["presentations-all"] });
-      await queryClient.invalidateQueries({ queryKey: ["recent-items"] });
+      await queryClient.invalidateQueries({ queryKey: ['presentations-all'] });
+      await queryClient.invalidateQueries({ queryKey: ['recent-items'] });
       toast({
-        title: "Success",
-        description: "Presentation renamed successfully",
+        title: 'Success',
+        description: 'Presentation renamed successfully',
       });
     },
     onError: (error) => {
-      console.error("Failed to rename presentation:", error);
+      console.error('Failed to rename presentation:', error);
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to rename presentation",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Failed to rename presentation',
       });
     },
   });
@@ -137,7 +137,7 @@ export function RecentPresentations() {
 
       if (!response.success) {
         throw new Error(
-          response.message ?? "Failed to check presentation status",
+          response.message ?? 'Failed to check presentation status'
         );
       }
 
@@ -151,11 +151,11 @@ export function RecentPresentations() {
         router.push(`/presentation/generate/${presentation.id}`);
       }
     } catch (error) {
-      console.error("Failed to navigate:", error);
+      console.error('Failed to navigate:', error);
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to open presentation",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Failed to open presentation',
       });
     } finally {
       setIsNavigating(null);
@@ -225,9 +225,9 @@ export function RecentPresentations() {
 
   const formatDate = (date: Date) => {
     return new Date(date).toLocaleDateString(undefined, {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
     });
   };
 
@@ -269,17 +269,17 @@ export function RecentPresentations() {
                   height={200}
                   width={300}
                   src={presentation.thumbnailUrl}
-                  alt={presentation.title || "Presentation thumbnail"}
+                  alt={presentation.title || 'Presentation thumbnail'}
                   className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center bg-primary/10">
                   <Clock
                     className={cn(
-                      "h-12 w-12 transition-all",
+                      'h-12 w-12 transition-all',
                       isNavigating === presentation.id
-                        ? "animate-spin text-primary"
-                        : "text-primary/50",
+                        ? 'animate-spin text-primary'
+                        : 'text-primary/50'
                     )}
                   />
                 </div>
@@ -292,18 +292,18 @@ export function RecentPresentations() {
               >
                 <h3 className="line-clamp-1 text-lg font-semibold text-foreground">
                   {isNavigating === presentation.id
-                    ? "Loading..."
-                    : presentation.title || "Untitled Presentation"}
+                    ? 'Loading...'
+                    : presentation.title || 'Untitled Presentation'}
                 </h3>
                 <div className="flex items-center text-xs text-muted-foreground">
                   <Calendar className="mr-1 h-3.5 w-3.5" />
                   {isNavigating === presentation.id
-                    ? "Loading..."
+                    ? 'Loading...'
                     : formatDate(presentation.updatedAt)}
                 </div>
               </div>
             </CardContent>
-            <div className="absolute right-2 top-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+            <div className="absolute top-2 right-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -317,7 +317,7 @@ export function RecentPresentations() {
                 <DropdownMenuContent align="end" className="w-48">
                   <DropdownMenuItem
                     onClick={() =>
-                      handleRename(presentation.id, presentation.title || "")
+                      handleRename(presentation.id, presentation.title || '')
                     }
                     className="cursor-pointer"
                   >
@@ -354,7 +354,7 @@ export function RecentPresentations() {
                 selectedPresentationId &&
                 deletePresentationMutation(selectedPresentationId)
               }
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
             >
               Delete
             </AlertDialogAction>

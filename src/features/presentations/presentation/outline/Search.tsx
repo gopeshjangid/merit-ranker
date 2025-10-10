@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/features/presentations/components/ui/collapsible";
-import { ChevronsUpDownIcon, Loader2, SearchIcon } from "lucide-react";
+} from '@/components/ui/collapsible';
+import { ChevronsUpDownIcon, Loader2, SearchIcon } from 'lucide-react';
 
 export interface SearchResult {
   url: string;
@@ -43,7 +43,7 @@ export function Searched({
           <div className="flex w-[90%] items-center gap-3">
             <SearchIcon className="h-5 w-5" />
             <div className="flex flex-col items-start overflow-hidden">
-              <span className="w-full truncate overflow-ellipsis text-sm font-medium">
+              <span className="w-full truncate text-sm font-medium overflow-ellipsis">
                 {query}
               </span>
               <span className="text-xs text-muted-foreground">
@@ -68,7 +68,7 @@ export function Searched({
               <img src={faviconUrl} alt={domain} className="mt-1 h-4 w-4" />
               <div className="min-w-0 flex-1 overflow-hidden">
                 <h4 className="truncate text-sm font-medium">{result.title}</h4>
-                <p className="line-clamp-2 overflow-ellipsis text-xs text-muted-foreground">
+                <p className="line-clamp-2 text-xs overflow-ellipsis text-muted-foreground">
                   {result.content}
                 </p>
                 <a

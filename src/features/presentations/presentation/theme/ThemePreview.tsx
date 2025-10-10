@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Card } from "@/features/presentations/components/ui/card";
-import { type ThemeFormValues } from "./types";
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { type ThemeFormValues } from './types';
 
 interface ThemePreviewProps {
-  colors: ThemeFormValues["colors"];
-  fonts: ThemeFormValues["fonts"];
+  colors: ThemeFormValues['colors'];
+  fonts: ThemeFormValues['fonts'];
   borderRadius: string;
   logoPreview: string | null;
-  activeColorTab: "light" | "dark";
+  activeColorTab: 'light' | 'dark';
 }
 
 export function ThemePreview({
@@ -19,7 +19,7 @@ export function ThemePreview({
   logoPreview,
   activeColorTab,
 }: ThemePreviewProps) {
-  const currentColors = activeColorTab === "light" ? colors.light : colors.dark;
+  const currentColors = activeColorTab === 'light' ? colors.light : colors.dark;
 
   return (
     <Card
@@ -28,7 +28,7 @@ export function ThemePreview({
         backgroundColor: currentColors.background,
         color: currentColors.text,
         borderRadius,
-        transition: "all 0.2s ease-in-out",
+        transition: 'all 0.2s ease-in-out',
       }}
     >
       {logoPreview && (

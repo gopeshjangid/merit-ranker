@@ -1,25 +1,28 @@
-import { Button } from "@/components/ui/button";
-import { Label } from "@/features/presentations/components/ui/label";
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/features/presentations/components/ui/select";
-import { type Themes, themes } from "@/features/presentations/lib/presentation/themes";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { useTheme } from "next-themes";
-import { ImageSourceSelector } from "./ImageSourceSelector";
-import { ThemeModal } from "./ThemeModal";
+} from '@/components/ui/select';
+import {
+  type Themes,
+  themes,
+} from '@/features/presentations/lib/presentation/themes';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { useTheme } from 'next-themes';
+import { ImageSourceSelector } from './ImageSourceSelector';
+import { ThemeModal } from './ThemeModal';
 
 const PRESENTATION_STYLES = [
-  { value: "professional", label: "Professional" },
-  { value: "creative", label: "Creative" },
-  { value: "minimal", label: "Minimal" },
-  { value: "bold", label: "Bold" },
-  { value: "elegant", label: "Elegant" },
+  { value: 'professional', label: 'Professional' },
+  { value: 'creative', label: 'Creative' },
+  { value: 'minimal', label: 'Minimal' },
+  { value: 'bold', label: 'Bold' },
+  { value: 'elegant', label: 'Elegant' },
 ];
 
 export function ThemeSettings() {
@@ -34,7 +37,7 @@ export function ThemeSettings() {
     setStockImageProvider,
   } = usePresentationState();
   const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const isDark = resolvedTheme === 'dark';
 
   return (
     <div className="space-y-6">
@@ -59,10 +62,10 @@ export function ThemeSettings() {
                 key={key}
                 onClick={() => setTheme(key as Themes)}
                 className={cn(
-                  "group relative space-y-2 rounded-lg border p-4 text-left transition-all",
+                  'group relative space-y-2 rounded-lg border p-4 text-left transition-all',
                   theme === key
-                    ? "border-primary bg-primary/5"
-                    : "border-muted hover:border-primary/50 hover:bg-muted/50",
+                    ? 'border-primary bg-primary/5'
+                    : 'border-muted hover:border-primary/50 hover:bg-muted/50'
                 )}
                 style={{
                   borderRadius: themeOption.borderRadius,
@@ -70,10 +73,10 @@ export function ThemeSettings() {
                   transition: themeOption.transitions.default,
                   backgroundColor:
                     theme === key
-                      ? `${modeColors.primary}${isDark ? "15" : "08"}`
+                      ? `${modeColors.primary}${isDark ? '15' : '08'}`
                       : isDark
-                        ? "rgba(0,0,0,0.3)"
-                        : "rgba(255,255,255,0.9)",
+                        ? 'rgba(0,0,0,0.3)'
+                        : 'rgba(255,255,255,0.9)',
                 }}
               >
                 <div
@@ -102,7 +105,7 @@ export function ThemeSettings() {
                   ].map((color, i) => (
                     <div
                       key={i}
-                      className="h-4 w-4 rounded-full ring-1 ring-inset ring-white/10"
+                      className="h-4 w-4 rounded-full ring-1 ring-white/10 ring-inset"
                       style={{ backgroundColor: color }}
                     />
                   ))}

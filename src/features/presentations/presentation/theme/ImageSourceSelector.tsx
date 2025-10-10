@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { type ImageModelList } from "@/app/_actions/image/generate";
-import { Label } from "@/features/presentations/components/ui/label";
+import { type ImageModelList } from '@/app/_actions/image/generate';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -10,22 +10,22 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/features/presentations/components/ui/select";
-import { Image, Wand2 } from "lucide-react";
+} from '@/components/ui/select';
+import { Image, Wand2 } from 'lucide-react';
 
 export const IMAGE_MODELS: { value: ImageModelList; label: string }[] = [
-  { value: "black-forest-labs/FLUX.1-schnell-Free", label: "FLUX Fast" },
-  { value: "black-forest-labs/FLUX.1-dev", label: "FLUX Developer" },
-  { value: "black-forest-labs/FLUX1.1-pro", label: "FLUX Premium" },
+  { value: 'black-forest-labs/FLUX.1-schnell-Free', label: 'FLUX Fast' },
+  { value: 'black-forest-labs/FLUX.1-dev', label: 'FLUX Developer' },
+  { value: 'black-forest-labs/FLUX1.1-pro', label: 'FLUX Premium' },
 ];
 
 interface ImageSourceSelectorProps {
-  imageSource: "ai" | "stock";
+  imageSource: 'ai' | 'stock';
   imageModel: ImageModelList;
-  stockImageProvider: "unsplash";
-  onImageSourceChange: (source: "ai" | "stock") => void;
+  stockImageProvider: 'unsplash';
+  onImageSourceChange: (source: 'ai' | 'stock') => void;
   onImageModelChange: (model: ImageModelList) => void;
-  onStockImageProviderChange: (provider: "unsplash") => void;
+  onStockImageProviderChange: (provider: 'unsplash') => void;
   className?: string;
   showLabel?: boolean;
 }
@@ -43,23 +43,23 @@ export function ImageSourceSelector({
   return (
     <div className={className}>
       {showLabel && (
-        <Label className="text-sm font-medium mb-2 block">Image Source</Label>
+        <Label className="mb-2 block text-sm font-medium">Image Source</Label>
       )}
       <Select
         value={
-          imageSource === "ai"
-            ? imageModel || "black-forest-labs/FLUX.1-schnell-Free"
+          imageSource === 'ai'
+            ? imageModel || 'black-forest-labs/FLUX.1-schnell-Free'
             : `stock-${stockImageProvider}`
         }
         onValueChange={(value) => {
-          if (value.startsWith("stock-")) {
+          if (value.startsWith('stock-')) {
             // Handle stock image selection
-            const provider = value.replace("stock-", "") as "unsplash";
-            onImageSourceChange("stock");
+            const provider = value.replace('stock-', '') as 'unsplash';
+            onImageSourceChange('stock');
             onStockImageProviderChange(provider);
           } else {
             // Handle AI model selection
-            onImageSourceChange("ai");
+            onImageSourceChange('ai');
             onImageModelChange(value as ImageModelList);
           }
         }}
@@ -69,7 +69,7 @@ export function ImageSourceSelector({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel className="text-primary/80 flex items-center gap-1">
+            <SelectLabel className="flex items-center gap-1 text-primary/80">
               <Wand2 size={10} />
               AI Generation
             </SelectLabel>
@@ -80,7 +80,7 @@ export function ImageSourceSelector({
             ))}
           </SelectGroup>
           <SelectGroup>
-            <SelectLabel className="text-primary/80 flex items-center gap-1">
+            <SelectLabel className="flex items-center gap-1 text-primary/80">
               <Image size={10} />
               Stock Images
             </SelectLabel>

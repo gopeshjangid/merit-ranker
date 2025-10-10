@@ -1,6 +1,6 @@
-"use client";
-import { togglePresentationPublicStatus } from "@/app/_actions/presentation/sharedPresentationActions";
-import { Button } from "@/components/ui/button";
+'use client';
+import { togglePresentationPublicStatus } from '@/app/_actions/presentation/sharedPresentationActions';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,36 +8,36 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/features/presentations/components/ui/label";
-import { Switch } from "@/features/presentations/components/ui/switch";
-import { usePresentationState } from "@/states/presentation-state";
-import { useMutation } from "@tanstack/react-query";
-import { Check, Copy, Share } from "lucide-react";
-import { useState } from "react";
-import { toast } from "sonner";
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { usePresentationState } from '@/states/presentation-state';
+import { useMutation } from '@tanstack/react-query';
+import { Check, Copy, Share } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 export function ShareButton() {
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
   const [isPublic, setIsPublic] = useState(false);
-  const [shareLink, setShareLink] = useState("");
+  const [shareLink, setShareLink] = useState('');
   const [copied, setCopied] = useState(false);
   const currentPresentationId = usePresentationState(
-    (s) => s.currentPresentationId,
+    (s) => s.currentPresentationId
   );
 
   const { mutate: togglePublicStatus, isPending } = useMutation({
     mutationFn: async (makePublic: boolean) => {
       if (!currentPresentationId) {
-        throw new Error("No presentation selected");
+        throw new Error('No presentation selected');
       }
       const result = await togglePresentationPublicStatus(
         currentPresentationId,
-        makePublic,
+        makePublic
       );
       if (!result.success) {
-        throw new Error(result.message ?? "Failed to update sharing status");
+        throw new Error(result.message ?? 'Failed to update sharing status');
       }
       return result;
     },
@@ -48,15 +48,15 @@ export function ShareButton() {
         const baseUrl = window.location.origin;
         const shareUrl = `${baseUrl}/presentation/share/${currentPresentationId}`;
         setShareLink(shareUrl);
-        toast.success("Presentation is now shared publicly");
+        toast.success('Presentation is now shared publicly');
       } else {
-        setShareLink("");
-        toast.success("Presentation is now private");
+        setShareLink('');
+        toast.success('Presentation is now private');
       }
     },
     onError: (error) => {
       toast.error(
-        `Error: ${error instanceof Error ? error.message : "Failed to update sharing status"}`,
+        `Error: ${error instanceof Error ? error.message : 'Failed to update sharing status'}`
       );
     },
   });
@@ -73,12 +73,12 @@ export function ShareButton() {
     try {
       await navigator.clipboard.writeText(shareLink);
       setCopied(true);
-      toast.success("Link copied to clipboard!");
+      toast.success('Link copied to clipboard!');
 
       // Reset the copied state after 2 seconds
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Failed to copy link");
+      toast.error('Failed to copy link');
     }
   };
 
@@ -112,8 +112,8 @@ export function ShareButton() {
             />
             <Label htmlFor="public-mode">
               {isPublic
-                ? "Public - Anyone with the link can view"
-                : "Private - Only you can access"}
+                ? 'Public - Anyone with the link can view'
+                : 'Private - Only you can access'}
             </Label>
           </div>
 

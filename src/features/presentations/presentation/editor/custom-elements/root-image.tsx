@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Spinner } from "@/features/presentations/components/ui/spinner";
-import { useRootImageActions } from "@/features/presentations/hooks/presentation/useRootImageActions";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { Edit, ImageOff, Trash2 } from "lucide-react";
-import { useEditorReadOnly } from "platejs/react";
-import { Resizable } from "re-resizable";
-import { useState } from "react";
-import { type RootImage as RootImageType } from "../../utils/parser";
-import ImagePlaceholder from "./image-placeholder";
-import { PresentationImageEditor } from "./presentation-image-editor";
+} from '@/components/ui/popover';
+import { Spinner } from '@/components/ui/spinner';
+import { useRootImageActions } from '@/features/presentations/hooks/presentation/useRootImageActions';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { Edit, ImageOff, Trash2 } from 'lucide-react';
+import { useEditorReadOnly } from 'platejs/react';
+import { Resizable } from 're-resizable';
+import { useState } from 'react';
+import { type RootImage as RootImageType } from '../../utils/parser';
+import ImagePlaceholder from './image-placeholder';
+import { PresentationImageEditor } from './presentation-image-editor';
 
 export interface RootImageProps {
   image: RootImageType;
@@ -76,7 +76,7 @@ export default function RootImage({
               rootImage: { ...slide.rootImage!, url: undefined },
             }
           : slide;
-      }),
+      })
     );
   };
 
@@ -84,33 +84,33 @@ export default function RootImage({
     <Resizable
       enable={{
         top: false,
-        right: !readOnly && layoutType === "left",
-        bottom: !readOnly && layoutType === "vertical",
-        left: !readOnly && layoutType === "right",
+        right: !readOnly && layoutType === 'left',
+        bottom: !readOnly && layoutType === 'vertical',
+        left: !readOnly && layoutType === 'right',
         topRight: false,
         bottomRight: false,
         bottomLeft: false,
         topLeft: false,
       }}
       size={sizeStyle}
-      className="relative shrink-0 group/resizable"
+      className="group/resizable relative shrink-0"
       handleComponent={{
         right:
-          !readOnly && layoutType === "left" ? (
+          !readOnly && layoutType === 'left' ? (
             <div
               aria-label="resize-right"
               className="h-full w-1 cursor-ew-resize rounded-sm bg-primary/70 opacity-0 transition-opacity duration-150 group-hover/resizable:opacity-100"
             />
           ) : undefined,
         left:
-          !readOnly && layoutType === "right" ? (
+          !readOnly && layoutType === 'right' ? (
             <div
               aria-label="resize-left"
               className="h-full w-1 cursor-ew-resize rounded-sm bg-primary/70 opacity-0 transition-opacity duration-150 group-hover/resizable:opacity-100"
             />
           ) : undefined,
         bottom:
-          !readOnly && layoutType === "vertical" ? (
+          !readOnly && layoutType === 'vertical' ? (
             <div
               aria-label="resize-bottom"
               className="h-1 w-full cursor-ns-resize rounded-sm bg-primary/70 opacity-0 transition-opacity duration-150 group-hover/resizable:opacity-100"
@@ -121,15 +121,15 @@ export default function RootImage({
     >
       <div
         className={cn(
-          "h-full overflow-hidden border bg-background/80 shadow-md backdrop-blur-sm",
-          isDragging && "opacity-50",
+          'h-full overflow-hidden border bg-background/80 shadow-md backdrop-blur-sm',
+          isDragging && 'opacity-50'
         )}
       >
         <div
           ref={handleRef}
           className="h-full cursor-grab active:cursor-grabbing"
         >
-          {computedGen?.status === "pending" ? (
+          {computedGen?.status === 'pending' ? (
             <div className="flex h-full flex-col items-center justify-center bg-muted/30 p-4">
               <Spinner className="mb-2 h-8 w-8" />
               <p className="text-sm text-muted-foreground">
@@ -170,9 +170,9 @@ export default function RootImage({
                     style={imageStyles} // All sizing and crop styles handled here
                     onError={(e) => {
                       console.error(
-                        "Image failed to load:",
+                        'Image failed to load:',
                         e,
-                        computedImageUrl,
+                        computedImageUrl
                       );
                     }}
                   />
@@ -220,11 +220,11 @@ export default function RootImage({
       <PresentationImageEditor
         open={isSheetOpen}
         onOpenChange={setIsSheetOpen}
-        layoutType={layoutType ?? ""}
+        layoutType={layoutType ?? ''}
         slideIndex={slideIndex}
         isRootImage={true}
         element={{
-          type: "rootImage",
+          type: 'rootImage',
           children: [],
           ...image,
         }}

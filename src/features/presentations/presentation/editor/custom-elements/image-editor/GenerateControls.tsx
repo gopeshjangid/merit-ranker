@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
 import {
   generateImageAction,
   type ImageModelList,
-} from "@/app/_actions/image/generate";
-import { ImageSourceSelector } from "@/features/presentations/components/presentation/theme/ImageSourceSelector";
-import { Alert, AlertDescription } from "@/features/presentations/components/ui/alert";
-import { Button } from "@/features/presentations/components/ui/button";
-import { Label } from "@/features/presentations/components/ui/label";
-import { Textarea } from "@/features/presentations/components/ui/textarea";
-import { usePresentationState } from "@/states/presentation-state";
-import { AlertTriangle, RefreshCw, Wand2 } from "lucide-react";
-import { type TElement } from "platejs";
-import { useEditorRef } from "platejs/react";
-import { useEffect, useState } from "react";
-import { type RootImage as RootImageType } from "../../../utils/parser";
+} from '@/app/_actions/image/generate';
+import { ImageSourceSelector } from '@/features/presentations/components/presentation/theme/ImageSourceSelector';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { usePresentationState } from '@/states/presentation-state';
+import { AlertTriangle, RefreshCw, Wand2 } from 'lucide-react';
+import { type TElement } from 'platejs';
+import { useEditorRef } from 'platejs/react';
+import { useEffect, useState } from 'react';
+import { type RootImage as RootImageType } from '../../../utils/parser';
 
 interface GenerateControlsProps {
   element: TElement & RootImageType;
@@ -36,12 +36,12 @@ export function GenerateControls({
     stockImageProvider,
     setStockImageProvider,
   } = usePresentationState();
-  const [newPrompt, setNewPrompt] = useState(element.query ?? "");
+  const [newPrompt, setNewPrompt] = useState(element.query ?? '');
   const [localError, setLocalError] = useState<string | null>(null);
 
   // Update prompt when element changes
   useEffect(() => {
-    setNewPrompt(element.query ?? "");
+    setNewPrompt(element.query ?? '');
   }, [element.query]);
 
   const handleGenerateClick = async () => {
@@ -51,7 +51,7 @@ export function GenerateControls({
     try {
       const result = await generateImageAction(
         newPrompt,
-        imageModel as ImageModelList,
+        imageModel as ImageModelList
       );
       if (result.success && result.image) {
         // Update the element using the editor or global state
@@ -68,21 +68,21 @@ export function GenerateControls({
                       query: newPrompt,
                     },
                   }
-                : slide,
-            ),
+                : slide
+            )
           );
         } else {
           editor.tf.setNodes(
             { url: result.image.url, query: newPrompt },
-            { at: editor.api.findPath(element) },
+            { at: editor.api.findPath(element) }
           );
         }
       } else {
-        setLocalError(result.error ?? "Failed to generate image");
+        setLocalError(result.error ?? 'Failed to generate image');
       }
     } catch (error) {
       setLocalError(
-        error instanceof Error ? error.message : "Failed to generate image",
+        error instanceof Error ? error.message : 'Failed to generate image'
       );
     }
   };
@@ -94,7 +94,7 @@ export function GenerateControls({
     try {
       const result = await generateImageAction(
         element.query,
-        imageModel as ImageModelList,
+        imageModel as ImageModelList
       );
       if (result.success && result.image) {
         // Update the element using the editor or global state
@@ -110,21 +110,21 @@ export function GenerateControls({
                       url: result.image.url,
                     },
                   }
-                : slide,
-            ),
+                : slide
+            )
           );
         } else {
           editor.tf.setNodes(
             { url: result.image.url },
-            { at: editor.api.findPath(element) },
+            { at: editor.api.findPath(element) }
           );
         }
       } else {
-        setLocalError(result.error ?? "Failed to regenerate image");
+        setLocalError(result.error ?? 'Failed to regenerate image');
       }
     } catch (error) {
       setLocalError(
-        error instanceof Error ? error.message : "Failed to regenerate image",
+        error instanceof Error ? error.message : 'Failed to regenerate image'
       );
     }
   };

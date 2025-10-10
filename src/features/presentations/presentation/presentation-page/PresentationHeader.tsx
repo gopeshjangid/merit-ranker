@@ -1,20 +1,20 @@
-"use client";
-import SideBarDropdown from "@/features/presentations/components/auth/Dropdown";
-import { Brain } from "@/features/presentations/components/ui/icons";
-import { usePresentationState } from "@/states/presentation-state";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+'use client';
+import SideBarDropdown from '@/features/presentations/components/auth/Dropdown';
+import { Brain } from '@/components/ui/icons';
+import { usePresentationState } from '@/states/presentation-state';
+import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 // Import our new components
-import AllweoneText from "@/features/presentations/components/globals/allweone-logo";
-import { Button } from "@/components/ui/button";
-import * as motion from "framer-motion/client";
-import { ExportButton } from "./buttons/ExportButton";
-import { PresentButton } from "./buttons/PresentButton";
-import { SaveStatus } from "./buttons/SaveStatus";
-import { ShareButton } from "./buttons/ShareButton";
+import AllweoneText from '@/features/presentations/components/globals/allweone-logo';
+import { Button } from '@/components/ui/button';
+import * as motion from 'framer-motion/client';
+import { ExportButton } from './buttons/ExportButton';
+import { PresentButton } from './buttons/PresentButton';
+import { SaveStatus } from './buttons/SaveStatus';
+import { ShareButton } from './buttons/ShareButton';
 
 interface PresentationHeaderProps {
   title?: string;
@@ -22,18 +22,18 @@ interface PresentationHeaderProps {
 
 export default function PresentationHeader({ title }: PresentationHeaderProps) {
   const currentPresentationTitle = usePresentationState(
-    (s) => s.currentPresentationTitle,
+    (s) => s.currentPresentationTitle
   );
   const isPresenting = usePresentationState((s) => s.isPresenting);
   const currentPresentationId = usePresentationState(
-    (s) => s.currentPresentationId,
+    (s) => s.currentPresentationId
   );
   const [presentationTitle, setPresentationTitle] =
-    useState<string>("Presentation");
+    useState<string>('Presentation');
   const pathname = usePathname();
   // Check if we're on the generate/outline page
   const isPresentationPage =
-    pathname.startsWith("/presentation/") && !pathname.includes("generate");
+    pathname.startsWith('/presentation/') && !pathname.includes('generate');
 
   // Update title when it changes in the state
   useEffect(() => {
@@ -44,9 +44,9 @@ export default function PresentationHeader({ title }: PresentationHeaderProps) {
     }
   }, [currentPresentationTitle, title]);
 
-  if (pathname === "/presentation/create")
+  if (pathname === '/presentation/create')
     return (
-      <header className="flex h-12 max-w-[100vw]  items-center justify-between overflow-clip border-accent px-2 py-2">
+      <header className="flex h-12 max-w-[100vw] items-center justify-between overflow-clip border-accent px-2 py-2">
         <div className="flex items-center gap-2">
           {/* This component is suppose to be logo but for now its is actually hamburger menu */}
 
@@ -94,7 +94,7 @@ export default function PresentationHeader({ title }: PresentationHeaderProps) {
 
         {/* Export button - Only in presentation page, not outline or present mode */}
         {isPresentationPage && !isPresenting && (
-          <ExportButton presentationId={currentPresentationId ?? ""} />
+          <ExportButton presentationId={currentPresentationId ?? ''} />
         )}
 
         {/* Share button - Only in presentation page, not outline */}

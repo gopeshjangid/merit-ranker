@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/features/presentations/components/ui/card";
-import { signOut } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+} from '@/components/ui/card';
+import { signOut } from 'next-auth/react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function SignOut() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/";
+  const callbackUrl = searchParams.get('callbackUrl') ?? '/';
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl });
@@ -25,7 +25,7 @@ export default function SignOut() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-slate-900 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 dark:bg-slate-900">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold">Sign Out</CardTitle>

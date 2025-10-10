@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { PlateElement, useEditorRef, withHOC, withRef } from "platejs/react";
-import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { PlateElement, useEditorRef, withHOC, withRef } from 'platejs/react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { generateImageAction } from "@/app/_actions/image/generate";
-import { getImageFromUnsplash } from "@/app/_actions/image/unsplash";
-import { MediaToolbar } from "@/features/presentations/components/plate/ui/media-toolbar";
-import { mediaResizeHandleVariants } from "@/features/presentations/components/plate/ui/resize-handle";
-import { Spinner } from "@/features/presentations/components/ui/spinner";
-import { useDebouncedSave } from "@/features/presentations/hooks/presentation/useDebouncedSave";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { Image, ImagePlugin, useMediaState } from "@platejs/media/react";
-import { Resizable, ResizableProvider, ResizeHandle } from "@platejs/resizable";
-import { type TImageElement } from "platejs";
-import { type RootImage } from "../../utils/parser";
-import { type ImageCropSettings } from "../../utils/types";
-import { useDraggable } from "../dnd/hooks/useDraggable";
-import { PresentationImageEditor } from "./presentation-image-editor";
+import { generateImageAction } from '@/app/_actions/image/generate';
+import { getImageFromUnsplash } from '@/app/_actions/image/unsplash';
+import { MediaToolbar } from '@/features/presentations/components/plate/ui/media-toolbar';
+import { mediaResizeHandleVariants } from '@/features/presentations/components/plate/ui/resize-handle';
+import { Spinner } from '@/components/ui/spinner';
+import { useDebouncedSave } from '@/features/presentations/hooks/presentation/useDebouncedSave';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { Image, ImagePlugin, useMediaState } from '@platejs/media/react';
+import { Resizable, ResizableProvider, ResizeHandle } from '@platejs/resizable';
+import { type TImageElement } from 'platejs';
+import { type RootImage } from '../../utils/parser';
+import { type ImageCropSettings } from '../../utils/types';
+import { useDraggable } from '../dnd/hooks/useDraggable';
+import { PresentationImageEditor } from './presentation-image-editor';
 
 // ImageCropSettings imported from shared types; includes optional zoom
 
@@ -36,7 +36,7 @@ export const PresentationImageElement = withHOC(
   ResizableProvider,
   withRef<typeof PlateElement, PresentationImageElementProps>(
     ({ children, className, nodeProps, ...props }, ref) => {
-      const { align = "center", focused, readOnly, selected } = useMediaState();
+      const { align = 'center', focused, readOnly, selected } = useMediaState();
       const { isDragging, handleRef } = useDraggable({
         element: props.element,
       });
@@ -46,7 +46,7 @@ export const PresentationImageElement = withHOC(
       const [isSheetOpen, setIsSheetOpen] = useState(false);
       const [isGenerating, setIsGenerating] = useState(false);
       const [imageUrl, setImageUrl] = useState<string | undefined>(
-        props.element.url,
+        props.element.url
       );
 
       const imageSource = usePresentationState((s) => s.imageSource);
@@ -55,13 +55,13 @@ export const PresentationImageElement = withHOC(
 
       // Get crop settings from element or use defaults
       const cropSettings: ImageCropSettings = props.element.cropSettings || {
-        objectFit: "cover",
+        objectFit: 'cover',
         objectPosition: { x: 50, y: 50 },
         zoom: 1,
       };
 
       const generateImage = async (prompt: string) => {
-        const container = document.querySelector(".presentation-slides");
+        const container = document.querySelector('.presentation-slides');
         const isEditorReadOnly = !container?.contains(imageRef?.current);
         // Prevent image generation in read-only mode
         console.log(isEditorReadOnly, hasHandledGenerationRef.current);
@@ -73,7 +73,7 @@ export const PresentationImageElement = withHOC(
           hasHandledGenerationRef.current = true;
           let result;
 
-          if (imageSource === "stock") {
+          if (imageSource === 'stock') {
             // Use Unsplash for stock images
             const unsplashResult = await getImageFromUnsplash(prompt);
             if (unsplashResult.success && unsplashResult.imageUrl) {
@@ -89,8 +89,8 @@ export const PresentationImageElement = withHOC(
 
           if (
             result &&
-            typeof result === "object" &&
-            "success" in result &&
+            typeof result === 'object' &&
+            'success' in result &&
             result.success === true &&
             result.image?.url
           ) {
@@ -111,7 +111,7 @@ export const PresentationImageElement = withHOC(
             }, 500);
           }
         } catch (error) {
-          console.error("Error generating image:", error);
+          console.error('Error generating image:', error);
         } finally {
           setIsGenerating(false);
         }
@@ -160,8 +160,8 @@ export const PresentationImageElement = withHOC(
                   }}
                 >
                   <ResizeHandle
-                    className={mediaResizeHandleVariants({ direction: "left" })}
-                    options={{ direction: "left" }}
+                    className={mediaResizeHandleVariants({ direction: 'left' })}
+                    options={{ direction: 'left' }}
                   />
                   {isGenerating ? (
                     <div className="relative w-full">
@@ -186,21 +186,21 @@ export const PresentationImageElement = withHOC(
                       <Image
                         ref={handleRef}
                         className={cn(
-                          "presentation-image",
-                          "cursor-pointer",
+                          'presentation-image',
+                          'cursor-pointer',
                           focused &&
                             selected &&
-                            "ring-2 ring-ring ring-offset-2",
-                          isDragging && "opacity-50",
+                            'ring-2 ring-ring ring-offset-2',
+                          isDragging && 'opacity-50'
                         )}
-                        alt={props.element.query ?? ""}
+                        alt={props.element.query ?? ''}
                         src={imageUrl}
                         style={imageStyles} // Add crop styles
                         onError={(e) => {
                           console.error(
-                            "Presentation image failed to load:",
+                            'Presentation image failed to load:',
                             e,
-                            imageUrl,
+                            imageUrl
                           );
                         }}
                         {...nodeProps}
@@ -209,9 +209,9 @@ export const PresentationImageElement = withHOC(
                   )}
                   <ResizeHandle
                     className={mediaResizeHandleVariants({
-                      direction: "right",
+                      direction: 'right',
                     })}
-                    options={{ direction: "right" }}
+                    options={{ direction: 'right' }}
                   />
                   {children}
                 </Resizable>
@@ -226,7 +226,7 @@ export const PresentationImageElement = withHOC(
             element={
               {
                 ...props.element,
-                type: "rootImage",
+                type: 'rootImage',
                 children: [],
               } as TImageElement & RootImage
             }
@@ -236,6 +236,6 @@ export const PresentationImageElement = withHOC(
           />
         </>
       );
-    },
-  ),
+    }
+  )
 );

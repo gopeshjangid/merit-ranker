@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { Card, CardContent } from "@/features/presentations/components/ui/card";
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/features/presentations/components/ui/collapsible";
-import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
-import { Brain, ChevronDown, Loader2 } from "lucide-react";
-import { useState } from "react";
+} from '@/components/ui/collapsible';
+import { cn } from '@/lib/utils';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Brain, ChevronDown, Loader2 } from 'lucide-react';
+import { useState } from 'react';
 
 interface ThinkingDisplayProps {
   thinking: string;
@@ -20,12 +20,12 @@ interface ThinkingDisplayProps {
 export function ThinkingDisplay({
   thinking,
   isGenerating: _isGenerating,
-  title = "AI is thinking...",
+  title = 'AI is thinking...',
 }: ThinkingDisplayProps) {
   const extractThinkingContent = (text: string): string => {
     return text
-      .replace(/^<think>/, "")
-      .replace(/<\/think>$/, "")
+      .replace(/^<think>/, '')
+      .replace(/<\/think>$/, '')
       .trim();
   };
 
@@ -42,8 +42,8 @@ export function ThinkingDisplay({
   return (
     <Card
       className={cn(
-        "mb-4 w-full border border-border/40 bg-muted backdrop-blur-md",
-        "shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl",
+        'mb-4 w-full border border-border/40 bg-muted backdrop-blur-md',
+        'rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md'
       )}
     >
       <CardContent className="p-4">
@@ -62,8 +62,8 @@ export function ThinkingDisplay({
 
             <ChevronDown
               className={cn(
-                "h-4 w-4 text-muted-foreground transition-transform duration-300",
-                open && "rotate-180",
+                'h-4 w-4 text-muted-foreground transition-transform duration-300',
+                open && 'rotate-180'
               )}
             />
           </CollapsibleTrigger>
@@ -77,7 +77,7 @@ export function ThinkingDisplay({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -5 }}
                   transition={{ duration: 0.2 }}
-                  className="mt-3 rounded-lg border border-border/30 bg-background/60 p-3 text-sm text-muted-foreground max-h-60 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted-foreground/20"
+                  className="mt-3 scrollbar-thin max-h-60 overflow-y-auto rounded-lg border border-border/30 bg-background/60 p-3 text-sm text-muted-foreground scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent"
                 >
                   {thinkingContent || (
                     <div className="animate-pulse text-muted-foreground/70">

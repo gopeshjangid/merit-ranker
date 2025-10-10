@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { FontPicker } from "@/features/presentations/components/ui/font-picker";
-import { type ThemeProperties } from "@/features/presentations/lib/presentation/themes";
+import { FontPicker } from '@/components/ui/font-picker';
+import { type ThemeProperties } from '@/features/presentations/lib/presentation/themes';
 
 // Component to load fonts for custom themes
 export function CustomThemeFontLoader({
@@ -12,7 +12,7 @@ export function CustomThemeFontLoader({
   const fonts = [themeData.fonts.heading, themeData.fonts.body];
 
   return (
-    <div style={{ display: "none" }}>
+    <div style={{ display: 'none' }}>
       <FontPicker
         defaultValue={fonts[0]}
         loadFonts={fonts}

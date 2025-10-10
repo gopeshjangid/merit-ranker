@@ -1,7 +1,7 @@
 import {
   generateImageAction,
   type ImageModelList,
-} from "@/app/_actions/image/generate";
+} from '@/app/_actions/image/generate';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,33 +11,33 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/features/presentations/components/ui/label";
+} from '@/components/ui/alert-dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/features/presentations/components/ui/select";
-import { ImagePlugin } from "@platejs/media/react";
-import { useEditorRef } from "platejs/react";
-import { useState } from "react";
-import { toast } from "sonner";
+} from '@/components/ui/select';
+import { ImagePlugin } from '@platejs/media/react';
+import { useEditorRef } from 'platejs/react';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 const MODEL_OPTIONS = [
   {
-    label: "FLUX Fast",
-    value: "black-forest-labs/FLUX.1-schnell-Free",
+    label: 'FLUX Fast',
+    value: 'black-forest-labs/FLUX.1-schnell-Free',
   },
   {
-    label: "FLUX Developer",
-    value: "black-forest-labs/FLUX.1-dev",
+    label: 'FLUX Developer',
+    value: 'black-forest-labs/FLUX.1-dev',
   },
   {
-    label: "FLUX Premium",
-    value: "black-forest-labs/FLUX1.1-pro",
+    label: 'FLUX Premium',
+    value: 'black-forest-labs/FLUX1.1-pro',
   },
 ];
 
@@ -51,14 +51,14 @@ export function GenerateImageDialogContent({
   setIsGenerating: (value: boolean) => void;
 }) {
   const editor = useEditorRef();
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState('');
   const [selectedModel, setSelectedModel] = useState<ImageModelList>(
-    "black-forest-labs/FLUX.1-schnell-Free",
+    'black-forest-labs/FLUX.1-schnell-Free'
   );
 
   const generateImage = async () => {
     if (!prompt.trim()) {
-      toast.error("Please enter a prompt");
+      toast.error('Please enter a prompt');
       return;
     }
 
@@ -68,21 +68,21 @@ export function GenerateImageDialogContent({
       const result = await generateImageAction(prompt, selectedModel);
 
       if (!result.success || !result.image?.url) {
-        throw new Error(result.error ?? "Failed to generate image");
+        throw new Error(result.error ?? 'Failed to generate image');
       }
 
       editor.tf.insertNodes({
-        children: [{ text: "" }],
+        children: [{ text: '' }],
         type: ImagePlugin.key,
         url: result.image.url,
         query: prompt,
       });
 
       setOpen(false);
-      toast.success("Image generated successfully!");
+      toast.success('Image generated successfully!');
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Failed to generate image",
+        error instanceof Error ? error.message : 'Failed to generate image'
       );
     } finally {
       setIsGenerating(false);
@@ -107,7 +107,7 @@ export function GenerateImageDialogContent({
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && !isGenerating) void generateImage();
+              if (e.key === 'Enter' && !isGenerating) void generateImage();
             }}
             type="text"
             autoFocus
@@ -151,7 +151,7 @@ export function GenerateImageDialogContent({
             }}
             disabled={isGenerating}
           >
-            {isGenerating ? "Generating..." : "Generate"}
+            {isGenerating ? 'Generating...' : 'Generate'}
           </AlertDialogAction>
         </div>
       </AlertDialogFooter>

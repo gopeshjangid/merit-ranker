@@ -1,4 +1,4 @@
-import { Skeleton } from "@/features/presentations/components/ui/skeleton";
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function ModelPickerSkeleton() {
   return (

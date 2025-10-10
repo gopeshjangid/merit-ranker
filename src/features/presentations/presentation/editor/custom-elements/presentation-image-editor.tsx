@@ -1,33 +1,33 @@
-import { Badge } from "@/features/presentations/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/features/presentations/components/ui/card";
+} from '@/components/ui/card';
 import {
   Sheet,
   SheetContent,
   SheetFooter,
   SheetHeader,
   SheetTitle,
-} from "@/features/presentations/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { Save, X } from "lucide-react";
-import { type TElement } from "platejs";
-import { useEditorRef } from "platejs/react";
-import { useEffect, useState } from "react";
-import { type RootImage as RootImageType } from "../../utils/parser";
-import { type ImageCropSettings } from "../../utils/types";
+} from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { Save, X } from 'lucide-react';
+import { type TElement } from 'platejs';
+import { useEditorRef } from 'platejs/react';
+import { useEffect, useState } from 'react';
+import { type RootImage as RootImageType } from '../../utils/parser';
+import { type ImageCropSettings } from '../../utils/types';
 import {
   ActionButtons,
   ErrorDisplay,
   GenerateControls,
   ImagePreview,
-} from "./image-editor";
+} from './image-editor';
 export interface PresentationImageEditorProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -37,7 +37,7 @@ export interface PresentationImageEditorProps {
   isRootImage?: boolean;
 }
 
-export type EditorMode = "generate" | "crop";
+export type EditorMode = 'generate' | 'crop';
 export const PresentationImageEditor = ({
   open,
   onOpenChange,
@@ -47,24 +47,24 @@ export const PresentationImageEditor = ({
   isRootImage = false,
 }: PresentationImageEditorProps) => {
   const editor = useEditorRef();
-  const [currentMode, setCurrentMode] = useState<EditorMode>("generate");
+  const [currentMode, setCurrentMode] = useState<EditorMode>('generate');
   const setSlides = usePresentationState((s) => s.setSlides);
   const slides = usePresentationState((s) => s.slides);
 
   useEffect(() => {
-    console.log("Element on mount", element);
+    console.log('Element on mount', element);
   }, []);
 
   // Local crop settings state - only saved when user clicks save
   const [localCropSettings, setLocalCropSettings] = useState<ImageCropSettings>(
     {
-      objectFit: element.cropSettings?.objectFit ?? "cover",
+      objectFit: element.cropSettings?.objectFit ?? 'cover',
       objectPosition: {
         x: element.cropSettings?.objectPosition.x ?? 50,
         y: element.cropSettings?.objectPosition.y ?? 50,
       },
       zoom: element.cropSettings?.zoom ?? 1,
-    },
+    }
   );
 
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
@@ -81,8 +81,8 @@ export const PresentationImageEditor = ({
                   cropSettings: localCropSettings,
                 },
               }
-            : slide,
-        ),
+            : slide
+        )
       );
     } else {
       editor.tf.setNodes({
@@ -90,21 +90,21 @@ export const PresentationImageEditor = ({
         cropSettings: localCropSettings,
       });
     }
-    setCurrentMode("generate");
+    setCurrentMode('generate');
     onOpenChange(false);
     setHasUnsavedChanges(false);
   };
 
   const handleCancel = () => {
     setLocalCropSettings({
-      objectFit: element.cropSettings?.objectFit ?? "cover",
+      objectFit: element.cropSettings?.objectFit ?? 'cover',
       objectPosition: {
         x: element.cropSettings?.objectPosition.x ?? 0,
         y: element.cropSettings?.objectPosition.y ?? 0,
       },
       zoom: element.cropSettings?.zoom ?? 1,
     });
-    setCurrentMode("generate");
+    setCurrentMode('generate');
     setHasUnsavedChanges(false);
     onOpenChange(false);
   };
@@ -113,7 +113,7 @@ export const PresentationImageEditor = ({
     <Sheet
       open={open}
       onOpenChange={(open) => {
-        console.log("opened editor for ", element);
+        console.log('opened editor for ', element);
         onOpenChange(open);
       }}
     >
@@ -170,7 +170,7 @@ export const PresentationImageEditor = ({
               />
 
               {/* Generate Mode Controls */}
-              {currentMode === "generate" && (
+              {currentMode === 'generate' && (
                 <GenerateControls
                   element={element}
                   slideIndex={slideIndex}
@@ -190,8 +190,8 @@ export const PresentationImageEditor = ({
             onClick={handleSaveChanges}
             disabled={!hasUnsavedChanges}
             className={cn(
-              "gap-2 transition-all",
-              hasUnsavedChanges && "border-red shadow-lg shadow-primary/25",
+              'gap-2 transition-all',
+              hasUnsavedChanges && 'border-red shadow-lg shadow-primary/25'
             )}
           >
             <Save className="h-4 w-4" />

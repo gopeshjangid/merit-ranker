@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Slider } from "@/features/presentations/components/ui/slider";
+import { Button } from '@/components/ui/button';
+import { Slider } from '@/components/ui/slider';
 import {
   BASE_HEIGHT,
   BASE_WIDTH_PERCENTAGE,
-} from "@/features/presentations/hooks/presentation/useRootImageActions";
-import { Download, Image as ImageIcon } from "lucide-react";
-import { type TElement } from "platejs";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { type RootImage as RootImageType } from "../../../utils/parser";
-import { type ImageCropSettings } from "../../../utils/types";
-import { type EditorMode } from "../presentation-image-editor";
+} from '@/features/presentations/hooks/presentation/useRootImageActions';
+import { Download, Image as ImageIcon } from 'lucide-react';
+import { type TElement } from 'platejs';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { type RootImage as RootImageType } from '../../../utils/parser';
+import { type ImageCropSettings } from '../../../utils/types';
+import { type EditorMode } from '../presentation-image-editor';
 
 interface ImagePreviewProps {
   element: TElement & RootImageType;
@@ -53,7 +53,7 @@ export function ImagePreview({
       });
       onUnsavedChanges(true);
     },
-    [localCropSettings, onCropSettingsChange, onUnsavedChanges],
+    [localCropSettings, onCropSettingsChange, onUnsavedChanges]
   );
 
   // Custom crop state for panning
@@ -75,7 +75,7 @@ export function ImagePreview({
         y: localCropSettings.objectPosition.y,
       });
     },
-    [localCropSettings.objectPosition],
+    [localCropSettings.objectPosition]
   );
 
   const handleMouseMove = useCallback(
@@ -99,11 +99,11 @@ export function ImagePreview({
       // Calculate new object position
       const newX = Math.max(
         0,
-        Math.min(100, lastObjectPosition.x + deltaXPercent),
+        Math.min(100, lastObjectPosition.x + deltaXPercent)
       );
       const newY = Math.max(
         0,
-        Math.min(100, lastObjectPosition.y + deltaYPercent),
+        Math.min(100, lastObjectPosition.y + deltaYPercent)
       );
 
       onCropSettingsChange({
@@ -117,7 +117,7 @@ export function ImagePreview({
       lastObjectPosition,
       localCropSettings,
       onCropSettingsChange,
-    ],
+    ]
   );
 
   const handleMouseUp = useCallback(() => {
@@ -136,7 +136,7 @@ export function ImagePreview({
 
       setZoom(newZoom);
     },
-    [zoom, setZoom],
+    [zoom, setZoom]
   );
 
   // Add global mouse event listeners for dragging
@@ -145,23 +145,23 @@ export function ImagePreview({
       const preventSelection = (e: Event) => e.preventDefault();
 
       // Add global event listeners
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      document.addEventListener("selectstart", preventSelection);
-      document.addEventListener("dragstart", preventSelection);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('selectstart', preventSelection);
+      document.addEventListener('dragstart', preventSelection);
 
       return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
-        document.removeEventListener("selectstart", preventSelection);
-        document.removeEventListener("dragstart", preventSelection);
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('selectstart', preventSelection);
+        document.removeEventListener('dragstart', preventSelection);
       };
     }
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
   const imageDimensionInPresentation = useMemo(() => {
     const slideContainer = document.querySelector(
-      `.slide-container-${slideIndex}`,
+      `.slide-container-${slideIndex}`
     );
 
     if (!slideContainer) {
@@ -178,7 +178,7 @@ export function ImagePreview({
     let actualWidth: number = parentWidth * BASE_WIDTH_PERCENTAGE_NUMERICAL;
     let actualHeight: number = 384;
 
-    if (layoutType === "vertical") {
+    if (layoutType === 'vertical') {
       actualHeight = element.size?.h ?? BASE_HEIGHT;
       actualWidth = parentWidth;
     } else {
@@ -188,7 +188,7 @@ export function ImagePreview({
       actualHeight = parentHeight;
     }
 
-    console.log("actualWidth", actualWidth, "actualHeight", actualHeight);
+    console.log('actualWidth', actualWidth, 'actualHeight', actualHeight);
     return { width: actualWidth, height: actualHeight };
   }, [slideIndex]);
 
@@ -204,7 +204,7 @@ export function ImagePreview({
     } else {
       maxWidth = windowWidth; // max-w-full (full width for small screens)
     }
-    console.log("maxWidth", maxWidth, "maxHeight", maxHeight);
+    console.log('maxWidth', maxWidth, 'maxHeight', maxHeight);
 
     let heightFits = imageDimensionInPresentation.height <= maxHeight;
     let widthFits = imageDimensionInPresentation.width <= maxWidth;
@@ -231,7 +231,7 @@ export function ImagePreview({
 
   // Debug logging for container dimensions
   useEffect(() => {
-    console.log("Container dimensions:", {
+    console.log('Container dimensions:', {
       width: imageDimensionInPresentation.width * containerScale,
       height: imageDimensionInPresentation.height * containerScale,
       containerScale,
@@ -245,7 +245,7 @@ export function ImagePreview({
       const response = await fetch(element.url);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
+      const a = document.createElement('a');
       a.href = url;
       a.download = `image-${Date.now()}.png`;
       document.body.appendChild(a);
@@ -253,7 +253,7 @@ export function ImagePreview({
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
     } catch (err) {
-      console.error("Failed to download image:", err);
+      console.error('Failed to download image:', err);
     }
   }, [element.url]);
 
@@ -271,23 +271,23 @@ export function ImagePreview({
   return (
     <div className="space-y-4">
       {/* Image Preview Area */}
-      <div className="relative max-h-[50vh] flex justify-center items-center w-full overflow-hidden">
-        {currentMode === "crop" ? (
+      <div className="relative flex max-h-[50vh] w-full items-center justify-center overflow-hidden">
+        {currentMode === 'crop' ? (
           <div
             ref={containerRef}
-            className="relative shrink-0 rounded-lg bg-gradient-to-br aspect-auto from-muted/50 to-muted overflow-hidden cursor-grab active:cursor-grabbing select-none"
+            className="relative aspect-auto shrink-0 cursor-grab overflow-hidden rounded-lg bg-gradient-to-br from-muted/50 to-muted select-none active:cursor-grabbing"
             style={{
               width: imageDimensionInPresentation.width * containerScale,
               height: imageDimensionInPresentation.height * containerScale,
               aspectRatio:
                 imageDimensionInPresentation.width /
                 imageDimensionInPresentation.height,
-              transformOrigin: "center center",
-              userSelect: "none",
-              WebkitUserSelect: "none",
-              MozUserSelect: "none",
-              msUserSelect: "none",
-              overflow: "visible",
+              transformOrigin: 'center center',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              MozUserSelect: 'none',
+              msUserSelect: 'none',
+              overflow: 'visible',
             }}
             onMouseDown={handleMouseDown}
             onWheel={handleWheel}
@@ -296,24 +296,24 @@ export function ImagePreview({
             {/** biome-ignore lint/performance/noImgElement: This is a valid use case */}
             <img
               src={element.url}
-              alt={element.query ?? "Presentation image"}
+              alt={element.query ?? 'Presentation image'}
               style={{
-                height: "100%",
-                width: "100%",
+                height: '100%',
+                width: '100%',
                 objectFit: localCropSettings.objectFit,
                 objectPosition: `${localCropSettings.objectPosition.x}% ${localCropSettings.objectPosition.y}%`,
                 transform: `scale(${localCropSettings.zoom ?? 1})`,
                 transformOrigin: `${localCropSettings.objectPosition.x}% ${localCropSettings.objectPosition.y}%`,
-                pointerEvents: "none", // Prevent image from interfering with mouse events
-                display: "block", // Remove any default inline spacing
-                maxWidth: "none", // Prevent any max-width constraints
-                maxHeight: "none", // Prevent any max-height constraints
+                pointerEvents: 'none', // Prevent image from interfering with mouse events
+                display: 'block', // Remove any default inline spacing
+                maxWidth: 'none', // Prevent any max-width constraints
+                maxHeight: 'none', // Prevent any max-height constraints
               }}
               draggable={false}
             />
             {/* Crop overlay */}
-            <div className="absolute inset-0 border-2 border-blue-500 border-dashed pointer-events-none">
-              <div className="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded shadow-sm">
+            <div className="pointer-events-none absolute inset-0 border-2 border-dashed border-blue-500">
+              <div className="absolute top-2 left-2 rounded bg-blue-500 px-2 py-1 text-xs text-white shadow-sm">
                 Drag to pan • Scroll to zoom
               </div>
             </div>
@@ -321,20 +321,20 @@ export function ImagePreview({
         ) : (
           // Normal Preview Mode - Show cropped preview
           <div
-            className="relative overflow-hidden shrink-0 rounded-lg bg-gradient-to-br aspect-auto from-muted/50 to-muted"
+            className="relative aspect-auto shrink-0 overflow-hidden rounded-lg bg-gradient-to-br from-muted/50 to-muted"
             style={{
               ...imageDimensionInPresentation,
               scale: containerScale,
-              transformOrigin: "center center",
+              transformOrigin: 'center center',
             }}
           >
             {/** biome-ignore lint/performance/noImgElement: This is a valid use case */}
             <img
               src={element.url}
-              alt={element.query ?? "Presentation image"}
+              alt={element.query ?? 'Presentation image'}
               style={{
-                height: "100%",
-                width: "100%",
+                height: '100%',
+                width: '100%',
                 objectFit: localCropSettings.objectFit,
                 objectPosition: `${localCropSettings.objectPosition.x}% ${localCropSettings.objectPosition.y}%`,
                 transform: `scale(${localCropSettings.zoom ?? 1})`,
@@ -342,7 +342,7 @@ export function ImagePreview({
               }}
               draggable={false}
             />
-            <div className="absolute bottom-2 right-2 flex gap-1">
+            <div className="absolute right-2 bottom-2 flex gap-1">
               <Button
                 variant="secondary"
                 size="icon"
@@ -357,14 +357,14 @@ export function ImagePreview({
       </div>
 
       {/* Crop Controls - Only show in crop mode */}
-      {currentMode === "crop" && (
-        <div className="space-y-4 p-4 bg-muted/30 rounded-lg border">
+      {currentMode === 'crop' && (
+        <div className="space-y-4 rounded-lg border bg-muted/30 p-4">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="text-sm font-medium">Crop Controls</h4>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <span>
-                  Position: {localCropSettings.objectPosition.x.toFixed(0)}%,{" "}
+                  Position: {localCropSettings.objectPosition.x.toFixed(0)}%,{' '}
                   {localCropSettings.objectPosition.y.toFixed(0)}%
                 </span>
               </div>

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Spinner } from "@/features/presentations/components/ui/spinner";
-import { ThemeBackground } from "../theme/ThemeBackground";
+import { Spinner } from '@/components/ui/spinner';
+import { ThemeBackground } from '../theme/ThemeBackground';
 
 export function LoadingState() {
   return (

@@ -1,7 +1,7 @@
 'use client';
 
 import { createEmptyPresentation } from '@/app/_actions/presentation/presentationActions';
-import { Button } from '@/features/presentations/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { usePresentationState } from '@/states/presentation-state';
 import { Wand2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';

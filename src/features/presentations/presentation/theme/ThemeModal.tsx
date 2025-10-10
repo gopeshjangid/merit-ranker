@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
 import {
   getPublicCustomThemes,
   getUserCustomThemes,
-} from "@/app/_actions/presentation/theme-actions";
-import { Button } from "@/components/ui/button";
+} from '@/app/_actions/presentation/theme-actions';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogTrigger,
-} from "@/features/presentations/components/ui/dialog";
-import { Skeleton } from "@/features/presentations/components/ui/skeleton";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/presentations/components/ui/tabs";
-import { type ThemeProperties } from "@/features/presentations/lib/presentation/themes";
-import { usePresentationState } from "@/states/presentation-state";
-import { useQuery } from "@tanstack/react-query";
-import { Plus, X } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useState, type ReactNode } from "react";
-import { ThemeCreator } from "./ThemeCreator";
+} from '@/components/ui/dialog';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { type ThemeProperties } from '@/features/presentations/lib/presentation/themes';
+import { usePresentationState } from '@/states/presentation-state';
+import { useQuery } from '@tanstack/react-query';
+import { Plus, X } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { useState, type ReactNode } from 'react';
+import { ThemeCreator } from './ThemeCreator';
 
 // Define interfaces for the theme data
 interface CustomTheme {
@@ -51,14 +51,14 @@ function ThemeCardSkeleton() {
 
 export function ThemeModal({ children }: { children?: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("my-themes");
+  const [activeTab, setActiveTab] = useState('my-themes');
   const { setTheme } = usePresentationState();
   const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const isDark = resolvedTheme === 'dark';
 
   // Fetch user themes with React Query
   const { data: userThemes = [], isLoading: isLoadingUserThemes } = useQuery({
-    queryKey: ["userThemes"],
+    queryKey: ['userThemes'],
     queryFn: async () => {
       const result = await getUserCustomThemes();
       return result.success ? (result.themes as CustomTheme[]) : [];
@@ -69,7 +69,7 @@ export function ThemeModal({ children }: { children?: ReactNode }) {
   // Fetch public themes with React Query
   const { data: publicThemes = [], isLoading: isLoadingPublicThemes } =
     useQuery({
-      queryKey: ["publicThemes"],
+      queryKey: ['publicThemes'],
       queryFn: async () => {
         const result = await getPublicCustomThemes();
         return result.success ? (result.themes as CustomTheme[]) : [];
@@ -92,7 +92,7 @@ export function ThemeModal({ children }: { children?: ReactNode }) {
         shouldHaveClose={false}
         className="h-[60vh] max-w-5xl overflow-auto"
       >
-        <div className="flex h-full flex-col ">
+        <div className="flex h-full flex-col">
           <Tabs
             defaultValue="my-themes"
             value={activeTab}
@@ -148,8 +148,8 @@ export function ThemeModal({ children }: { children?: ReactNode }) {
                           boxShadow: modeShadows.card,
                           transition: themeData.transitions.default,
                           backgroundColor: isDark
-                            ? "rgba(0,0,0,0.3)"
-                            : "rgba(255,255,255,0.9)",
+                            ? 'rgba(0,0,0,0.3)'
+                            : 'rgba(255,255,255,0.9)',
                         }}
                       >
                         <div
@@ -168,7 +168,7 @@ export function ThemeModal({ children }: { children?: ReactNode }) {
                             fontFamily: themeData.fonts.body,
                           }}
                         >
-                          {theme.description ?? "Custom theme"}
+                          {theme.description ?? 'Custom theme'}
                         </div>
                         <div className="flex gap-2">
                           {[
@@ -178,7 +178,7 @@ export function ThemeModal({ children }: { children?: ReactNode }) {
                           ].map((color, i) => (
                             <div
                               key={i}
-                              className="h-4 w-4 rounded-full ring-1 ring-inset ring-white/10"
+                              className="h-4 w-4 rounded-full ring-1 ring-white/10 ring-inset"
                               style={{ backgroundColor: color }}
                             />
                           ))}
@@ -227,8 +227,8 @@ export function ThemeModal({ children }: { children?: ReactNode }) {
                           boxShadow: modeShadows.card,
                           transition: themeData.transitions.default,
                           backgroundColor: isDark
-                            ? "rgba(0,0,0,0.3)"
-                            : "rgba(255,255,255,0.9)",
+                            ? 'rgba(0,0,0,0.3)'
+                            : 'rgba(255,255,255,0.9)',
                         }}
                       >
                         <div
@@ -247,10 +247,10 @@ export function ThemeModal({ children }: { children?: ReactNode }) {
                             fontFamily: themeData.fonts.body,
                           }}
                         >
-                          {theme.description ?? "Custom theme"}
+                          {theme.description ?? 'Custom theme'}
                         </div>
                         <div className="text-xs text-muted-foreground">
-                          By {theme.user?.name ?? "Unknown"}
+                          By {theme.user?.name ?? 'Unknown'}
                         </div>
                         <div className="flex gap-2">
                           {[
@@ -260,7 +260,7 @@ export function ThemeModal({ children }: { children?: ReactNode }) {
                           ].map((color, i) => (
                             <div
                               key={i}
-                              className="h-4 w-4 rounded-full ring-1 ring-inset ring-white/10"
+                              className="h-4 w-4 rounded-full ring-1 ring-white/10 ring-inset"
                               style={{ backgroundColor: color }}
                             />
                           ))}

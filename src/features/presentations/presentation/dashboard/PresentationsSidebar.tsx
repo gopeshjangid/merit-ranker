@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { fetchPresentations } from "@/app/_actions/presentation/fetchPresentations";
-import { deletePresentations } from "@/app/_actions/presentation/presentationActions";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/features/presentations/components/ui/scroll-area";
+import { fetchPresentations } from '@/app/_actions/presentation/fetchPresentations';
+import { deletePresentations } from '@/app/_actions/presentation/presentationActions';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "@/features/presentations/components/ui/sheet";
-import { Skeleton } from "@/features/presentations/components/ui/skeleton";
-import { useToast } from "@/features/presentations/components/ui/use-toast";
-import { usePresentationState } from "@/states/presentation-state";
-import { type Prisma } from "@prisma/client";
+} from '@/components/ui/sheet';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/components/ui/use-toast';
+import { usePresentationState } from '@/states/presentation-state';
+import { type Prisma } from '@prisma/client';
 import {
   useInfiniteQuery,
   useMutation,
   useQueryClient,
-} from "@tanstack/react-query";
-import { FileX, Plus } from "lucide-react";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { PresentationItem } from "./PresentationItem";
-import { SelectionControls } from "./SelectionControls";
+} from '@tanstack/react-query';
+import { FileX, Plus } from 'lucide-react';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { PresentationItem } from './PresentationItem';
+import { SelectionControls } from './SelectionControls';
 
 type PresentationDocument = Prisma.BaseDocumentGetPayload<{
   include: {
@@ -37,9 +37,9 @@ interface PresentationResponse {
 }
 
 export function PresentationsSidebar({
-  side = "left",
+  side = 'left',
 }: {
-  side?: "left" | "right";
+  side?: 'left' | 'right';
 }) {
   const { ref: loadMoreRef, inView } = useInView();
   const queryClient = useQueryClient();
@@ -63,26 +63,26 @@ export function PresentationsSidebar({
     mutationFn: async () => {
       const result = await deletePresentations(selectedPresentations);
       if (!result.success && !result.partialSuccess) {
-        throw new Error(result.message ?? "Failed to delete presentations");
+        throw new Error(result.message ?? 'Failed to delete presentations');
       }
       return result;
     },
     onSuccess: async (result) => {
-      await queryClient.invalidateQueries({ queryKey: ["presentations-all"] });
-      await queryClient.invalidateQueries({ queryKey: ["recent-items"] });
+      await queryClient.invalidateQueries({ queryKey: ['presentations-all'] });
+      await queryClient.invalidateQueries({ queryKey: ['recent-items'] });
       deselectAllPresentations();
       toggleSelecting();
       toast({
-        title: "Success",
-        description: result.message || "Selected presentations deleted",
+        title: 'Success',
+        description: result.message || 'Selected presentations deleted',
       });
     },
     onError: (error) => {
-      console.error("Failed to delete presentations:", error);
+      console.error('Failed to delete presentations:', error);
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to delete presentations",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Failed to delete presentations',
       });
     },
   });
@@ -95,7 +95,7 @@ export function PresentationsSidebar({
     isLoading,
     isError,
   } = useInfiniteQuery<PresentationResponse>({
-    queryKey: ["presentations-all"],
+    queryKey: ['presentations-all'],
     queryFn: async ({ pageParam = 0 }) => {
       const response = await fetchPresentations(pageParam as number);
       return response as PresentationResponse;
@@ -119,7 +119,7 @@ export function PresentationsSidebar({
 
   const handleSelectAll = () => {
     selectAllPresentations(
-      allPresentations.map((presentation) => presentation.id),
+      allPresentations.map((presentation) => presentation.id)
     );
   };
 

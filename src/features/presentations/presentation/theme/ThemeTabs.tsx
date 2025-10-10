@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Tabs, TabsList, TabsTrigger } from "@/features/presentations/components/ui/tabs";
-import { Grid2X2, PaletteIcon, TypeIcon } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Grid2X2, PaletteIcon, TypeIcon } from 'lucide-react';
 
 interface ThemeTabsProps {
   activeTab: string;

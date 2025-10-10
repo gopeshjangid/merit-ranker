@@ -1,8 +1,8 @@
 // components/export-ppt-button.tsx
-"use client";
+'use client';
 
-import { exportPresentation } from "@/app/_actions/presentation/exportPresentationActions";
-import { Button } from "@/components/ui/button";
+import { exportPresentation } from '@/app/_actions/presentation/exportPresentationActions';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -11,12 +11,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { useToast } from "@/features/presentations/components/ui/use-toast";
-import { themes } from "@/features/presentations/lib/presentation/themes";
-import { usePresentationState } from "@/states/presentation-state";
-import { Download } from "lucide-react";
-import { useState } from "react";
+} from '@/components/ui/dialog';
+import { useToast } from '@/components/ui/use-toast';
+import { themes } from '@/features/presentations/lib/presentation/themes';
+import { usePresentationState } from '@/states/presentation-state';
+import { Download } from 'lucide-react';
+import { useState } from 'react';
 
 interface ExportPPTButtonProps {
   presentationId: string;
@@ -25,7 +25,7 @@ interface ExportPPTButtonProps {
 
 export function ExportButton({
   presentationId,
-  fileName = "presentation",
+  fileName = 'presentation',
 }: ExportPPTButtonProps) {
   const [isExportDialogOpen, setIsExportDialogOpen] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
@@ -42,26 +42,26 @@ export function ExportButton({
         if (customThemeData) {
           const colors = customThemeData.colors.light;
           return {
-            primary: colors.primary.replace("#", ""),
-            secondary: colors.secondary.replace("#", ""),
-            accent: colors.accent.replace("#", ""),
-            background: colors.background.replace("#", ""),
-            text: colors.text.replace("#", ""),
-            heading: colors.heading.replace("#", ""),
-            muted: colors.muted.replace("#", ""),
+            primary: colors.primary.replace('#', ''),
+            secondary: colors.secondary.replace('#', ''),
+            accent: colors.accent.replace('#', ''),
+            background: colors.background.replace('#', ''),
+            text: colors.text.replace('#', ''),
+            heading: colors.heading.replace('#', ''),
+            muted: colors.muted.replace('#', ''),
           };
         }
-        if (typeof theme === "string" && theme in themes) {
+        if (typeof theme === 'string' && theme in themes) {
           const t = themes[theme as keyof typeof themes];
           const colors = t.colors.light;
           return {
-            primary: colors.primary.replace("#", ""),
-            secondary: colors.secondary.replace("#", ""),
-            accent: colors.accent.replace("#", ""),
-            background: colors.background.replace("#", ""),
-            text: colors.text.replace("#", ""),
-            heading: colors.heading.replace("#", ""),
-            muted: colors.muted.replace("#", ""),
+            primary: colors.primary.replace('#', ''),
+            secondary: colors.secondary.replace('#', ''),
+            accent: colors.accent.replace('#', ''),
+            background: colors.background.replace('#', ''),
+            text: colors.text.replace('#', ''),
+            heading: colors.heading.replace('#', ''),
+            muted: colors.muted.replace('#', ''),
           };
         }
         return undefined;
@@ -70,7 +70,7 @@ export function ExportButton({
       const result = await exportPresentation(
         presentationId,
         fileName,
-        themeColors,
+        themeColors
       );
 
       if (result.success && result.data) {
@@ -82,12 +82,12 @@ export function ExportButton({
         }
         const byteArray = new Uint8Array(byteNumbers);
         const blob = new Blob([byteArray], {
-          type: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
         });
 
         // Create download link
         const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
+        const link = document.createElement('a');
         link.href = url;
         link.download = result.fileName ?? `${fileName}.pptx`;
         document.body.appendChild(link);
@@ -98,22 +98,22 @@ export function ExportButton({
         document.body.removeChild(link);
 
         toast({
-          title: "Export Successful",
-          description: "Your presentation has been exported successfully.",
-          variant: "default",
+          title: 'Export Successful',
+          description: 'Your presentation has been exported successfully.',
+          variant: 'default',
         });
 
         setIsExportDialogOpen(false);
       } else {
-        throw new Error(result.error ?? "Export failed");
+        throw new Error(result.error ?? 'Export failed');
       }
     } catch (error) {
       toast({
-        title: "Export Failed",
-        description: "There was an error exporting your presentation.",
-        variant: "destructive",
+        title: 'Export Failed',
+        description: 'There was an error exporting your presentation.',
+        variant: 'destructive',
       });
-      console.error("Export error:", error);
+      console.error('Export error:', error);
     } finally {
       setIsExporting(false);
     }
@@ -154,7 +154,7 @@ export function ExportButton({
             Cancel
           </Button>
           <Button type="button" onClick={handleExport} disabled={isExporting}>
-            {isExporting ? "Exporting..." : "Export to PowerPoint"}
+            {isExporting ? 'Exporting...' : 'Export to PowerPoint'}
           </Button>
         </DialogFooter>
       </DialogContent>

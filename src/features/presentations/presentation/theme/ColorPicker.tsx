@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Label } from "@/features/presentations/components/ui/label";
-import { useState } from "react";
-import { HexColorPicker } from "react-colorful";
+import { Label } from '@/components/ui/label';
+import { useState } from 'react';
+import { HexColorPicker } from 'react-colorful';
 
 interface ColorPickerProps {
   color: string;
@@ -22,7 +22,7 @@ export function ColorPicker({ color, onChange, label }: ColorPickerProps) {
         onClick={() => setShowPicker(!showPicker)}
       />
       {showPicker && (
-        <div className="absolute left-0 top-full z-50 mt-2">
+        <div className="absolute top-full left-0 z-50 mt-2">
           <div className="fixed inset-0" onClick={() => setShowPicker(false)} />
           <HexColorPicker color={color} onChange={onChange} />
         </div>

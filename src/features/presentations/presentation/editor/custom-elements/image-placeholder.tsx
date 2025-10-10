@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import type React from "react";
+import type React from 'react';
 
-import { useUploadFile } from "@/features/presentations/components/plate/hooks/use-upload-file";
-import { ImageSourceSelector } from "@/features/presentations/components/presentation/theme/ImageSourceSelector";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/features/presentations/components/ui/label";
+import { useUploadFile } from '@/features/presentations/components/plate/hooks/use-upload-file';
+import { ImageSourceSelector } from '@/features/presentations/components/presentation/theme/ImageSourceSelector';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { ImageIcon, Loader2, Sparkles, Upload } from "lucide-react";
-import { useRef, useState } from "react";
-import { toast } from "sonner";
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { ImageIcon, Loader2, Sparkles, Upload } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { toast } from 'sonner';
 
 export interface ImagePlaceholderProps {
   onGenerate?: (prompt: string) => void;
@@ -32,7 +32,7 @@ export default function ImagePlaceholder({
   slideIndex,
 }: ImagePlaceholderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState('');
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const setSlides = usePresentationState((s) => s.setSlides);
   const slides = usePresentationState((s) => s.slides);
@@ -57,13 +57,13 @@ export default function ImagePlaceholder({
                   ...slide,
                   rootImage: { ...slide.rootImage!, url: file.ufsUrl },
                 }
-              : slide,
-          ),
+              : slide
+          )
         );
       }
     },
     onUploadError: (error) => {
-      toast.error("Failed to upload image");
+      toast.error('Failed to upload image');
       console.error(error);
     },
   });
@@ -84,7 +84,7 @@ export default function ImagePlaceholder({
   const handleGenerateClick = () => {
     if (!isStatic && onGenerate && prompt.trim()) {
       onGenerate(prompt);
-      setPrompt("");
+      setPrompt('');
       setIsPopoverOpen(false);
     }
   };
@@ -92,21 +92,21 @@ export default function ImagePlaceholder({
   return (
     <div
       className={cn(
-        "relative h-full w-full rounded-lg overflow-hidden border border-border bg-gradient-to-br from-muted/50 to-muted",
-        className,
+        'relative h-full w-full overflow-hidden rounded-lg border border-border bg-gradient-to-br from-muted/50 to-muted',
+        className
       )}
     >
       {/* Main placeholder area */}
-      <div className="relative h-full flex flex-col items-center justify-center p-8 gap-6">
+      <div className="relative flex h-full flex-col items-center justify-center gap-6 p-8">
         <div className="flex flex-col items-center gap-4">
           <div className="relative">
-            <div className="absolute inset-0 bg-primary/10 blur-xl rounded-full" />
-            <div className="relative w-20 h-20 rounded-2xl bg-background border-2 border-border flex items-center justify-center shadow-sm">
-              <ImageIcon className="w-10 h-10 text-muted-foreground" />
+            <div className="absolute inset-0 rounded-full bg-primary/10 blur-xl" />
+            <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-border bg-background shadow-sm">
+              <ImageIcon className="h-10 w-10 text-muted-foreground" />
             </div>
           </div>
 
-          <div className="text-center space-y-1">
+          <div className="space-y-1 text-center">
             <p className="text-sm font-medium text-foreground">No image yet</p>
             <p className="text-xs text-muted-foreground">
               Upload or generate an image
@@ -118,18 +118,18 @@ export default function ImagePlaceholder({
           <Button
             variant="outline"
             size="default"
-            className="h-10 px-6 font-medium shadow-sm hover:shadow transition-shadow bg-transparent"
+            className="h-10 bg-transparent px-6 font-medium shadow-sm transition-shadow hover:shadow"
             onClick={handleUploadClick}
             disabled={isStatic || isUploading}
           >
             {isUploading ? (
               <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 {progress}%
               </>
             ) : (
               <>
-                <Upload className="h-4 w-4 mr-2" />
+                <Upload className="mr-2 h-4 w-4" />
                 Upload
               </>
             )}
@@ -140,22 +140,22 @@ export default function ImagePlaceholder({
               <Button
                 variant="default"
                 size="default"
-                className="h-10 px-6 font-medium shadow-sm hover:shadow-md transition-shadow"
+                className="h-10 px-6 font-medium shadow-sm transition-shadow hover:shadow-md"
                 disabled={isStatic}
               >
-                <Sparkles className="h-4 w-4 mr-2" />
+                <Sparkles className="mr-2 h-4 w-4" />
                 Generate
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-96 p-0" side="bottom" align="center">
-              <div className="p-6 space-y-4">
+              <div className="space-y-4 p-6">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-primary" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                      <Sparkles className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-sm text-foreground">
+                      <h4 className="text-sm font-semibold text-foreground">
                         Generate Image
                       </h4>
                       <p className="text-xs text-muted-foreground">
@@ -191,7 +191,7 @@ export default function ImagePlaceholder({
                       onChange={(e) => setPrompt(e.target.value)}
                       disabled={isStatic}
                       onKeyDown={(e) => {
-                        if (e.key === "Enter" && !isStatic) {
+                        if (e.key === 'Enter' && !isStatic) {
                           handleGenerateClick();
                         }
                       }}
@@ -200,11 +200,11 @@ export default function ImagePlaceholder({
 
                   <Button
                     size="default"
-                    className="w-full h-10 font-medium"
+                    className="h-10 w-full font-medium"
                     onClick={handleGenerateClick}
                     disabled={isStatic || !prompt.trim()}
                   >
-                    <Sparkles className="h-4 w-4 mr-2" />
+                    <Sparkles className="mr-2 h-4 w-4" />
                     Generate Image
                   </Button>
                 </div>

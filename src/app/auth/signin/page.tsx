@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,29 +8,29 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/features/presentations/components/ui/card";
-import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { FaGoogle } from "react-icons/fa";
+} from '@/components/ui/card';
+import { signIn } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
+import { FaGoogle } from 'react-icons/fa';
 
 export default function SignIn() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/";
-  const error = searchParams.get("error");
+  const callbackUrl = searchParams.get('callbackUrl') ?? '/';
+  const error = searchParams.get('error');
 
   const handleSignIn = async (provider: string) => {
     await signIn(provider, { callbackUrl });
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-slate-900 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 dark:bg-slate-900">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
           <CardDescription>Sign in to your account to continue</CardDescription>
           {error && (
             <div
-              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              className="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
               role="alert"
             >
               <span className="block sm:inline">
@@ -43,7 +43,7 @@ export default function SignIn() {
           <Button
             variant="outline"
             className="flex items-center justify-center gap-2"
-            onClick={() => handleSignIn("google")}
+            onClick={() => handleSignIn('google')}
           >
             <FaGoogle className="h-4 w-4" />
             Sign in with Google

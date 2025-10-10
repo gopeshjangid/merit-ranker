@@ -1,5 +1,5 @@
-import { Skeleton } from "@/features/presentations/components/ui/skeleton";
-import { usePresentationState } from "@/states/presentation-state";
+import { Skeleton } from '@/components/ui/skeleton';
+import { usePresentationState } from '@/states/presentation-state';
 import {
   closestCenter,
   DndContext,
@@ -8,16 +8,16 @@ import {
   useSensor,
   useSensors,
   type DragEndEvent,
-} from "@dnd-kit/core";
+} from '@dnd-kit/core';
 import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { Plus } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { OutlineItem } from "./OutlineItem";
+} from '@dnd-kit/sortable';
+import { Plus } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { OutlineItem } from './OutlineItem';
 
 interface OutlineItemType {
   id: string;
@@ -38,7 +38,7 @@ export function OutlineList() {
     initialItems.map((title, index) => ({
       id: (index + 1).toString(),
       title,
-    })),
+    }))
   );
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export function OutlineList() {
       initialItems.map((title, index) => ({
         id: (index + 1).toString(),
         title,
-      })),
+      }))
     );
   }, [initialItems]);
 
@@ -54,7 +54,7 @@ export function OutlineList() {
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    }),
+    })
   );
 
   function handleDragEnd(event: DragEndEvent) {
@@ -75,7 +75,7 @@ export function OutlineList() {
   const handleTitleChange = (id: string, newTitle: string) => {
     setItems((items) => {
       const newItems = items.map((item) =>
-        item.id === id ? { ...item, title: newTitle } : item,
+        item.id === id ? { ...item, title: newTitle } : item
       );
       // Update the outline in the store
       setOutline(newItems.map((item) => item.title));
@@ -89,8 +89,8 @@ export function OutlineList() {
         ? (
             Math.max(...items.map((item) => parseInt(item.id, 10))) + 1
           ).toString()
-        : "1";
-    const newItems = [...items, { id: newId, title: "New Card" }];
+        : '1';
+    const newItems = [...items, { id: newId, title: 'New Card' }];
     setItems(newItems);
     // Update the outline in the store
     setOutline(newItems.map((item) => item.title));
