@@ -1,13 +1,13 @@
-import { type PlateEditor } from "platejs/react";
-import { type DropTargetMonitor } from "react-dnd";
+import { type PlateEditor } from 'platejs/react';
+import { type DropTargetMonitor } from 'react-dnd';
 
-import { NodeApi, PathApi } from "platejs";
+import { NodeApi, PathApi } from 'platejs';
 
-import { type DragItemNode } from "@platejs/dnd";
-import { type UseDropNodeOptions } from "../hooks/useDropNode";
+import { type DragItemNode } from '@platejs/dnd';
+import { type UseDropNodeOptions } from '../hooks/useDropNode';
 
-import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
-import { getDropPath } from "../utils/getDropPath";
+import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
+import { getDropPath } from '../utils/getDropPath';
 
 /**
  * Callback called when dragging a node and hovering nodes.
@@ -24,11 +24,11 @@ export const onHoverNode = (
   }: {
     dragItem: DragItemNode;
     monitor: DropTargetMonitor;
-  } & Pick<UseDropNodeOptions, "canDropNode" | "element" | "nodeRef">,
+  } & Pick<UseDropNodeOptions, 'canDropNode' | 'element' | 'nodeRef'>
 ) => {
   const { _isOver, dropTarget } = editor.getOptions(MultiDndPlugin);
   const currentId = dropTarget?.id ?? null;
-  const currentLine = dropTarget?.line ?? "";
+  const currentLine = dropTarget?.line ?? '';
 
   // Check if the drop would actually move the node
   const result = getDropPath(editor, {
@@ -42,7 +42,7 @@ export const onHoverNode = (
   // If getDropPath returns undefined, it means no actual move would happen
   if (!result) {
     if (currentId || currentLine) {
-      editor.setOption(MultiDndPlugin, "dropTarget", { id: null, line: "" });
+      editor.setOption(MultiDndPlugin, 'dropTarget', { id: null, line: '' });
     }
     return;
   }
@@ -57,24 +57,24 @@ export const onHoverNode = (
     }
 
     // For top positioning, adjust to show line at bottom of previous element
-    if (newDropTarget.line === "top") {
+    if (newDropTarget.line === 'top') {
       const previousPath = PathApi.previous(editor.api.findPath(element)!);
 
       if (!previousPath) {
-        return editor.setOption(MultiDndPlugin, "dropTarget", newDropTarget);
+        return editor.setOption(MultiDndPlugin, 'dropTarget', newDropTarget);
       }
 
       const nextNode = NodeApi.get(editor, previousPath!);
 
-      editor.setOption(MultiDndPlugin, "dropTarget", {
+      editor.setOption(MultiDndPlugin, 'dropTarget', {
         id: nextNode?.id as string,
-        line: "bottom",
+        line: 'bottom',
       });
 
       return;
     }
 
-    editor.setOption(MultiDndPlugin, "dropTarget", newDropTarget);
+    editor.setOption(MultiDndPlugin, 'dropTarget', newDropTarget);
   }
 
   // Collapse selection if expanded during drag

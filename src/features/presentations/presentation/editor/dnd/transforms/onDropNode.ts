@@ -1,15 +1,15 @@
-import { type PlateEditor } from "platejs/react";
-import { type DropTargetMonitor } from "react-dnd";
+import { type PlateEditor } from 'platejs/react';
+import { type DropTargetMonitor } from 'react-dnd';
 
-import { insertColumnGroup } from "@platejs/layout";
-import { type TElement } from "platejs";
+import { insertColumnGroup } from '@platejs/layout';
+import { type TElement } from 'platejs';
 
-import { type ElementDragItemNode } from "@platejs/dnd";
-import { type UseDropNodeOptions } from "../hooks";
+import { type ElementDragItemNode } from '@platejs/dnd';
+import { type UseDropNodeOptions } from '../hooks';
 
-import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
-import { getDropPath } from "../utils/getDropPath";
-import { updateSiblingsAfterDrop } from "../utils/updateSiblingsForcefully";
+import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
+import { getDropPath } from '../utils/getDropPath';
+import { updateSiblingsAfterDrop } from '../utils/updateSiblingsForcefully';
 
 export const onDropNode = (
   editor: PlateEditor,
@@ -22,7 +22,7 @@ export const onDropNode = (
   }: {
     dragItem: ElementDragItemNode;
     monitor: DropTargetMonitor;
-  } & Pick<UseDropNodeOptions, "canDropNode" | "element" | "nodeRef">,
+  } & Pick<UseDropNodeOptions, 'canDropNode' | 'element' | 'nodeRef'>
 ) => {
   const { orientation } = editor.getOptions(MultiDndPlugin);
   const result = getDropPath(editor, {
@@ -101,7 +101,7 @@ export const onDropNode = (
   const draggedIds = Array.isArray(dragItem.id) ? dragItem.id : [dragItem.id];
 
   // Handle horizontal drops (create columns)
-  if (direction === "left" || direction === "right") {
+  if (direction === 'left' || direction === 'right') {
     if (!hoveredPath) return;
 
     // Check if we should create columns or just move elements
@@ -129,7 +129,7 @@ export const onDropNode = (
       // Update siblings for dropped elements that require it
       draggedElementIds.forEach((id) => {
         const entry = editor.api.node<TElement>({ id, at: [] });
-        console.log("Entry:", entry);
+        console.log('Entry:', entry);
         if (entry?.[0].type) {
           updateSiblingsAfterDrop(editor, entry[0], to);
         }
@@ -156,9 +156,9 @@ export const onDropNode = (
 
     // Determine which column gets which content based on direction
     const targetColumnPath =
-      direction === "left" ? secondColumnPath : firstColumnPath;
+      direction === 'left' ? secondColumnPath : firstColumnPath;
     const draggedColumnPath =
-      direction === "left" ? firstColumnPath : secondColumnPath;
+      direction === 'left' ? firstColumnPath : secondColumnPath;
 
     // Use a transaction to ensure all operations complete
     editor.transforms.withoutNormalizing(() => {
@@ -173,7 +173,7 @@ export const onDropNode = (
       if (
         isExternalNode &&
         dragItem.element &&
-        typeof dragItem.element === "object"
+        typeof dragItem.element === 'object'
       ) {
         // Handle external node insertion
         if (Array.isArray(dragItem.element)) {
@@ -213,7 +213,7 @@ export const onDropNode = (
       // Update siblings for dropped elements that require it
       draggedElementIds.forEach((id) => {
         const entry = editor.api.node<TElement>({ id });
-        console.log("Entry:", entry);
+        console.log('Entry:', entry);
         if (entry?.[0]?.type) {
           updateSiblingsAfterDrop(editor, entry[0], [...draggedColumnPath, 0]);
         }
@@ -246,7 +246,7 @@ export const onDropNode = (
   } else if (
     isExternalNode &&
     dragItem.element &&
-    typeof dragItem.element === "object"
+    typeof dragItem.element === 'object'
   ) {
     // External node - insert at position
     editor.tf.insertNodes(dragItem.element as TElement, {

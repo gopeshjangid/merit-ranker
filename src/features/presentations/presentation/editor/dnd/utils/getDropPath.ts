@@ -1,12 +1,12 @@
-import { type PlateEditor } from "platejs/react";
-import { type DropTargetMonitor } from "react-dnd";
+import { type PlateEditor } from 'platejs/react';
+import { type DropTargetMonitor } from 'react-dnd';
 
-import { type NodeEntry, type Path, type TElement, PathApi } from "platejs";
+import { type NodeEntry, type Path, type TElement, PathApi } from 'platejs';
 
-import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
-import { type DragItemNode } from "@platejs/dnd";
-import { type UseDropNodeOptions } from "../hooks";
-import { getHoverDirection } from "./getHoverDirection";
+import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
+import { type DragItemNode } from '@platejs/dnd';
+import { type UseDropNodeOptions } from '../hooks';
+import { getHoverDirection } from './getHoverDirection';
 
 /**
  * Callback called on drag and drop a node with id.
@@ -23,7 +23,7 @@ export const getDropPath = (
   }: {
     dragItem: DragItemNode;
     monitor: DropTargetMonitor;
-  } & Pick<UseDropNodeOptions, "canDropNode" | "element" | "nodeRef">,
+  } & Pick<UseDropNodeOptions, 'canDropNode' | 'element' | 'nodeRef'>
 ) => {
   const { orientation } = editor.getOptions(MultiDndPlugin);
   // Get direction without orientation constraint for multi-directional support
@@ -40,7 +40,7 @@ export const getDropPath = (
   let dragEntry: NodeEntry<TElement> | undefined;
   let dropEntry: NodeEntry<TElement> | undefined;
 
-  if ("element" in dragItem) {
+  if ('element' in dragItem) {
     const dragPath = editor.api.findPath(dragItem.element);
     const hoveredPath = editor.api.findPath(element);
 
@@ -72,7 +72,7 @@ export const getDropPath = (
   const hoveredPath = dropEntry[1];
 
   // For left/right direction, return early since we'll handle column creation
-  if (direction === "left" || direction === "right") {
+  if (direction === 'left' || direction === 'right') {
     // Include isExternalNode flag if dragPath is not available
     return {
       direction,
@@ -86,7 +86,7 @@ export const getDropPath = (
   // Handle top/bottom drops for vertical reordering
   let dropPath: Path | undefined;
 
-  if (direction === "bottom") {
+  if (direction === 'bottom') {
     // Insert after hovered node
     dropPath = hoveredPath;
 
@@ -94,7 +94,7 @@ export const getDropPath = (
     if (dragPath && PathApi.equals(dragPath, PathApi.next(dropPath))) return;
   }
 
-  if (direction === "top") {
+  if (direction === 'top') {
     // Insert before hovered node
     dropPath = [...hoveredPath.slice(0, -1), hoveredPath.at(-1)! - 1];
 

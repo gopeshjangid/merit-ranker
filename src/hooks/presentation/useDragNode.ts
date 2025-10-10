@@ -1,19 +1,19 @@
-import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
-import { type DragItemNode } from "@platejs/dnd";
-import { type TElement } from "platejs";
-import { type PlateEditor } from "platejs/react";
-import React from "react";
+import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
+import { type DragItemNode } from '@platejs/dnd';
+import { type TElement } from 'platejs';
+import { type PlateEditor } from 'platejs/react';
+import React from 'react';
 import {
   type ConnectDragPreview,
   type ConnectDragSource,
   type DragSourceHookSpec,
   useDrag,
-} from "react-dnd";
+} from 'react-dnd';
 
 export interface UseDragNodeOptions
   extends DragSourceHookSpec<DragItemNode, unknown, { isDragging: boolean }> {
   element: TElement;
-  orientation?: "vertical" | "horizontal";
+  orientation?: 'vertical' | 'horizontal';
 }
 
 /**
@@ -21,7 +21,7 @@ export interface UseDragNodeOptions
  */
 export const useDragNode = (
   editor: PlateEditor,
-  { element: staleElement, item, orientation, ...options }: UseDragNodeOptions,
+  { element: staleElement, item, orientation, ...options }: UseDragNodeOptions
 ): [
   { isAboutToDrag: boolean; isDragging: boolean },
   ConnectDragSource,
@@ -44,21 +44,21 @@ export const useDragNode = (
         isDragging: monitor.isDragging(),
       }),
       end: () => {
-        editor.setOption(MultiDndPlugin, "isDragging", false);
-        document.body.classList.remove("dragging");
+        editor.setOption(MultiDndPlugin, 'isDragging', false);
+        document.body.classList.remove('dragging');
         setIsAboutToDrag(false);
       },
       item(monitor) {
-        editor.setOption(MultiDndPlugin, "isDragging", true);
-        editor.setOption(MultiDndPlugin, "orientation", orientation);
-        editor.setOption(MultiDndPlugin, "_isOver", true);
-        document.body.classList.add("dragging");
+        editor.setOption(MultiDndPlugin, 'isDragging', true);
+        editor.setOption(MultiDndPlugin, 'orientation', orientation);
+        editor.setOption(MultiDndPlugin, '_isOver', true);
+        document.body.classList.add('dragging');
 
-        const _item = typeof item === "function" ? item(monitor) : item;
+        const _item = typeof item === 'function' ? item(monitor) : item;
 
         const currentDraggingId = editor.getOption(
           MultiDndPlugin,
-          "draggingId",
+          'draggingId'
         );
         let id: string[] | string;
 
@@ -70,7 +70,7 @@ export const useDragNode = (
           id = Array.from(currentDraggingId);
         } else {
           id = elementId;
-          editor.setOption(MultiDndPlugin, "draggingId", elementId);
+          editor.setOption(MultiDndPlugin, 'draggingId', elementId);
         }
 
         return {
@@ -82,7 +82,7 @@ export const useDragNode = (
       },
       ...options,
     }),
-    [editor, elementId],
+    [editor, elementId]
   );
 
   React.useEffect(() => {

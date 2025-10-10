@@ -3,21 +3,21 @@ import {
   type DropTargetHookSpec,
   type DropTargetMonitor,
   useDrop,
-} from "react-dnd";
+} from 'react-dnd';
 
-import { type NodeEntry, type TElement } from "platejs";
-import { type PlateEditor } from "platejs/react";
+import { type NodeEntry, type TElement } from 'platejs';
+import { type PlateEditor } from 'platejs/react';
 
 import {
   type DragItemNode,
   type ElementDragItemNode,
   type FileDragItemNode,
-} from "@platejs/dnd";
+} from '@platejs/dnd';
 
-import { MultiDndPlugin } from "@/features/presentations/components/plate/plugins/dnd-kit";
-import { onDropNode } from "../transforms/onDropNode";
-import { onHoverNode } from "../transforms/onHoverNode";
-import { getDropPath } from "../utils/getDropPath";
+import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
+import { onDropNode } from '../transforms/onDropNode';
+import { onHoverNode } from '../transforms/onHoverNode';
+import { getDropPath } from '../utils/getDropPath';
 export type CanDropCallback = (args: {
   dragEntry: NodeEntry<TElement>;
   dragItem: DragItemNode;
@@ -36,7 +36,7 @@ export interface UseDropNodeOptions
   /** The reference to the multiple preview element */
   multiplePreviewRef: any;
 
-  orientation?: "vertical" | "horizontal";
+  orientation?: 'vertical' | 'horizontal';
   /**
    * Intercepts the drop handling. If `false` is returned, the default drop
    * behavior is called after. If `true` is returned, the default behavior is
@@ -54,7 +54,7 @@ export interface UseDropNodeOptions
       dragItem: DragItemNode;
       monitor: DropTargetMonitor<DragItemNode, unknown>;
       nodeRef: any;
-    },
+    }
   ) => boolean | undefined;
 }
 
@@ -85,7 +85,7 @@ export const useDropNode = (
     nodeRef,
     onDropHandler,
     ...options
-  }: UseDropNodeOptions,
+  }: UseDropNodeOptions
 ) => {
   const id = element.id as string;
 
