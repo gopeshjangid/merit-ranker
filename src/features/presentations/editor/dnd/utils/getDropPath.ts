@@ -5,7 +5,7 @@ import { type NodeEntry, type Path, type TElement, PathApi } from 'platejs';
 
 import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
 import { type DragItemNode } from '@platejs/dnd';
-import { type UseDropNodeOptions } from '../hooks';
+import { type UseDropNodeOptions } from '@/hooks/presentation/useDropNode';
 import { getHoverDirection } from './getHoverDirection';
 
 /**

@@ -15,8 +15,8 @@ import {
   usePluginOption,
 } from "platejs/react";
 import React from "react";
-import { type MyEditor } from "../editor-kit";
-import { MultiDndPlugin } from "../plugins/dnd-kit";
+import { type MyEditor } from "@/features/presentations/plate/editor-kit";
+import { MultiDndPlugin } from "@/features/presentations/plate/plugins/dnd-kit";
 
 export type FloatingToolbarState = {
   floatingOptions?: UseVirtualFloatingOptions;
