@@ -7,7 +7,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/features/presentations/components/ui/table";
+} from "@/components/ui/table";
 import { Plus, Trash2 } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "./button";
