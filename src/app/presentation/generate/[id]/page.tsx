@@ -15,7 +15,7 @@ import {
   themes,
   type ThemeProperties,
   type Themes,
-} from '@/features/presentations/lib/presentation/themes';
+} from '@/lib/presentation/themes';
 import { usePresentationState } from '@/states/presentation-state';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Wand2 } from 'lucide-react';

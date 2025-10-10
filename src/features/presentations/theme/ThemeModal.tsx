@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { type ThemeProperties } from '@/features/presentations/lib/presentation/themes';
+import { type ThemeProperties } from '@/lib/presentation/themes';
 import { usePresentationState } from '@/states/presentation-state';
 import { useQuery } from '@tanstack/react-query';
 import { Plus, X } from 'lucide-react';

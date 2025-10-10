@@ -1,10 +1,10 @@
-import { type Themes } from "@/features/presentations/lib/presentation/themes";
+import { type Themes } from '@/lib/presentation/themes';
 
 export type ThemeFormValues = {
   name: string;
   description: string;
   isPublic: boolean;
-  themeBase: Themes | "blank";
+  themeBase: Themes | 'blank';
   colors: {
     light: {
       primary: string;
@@ -45,20 +45,20 @@ export type ThemeFormValues = {
   };
 };
 
-export type ColorKey = keyof ThemeFormValues["colors"]["light"];
-export type ColorMode = "light" | "dark";
+export type ColorKey = keyof ThemeFormValues['colors']['light'];
+export type ColorMode = 'light' | 'dark';
 
 export const fontOptions = [
-  "Inter, sans-serif",
-  "Poppins, sans-serif",
-  "Montserrat, sans-serif",
-  "Roboto, sans-serif",
-  "Playfair Display, serif",
-  "Merriweather, serif",
-  "Lora, serif",
-  "Source Sans Pro, sans-serif",
-  "DM Sans, sans-serif",
-  "JetBrains Mono, monospace",
-  "Raleway, sans-serif",
-  "Open Sans, sans-serif",
+  'Inter, sans-serif',
+  'Poppins, sans-serif',
+  'Montserrat, sans-serif',
+  'Roboto, sans-serif',
+  'Playfair Display, serif',
+  'Merriweather, serif',
+  'Lora, serif',
+  'Source Sans Pro, sans-serif',
+  'DM Sans, sans-serif',
+  'JetBrains Mono, monospace',
+  'Raleway, sans-serif',
+  'Open Sans, sans-serif',
 ];

@@ -9,7 +9,7 @@ import { getImageFromUnsplash } from '@/app/_actions/image/unsplash';
 import { MediaToolbar } from '@/components/ui/media-toolbar';
 import { mediaResizeHandleVariants } from '@/components/ui/resize-handle';
 import { Spinner } from '@/components/ui/spinner';
-import { useDebouncedSave } from '@/features/presentations/hooks/presentation/useDebouncedSave';
+import { useDebouncedSave } from '@/hooks/presentation/useDebouncedSave';
 import { cn } from '@/lib/utils';
 import { usePresentationState } from '@/states/presentation-state';
 import { Image, ImagePlugin, useMediaState } from '@platejs/media/react';

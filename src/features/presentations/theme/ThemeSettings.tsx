@@ -7,10 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import {
-  type Themes,
-  themes,
-} from '@/features/presentations/lib/presentation/themes';
+import { type Themes, themes } from '@/lib/presentation/themes';
 import { cn } from '@/lib/utils';
 import { usePresentationState } from '@/states/presentation-state';
 import { useTheme } from 'next-themes';

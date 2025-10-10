@@ -1,9 +1,6 @@
 import { type ImageModelList } from '@/app/_actions/image/generate';
 import { type PlateSlide } from '@/features/presentations/utils/parser';
-import {
-  type ThemeProperties,
-  type Themes,
-} from '@/features/presentations/lib/presentation/themes';
+import { type ThemeProperties, type Themes } from '@/lib/presentation/themes';
 import { type TElement } from 'platejs';
 import { create } from 'zustand';
 

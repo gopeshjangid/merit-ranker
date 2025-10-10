@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   AlertDialog,
@@ -10,16 +10,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { useSlideOperations } from "@/features/presentations/hooks/presentation/useSlideOperations";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { GripVertical, Plus, Trash } from "lucide-react";
-import React, { useEffect } from "react";
-import { SlideEditPopover } from "./SlideEditPopover";
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { useSlideOperations } from '@/hooks/presentation/useSlideOperations';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { GripVertical, Plus, Trash } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { SlideEditPopover } from './SlideEditPopover';
 
 interface SlideContainerProps {
   children: React.ReactNode;
@@ -43,7 +43,7 @@ export function SlideContainer({
   const isPresenting = usePresentationState((s) => s.isPresenting);
   const currentSlideIndex = usePresentationState((s) => s.currentSlideIndex);
   const setCurrentSlideIndex = usePresentationState(
-    (s) => s.setCurrentSlideIndex,
+    (s) => s.setCurrentSlideIndex
   );
   // setSlides no longer needed after extracting operations
   // Select only this slide's data so other slides don't re-render on unrelated changes
@@ -89,32 +89,32 @@ export function SlideContainer({
       ref={setNodeRef}
       style={style}
       className={cn(
-        "group/card-container relative z-10 grid w-full place-items-center pb-6",
-        isDragging && "z-50 opacity-50",
-        dragTransparent && "opacity-30",
-        isPresenting && "fixed inset-0 pb-0",
-        index === currentSlideIndex && isPresenting && "z-[999]",
+        'group/card-container relative z-10 grid w-full place-items-center pb-6',
+        isDragging && 'z-50 opacity-50',
+        dragTransparent && 'opacity-30',
+        isPresenting && 'fixed inset-0 pb-0',
+        index === currentSlideIndex && isPresenting && 'z-[999]'
       )}
       {...attributes}
     >
       <div
         className={cn(
-          "relative w-full",
+          'relative w-full',
           !isPresenting &&
-            (slideWidth ?? currentSlide?.width ?? "M") === "S" &&
-            "max-w-4xl",
+            (slideWidth ?? currentSlide?.width ?? 'M') === 'S' &&
+            'max-w-4xl',
           !isPresenting &&
-            (slideWidth ?? currentSlide?.width ?? "M") === "M" &&
-            "max-w-5xl",
+            (slideWidth ?? currentSlide?.width ?? 'M') === 'M' &&
+            'max-w-5xl',
           !isPresenting &&
-            (slideWidth ?? currentSlide?.width ?? "M") === "L" &&
-            "max-w-6xl",
-          isPresenting && "h-full w-full",
-          className,
+            (slideWidth ?? currentSlide?.width ?? 'M') === 'L' &&
+            'max-w-6xl',
+          isPresenting && 'h-full w-full',
+          className
         )}
       >
         {!isPresenting && (
-          <div className="absolute left-4 top-2 z-[100] flex opacity-0 transition-opacity duration-200 group-hover/card-container:opacity-100">
+          <div className="absolute top-2 left-4 z-[100] flex opacity-0 transition-opacity duration-200 group-hover/card-container:opacity-100">
             <Button
               variant="ghost"
               size="icon"
@@ -161,12 +161,12 @@ export function SlideContainer({
       </div>
 
       {!isPresenting && !isReadOnly && (
-        <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200 group-hover/card-container:opacity-100">
+        <div className="absolute top-0 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200 group-hover/card-container:opacity-100">
           <Button
             variant="outline"
             size="icon"
             className="h-8 w-8 rounded-full bg-background shadow-md"
-            onClick={() => addSlide("before", index)}
+            onClick={() => addSlide('before', index)}
           >
             <Plus className="h-4 w-4" />
           </Button>
@@ -179,7 +179,7 @@ export function SlideContainer({
             variant="outline"
             size="icon"
             className="h-8 w-8 rounded-full bg-background shadow-md"
-            onClick={() => addSlide("after", index)}
+            onClick={() => addSlide('after', index)}
           >
             <Plus className="h-4 w-4" />
           </Button>
@@ -187,15 +187,15 @@ export function SlideContainer({
       )}
 
       {isPresenting && (
-        <div className="absolute bottom-0.5 left-1 right-1 z-[1001]">
+        <div className="absolute right-1 bottom-0.5 left-1 z-[1001]">
           <div className="flex h-1.5 w-full gap-1">
             {Array.from({ length: slidesCount ?? 0 }).map((_, index) => (
               <button
                 key={index}
                 className={`h-full flex-1 rounded-full transition-all ${
                   index === currentSlideIndex
-                    ? "bg-primary shadow-sm"
-                    : "bg-white/20 hover:bg-white/40"
+                    ? 'bg-primary shadow-sm'
+                    : 'bg-white/20 hover:bg-white/40'
                 }`}
                 onClick={() => setCurrentSlideIndex(index)}
                 aria-label={`Go to slide ${index + 1}`}

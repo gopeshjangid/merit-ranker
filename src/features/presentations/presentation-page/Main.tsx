@@ -12,7 +12,7 @@ import {
   type ThemeProperties,
   type Themes,
   themes,
-} from '@/features/presentations/lib/presentation/themes';
+} from '@/lib/presentation/themes';
 import { usePresentationState } from '@/states/presentation-state';
 import { useQuery } from '@tanstack/react-query';
 import debounce from 'lodash.debounce';

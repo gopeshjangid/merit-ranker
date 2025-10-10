@@ -7,7 +7,7 @@ import {
   type RootImage,
 } from '@/features/presentations/utils/parser';
 import { type ImageCropSettings } from '@/features/presentations/utils/types';
-import { useDebouncedSave } from '@/features/presentations/hooks/presentation/useDebouncedSave';
+import { useDebouncedSave } from '@/hooks/presentation/useDebouncedSave';
 import { usePresentationState } from '@/states/presentation-state';
 import { DndPlugin, type DragItemNode } from '@platejs/dnd';
 import { ImagePlugin } from '@platejs/media/react';

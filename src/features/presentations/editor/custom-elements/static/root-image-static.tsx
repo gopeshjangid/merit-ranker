@@ -5,7 +5,7 @@ import { Spinner } from '@/components/ui/spinner';
 import {
   BASE_HEIGHT,
   BASE_WIDTH_PERCENTAGE,
-} from '@/features/presentations/hooks/presentation/useRootImageActions';
+} from '@/hooks/presentation/useRootImageActions';
 import { cn } from '@/lib/utils';
 import { usePresentationState } from '@/states/presentation-state';
 import ImagePlaceholder from '../image-placeholder';

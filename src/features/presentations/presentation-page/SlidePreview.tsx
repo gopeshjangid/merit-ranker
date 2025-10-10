@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { previewSignature } from "@/features/presentations/hooks/presentation/previewSignature";
-import { AnimatePresence, motion } from "framer-motion";
-import { GripVertical, PanelLeftOpen, PanelRightOpen } from "lucide-react";
-import { Resizable } from "re-resizable";
-import React, { useCallback, useState } from "react";
+import { previewSignature } from '@/hooks/presentation/previewSignature';
+import { AnimatePresence, motion } from 'framer-motion';
+import { GripVertical, PanelLeftOpen, PanelRightOpen } from 'lucide-react';
+import { Resizable } from 're-resizable';
+import React, { useCallback, useState } from 'react';
 
-import { Button } from "@/components/ui/button";
-import { usePresentationSlides } from "@/features/presentations/hooks/presentation/usePresentationSlides";
-import { usePresentationState } from "@/states/presentation-state";
-import PresentationEditorStaticView from "../editor/presentation-editor-static";
-import { type PlateSlide } from "../utils/parser";
-import { SlidePreviewCard } from "./SlidePreviewCard";
+import { Button } from '@/components/ui/button';
+import { usePresentationSlides } from '@/hooks/presentation/usePresentationSlides';
+import { usePresentationState } from '@/states/presentation-state';
+import PresentationEditorStaticView from '../editor/presentation-editor-static';
+import { type PlateSlide } from '../utils/parser';
+import { SlidePreviewCard } from './SlidePreviewCard';
 
 interface SlidePreviewProps {
   onSlideClick?: (index: number) => void;
@@ -26,18 +26,18 @@ function SlidePreviewBase({
 }: SlidePreviewProps) {
   const slides = usePresentationState((s) => s.slides);
   const stateCurrentSlideIndex = usePresentationState(
-    (s) => s.currentSlideIndex,
+    (s) => s.currentSlideIndex
   );
   const setCurrentSlideIndex = usePresentationState(
-    (s) => s.setCurrentSlideIndex,
+    (s) => s.setCurrentSlideIndex
   );
   const isSidebarCollapsed = usePresentationState((s) => s.isSidebarCollapsed);
   const setIsSidebarCollapsed = usePresentationState(
-    (s) => s.setIsSidebarCollapsed,
+    (s) => s.setIsSidebarCollapsed
   );
 
   const effectiveCurrentSlideIndex =
-    typeof currentSlideIndexProp === "number"
+    typeof currentSlideIndexProp === 'number'
       ? currentSlideIndexProp
       : stateCurrentSlideIndex;
 
@@ -53,14 +53,14 @@ function SlidePreviewBase({
         scrollToSlide(index);
       }
     },
-    [onSlideClick, scrollToSlide, setCurrentSlideIndex],
+    [onSlideClick, scrollToSlide, setCurrentSlideIndex]
   );
 
   const handleResize = useCallback(
     (_e: unknown, _direction: unknown, _ref: unknown, d: { width: number }) => {
       setSidebarWidth((prev) => prev + d.width);
     },
-    [],
+    []
   );
 
   return (
@@ -71,9 +71,9 @@ function SlidePreviewBase({
             <motion.div
               initial={{
                 scale: 1,
-                width: "auto",
+                width: 'auto',
                 opacity: 1,
-                x: "-100%",
+                x: '-100%',
                 originX: 0.5,
                 originY: 0.5,
               }}
@@ -102,7 +102,7 @@ function SlidePreviewBase({
                 handleComponent={{
                   right: (
                     <div className="group/resize relative flex h-full w-1 cursor-col-resize bg-border">
-                      <GripVertical className="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 text-muted-foreground opacity-0 group-hover/resize:opacity-100" />
+                      <GripVertical className="absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 text-muted-foreground opacity-0 group-hover/resize:opacity-100" />
                     </div>
                   ),
                 }}
@@ -142,7 +142,7 @@ function SlidePreviewBase({
         {showSidebar && isSidebarCollapsed && (
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, x: "0.5rem" }}
+            animate={{ opacity: 1, x: '0.5rem' }}
             exit={{ opacity: 0 }}
             transition={{
               duration: 0.4,
@@ -196,7 +196,7 @@ const MemoPreviewItem = React.memo(
     if (previewSignature(prev.slide) !== previewSignature(next.slide))
       return false;
     return true;
-  },
+  }
 );
 
 export const SlidePreview = React.memo(SlidePreviewBase);

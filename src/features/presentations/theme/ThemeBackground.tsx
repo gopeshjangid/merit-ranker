@@ -2,11 +2,11 @@ import {
   setThemeVariables,
   themes,
   type ThemeProperties,
-} from "@/features/presentations/lib/presentation/themes";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+} from '@/lib/presentation/themes';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 interface ThemeBackgroundProps {
   className?: string;
@@ -18,7 +18,7 @@ export function ThemeBackground({ className, children }: ThemeBackgroundProps) {
   const customThemeData = usePresentationState((s) => s.customThemeData);
   const config = usePresentationState((s) => s.config);
   const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  const isDark = resolvedTheme === 'dark';
   const [mounted, setMounted] = useState(false);
 
   // Handle hydration mismatch by only rendering the gradient after mount
@@ -34,13 +34,13 @@ export function ThemeBackground({ className, children }: ThemeBackgroundProps) {
         // Use custom theme data
         setThemeVariables(customThemeData, isDark);
       } else if (
-        typeof presentationTheme === "string" &&
+        typeof presentationTheme === 'string' &&
         presentationTheme in themes
       ) {
         // Use predefined theme
         setThemeVariables(
           themes[presentationTheme as keyof typeof themes],
-          isDark,
+          isDark
         );
       }
     }
@@ -51,7 +51,7 @@ export function ThemeBackground({ className, children }: ThemeBackgroundProps) {
   if (customThemeData) {
     currentTheme = customThemeData;
   } else if (
-    typeof presentationTheme === "string" &&
+    typeof presentationTheme === 'string' &&
     presentationTheme in themes
   ) {
     currentTheme = themes[presentationTheme as keyof typeof themes];
@@ -59,7 +59,7 @@ export function ThemeBackground({ className, children }: ThemeBackgroundProps) {
 
   if (!currentTheme || !mounted) {
     return (
-      <div className={cn("h-max min-h-full w-full bg-background", className)}>
+      <div className={cn('h-max min-h-full w-full bg-background', className)}>
         {children}
       </div>
     );
@@ -90,7 +90,7 @@ export function ThemeBackground({ className, children }: ThemeBackgroundProps) {
 
   return (
     <div
-      className={cn("h-max min-h-full w-full", className)}
+      className={cn('h-max min-h-full w-full', className)}
       style={gradientStyle}
     >
       {children}

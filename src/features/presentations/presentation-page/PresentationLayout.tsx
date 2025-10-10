@@ -1,7 +1,7 @@
 'use client';
 
 import { ThemeBackground } from '@/features/presentations/theme/ThemeBackground';
-import { type ThemeProperties } from '@/features/presentations/lib/presentation/themes';
+import { type ThemeProperties } from '@/lib/presentation/themes';
 import { usePresentationState } from '@/states/presentation-state';
 import type React from 'react';
 import { DndProvider } from 'react-dnd';

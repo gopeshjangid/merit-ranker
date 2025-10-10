@@ -13,7 +13,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { useToast } from '@/components/ui/use-toast';
-import { themes } from '@/features/presentations/lib/presentation/themes';
+import { themes } from '@/lib/presentation/themes';
 import { usePresentationState } from '@/states/presentation-state';
 import { Download } from 'lucide-react';
 import { useState } from 'react';

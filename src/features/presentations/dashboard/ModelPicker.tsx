@@ -13,7 +13,7 @@ import {
   getSelectedModel,
   setSelectedModel,
   useLocalModels,
-} from '@/features/presentations/hooks/presentation/useLocalModels';
+} from '@/hooks/presentation/useLocalModels';
 import { usePresentationState } from '@/states/presentation-state';
 import { Bot, Cpu, Loader2, Monitor } from 'lucide-react';
 import { useEffect, useRef } from 'react';

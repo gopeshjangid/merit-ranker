@@ -5,7 +5,7 @@ import { Slider } from '@/components/ui/slider';
 import {
   BASE_HEIGHT,
   BASE_WIDTH_PERCENTAGE,
-} from '@/features/presentations/hooks/presentation/useRootImageActions';
+} from '@/hooks/presentation/useRootImageActions';
 import { Download, Image as ImageIcon } from 'lucide-react';
 import { type TElement } from 'platejs';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
