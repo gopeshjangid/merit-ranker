@@ -15,7 +15,7 @@ export const Spinner = ({
   return (
     <div className={cn("flex items-center gap-1", className)}>
       <svg
-        className={`animate-spin`}
+        className="animate-spin"
         viewBox="0 0 50 50"
         height={size}
         width={size}
