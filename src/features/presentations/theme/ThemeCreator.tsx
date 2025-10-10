@@ -9,7 +9,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
-import { useUploadThing } from '@/features/presentations/hooks/globals/useUploadthing';
+import { useUploadThing } from '@/hooks/useUploadthing';
 import { themes } from '@/lib/presentation/themes';
 import { Loader2, Plus } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
