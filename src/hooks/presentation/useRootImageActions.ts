@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useDraggable } from "@/features/presentations/components/presentation/editor/dnd/hooks/useDraggable";
+import { useDraggable } from '@/features/presentations/editor/dnd/hooks/useDraggable';
 import {
   type LayoutType,
   type PlateSlide,
   type RootImage,
-} from "@/features/presentations/components/presentation/utils/parser";
-import { type ImageCropSettings } from "@/features/presentations/components/presentation/utils/types";
-import { useDebouncedSave } from "@/features/presentations/hooks/presentation/useDebouncedSave";
-import { usePresentationState } from "@/states/presentation-state";
-import { DndPlugin, type DragItemNode } from "@platejs/dnd";
-import { ImagePlugin } from "@platejs/media/react";
-import { useEditorRef } from "platejs/react";
-import { useCallback, useId, useMemo, useState } from "react";
-import { type DragSourceMonitor } from "react-dnd";
+} from '@/features/presentations/utils/parser';
+import { type ImageCropSettings } from '@/features/presentations/utils/types';
+import { useDebouncedSave } from '@/features/presentations/hooks/presentation/useDebouncedSave';
+import { usePresentationState } from '@/states/presentation-state';
+import { DndPlugin, type DragItemNode } from '@platejs/dnd';
+import { ImagePlugin } from '@platejs/media/react';
+import { useEditorRef } from 'platejs/react';
+import { useCallback, useId, useMemo, useState } from 'react';
+import { type DragSourceMonitor } from 'react-dnd';
 
-export const BASE_WIDTH_PERCENTAGE = "45%";
+export const BASE_WIDTH_PERCENTAGE = '45%';
 export const BASE_HEIGHT = 384;
 
 type UseRootImageActionsOptions = {
@@ -26,16 +26,16 @@ type UseRootImageActionsOptions = {
 
 export function useRootImageActions(
   slideIndex: number,
-  options: UseRootImageActionsOptions = {},
+  options: UseRootImageActionsOptions = {}
 ) {
   const { image, layoutType, slideId } = options;
 
   const setSlides = usePresentationState((s) => s.setSlides);
   const startRootImageGeneration = usePresentationState(
-    (s) => s.startRootImageGeneration,
+    (s) => s.startRootImageGeneration
   );
   const rootImageGeneration = usePresentationState(
-    (s) => s.rootImageGeneration,
+    (s) => s.rootImageGeneration
   );
   const { saveImmediately } = useDebouncedSave();
 
@@ -49,22 +49,22 @@ export function useRootImageActions(
 
   const computedGen = useMemo(
     () => (slideId ? rootImageGeneration[slideId] : undefined),
-    [rootImageGeneration, slideId],
+    [rootImageGeneration, slideId]
   );
   const computedImageUrl = useMemo(
     () => computedGen?.url ?? image?.url,
-    [computedGen?.url, image?.url],
+    [computedGen?.url, image?.url]
   );
 
   // Get crop settings from image or use defaults
   const cropSettings: ImageCropSettings = useMemo(
     () =>
       image?.cropSettings || {
-        objectFit: "cover",
+        objectFit: 'cover',
         objectPosition: { x: 50, y: 50 },
         zoom: 1,
       },
-    [image?.cropSettings],
+    [image?.cropSettings]
   );
 
   // Derived styles
@@ -74,22 +74,22 @@ export function useRootImageActions(
       objectPosition: `${cropSettings.objectPosition.x}% ${cropSettings.objectPosition.y}%`,
       transform: `scale(${cropSettings.zoom ?? 1})`,
       transformOrigin: `${cropSettings.objectPosition.x}% ${cropSettings.objectPosition.y}%`,
-      height: "100%",
-      width: "100%",
-      display: "block",
+      height: '100%',
+      width: '100%',
+      display: 'block',
     }),
-    [cropSettings],
+    [cropSettings]
   );
 
   const sizeStyle: React.CSSProperties = useMemo(() => {
     if (!size.h && !size.w) {
-      if (layoutType === "vertical") {
-        return { height: BASE_HEIGHT, width: "100%" } as const;
+      if (layoutType === 'vertical') {
+        return { height: BASE_HEIGHT, width: '100%' } as const;
       }
       return { width: BASE_WIDTH_PERCENTAGE } as const;
     }
-    if (layoutType === "vertical") {
-      return { height: size.h, width: "100%" } as const;
+    if (layoutType === 'vertical') {
+      return { height: size.h, width: '100%' } as const;
     }
     return { width: size.w } as const;
   }, [layoutType, size.h, size.w]);
@@ -115,14 +115,14 @@ export function useRootImageActions(
         void saveImmediately();
       }, 100);
     },
-    [saveImmediately, setSlides, slideIndex],
+    [saveImmediately, setSlides, slideIndex]
   );
 
   const replaceImageUrl = useCallback(
     (url: string, query: string) => {
       const { slides } = usePresentationState.getState();
       const resetCrop: ImageCropSettings = {
-        objectFit: "cover",
+        objectFit: 'cover',
         objectPosition: { x: 50, y: 50 },
         zoom: 1,
       };
@@ -142,7 +142,7 @@ export function useRootImageActions(
       setSlides(updatedSlides);
       void saveImmediately();
     },
-    [saveImmediately, setSlides, slideIndex],
+    [saveImmediately, setSlides, slideIndex]
   );
 
   const removeRootImage = useCallback(
@@ -151,11 +151,11 @@ export function useRootImageActions(
       const updatedSlides = slides.map((slide: PlateSlide, index: number) => {
         if (index === slideIndex) {
           if (!slide.rootImage) return slide;
-          if (matchUrls && !matchUrls.includes(slide.rootImage.url ?? "")) {
+          if (matchUrls && !matchUrls.includes(slide.rootImage.url ?? '')) {
             return slide;
           }
           const { rootImage: _rootImage, ...rest } = slide as PlateSlide & {
-            rootImage?: PlateSlide["rootImage"];
+            rootImage?: PlateSlide['rootImage'];
           };
           return rest as PlateSlide;
         }
@@ -163,12 +163,12 @@ export function useRootImageActions(
       });
       setSlides(updatedSlides);
     },
-    [setSlides, slideIndex],
+    [setSlides, slideIndex]
   );
 
   const removeRootImageFromSlide = useCallback(() => {
     const urls = [image?.url, computedImageUrl].filter((u): u is string =>
-      Boolean(u),
+      Boolean(u)
     );
     removeRootImage(urls);
   }, [computedImageUrl, image?.url, removeRootImage]);
@@ -188,7 +188,7 @@ export function useRootImageActions(
       setSlides(updatedSlides);
       void saveImmediately();
     },
-    [setSlides, slideIndex],
+    [setSlides, slideIndex]
   );
 
   // Resizable handler logic moved here
@@ -197,9 +197,9 @@ export function useRootImageActions(
       _e: unknown,
       _direction: unknown,
       _ref: HTMLElement,
-      d: { width: number; height: number },
+      d: { width: number; height: number }
     ) => {
-      if (layoutType === "vertical") {
+      if (layoutType === 'vertical') {
         const nextHeight = (size?.h ?? BASE_HEIGHT) + d.height;
         setSize({ h: nextHeight });
         updateRootImageSize({ h: nextHeight });
@@ -216,7 +216,7 @@ export function useRootImageActions(
         updateRootImageSize({ w: nextWidth });
       }
     },
-    [layoutType, size?.h, size?.w, updateRootImageSize],
+    [layoutType, size?.h, size?.w, updateRootImageSize]
   );
 
   // Drag-and-drop logic moved here
@@ -228,9 +228,9 @@ export function useRootImageActions(
       url: computedImageUrl,
       query: image?.query,
       cropSettings: cropSettings,
-      children: [{ text: "" }],
+      children: [{ text: '' }],
     }),
-    [computedImageUrl, cropSettings, id, image?.query],
+    [computedImageUrl, cropSettings, id, image?.query]
   );
 
   const onDragEnd = useCallback(
@@ -240,9 +240,9 @@ export function useRootImageActions(
       if (monitor.didDrop() && !dropResult?.droppedInLayoutZone) {
         removeRootImageFromSlide();
       }
-      editor.setOption(DndPlugin, "isDragging", false);
+      editor.setOption(DndPlugin, 'isDragging', false);
     },
-    [editor, removeRootImageFromSlide],
+    [editor, removeRootImageFromSlide]
   );
 
   const { isDragging, handleRef } = useDraggable({

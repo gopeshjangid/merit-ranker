@@ -1,9 +1,9 @@
-"use server";
+'use server';
 
-import { convertPlateJSToPPTX } from "@/features/presentations/components/presentation/utils/exportToPPT";
-import { type PlateSlide } from "@/features/presentations/components/presentation/utils/parser";
-import { auth } from "@/server/auth";
-import { db } from "@/server/db";
+import { convertPlateJSToPPTX } from '@/features/presentations/utils/exportToPPT';
+import { type PlateSlide } from '@/features/presentations/utils/parser';
+import { auth } from '@/server/auth';
+import { db } from '@/server/db';
 
 export async function exportPresentation(
   presentationId: string,
@@ -16,40 +16,40 @@ export async function exportPresentation(
     text: string;
     heading: string;
     muted: string;
-  }>,
+  }>
 ) {
   try {
     const session = await auth();
     if (!session?.user) {
-      return { success: false, error: "Unauthorized" };
+      return { success: false, error: 'Unauthorized' };
     }
 
     // Here you would fetch the presentation data from your database
     // This is a placeholder - implement actual data fetching based on your data model
     const presentationData = await fetchPresentationData(
       presentationId,
-      session.user.id,
+      session.user.id
     );
 
     // Generate the PPT file (ArrayBuffer)
     const arrayBuffer = await convertPlateJSToPPTX(
       { slides: presentationData.slides },
-      theme,
+      theme
     );
 
     // Convert ArrayBuffer to Base64 string for transmission to the client
     const buffer = Buffer.from(arrayBuffer);
-    const base64 = buffer.toString("base64");
+    const base64 = buffer.toString('base64');
 
     // Return base64 data so client can download it
     return {
       success: true,
       data: base64,
-      fileName: `${fileName ?? "presentation"}.pptx`,
+      fileName: `${fileName ?? 'presentation'}.pptx`,
     };
   } catch (error) {
-    console.error("Error exporting presentation:", error);
-    return { success: false, error: "Failed to export presentation" };
+    console.error('Error exporting presentation:', error);
+    return { success: false, error: 'Failed to export presentation' };
   }
 }
 

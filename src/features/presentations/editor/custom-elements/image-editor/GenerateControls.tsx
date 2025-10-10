@@ -4,7 +4,7 @@ import {
   generateImageAction,
   type ImageModelList,
 } from '@/app/_actions/image/generate';
-import { ImageSourceSelector } from '@/features/presentations/components/presentation/theme/ImageSourceSelector';
+import { ImageSourceSelector } from '@/features/presentations/theme/ImageSourceSelector';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';

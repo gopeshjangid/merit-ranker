@@ -1,7 +1,7 @@
-"use server";
+'use server';
 
-import { type LayoutType } from "@/features/presentations/components/presentation/utils/parser";
-import { env } from "@/env";
+import { type LayoutType } from '@/features/presentations/utils/parser';
+import { env } from '@/env';
 // import { auth } from "@/server/auth";
 
 export interface UnsplashImage {
@@ -32,7 +32,7 @@ export interface UnsplashSearchResponse {
 
 export async function getImageFromUnsplash(
   query: string,
-  layoutType?: LayoutType,
+  layoutType?: LayoutType
 ): Promise<{ success: boolean; imageUrl?: string; error?: string }> {
   // Get the current session
   // const session = await auth();
@@ -42,11 +42,11 @@ export async function getImageFromUnsplash(
   //   return { success: false, error: "You must be logged in to get images" };
   // }
   const orientationQuery =
-    layoutType === "vertical"
-      ? "&orientation=landscape"
-      : layoutType === "left" || layoutType === "right"
-        ? "&orientation=portrait"
-        : "&orientation=landscape";
+    layoutType === 'vertical'
+      ? '&orientation=landscape'
+      : layoutType === 'left' || layoutType === 'right'
+        ? '&orientation=portrait'
+        : '&orientation=landscape';
   try {
     // Search for images
     const response = await fetch(
@@ -55,7 +55,7 @@ export async function getImageFromUnsplash(
         headers: {
           Authorization: `Client-ID ${env.UNSPLASH_ACCESS_KEY}`,
         },
-      },
+      }
     );
 
     if (!response.ok) {
@@ -65,12 +65,12 @@ export async function getImageFromUnsplash(
     const data: UnsplashSearchResponse = await response.json();
 
     if (!data.results || data.results.length === 0) {
-      return { success: false, error: "No images found for this query" };
+      return { success: false, error: 'No images found for this query' };
     }
 
     const firstImage = data.results[0];
     if (!firstImage) {
-      return { success: false, error: "No images found for this query" };
+      return { success: false, error: 'No images found for this query' };
     }
 
     // Return the image URL directly without storing in database
@@ -79,10 +79,10 @@ export async function getImageFromUnsplash(
       imageUrl: firstImage.urls.regular,
     };
   } catch (error) {
-    console.error("Error getting Unsplash image:", error);
+    console.error('Error getting Unsplash image:', error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Failed to get image",
+      error: error instanceof Error ? error.message : 'Failed to get image',
     };
   }
 }

@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { ThemeBackground } from "@/features/presentations/components/presentation/theme/ThemeBackground";
-import { type ThemeProperties } from "@/features/presentations/lib/presentation/themes";
-import { usePresentationState } from "@/states/presentation-state";
-import type React from "react";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { CustomThemeFontLoader } from "./FontLoader";
-import { LoadingState } from "./Loading";
-import { SlidePreview } from "./SlidePreview";
+import { ThemeBackground } from '@/features/presentations/theme/ThemeBackground';
+import { type ThemeProperties } from '@/features/presentations/lib/presentation/themes';
+import { usePresentationState } from '@/states/presentation-state';
+import type React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { CustomThemeFontLoader } from './FontLoader';
+import { LoadingState } from './Loading';
+import { SlidePreview } from './SlidePreview';
 
 interface PresentationLayoutProps {
   children: React.ReactNode;

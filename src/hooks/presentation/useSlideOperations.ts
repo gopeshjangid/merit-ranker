@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import { type PlateSlide } from "@/features/presentations/components/presentation/utils/parser";
-import { usePresentationState } from "@/states/presentation-state";
-import { nanoid } from "nanoid";
+import { type PlateSlide } from '@/features/presentations/utils/parser';
+import { usePresentationState } from '@/states/presentation-state';
+import { nanoid } from 'nanoid';
 
-export type InsertPosition = "before" | "after";
+export type InsertPosition = 'before' | 'after';
 
 export function useSlideOperations() {
   const setSlides = usePresentationState((s) => s.setSlides);
   const setCurrentSlideIndex = usePresentationState(
-    (s) => s.setCurrentSlideIndex,
+    (s) => s.setCurrentSlideIndex
   );
 
   const addSlide = (position: InsertPosition, index: number) => {
     const newSlide: PlateSlide = {
       content: [
         {
-          type: "h1",
-          children: [{ text: "New Slide" }],
+          type: 'h1',
+          children: [{ text: 'New Slide' }],
         },
       ],
       id: nanoid(),
-      alignment: "center",
+      alignment: 'center',
     };
     const { slides } = usePresentationState.getState();
     const updatedSlides = [...slides];
-    const insertIndex = position === "before" ? index : index + 1;
+    const insertIndex = position === 'before' ? index : index + 1;
     updatedSlides.splice(insertIndex, 0, newSlide);
     setSlides(updatedSlides);
     setCurrentSlideIndex(insertIndex);

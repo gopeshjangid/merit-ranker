@@ -1,7 +1,7 @@
 import {
   Searched,
   type SearchResult,
-} from '@/features/presentations/components/presentation/outline/Search';
+} from '@/features/presentations/outline/Search';
 import {
   Collapsible,
   CollapsibleContent,

@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { type PlateSlide } from "@/features/presentations/components/presentation/utils/parser";
-import { usePresentationState } from "@/states/presentation-state";
+import { type PlateSlide } from '@/features/presentations/utils/parser';
+import { usePresentationState } from '@/states/presentation-state';
 import {
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
   type DragEndEvent,
-} from "@dnd-kit/core";
-import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { nanoid } from "nanoid";
-import { useCallback, useMemo } from "react";
+} from '@dnd-kit/core';
+import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import { nanoid } from 'nanoid';
+import { useCallback, useMemo } from 'react';
 
 interface SlideWithId extends PlateSlide {
   id: string;
@@ -21,7 +21,7 @@ export function usePresentationSlides() {
   const slides = usePresentationState((s) => s.slides);
   const setSlides = usePresentationState((s) => s.setSlides);
   const setCurrentSlideIndex = usePresentationState(
-    (s) => s.setCurrentSlideIndex,
+    (s) => s.setCurrentSlideIndex
   );
   const isPresenting = usePresentationState((s) => s.isPresenting);
 
@@ -34,14 +34,14 @@ export function usePresentationSlides() {
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    }),
+    })
   );
 
   // Ensure all slides have IDs
   const items = useMemo(
     () =>
       slides.map((slide) => (slide?.id ? slide : { ...slide, id: nanoid() })),
-    [slides],
+    [slides]
   );
 
   // Handle drag end
@@ -53,10 +53,10 @@ export function usePresentationSlides() {
 
       if (over && active.id !== over.id) {
         const oldIndex = items.findIndex(
-          (item: SlideWithId) => item.id === active.id,
+          (item: SlideWithId) => item.id === active.id
         );
         const newIndex = items.findIndex(
-          (item: SlideWithId) => item.id === over.id,
+          (item: SlideWithId) => item.id === over.id
         );
         const newArray = arrayMove(items, oldIndex, newIndex);
         setSlides([...newArray]);
@@ -64,7 +64,7 @@ export function usePresentationSlides() {
         setCurrentSlideIndex(newIndex);
       }
     },
-    [items, isPresenting, setSlides, setCurrentSlideIndex],
+    [items, isPresenting, setSlides, setCurrentSlideIndex]
   );
 
   // Scroll to a slide by index
@@ -74,20 +74,20 @@ export function usePresentationSlides() {
 
     if (slideElement) {
       // Find the scrollable container
-      const scrollContainer = document.querySelector(".presentation-slides");
+      const scrollContainer = document.querySelector('.presentation-slides');
 
       if (scrollContainer) {
         // Calculate the scroll position
         scrollContainer.scrollTo({
           top: (slideElement as HTMLElement).offsetTop - 30, // Add a small offset for better visibility
-          behavior: "smooth",
+          behavior: 'smooth',
         });
 
         setTimeout(() => {
           // Focus the editor after scrolling
           // Try to find and focus the editor within the slide container
           const editorElement = slideElement.querySelector(
-            "[contenteditable=true]",
+            '[contenteditable=true]'
           );
           if (editorElement instanceof HTMLElement) {
             editorElement.focus();

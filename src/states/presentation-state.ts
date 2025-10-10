@@ -1,8 +1,11 @@
-import { type ImageModelList } from "@/app/_actions/image/generate";
-import { type PlateSlide } from "@/features/presentations/components/presentation/utils/parser";
-import { type ThemeProperties, type Themes } from "@/features/presentations/lib/presentation/themes";
-import { type TElement } from "platejs";
-import { create } from "zustand";
+import { type ImageModelList } from '@/app/_actions/image/generate';
+import { type PlateSlide } from '@/features/presentations/utils/parser';
+import {
+  type ThemeProperties,
+  type Themes,
+} from '@/features/presentations/lib/presentation/themes';
+import { type TElement } from 'platejs';
+import { create } from 'zustand';
 
 interface PresentationState {
   currentPresentationId: string | null;
@@ -18,12 +21,12 @@ interface PresentationState {
   showTemplates: boolean;
   presentationInput: string;
   imageModel: ImageModelList;
-  imageSource: "ai" | "stock";
-  stockImageProvider: "unsplash";
+  imageSource: 'ai' | 'stock';
+  stockImageProvider: 'unsplash';
   presentationStyle: string;
-  modelProvider: "openai" | "ollama" | "lmstudio";
+  modelProvider: 'openai' | 'ollama' | 'lmstudio';
   modelId: string;
-  savingStatus: "idle" | "saving" | "saved";
+  savingStatus: 'idle' | 'saving' | 'saved';
   isPresenting: boolean;
   currentSlideIndex: number;
   isThemeCreatorOpen: boolean;
@@ -49,7 +52,7 @@ interface PresentationState {
     string,
     {
       query: string;
-      status: "pending" | "success" | "error";
+      status: 'pending' | 'success' | 'error';
       url?: string;
       error?: string;
     }
@@ -70,7 +73,7 @@ interface PresentationState {
   setNumSlides: (num: number) => void;
   setTheme: (
     theme: Themes | string,
-    customData?: ThemeProperties | null,
+    customData?: ThemeProperties | null
   ) => void;
   shouldShowExitHeader: boolean;
   setShouldShowExitHeader: (udpdate: boolean) => void;
@@ -82,18 +85,18 @@ interface PresentationState {
   setPresentationInput: (input: string) => void;
   setOutline: (topics: string[]) => void;
   setSearchResults: (
-    results: Array<{ query: string; results: unknown[] }>,
+    results: Array<{ query: string; results: unknown[] }>
   ) => void;
   setOutlineThinking: (thinking: string) => void;
   setPresentationThinking: (thinking: string) => void;
   setWebSearchEnabled: (enabled: boolean) => void;
   setImageModel: (model: ImageModelList) => void;
-  setImageSource: (source: "ai" | "stock") => void;
-  setStockImageProvider: (provider: "unsplash") => void;
+  setImageSource: (source: 'ai' | 'stock') => void;
+  setStockImageProvider: (provider: 'unsplash') => void;
   setPresentationStyle: (style: string) => void;
-  setModelProvider: (provider: "openai" | "ollama" | "lmstudio") => void;
+  setModelProvider: (provider: 'openai' | 'ollama' | 'lmstudio') => void;
   setModelId: (id: string) => void;
-  setSavingStatus: (status: "idle" | "saving" | "saved") => void;
+  setSavingStatus: (status: 'idle' | 'saving' | 'saved') => void;
   setIsPresenting: (isPresenting: boolean) => void;
   setCurrentSlideIndex: (index: number) => void;
   nextSlide: () => void;
@@ -133,26 +136,26 @@ export const usePresentationState = create<PresentationState>((set) => ({
   thumbnailUrl: undefined,
   setThumbnailUrl: (url) => set({ thumbnailUrl: url }),
   numSlides: 5,
-  language: "en-US",
-  pageStyle: "default",
+  language: 'en-US',
+  pageStyle: 'default',
   showTemplates: false,
-  presentationInput: "",
+  presentationInput: '',
   outline: [],
   searchResults: [],
   webSearchEnabled: false,
-  theme: "mystique",
+  theme: 'mystique',
   customThemeData: null,
-  imageModel: "black-forest-labs/FLUX.1-schnell-Free",
-  imageSource: "stock",
-  stockImageProvider: "unsplash",
-  presentationStyle: "professional",
-  modelProvider: "openai",
-  modelId: "llama3.1:8b",
+  imageModel: 'black-forest-labs/FLUX.1-schnell-Free',
+  imageSource: 'stock',
+  stockImageProvider: 'unsplash',
+  presentationStyle: 'professional',
+  modelProvider: 'openai',
+  modelId: 'llama3.1:8b',
   slides: [], // Now holds the new slide object structure
-  outlineThinking: "",
-  presentationThinking: "",
+  outlineThinking: '',
+  presentationThinking: '',
   rootImageGeneration: {},
-  savingStatus: "idle",
+  savingStatus: 'idle',
   isPresenting: false,
   currentSlideIndex: 0,
   isThemeCreatorOpen: false,
@@ -180,7 +183,7 @@ export const usePresentationState = create<PresentationState>((set) => ({
     set((state) => ({
       rootImageGeneration: {
         ...state.rootImageGeneration,
-        [slideId]: { query, status: "pending" },
+        [slideId]: { query, status: 'pending' },
       },
     })),
   completeRootImageGeneration: (slideId, url) =>
@@ -188,8 +191,8 @@ export const usePresentationState = create<PresentationState>((set) => ({
       rootImageGeneration: {
         ...state.rootImageGeneration,
         [slideId]: {
-          ...(state.rootImageGeneration[slideId] ?? { query: "" }),
-          status: "success",
+          ...(state.rootImageGeneration[slideId] ?? { query: '' }),
+          status: 'success',
           url,
         },
       },
@@ -199,15 +202,14 @@ export const usePresentationState = create<PresentationState>((set) => ({
       rootImageGeneration: {
         ...state.rootImageGeneration,
         [slideId]: {
-          ...(state.rootImageGeneration[slideId] ?? { query: "" }),
-          status: "error",
+          ...(state.rootImageGeneration[slideId] ?? { query: '' }),
+          status: 'error',
           error,
         },
       },
     })),
   clearRootImageGeneration: (slideId) =>
     set((state) => {
-       
       const { [slideId]: _removed, ...rest } = state.rootImageGeneration;
       return { rootImageGeneration: rest } as Partial<PresentationState>;
     }),
@@ -244,7 +246,7 @@ export const usePresentationState = create<PresentationState>((set) => ({
     set((state) => ({
       currentSlideIndex: Math.min(
         state.currentSlideIndex + 1,
-        state.slides.length - 1,
+        state.slides.length - 1
       ),
     })),
   previousSlide: () =>
@@ -290,8 +292,8 @@ export const usePresentationState = create<PresentationState>((set) => ({
       outline: [],
       searchResults: [],
       slides: [],
-      outlineThinking: "",
-      presentationThinking: "",
+      outlineThinking: '',
+      presentationThinking: '',
       rootImageGeneration: {},
       config: {},
     })),

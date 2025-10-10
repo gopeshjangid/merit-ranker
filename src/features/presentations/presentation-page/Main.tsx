@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
 import {
   getPresentation,
   updatePresentation,
   updatePresentationTheme,
-} from "@/app/_actions/presentation/presentationActions";
-import { getCustomThemeById } from "@/app/_actions/presentation/theme-actions";
-import { type PlateSlide } from "@/features/presentations/components/presentation/utils/parser";
+} from '@/app/_actions/presentation/presentationActions';
+import { getCustomThemeById } from '@/app/_actions/presentation/theme-actions';
+import { type PlateSlide } from '@/features/presentations/utils/parser';
 import {
   setThemeVariables,
   type ThemeProperties,
   type Themes,
   themes,
-} from "@/features/presentations/lib/presentation/themes";
-import { usePresentationState } from "@/states/presentation-state";
-import { useQuery } from "@tanstack/react-query";
-import debounce from "lodash.debounce";
-import { useTheme } from "next-themes";
-import { useParams } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { LoadingState } from "./Loading";
-import { PresentationLayout } from "./PresentationLayout";
-import { PresentationSlidesView } from "./PresentationSlidesView";
+} from '@/features/presentations/lib/presentation/themes';
+import { usePresentationState } from '@/states/presentation-state';
+import { useQuery } from '@tanstack/react-query';
+import debounce from 'lodash.debounce';
+import { useTheme } from 'next-themes';
+import { useParams } from 'next/navigation';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { LoadingState } from './Loading';
+import { PresentationLayout } from './PresentationLayout';
+import { PresentationSlidesView } from './PresentationSlidesView';
 
 export default function PresentationPage() {
   const params = useParams();
@@ -29,22 +29,22 @@ export default function PresentationPage() {
   const { resolvedTheme } = useTheme();
   const [shouldFetchData, setSetShouldFetchData] = useState(true);
   const setCurrentPresentation = usePresentationState(
-    (s) => s.setCurrentPresentation,
+    (s) => s.setCurrentPresentation
   );
   const setPresentationInput = usePresentationState(
-    (s) => s.setPresentationInput,
+    (s) => s.setPresentationInput
   );
   const setOutline = usePresentationState((s) => s.setOutline);
   const setSlides = usePresentationState((s) => s.setSlides);
   const setThumbnailUrl = usePresentationState((s) => s.setThumbnailUrl);
   const isGeneratingPresentation = usePresentationState(
-    (s) => s.isGeneratingPresentation,
+    (s) => s.isGeneratingPresentation
   );
   const setTheme = usePresentationState((s) => s.setTheme);
   const setImageModel = usePresentationState((s) => s.setImageModel);
   const setImageSource = usePresentationState((s) => s.setImageSource);
   const setPresentationStyle = usePresentationState(
-    (s) => s.setPresentationStyle,
+    (s) => s.setPresentationStyle
   );
   const currentSlideIndex = usePresentationState((s) => s.currentSlideIndex);
   const setLanguage = usePresentationState((s) => s.setLanguage);
@@ -59,16 +59,16 @@ export default function PresentationPage() {
   }, [isGeneratingPresentation]);
 
   useEffect(() => {
-    console.log("Current Slide Index", currentSlideIndex);
+    console.log('Current Slide Index', currentSlideIndex);
   }, [currentSlideIndex]);
 
   // Use React Query to fetch presentation data
   const { data: presentationData, isLoading } = useQuery({
-    queryKey: ["presentation", id],
+    queryKey: ['presentation', id],
     queryFn: async () => {
       const result = await getPresentation(id);
       if (!result.success) {
-        throw new Error(result.message ?? "Failed to load presentation");
+        throw new Error(result.message ?? 'Failed to load presentation');
       }
       return result.presentation;
     },
@@ -81,16 +81,16 @@ export default function PresentationPage() {
       updatePresentationTheme(presentationId, newTheme)
         .then((result) => {
           if (result.success) {
-            console.log("Theme updated in database");
+            console.log('Theme updated in database');
           } else {
-            console.error("Failed to update theme:", result.message);
+            console.error('Failed to update theme:', result.message);
           }
         })
         .catch((error) => {
-          console.error("Error updating theme:", error);
+          console.error('Error updating theme:', error);
         });
     }, 600),
-    [],
+    []
   );
 
   // Update presentation state when data is fetched
@@ -105,7 +105,7 @@ export default function PresentationPage() {
       dbThemeRef.current = presentationData.presentation?.theme ?? null;
       setCurrentPresentation(presentationData.id, presentationData.title);
       setPresentationInput(
-        presentationData.presentation?.prompt ?? presentationData.title,
+        presentationData.presentation?.prompt ?? presentationData.title
       );
 
       // Load all content from the database
@@ -125,16 +125,16 @@ export default function PresentationPage() {
         const deriveFromSlides = (): string | null => {
           if (!Array.isArray(slides) || slides.length === 0) return null;
           const firstRoot = slides[0]?.rootImage?.url;
-          if (typeof firstRoot === "string" && firstRoot) return firstRoot;
+          if (typeof firstRoot === 'string' && firstRoot) return firstRoot;
           for (const s of slides) {
             const u = s?.rootImage?.url;
-            if (typeof u === "string" && u) return u;
+            if (typeof u === 'string' && u) return u;
           }
           const findFirstImgUrl = (nodes: unknown[]): string | null => {
             for (const n of nodes) {
-              if (!n || typeof n !== "object") continue;
+              if (!n || typeof n !== 'object') continue;
               const anyNode = n as Record<string, unknown>;
-              if (anyNode.type === "img" && typeof anyNode.url === "string") {
+              if (anyNode.type === 'img' && typeof anyNode.url === 'string') {
                 return anyNode.url as string;
               }
               const children = anyNode.children as unknown[] | undefined;
@@ -193,21 +193,21 @@ export default function PresentationPage() {
                 setTheme(themeId, themeData as unknown as ThemeProperties);
               } else {
                 // Fallback to default theme if custom theme not found
-                console.warn("Custom theme not found:", themeId);
-                setTheme("mystique");
+                console.warn('Custom theme not found:', themeId);
+                setTheme('mystique');
               }
             })
             .catch((error) => {
-              console.error("Failed to load custom theme:", error);
+              console.error('Failed to load custom theme:', error);
               // Fallback to default theme on error
-              setTheme("mystique");
+              setTheme('mystique');
             });
         }
       }
 
       if (presentationData?.presentation?.imageSource) {
         setImageSource(
-          presentationData.presentation.imageSource as "ai" | "stock",
+          presentationData.presentation.imageSource as 'ai' | 'stock'
         );
       }
 
@@ -254,13 +254,13 @@ export default function PresentationPage() {
       const state = usePresentationState.getState();
       // Check if we have custom theme data
       if (state.customThemeData) {
-        setThemeVariables(state.customThemeData, resolvedTheme === "dark");
+        setThemeVariables(state.customThemeData, resolvedTheme === 'dark');
       }
       // Otherwise try to use a predefined theme
-      else if (typeof theme === "string" && theme in themes) {
+      else if (typeof theme === 'string' && theme in themes) {
         const currentTheme = themes[theme as keyof typeof themes];
         if (currentTheme) {
-          setThemeVariables(currentTheme, resolvedTheme === "dark");
+          setThemeVariables(currentTheme, resolvedTheme === 'dark');
         }
       }
     }
@@ -272,7 +272,7 @@ export default function PresentationPage() {
     if (state.customThemeData) {
       return state.customThemeData;
     }
-    if (typeof theme === "string" && theme in themes) {
+    if (typeof theme === 'string' && theme in themes) {
       return themes[theme as keyof typeof themes];
     }
     return null;

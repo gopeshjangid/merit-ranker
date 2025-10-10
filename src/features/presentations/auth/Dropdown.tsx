@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,27 +6,26 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ThemeToggle } from "@/provider/theme-provider";
-import { LogOut, User } from "lucide-react";
+} from '@/components/ui/dropdown-menu';
+import { ThemeToggle } from '@/provider/theme-provider';
+import { LogOut, User } from 'lucide-react';
 // import { signOut, useSession } from "next-auth/react";
-import Link from "next/link";
-import { useState } from "react";
-import { Button } from "../ui/button";
-import { Skeleton } from "../ui/skeleton";
+import Link from 'next/link';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 // Dummy session object for testing
 const dummySession = {
-  status: "authenticated" as const,
+  status: 'authenticated' as const,
   data: {
     user: {
-      id: "test-user-123",
-      name: "John Doe",
-      email: "john.doe@example.com",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=JohnDoe",
+      id: 'test-user-123',
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=JohnDoe',
     },
   },
 };
@@ -38,30 +37,29 @@ function useSession() {
 
 // Dummy signOut function
 async function signOut() {
-  console.log("🚪 User signing out...");
-  console.log("Session data:", dummySession.data);
+  console.log('🚪 User signing out...');
+  console.log('Session data:', dummySession.data);
   // Simulate async operation
   await new Promise((resolve) => setTimeout(resolve, 500));
-  console.log("✅ Sign out complete");
+  console.log('✅ Sign out complete');
 }
-
 
 export function getInitials(name: string): string {
   // Split the name by spaces to get individual words
-  const words = name.split(" ");
+  const words = name.split(' ');
   // Map over the words array, extracting the first letter of each word and converting it to uppercase
   const initials = words.map((word) => word.charAt(0).toUpperCase());
   // Join the initials into a single string
-  return initials.join("");
+  return initials.join('');
 }
 
 export function UserAvatar() {
   const session = useSession();
   return (
     <Avatar className="h-10 w-10">
-      <AvatarImage src={session.data?.user.image ?? ""} />
+      <AvatarImage src={session.data?.user.image ?? ''} />
       <AvatarFallback>
-        {getInitials(session.data?.user.name ?? "")}
+        {getInitials(session.data?.user.name ?? '')}
       </AvatarFallback>
     </Avatar>
   );
@@ -72,18 +70,18 @@ export function UserDetail() {
 
   return (
     <div className="max-w-max overflow-hidden">
-      {session.status !== "loading" && (
-        <div className="max-w-full text-ellipsis px-2 py-1.5">
-          <p className="text-ellipsis text-start text-sm font-medium leading-none">
+      {session.status !== 'loading' && (
+        <div className="max-w-full px-2 py-1.5 text-ellipsis">
+          <p className="text-start text-sm leading-none font-medium text-ellipsis">
             {session?.data?.user?.name}
           </p>
-          <p className="mt-1 text-ellipsis text-xs leading-none text-muted-foreground">
+          <p className="mt-1 text-xs leading-none text-ellipsis text-muted-foreground">
             {session?.data?.user?.email}
           </p>
         </div>
       )}
-      {(session.status === "loading" ||
-        session.status === "unauthenticated") && (
+      {(session.status === 'loading' ||
+        session.status === 'unauthenticated') && (
         <div className="grid gap-0.5 px-2 py-1.5">
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-2 w-full" />
@@ -99,8 +97,8 @@ export default function SideBarDropdown({
   align,
 }: {
   shouldViewFullName?: boolean;
-  side?: "top";
-  align?: "start";
+  side?: 'top';
+  align?: 'start';
 }) {
   const session = useSession();
   const userId = session.data?.user.id;
@@ -115,8 +113,8 @@ export default function SideBarDropdown({
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        align={align ?? "end"}
-        side={side ?? "right"}
+        align={align ?? 'end'}
+        side={side ?? 'right'}
         sideOffset={5}
         alignOffset={5}
         className="w-60"
@@ -135,7 +133,7 @@ export default function SideBarDropdown({
           <DropdownMenuItem asChild>
             <Button variant="outline" className="w-full">
               <Link
-                href={userId ? `/user/${userId}` : ""}
+                href={userId ? `/user/${userId}` : ''}
                 className="flex h-full w-full items-center justify-center p-2"
               >
                 <User className="mr-2 h-4 w-4" />
@@ -146,13 +144,13 @@ export default function SideBarDropdown({
 
           <DropdownMenuItem asChild>
             <Button
-              variant={isLoggingOut ? "outlineLoading" : "outline"}
+              variant={isLoggingOut ? 'outlineLoading' : 'outline'}
               className="w-full"
               disabled={isLoggingOut}
               onClick={async () => {
                 setIsLoggingOut(true);
-                document.cookie.split(";").forEach((cookie) => {
-                  const [name] = cookie.split("=");
+                document.cookie.split(';').forEach((cookie) => {
+                  const [name] = cookie.split('=');
                   if (name) {
                     document.cookie = `${name.trim()}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
                   }

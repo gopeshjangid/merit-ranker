@@ -3,7 +3,7 @@
 import type React from 'react';
 
 import { useUploadFile } from '@/features/presentations/components/plate/hooks/use-upload-file';
-import { ImageSourceSelector } from '@/features/presentations/components/presentation/theme/ImageSourceSelector';
+import { ImageSourceSelector } from '@/features/presentations/theme/ImageSourceSelector';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

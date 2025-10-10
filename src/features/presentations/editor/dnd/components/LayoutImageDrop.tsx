@@ -1,12 +1,12 @@
-import { type LayoutType } from "@/features/presentations/components/presentation/utils/parser";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { DRAG_ITEM_BLOCK } from "@platejs/dnd";
-import { ImagePlugin } from "@platejs/media/react";
-import { type TElement } from "platejs";
-import { useEditorRef, type PlateEditor } from "platejs/react";
-import { useRef } from "react";
-import { useDrop } from "react-dnd";
+import { type LayoutType } from '@/features/presentations/utils/parser';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { DRAG_ITEM_BLOCK } from '@platejs/dnd';
+import { ImagePlugin } from '@platejs/media/react';
+import { type TElement } from 'platejs';
+import { useEditorRef, type PlateEditor } from 'platejs/react';
+import { useRef } from 'react';
+import { useDrop } from 'react-dnd';
 
 function removeNodeById(editor: PlateEditor, element: TElement) {
   const path = editor.api.findPath(element);
@@ -29,7 +29,7 @@ export default function LayoutImageDrop({
 
   const handleImageDrop = (
     item: { element: TElement },
-    layoutType: LayoutType,
+    layoutType: LayoutType
   ) => {
     // Only handle image elements
     if (item?.element?.type !== ImagePlugin.key) return;
@@ -73,7 +73,7 @@ export default function LayoutImageDrop({
     canDrop: (item: { element: TElement }) =>
       item.element.type === ImagePlugin.key,
     drop: (item) => {
-      handleImageDrop(item, "vertical");
+      handleImageDrop(item, 'vertical');
       return { droppedInLayoutZone: true }; // Add this return value
     },
     collect: (monitor) => ({
@@ -86,7 +86,7 @@ export default function LayoutImageDrop({
     canDrop: (item: { element: TElement }) =>
       item?.element?.type === ImagePlugin.key,
     drop: (item) => {
-      handleImageDrop(item, "left");
+      handleImageDrop(item, 'left');
       return { droppedInLayoutZone: true }; // Add this return value
     },
     collect: (monitor) => ({
@@ -99,7 +99,7 @@ export default function LayoutImageDrop({
     canDrop: (item: { element: TElement }) =>
       item.element.type === ImagePlugin.key,
     drop: (item) => {
-      handleImageDrop(item, "right");
+      handleImageDrop(item, 'right');
       return { droppedInLayoutZone: true }; // Add this return value
     },
     collect: (monitor) => ({
@@ -117,9 +117,9 @@ export default function LayoutImageDrop({
       <div
         ref={topRef}
         className={cn(
-          "absolute left-0 right-0 top-0 z-50 h-16",
-          isTopOver ? "bg-primary/20" : "bg-transparent",
-          "transition-colors duration-200",
+          'absolute top-0 right-0 left-0 z-50 h-16',
+          isTopOver ? 'bg-primary/20' : 'bg-transparent',
+          'transition-colors duration-200'
         )}
       />
 
@@ -127,9 +127,9 @@ export default function LayoutImageDrop({
       <div
         ref={leftRef}
         className={cn(
-          "absolute bottom-0 left-0 top-16 z-50 w-8",
-          isLeftOver ? "bg-primary/20" : "bg-transparent",
-          "transition-colors duration-200",
+          'absolute top-16 bottom-0 left-0 z-50 w-8',
+          isLeftOver ? 'bg-primary/20' : 'bg-transparent',
+          'transition-colors duration-200'
         )}
       />
 
@@ -137,9 +137,9 @@ export default function LayoutImageDrop({
       <div
         ref={rightRef}
         className={cn(
-          "absolute bottom-0 right-0 top-16 z-50 w-8",
-          isRightOver ? "bg-primary/20" : "bg-transparent",
-          "transition-colors duration-200",
+          'absolute top-16 right-0 bottom-0 z-50 w-8',
+          isRightOver ? 'bg-primary/20' : 'bg-transparent',
+          'transition-colors duration-200'
         )}
       />
     </>
