@@ -1,8 +1,8 @@
-import { modelPicker } from "@/features/presentations/lib/model-picker";
+import { modelPicker } from '@/lib/model-picker';
 // import { auth } from "@/server/auth";
-import { streamText } from "ai";
-import { NextResponse } from "next/server";
-import { search_tool } from "./search_tool";
+import { streamText } from 'ai';
+import { NextResponse } from 'next/server';
+import { search_tool } from './search_tool';
 
 interface OutlineRequest {
   prompt: string;
@@ -65,38 +65,38 @@ export async function POST(req: Request) {
       prompt,
       numberOfCards,
       language,
-      modelProvider = "openai",
+      modelProvider = 'openai',
       modelId,
     } = (await req.json()) as OutlineRequest;
 
     if (!prompt || !numberOfCards || !language) {
       return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 },
+        { error: 'Missing required fields' },
+        { status: 400 }
       );
     }
 
     const languageMap: Record<string, string> = {
-      "en-US": "English (US)",
-      pt: "Portuguese",
-      es: "Spanish",
-      fr: "French",
-      de: "German",
-      it: "Italian",
-      ja: "Japanese",
-      ko: "Korean",
-      zh: "Chinese",
-      ru: "Russian",
-      hi: "Hindi",
-      ar: "Arabic",
+      'en-US': 'English (US)',
+      pt: 'Portuguese',
+      es: 'Spanish',
+      fr: 'French',
+      de: 'German',
+      it: 'Italian',
+      ja: 'Japanese',
+      ko: 'Korean',
+      zh: 'Chinese',
+      ru: 'Russian',
+      hi: 'Hindi',
+      ar: 'Arabic',
     };
 
     const actualLanguage = languageMap[language] ?? language;
-    const currentDate = new Date().toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    const currentDate = new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     });
 
     // Create model based on selection
@@ -105,12 +105,12 @@ export async function POST(req: Request) {
     const result = streamText({
       model,
       system: outlineSystemPrompt
-        .replace("{numberOfCards}", numberOfCards.toString())
-        .replace("{language}", actualLanguage)
-        .replace("{currentDate}", currentDate),
+        .replace('{numberOfCards}', numberOfCards.toString())
+        .replace('{language}', actualLanguage)
+        .replace('{currentDate}', currentDate),
       messages: [
         {
-          role: "user",
+          role: 'user',
           content: `Create a presentation outline for: ${prompt}`,
         },
       ],
@@ -118,15 +118,15 @@ export async function POST(req: Request) {
         webSearch: search_tool,
       },
       // maxSteps: 5, // Allow up to 5 tool calls
-      toolChoice: "auto", // Let the model decide when to use tools
+      toolChoice: 'auto', // Let the model decide when to use tools
     });
 
     return result.toUIMessageStreamResponse();
   } catch (error) {
-    console.error("Error in outline generation with search:", error);
+    console.error('Error in outline generation with search:', error);
     return NextResponse.json(
-      { error: "Failed to generate outline with search" },
-      { status: 500 },
+      { error: 'Failed to generate outline with search' },
+      { status: 500 }
     );
   }
 }

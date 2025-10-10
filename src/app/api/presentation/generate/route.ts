@@ -1,7 +1,7 @@
-import { modelPicker } from "@/features/presentations/lib/model-picker";
+import { modelPicker } from '@/lib/model-picker';
 // import { auth } from "@/server/auth";
-import { streamText } from "ai";
-import { NextResponse } from "next/server";
+import { streamText } from 'ai';
+import { NextResponse } from 'next/server';
 // Use AI SDK types for proper type safety
 
 interface SlidesRequest {
@@ -244,20 +244,20 @@ export async function POST(req: Request) {
       outline,
       language,
       tone,
-      modelProvider = "openai",
+      modelProvider = 'openai',
       modelId,
       searchResults,
     } = (await req.json()) as SlidesRequest;
 
     if (!title || !outline || !Array.isArray(outline) || !language) {
       return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 },
+        { error: 'Missing required fields' },
+        { status: 400 }
       );
     }
 
     // Format search results
-    let searchResultsText = "No research data available.";
+    let searchResultsText = 'No research data available.';
     if (searchResults && searchResults.length > 0) {
       const searchData = searchResults
         .map((searchItem, index: number) => {
@@ -266,30 +266,30 @@ export async function POST(req: Request) {
             ? searchItem.results
             : [];
 
-          if (results.length === 0) return "";
+          if (results.length === 0) return '';
 
           const formattedResults = results
             .map((result: unknown) => {
               const resultObj = result as Record<string, unknown>;
-              return `- ${resultObj.title || "No title"}\n  ${resultObj.content || "No content"}\n  ${resultObj.url || "No URL"}`;
+              return `- ${resultObj.title || 'No title'}\n  ${resultObj.content || 'No content'}\n  ${resultObj.url || 'No URL'}`;
             })
-            .join("\n");
+            .join('\n');
 
           return `**Search Query ${index + 1}:** ${query}\n**Results:**\n${formattedResults}\n---`;
         })
         .filter(Boolean)
-        .join("\n\n");
+        .join('\n\n');
 
       if (searchData) {
         searchResultsText = `The following research was conducted during outline generation:\n\n${searchData}`;
       }
     }
 
-    const currentDate = new Date().toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    const currentDate = new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     });
 
     const model = modelPicker(modelProvider, modelId);
@@ -297,11 +297,11 @@ export async function POST(req: Request) {
     // Format the prompt with template variables
     const formattedPrompt = slidesTemplate
       .replace(/{TITLE}/g, title)
-      .replace(/{PROMPT}/g, userPrompt || "No specific prompt provided")
+      .replace(/{PROMPT}/g, userPrompt || 'No specific prompt provided')
       .replace(/{CURRENT_DATE}/g, currentDate)
       .replace(/{LANGUAGE}/g, language)
       .replace(/{TONE}/g, tone)
-      .replace(/{OUTLINE_FORMATTED}/g, outline.join("\n\n"))
+      .replace(/{OUTLINE_FORMATTED}/g, outline.join('\n\n'))
       .replace(/{TOTAL_SLIDES}/g, outline.length.toString())
       .replace(/{SEARCH_RESULTS}/g, searchResultsText);
 
@@ -312,10 +312,10 @@ export async function POST(req: Request) {
 
     return result.toTextStreamResponse();
   } catch (error) {
-    console.error("Error in presentation generation:", error);
+    console.error('Error in presentation generation:', error);
     return NextResponse.json(
-      { error: "Failed to generate presentation slides" },
-      { status: 500 },
+      { error: 'Failed to generate presentation slides' },
+      { status: 500 }
     );
   }
 }

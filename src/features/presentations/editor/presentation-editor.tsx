@@ -10,7 +10,7 @@ import { usePlateEditor } from '@/features/presentations/components/plate/hooks/
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { extractFontsFromEditor } from '@/features/presentations/components/plate/utils/extractFontsFromEditor';
 import { FontLoader } from '@/features/presentations/components/plate/utils/font-loader';
-import { cn } from '@/features/presentations/lib/utils';
+import { cn } from '@/lib/utils';
 import { usePresentationState } from '@/states/presentation-state';
 import '@/styles/presentation.css';
 import { type TElement } from 'platejs';

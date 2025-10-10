@@ -1,7 +1,7 @@
-import { modelPicker } from "@/features/presentations/lib/model-picker";
+import { modelPicker } from '@/lib/model-picker';
 // import { auth } from "@/server/auth";
-import { streamText } from "ai";
-import { NextResponse } from "next/server";
+import { streamText } from 'ai';
+import { NextResponse } from 'next/server';
 
 interface OutlineRequest {
   prompt: string;
@@ -60,37 +60,37 @@ export async function POST(req: Request) {
       prompt,
       numberOfCards,
       language,
-      modelProvider = "openai",
+      modelProvider = 'openai',
       modelId,
     } = (await req.json()) as OutlineRequest;
 
     if (!prompt || !numberOfCards || !language) {
       return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 },
+        { error: 'Missing required fields' },
+        { status: 400 }
       );
     }
     const languageMap: Record<string, string> = {
-      "en-US": "English (US)",
-      pt: "Portuguese",
-      es: "Spanish",
-      fr: "French",
-      de: "German",
-      it: "Italian",
-      ja: "Japanese",
-      ko: "Korean",
-      zh: "Chinese",
-      ru: "Russian",
-      hi: "Hindi",
-      ar: "Arabic",
+      'en-US': 'English (US)',
+      pt: 'Portuguese',
+      es: 'Spanish',
+      fr: 'French',
+      de: 'German',
+      it: 'Italian',
+      ja: 'Japanese',
+      ko: 'Korean',
+      zh: 'Chinese',
+      ru: 'Russian',
+      hi: 'Hindi',
+      ar: 'Arabic',
     };
 
     const actualLanguage = languageMap[language] ?? language; // Fallback to the original if not found
-    const currentDate = new Date().toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    const currentDate = new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     });
 
     const model = modelPicker(modelProvider, modelId);
@@ -109,10 +109,10 @@ export async function POST(req: Request) {
 
     return result.toUIMessageStreamResponse();
   } catch (error) {
-    console.error("Error in outline generation:", error);
+    console.error('Error in outline generation:', error);
     return NextResponse.json(
-      { error: "Failed to generate outline" },
-      { status: 500 },
+      { error: 'Failed to generate outline' },
+      { status: 500 }
     );
   }
 }

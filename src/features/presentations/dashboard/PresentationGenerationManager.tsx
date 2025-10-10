@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { generateImageAction } from "@/app/_actions/image/generate";
-import { getImageFromUnsplash } from "@/app/_actions/image/unsplash";
-import { updatePresentation } from "@/app/_actions/presentation/presentationActions";
-import { extractThinking } from "@/features/presentations/lib/thinking-extractor";
-import { usePresentationState } from "@/states/presentation-state";
-import { useChat, useCompletion } from "@ai-sdk/react";
-import { useEffect, useRef } from "react";
-import { toast } from "sonner";
-import { SlideParser } from "../utils/parser";
-import { DefaultChatTransport } from "ai";
+import { generateImageAction } from '@/app/_actions/image/generate';
+import { getImageFromUnsplash } from '@/app/_actions/image/unsplash';
+import { updatePresentation } from '@/app/_actions/presentation/presentationActions';
+import { extractThinking } from '@/lib/thinking-extractor';
+import { usePresentationState } from '@/states/presentation-state';
+import { useChat, useCompletion } from '@ai-sdk/react';
+import { useEffect, useRef } from 'react';
+import { toast } from 'sonner';
+import { SlideParser } from '../utils/parser';
+import { DefaultChatTransport } from 'ai';
 function stripXmlCodeBlock(input: string): string {
   let result = input.trim();
-  if (result.startsWith("```xml")) {
+  if (result.startsWith('```xml')) {
     result = result.slice(6).trimStart();
   }
-  if (result.endsWith("```")) {
+  if (result.endsWith('```')) {
     result = result.slice(0, -3).trimEnd();
   }
   return result;
@@ -82,7 +82,7 @@ export function PresentationGenerationManager() {
       : presentationCompletion;
 
     const processedPresentationCompletion = stripXmlCodeBlock(
-      presentationContentToParse,
+      presentationContentToParse
     );
     streamingParserRef.current.reset();
     streamingParserRef.current.parseChunk(processedPresentationCompletion);
@@ -91,7 +91,7 @@ export function PresentationGenerationManager() {
     // Merge any completed root image URLs from state into streamed slides
     const mergedSlides = allSlides.map((slide) => {
       const gen = rootImageGeneration[slide.id];
-      if (gen?.status === "success" && slide.rootImage?.query) {
+      if (gen?.status === 'success' && slide.rootImage?.query) {
         return {
           ...slide,
           rootImage: {
@@ -108,17 +108,17 @@ export function PresentationGenerationManager() {
       const rootImage = slide.rootImage;
       if (rootImage?.query && !rootImage.url) {
         const already = rootImageGeneration[slideId];
-        if (!already || already.status === "error") {
+        if (!already || already.status === 'error') {
           startRootImageGeneration(slideId, rootImage.query);
           void (async () => {
             try {
               let result;
 
-              if (imageSource === "stock") {
+              if (imageSource === 'stock') {
                 // Use Unsplash for stock images
                 const unsplashResult = await getImageFromUnsplash(
                   rootImage.query,
-                  rootImage.layoutType,
+                  rootImage.layoutType
                 );
                 if (unsplashResult.success && unsplashResult.imageUrl) {
                   result = { image: { url: unsplashResult.imageUrl } };
@@ -154,15 +154,15 @@ export function PresentationGenerationManager() {
                             url: result.image.url,
                           },
                         }
-                      : s,
-                  ),
+                      : s
+                  )
                 );
               } else {
-                failRootImageGeneration(slideId, "No image url returned");
+                failRootImageGeneration(slideId, 'No image url returned');
               }
             } catch (err) {
               const message =
-                err instanceof Error ? err.message : "Image generation failed";
+                err instanceof Error ? err.message : 'Image generation failed';
               failRootImageGeneration(slideId, message);
             }
           })();
@@ -175,112 +175,114 @@ export function PresentationGenerationManager() {
 
   // Function to extract title from content
   const extractTitle = (
-    content: string,
+    content: string
   ): { title: string | null; cleanContent: string } => {
     const titleMatch = content.match(/<TITLE>(.*?)<\/TITLE>/i);
     if (titleMatch?.[1]) {
       const title = titleMatch[1].trim();
-      const cleanContent = content.replace(/<TITLE>.*?<\/TITLE>/i, "").trim();
+      const cleanContent = content.replace(/<TITLE>.*?<\/TITLE>/i, '').trim();
       return { title, cleanContent };
     }
     return { title: null, cleanContent: content };
   };
 
   // Function to process messages and extract data (optimized - only process last message)
-const processMessages = (messages: typeof outlineMessages): void => {
-  if (messages.length <= 1) return;
+  const processMessages = (messages: typeof outlineMessages): void => {
+    if (messages.length <= 1) return;
 
-  // Get the last message - this is where all the current data is
-  const lastMessage = messages[messages.length - 1];
-  if (!lastMessage) return;
+    // Get the last message - this is where all the current data is
+    const lastMessage = messages[messages.length - 1];
+    if (!lastMessage) return;
 
-  // Extract search results from the last message only (much more efficient)
-  if (webSearchEnabled && lastMessage.parts) {
-    const searchResults: Array<{ query: string; results: unknown[] }> = [];
+    // Extract search results from the last message only (much more efficient)
+    if (webSearchEnabled && lastMessage.parts) {
+      const searchResults: Array<{ query: string; results: unknown[] }> = [];
 
-    for (const part of lastMessage.parts) {
-      if (part.type === "tool-webSearch") {
-        if (part.state === "output-available" && part.output) {
-          const toolInput = part.input as { query?: string };
-const query = typeof toolInput?.query === "string"
-  ? toolInput.query
-  : "Unknown query";
+      for (const part of lastMessage.parts) {
+        if (part.type === 'tool-webSearch') {
+          if (part.state === 'output-available' && part.output) {
+            const toolInput = part.input as { query?: string };
+            const query =
+              typeof toolInput?.query === 'string'
+                ? toolInput.query
+                : 'Unknown query';
 
-          // Parse the search result
-          let parsedResult;
-          try {
-            parsedResult =
-              typeof part.output === "string"
-                ? JSON.parse(part.output)
-                : part.output;
-          } catch {
-            parsedResult = part.output;
+            // Parse the search result
+            let parsedResult;
+            try {
+              parsedResult =
+                typeof part.output === 'string'
+                  ? JSON.parse(part.output)
+                  : part.output;
+            } catch {
+              parsedResult = part.output;
+            }
+
+            searchResults.push({
+              query,
+              results: parsedResult?.results || [],
+            });
           }
-
-          searchResults.push({
-            query,
-            results: parsedResult?.results || [],
-          });
         }
       }
-    }
 
-    // Store search results in buffer (only if we found any)
-    if (searchResults.length > 0) {
-      searchResultsBufferRef.current = searchResults;
-    }
-  }
-
-  if (lastMessage.role === "assistant" && lastMessage.parts) {
-    const textParts = lastMessage.parts
-      .filter((part) => part.type === "text")
-      .map((part) => part.text)
-      .join("");
-
-    if (textParts) {
-      const thinkingExtract = extractThinking(textParts);
-      if (thinkingExtract.hasThinking) {
-        setOutlineThinking(thinkingExtract.thinking);
+      // Store search results in buffer (only if we found any)
+      if (searchResults.length > 0) {
+        searchResultsBufferRef.current = searchResults;
       }
+    }
 
-      let cleanContent = thinkingExtract.hasThinking
-        ? thinkingExtract.content
-        : textParts;
+    if (lastMessage.role === 'assistant' && lastMessage.parts) {
+      const textParts = lastMessage.parts
+        .filter((part) => part.type === 'text')
+        .map((part) => part.text)
+        .join('');
 
-      // Only extract title if we haven't done it yet
-      if (!titleExtractedRef.current) {
-        const { title, cleanContent: extractedCleanContent } =
-          extractTitle(cleanContent);
+      if (textParts) {
+        const thinkingExtract = extractThinking(textParts);
+        if (thinkingExtract.hasThinking) {
+          setOutlineThinking(thinkingExtract.thinking);
+        }
 
-        cleanContent = extractedCleanContent;
+        let cleanContent = thinkingExtract.hasThinking
+          ? thinkingExtract.content
+          : textParts;
 
-        // Set the title if found and mark as extracted
-        if (title) {
-          setCurrentPresentation(currentPresentationId, title);
-          titleExtractedRef.current = true;
+        // Only extract title if we haven't done it yet
+        if (!titleExtractedRef.current) {
+          const { title, cleanContent: extractedCleanContent } =
+            extractTitle(cleanContent);
+
+          cleanContent = extractedCleanContent;
+
+          // Set the title if found and mark as extracted
+          if (title) {
+            setCurrentPresentation(currentPresentationId, title);
+            titleExtractedRef.current = true;
+          } else {
+            // Title not found yet, don't process outline
+            return;
+          }
         } else {
-          // Title not found yet, don't process outline
-          return;
+          // Title already extracted, just remove it from content if it exists
+          cleanContent = cleanContent
+            .replace(/<TITLE>.*?<\/TITLE>/i, '')
+            .trim();
         }
-      } else {
-        // Title already extracted, just remove it from content if it exists
-        cleanContent = cleanContent.replace(/<TITLE>.*?<\/TITLE>/i, "").trim();
-      }
 
-      // Parse the outline into sections
-      const sections = cleanContent.split(/^# /gm).filter(Boolean);
-      const outlineItems: string[] =
-        sections.length > 0
-          ? sections.map((section) => `# ${section}`.trim())
-          : [];
+        // Parse the outline into sections
+        const sections = cleanContent.split(/^# /gm).filter(Boolean);
+        const outlineItems: string[] =
+          sections.length > 0
+            ? sections.map((section) => `# ${section}`.trim())
+            : [];
 
-      if (outlineItems.length > 0) {
-        outlineBufferRef.current = outlineItems;
+        if (outlineItems.length > 0) {
+          outlineBufferRef.current = outlineItems;
+        }
       }
     }
-  }
-};
-
+  };
 
   // Function to update outline and search results using requestAnimationFrame
   const updateOutlineWithRAF = (): void => {
@@ -303,66 +305,67 @@ const query = typeof toolInput?.query === "string"
   };
 
   // Outline generation with or without web search
-  const { messages: outlineMessages, sendMessage: sendOutlineMessage } = useChat({
-    transport: new DefaultChatTransport({
-    api: webSearchEnabled
-      ? "/api/presentation/outline-with-search"
-      : "/api/presentation/outline",
-    body: {
-      prompt: presentationInput,
-      numberOfCards: numSlides,
-      language,
-      modelProvider,
-      modelId,
-    },  
-  }),
-    onFinish: () => {
-      setIsGeneratingOutline(false);
-      setShouldStartOutlineGeneration(false);
-      setShouldStartPresentationGeneration(false);
+  const { messages: outlineMessages, sendMessage: sendOutlineMessage } =
+    useChat({
+      transport: new DefaultChatTransport({
+        api: webSearchEnabled
+          ? '/api/presentation/outline-with-search'
+          : '/api/presentation/outline',
+        body: {
+          prompt: presentationInput,
+          numberOfCards: numSlides,
+          language,
+          modelProvider,
+          modelId,
+        },
+      }),
+      onFinish: () => {
+        setIsGeneratingOutline(false);
+        setShouldStartOutlineGeneration(false);
+        setShouldStartPresentationGeneration(false);
 
-      const {
-        currentPresentationId,
-        outline,
-        searchResults,
-        currentPresentationTitle,
-        theme,
-        imageSource,
-      } = usePresentationState.getState();
-
-      if (currentPresentationId) {
-        void updatePresentation({
-          id: currentPresentationId,
+        const {
+          currentPresentationId,
           outline,
           searchResults,
-          prompt: presentationInput,
-          title: currentPresentationTitle ?? "",
+          currentPresentationTitle,
           theme,
           imageSource,
-        });
-      }
+        } = usePresentationState.getState();
 
-      // Cancel any pending outline animation frame
-      if (outlineRafIdRef.current !== null) {
-        cancelAnimationFrame(outlineRafIdRef.current);
-        outlineRafIdRef.current = null;
-      }
-    },
-    onError: (error) => {
-      toast.error("Failed to generate outline: " + error.message);
-      resetGeneration();
+        if (currentPresentationId) {
+          void updatePresentation({
+            id: currentPresentationId,
+            outline,
+            searchResults,
+            prompt: presentationInput,
+            title: currentPresentationTitle ?? '',
+            theme,
+            imageSource,
+          });
+        }
 
-      // Cancel any pending outline animation frame
-      if (outlineRafIdRef.current !== null) {
-        cancelAnimationFrame(outlineRafIdRef.current);
-        outlineRafIdRef.current = null;
-      }
-    },
-  });
+        // Cancel any pending outline animation frame
+        if (outlineRafIdRef.current !== null) {
+          cancelAnimationFrame(outlineRafIdRef.current);
+          outlineRafIdRef.current = null;
+        }
+      },
+      onError: (error) => {
+        toast.error('Failed to generate outline: ' + error.message);
+        resetGeneration();
+
+        // Cancel any pending outline animation frame
+        if (outlineRafIdRef.current !== null) {
+          cancelAnimationFrame(outlineRafIdRef.current);
+          outlineRafIdRef.current = null;
+        }
+      },
+    });
 
   // Lightweight useEffect that only schedules RAF updates
   useEffect(() => {
-    console.log("outlineMessages", outlineMessages);
+    console.log('outlineMessages', outlineMessages);
     // Only update if we have new messages
     if (outlineMessages.length > 1) {
       lastProcessedMessagesLength.current = outlineMessages.length;
@@ -400,17 +403,17 @@ const query = typeof toolInput?.query === "string"
           }
 
           await sendOutlineMessage(
-  {
-    text: presentationInput,
-  },
-  {
-    body: {
-      prompt: presentationInput,
-      numberOfCards: numSlides,
-      language,
-    },
-  },
-);
+            {
+              text: presentationInput,
+            },
+            {
+              body: {
+                prompt: presentationInput,
+                numberOfCards: numSlides,
+                language,
+              },
+            }
+          );
         } catch (error) {
           console.log(error);
           // Error is handled by onError callback
@@ -426,13 +429,13 @@ const query = typeof toolInput?.query === "string"
 
   const { completion: presentationCompletion, complete: generatePresentation } =
     useCompletion({
-      api: "/api/presentation/generate",
+      api: '/api/presentation/generate',
       onFinish: (_prompt, _completion) => {
         setIsGeneratingPresentation(false);
         setShouldStartPresentationGeneration(false);
       },
       onError: (error) => {
-        toast.error("Failed to generate presentation: " + error.message);
+        toast.error('Failed to generate presentation: ' + error.message);
         resetGeneration();
         streamingParserRef.current.reset();
 
@@ -452,8 +455,8 @@ const query = typeof toolInput?.query === "string"
           slidesRafIdRef.current = requestAnimationFrame(updateSlidesWithRAF);
         }
       } catch (error) {
-        console.error("Error processing presentation XML:", error);
-        toast.error("Error processing presentation content");
+        console.error('Error processing presentation XML:', error);
+        toast.error('Error processing presentation content');
       }
     }
   }, [presentationCompletion]);
@@ -476,10 +479,10 @@ const query = typeof toolInput?.query === "string"
       streamingParserRef.current.reset();
       setIsGeneratingPresentation(true);
       setThumbnailUrl(undefined);
-      void generatePresentation(presentationInput ?? "", {
+      void generatePresentation(presentationInput ?? '', {
         body: {
-          title: currentPresentationTitle ?? presentationInput ?? "",
-          prompt: presentationInput ?? "",
+          title: currentPresentationTitle ?? presentationInput ?? '',
+          prompt: presentationInput ?? '',
           outline,
           searchResults: stateSearchResults,
           language,
@@ -500,7 +503,7 @@ const query = typeof toolInput?.query === "string"
 
     // Check for any pending root image generations that need to be processed
     for (const [slideId, gen] of Object.entries(rootImageGeneration)) {
-      if (gen.status === "pending") {
+      if (gen.status === 'pending') {
         // Find the slide to get the rootImage query
         const slide = slides.find((s) => s.id === slideId);
         if (slide?.rootImage?.query) {
@@ -508,11 +511,11 @@ const query = typeof toolInput?.query === "string"
             try {
               let result;
 
-              if (imageSource === "stock") {
+              if (imageSource === 'stock') {
                 // Use Unsplash for stock images
                 const unsplashResult = await getImageFromUnsplash(
                   slide.rootImage!.query,
-                  slide.rootImage!.layoutType,
+                  slide.rootImage!.layoutType
                 );
                 if (unsplashResult.success && unsplashResult.imageUrl) {
                   result = { image: { url: unsplashResult.imageUrl } };
@@ -521,7 +524,7 @@ const query = typeof toolInput?.query === "string"
                 // Use AI generation
                 result = await generateImageAction(
                   slide.rootImage!.query,
-                  imageModel,
+                  imageModel
                 );
               }
 
@@ -538,15 +541,15 @@ const query = typeof toolInput?.query === "string"
                             url: result.image.url,
                           },
                         }
-                      : s,
-                  ),
+                      : s
+                  )
                 );
               } else {
-                failRootImageGeneration(slideId, "No image url returned");
+                failRootImageGeneration(slideId, 'No image url returned');
               }
             } catch (err) {
               const message =
-                err instanceof Error ? err.message : "Image generation failed";
+                err instanceof Error ? err.message : 'Image generation failed';
               failRootImageGeneration(slideId, message);
             }
           })();
