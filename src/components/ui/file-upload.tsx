@@ -1,7 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/features/presentations/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   AudioWaveform,
   File,

@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/features/presentations/components/ui/dialog";
+} from "@/components/ui/dialog";
 import {
   Drawer,
   DrawerClose,
@@ -21,8 +21,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/features/presentations/components/ui/drawer";
-import { useMediaQuery } from "@/features/presentations/hooks/globals/useMediaQuery";
+} from "@/components/ui/drawer";
+import { useMediaQuery } from "@/hooks/globals/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 type DialogProps = React.ComponentProps<typeof Dialog>;
