@@ -5,7 +5,7 @@ import { insertColumnGroup } from '@platejs/layout';
 import { type TElement } from 'platejs';
 
 import { type ElementDragItemNode } from '@platejs/dnd';
-import { type UseDropNodeOptions } from '../hooks';
+import { type UseDropNodeOptions } from '@/hooks/presentation/useDropNode';
 
 import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
 import { getDropPath } from '../utils/getDropPath';

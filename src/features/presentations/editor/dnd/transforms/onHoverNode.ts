@@ -4,7 +4,7 @@ import { type DropTargetMonitor } from 'react-dnd';
 import { NodeApi, PathApi } from 'platejs';
 
 import { type DragItemNode } from '@platejs/dnd';
-import { type UseDropNodeOptions } from '../hooks/useDropNode';
+import { type UseDropNodeOptions } from '@/hooks/presentation/useDropNode';
 
 import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
 import { getDropPath } from '../utils/getDropPath';
