@@ -1,13 +1,13 @@
 'use client';
 
-import { Editor } from '@/features/presentations/components/plate/ui/editor';
+import { Editor } from '@/components/ui/editor';
 import debounce from 'lodash.debounce';
 import { type Value } from 'platejs';
 import { Plate } from 'platejs/react';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { usePlateEditor } from '@/features/presentations/components/plate/hooks/usePlateEditor';
-import { TooltipProvider } from '@/features/presentations/components/plate/ui/tooltip';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { extractFontsFromEditor } from '@/features/presentations/components/plate/utils/extractFontsFromEditor';
 import { FontLoader } from '@/features/presentations/components/plate/utils/font-loader';
 import { cn } from '@/features/presentations/lib/utils';
@@ -126,7 +126,7 @@ const PresentationEditor = React.memo(
         <div
           className={cn(
             'flex min-h-[500px]',
-            'scrollbar-thumb-muted-foreground/20 hover:scrollbar-thumb-muted-foreground/30 scrollbar-thin scrollbar-track-transparent overflow-hidden p-0',
+            'scrollbar-thin overflow-hidden p-0 scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent hover:scrollbar-thumb-muted-foreground/30',
             'relative text-foreground',
             'focus-within:ring-opacity-50 focus-within:ring-2 focus-within:ring-primary',
             className,

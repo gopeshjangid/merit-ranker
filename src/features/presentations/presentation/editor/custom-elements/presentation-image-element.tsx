@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { generateImageAction } from '@/app/_actions/image/generate';
 import { getImageFromUnsplash } from '@/app/_actions/image/unsplash';
-import { MediaToolbar } from '@/features/presentations/components/plate/ui/media-toolbar';
-import { mediaResizeHandleVariants } from '@/features/presentations/components/plate/ui/resize-handle';
+import { MediaToolbar } from '@/components/ui/media-toolbar';
+import { mediaResizeHandleVariants } from '@/components/ui/resize-handle';
 import { Spinner } from '@/components/ui/spinner';
 import { useDebouncedSave } from '@/features/presentations/hooks/presentation/useDebouncedSave';
 import { cn } from '@/lib/utils';

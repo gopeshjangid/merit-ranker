@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { DndPlugin } from "@platejs/dnd";
-import { PlaceholderPlugin } from "@platejs/media/react";
+import { DndPlugin } from '@platejs/dnd';
+import { PlaceholderPlugin } from '@platejs/media/react';
 
-import { BlockDraggable } from "@/features/presentations/components/plate/ui/block-draggable";
+import { BlockDraggable } from '@/components/ui/block-draggable';
 
 export const MultiDndPlugin = DndPlugin.extend({
   options: {
     orientation: undefined,
     isMouseDown: false,
   } as {
-    orientation: "vertical" | "horizontal" | undefined;
+    orientation: 'vertical' | 'horizontal' | undefined;
     isMouseDown: boolean;
   },
 });

@@ -7,11 +7,11 @@ import {
   BaseH5Plugin,
   BaseH6Plugin,
   BaseHorizontalRulePlugin,
-} from "@platejs/basic-nodes";
-import { BaseParagraphPlugin } from "platejs";
+} from '@platejs/basic-nodes';
+import { BaseParagraphPlugin } from 'platejs';
 
-import { BlockquoteElementStatic } from "@/features/presentations/components/plate/ui/blockquote-node-static";
-import { HrElementStatic } from "@/features/presentations/components/plate/ui/hr-node-static";
+import { BlockquoteElementStatic } from '@/components/ui/blockquote-node-static';
+import { HrElementStatic } from '@/components/ui/hr-node-static';
 
 import {
   H1ElementStatic,
@@ -20,8 +20,8 @@ import {
   H4ElementStatic,
   H5ElementStatic,
   H6ElementStatic,
-} from "../custom-elements/static/presentation-heading-element-static";
-import { PresentationParagraphElementStatic } from "../custom-elements/static/presentation-paragraph-element-static";
+} from '../custom-elements/static/presentation-heading-element-static';
+import { PresentationParagraphElementStatic } from '../custom-elements/static/presentation-paragraph-element-static';
 
 export const PresentationBasicBlocksBaseKit = [
   BaseParagraphPlugin.withComponent(PresentationParagraphElementStatic),

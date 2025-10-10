@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   BoldPlugin,
@@ -10,33 +10,33 @@ import {
   SubscriptPlugin,
   SuperscriptPlugin,
   UnderlinePlugin,
-} from "@platejs/basic-nodes/react";
+} from '@platejs/basic-nodes/react';
 
-import { CodeLeaf } from "@/features/presentations/components/plate/ui/code-node";
-import { HighlightLeaf } from "@/features/presentations/components/plate/ui/highlight-node";
-import { KbdLeaf } from "@/features/presentations/components/plate/ui/kbd-node";
-import { PresentationLeafElement } from "../custom-elements/presentation-leaf-element";
+import { CodeLeaf } from '@/components/ui/code-node';
+import { HighlightLeaf } from '@/components/ui/highlight-node';
+import { KbdLeaf } from '@/components/ui/kbd-node';
+import { PresentationLeafElement } from '../custom-elements/presentation-leaf-element';
 export const BasicMarksKit = [
   BoldPlugin.withComponent(PresentationLeafElement),
   ItalicPlugin.withComponent(PresentationLeafElement),
   UnderlinePlugin.withComponent(PresentationLeafElement),
   CodePlugin.configure({
     node: { component: CodeLeaf },
-    shortcuts: { toggle: { keys: "mod+e" } },
+    shortcuts: { toggle: { keys: 'mod+e' } },
   }),
   StrikethroughPlugin.configure({
     render: { node: PresentationLeafElement },
-    shortcuts: { toggle: { keys: "mod+shift+x" } },
+    shortcuts: { toggle: { keys: 'mod+shift+x' } },
   }),
   SubscriptPlugin.configure({
-    shortcuts: { toggle: { keys: "mod+comma" } },
+    shortcuts: { toggle: { keys: 'mod+comma' } },
   }),
   SuperscriptPlugin.configure({
-    shortcuts: { toggle: { keys: "mod+period" } },
+    shortcuts: { toggle: { keys: 'mod+period' } },
   }),
   HighlightPlugin.configure({
     node: { component: HighlightLeaf },
-    shortcuts: { toggle: { keys: "mod+shift+h" } },
+    shortcuts: { toggle: { keys: 'mod+shift+h' } },
   }),
   KbdPlugin.withComponent(KbdLeaf),
 ];
