@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { SlideContainer } from "@/features/presentations/components/presentation/presentation-page/SlideContainer";
-import { usePresentationSlides } from "@/features/presentations/hooks/presentation/usePresentationSlides";
-import { useSlideChangeWatcher } from "@/features/presentations/hooks/presentation/useSlideChangeWatcher";
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { DndContext, closestCenter } from "@dnd-kit/core";
+import { SlideContainer } from '@/features/presentations/presentation-page/SlideContainer';
+import { usePresentationSlides } from '@/features/presentations/hooks/presentation/usePresentationSlides';
+import { useSlideChangeWatcher } from '@/features/presentations/hooks/presentation/useSlideChangeWatcher';
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { DndContext, closestCenter } from '@dnd-kit/core';
 import {
   SortableContext,
   verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { PlateController } from "platejs/react";
-import { useEffect } from "react";
-import { PresentModeHeader } from "../dashboard/PresentModeHeader";
-import { ThinkingDisplay } from "../dashboard/ThinkingDisplay";
-import PresentationEditor from "../editor/presentation-editor";
-import { GlobalUndoRedoHandler } from "./GlobalUndoRedoHandler";
+} from '@dnd-kit/sortable';
+import { PlateController } from 'platejs/react';
+import { useEffect } from 'react';
+import { PresentModeHeader } from '../dashboard/PresentModeHeader';
+import { ThinkingDisplay } from '../dashboard/ThinkingDisplay';
+import PresentationEditor from '../editor/presentation-editor';
+import { GlobalUndoRedoHandler } from './GlobalUndoRedoHandler';
 
 interface PresentationSlidesViewProps {
   isGeneratingPresentation: boolean;
@@ -29,13 +29,13 @@ export const PresentationSlidesView = ({
   const nextSlide = usePresentationState((s) => s.nextSlide);
   const previousSlide = usePresentationState((s) => s.previousSlide);
   const setShouldShowExitHeader = usePresentationState(
-    (s) => s.setShouldShowExitHeader,
+    (s) => s.setShouldShowExitHeader
   );
   const currentPresentationTitle = usePresentationState(
-    (s) => s.currentPresentationTitle,
+    (s) => s.currentPresentationTitle
   );
   const shouldShowExitHeader = usePresentationState(
-    (s) => s.shouldShowExitHeader,
+    (s) => s.shouldShowExitHeader
   );
   const { items, sensors, handleDragEnd } = usePresentationSlides();
   // Use the slide change watcher to automatically save changes
@@ -44,17 +44,17 @@ export const PresentationSlidesView = ({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isPresenting) return;
-      if (event.key === "ArrowRight" || event.key === "Space") {
+      if (event.key === 'ArrowRight' || event.key === 'Space') {
         nextSlide();
-      } else if (event.key === "ArrowLeft") {
+      } else if (event.key === 'ArrowLeft') {
         previousSlide();
-      } else if (event.key === "Escape") {
+      } else if (event.key === 'Escape') {
         usePresentationState.getState().setIsPresenting(false);
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextSlide, previousSlide, isPresenting]);
 
   // Handle showing header on mouse move
@@ -69,8 +69,8 @@ export const PresentationSlidesView = ({
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [isPresenting]);
 
   return (
@@ -108,14 +108,14 @@ export const PresentationSlidesView = ({
                 <div
                   className={cn(
                     `slide-container-${index}`,
-                    isPresenting && "h-screen w-screen",
+                    isPresenting && 'h-screen w-screen'
                   )}
                 >
                   <PresentationEditor
                     initialContent={slide}
                     className={cn(
-                      "min-h-[300px] rounded-md border",
-                      isPresenting && "h-screen w-screen",
+                      'min-h-[300px] rounded-md border',
+                      isPresenting && 'h-screen w-screen'
                     )}
                     id={slide.id}
                     autoFocus={index === currentSlideIndex}

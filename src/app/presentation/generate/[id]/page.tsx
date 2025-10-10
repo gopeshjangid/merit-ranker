@@ -2,7 +2,7 @@
 
 import { getPresentation } from '@/app/_actions/presentation/presentationActions';
 import { getCustomThemeById } from '@/app/_actions/presentation/theme-actions';
-import { ThinkingDisplay } from '@/features/presentations/components/presentation/dashboard/ThinkingDisplay';
+import { ThinkingDisplay } from '@/features/presentations/dashboard/ThinkingDisplay';
 import { Header } from '@/features/presentations/components/presentation/outline/Header';
 import { OutlineList } from '@/features/presentations/components/presentation/outline/OutlineList';
 import { PromptInput } from '@/features/presentations/components/presentation/outline/PromptInput';

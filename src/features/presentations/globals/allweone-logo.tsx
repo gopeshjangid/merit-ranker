@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import LocalFont from "next/font/local";
 import type React from "react";
 const AmericanTypewritter = LocalFont({
-  src: "../../fonts/American_Typewriter.woff",
+  src: "../../../../../fonts/American_Typewriter.woff",
 });
 
 export default function AllweoneText(
