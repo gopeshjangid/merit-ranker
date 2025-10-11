@@ -310,7 +310,7 @@ export async function POST(req: Request) {
       prompt: formattedPrompt,
     });
 
-    return result.toTextStreamResponse();
+    return result.toUIMessageStreamResponse();
   } catch (error) {
     console.error('Error in presentation generation:', error);
     return NextResponse.json(
