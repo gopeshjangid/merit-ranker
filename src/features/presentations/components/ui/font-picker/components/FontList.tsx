@@ -1,4 +1,4 @@
-import { Input } from "@/features/presentations/components/ui/input";
+import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/features/presentations/components/ui/scroll-area";
 import { Skeleton } from "@/features/presentations/components/ui/skeleton";
 import { Loader2, Search } from "lucide-react";

@@ -7,7 +7,7 @@ import { Plate } from 'platejs/react';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { usePlateEditor } from '@/features/presentations/components/plate/hooks/usePlateEditor';
-import { TooltipProvider } from '@/features/presentations/components/plate/ui/tooltip';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { extractFontsFromEditor } from '@/features/presentations/components/plate/utils/extractFontsFromEditor';
 import { FontLoader } from '@/features/presentations/components/plate/utils/font-loader';
 import { cn } from '@/features/presentations/lib/utils';

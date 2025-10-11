@@ -10,7 +10,7 @@ import {
   DialogClose,
   DialogContent,
   DialogTrigger,
-} from "@/features/presentations/components/ui/dialog";
+} from "@/components/ui/dialog";
 import { Skeleton } from "@/features/presentations/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/presentations/components/ui/tabs";
 import { type ThemeProperties } from "@/features/presentations/lib/presentation/themes";

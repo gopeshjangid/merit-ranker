@@ -31,13 +31,13 @@ import {
   discussionPlugin,
 } from "@/features/presentations/components/plate/plugins/discussion-kit";
 import { suggestionPlugin } from "@/features/presentations/components/plate/plugins/suggestion-kit";
-import { Button } from "@/features/presentations/components/plate/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverAnchor,
   PopoverContent,
   PopoverTrigger,
-} from "@/features/presentations/components/plate/ui/popover";
+} from "@/components/ui/popover";
 
 import {
   BlockSuggestionCard,

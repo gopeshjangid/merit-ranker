@@ -21,7 +21,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from "@/features/presentations/components/plate/ui/context-menu";
+} from "@/components/ui/context-menu";
 
 type Value = "askAI" | null;
 

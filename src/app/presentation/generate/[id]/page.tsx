@@ -9,8 +9,8 @@ import { PromptInput } from '@/features/presentations/components/presentation/ou
 import { ToolCallDisplay } from '@/features/presentations/components/presentation/outline/ToolCallDisplay';
 import { ThemeBackground } from '@/features/presentations/components/presentation/theme/ThemeBackground';
 import { ThemeSettings } from '@/features/presentations/components/presentation/theme/ThemeSettings';
-import { Button } from '@/features/presentations/components/ui/button';
-import { Spinner } from '@/features/presentations/components/ui/spinner';
+import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 import {
   themes,
   type ThemeProperties,

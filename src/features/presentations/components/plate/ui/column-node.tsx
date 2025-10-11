@@ -19,13 +19,13 @@ import {
   withHOC,
 } from "platejs/react";
 
-import { Button } from "@/features/presentations/components/plate/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverAnchor,
   PopoverContent,
-} from "@/features/presentations/components/plate/ui/popover";
-import { Separator } from "@/features/presentations/components/plate/ui/separator";
+} from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 export const ColumnElement = withHOC(

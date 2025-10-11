@@ -35,8 +35,8 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/features/presentations/components/plate/ui/avatar";
-import { Button } from "@/features/presentations/components/plate/ui/button";
+} from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 import {

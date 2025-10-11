@@ -6,7 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Spinner } from "@/features/presentations/components/ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 import { useRootImageActions } from "@/features/presentations/hooks/presentation/useRootImageActions";
 import { cn } from "@/lib/utils";
 import { usePresentationState } from "@/states/presentation-state";

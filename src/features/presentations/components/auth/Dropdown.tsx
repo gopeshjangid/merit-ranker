@@ -12,7 +12,7 @@ import { LogOut, User } from "lucide-react";
 // import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "../ui/skeleton";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

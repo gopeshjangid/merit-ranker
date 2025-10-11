@@ -9,16 +9,16 @@ import { ArrowDownToLineIcon } from "lucide-react";
 import { createSlateEditor, serializeHtml } from "platejs";
 import { useEditorRef } from "platejs/react";
 
-import { BaseEditorKit } from "@/features/presentations/components/plate/editor-base-kit";
+import { BaseEditorKit } from "@/components/editor/editor-base-kit";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/features/presentations/components/plate/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 
-import { EditorStatic } from "./editor-static";
+import { EditorStatic } from "@/components/ui/editor-static";
 import { ToolbarButton } from "./toolbar";
 
 const siteUrl = "https://platejs.org";

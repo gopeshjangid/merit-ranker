@@ -60,7 +60,7 @@ import {
   withHOC,
 } from "platejs/react";
 
-import { Button } from "@/features/presentations/components/plate/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -69,8 +69,8 @@ import {
   DropdownMenuItem,
   DropdownMenuPortal,
   DropdownMenuTrigger,
-} from "@/features/presentations/components/plate/ui/dropdown-menu";
-import { Popover, PopoverContent } from "@/features/presentations/components/plate/ui/popover";
+} from "@/components/ui/dropdown-menu";
+import { Popover, PopoverContent } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
 import { blockSelectionVariants } from "@/features/presentations/components/plate/ui/block-selection";

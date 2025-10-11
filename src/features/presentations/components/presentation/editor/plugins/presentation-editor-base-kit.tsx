@@ -1,4 +1,4 @@
-import { BaseAlignKit } from '@/features/presentations/components/plate/plugins/align-base-kit';
+import { BaseAlignKit } from '@/components/editor/plugins/align-base-kit';
 import { BaseBasicMarksKit } from '@/features/presentations/components/plate/plugins/basic-marks-base-kit';
 import { BaseCalloutKit } from '@/features/presentations/components/plate/plugins/callout-base-kit';
 import { BaseCodeBlockKit } from '@/features/presentations/components/plate/plugins/code-block-base-kit';
@@ -6,7 +6,7 @@ import { BaseColumnKit } from '@/features/presentations/components/plate/plugins
 import { BaseCommentKit } from '@/features/presentations/components/plate/plugins/comment-base-kit';
 import { BaseDateKit } from '@/features/presentations/components/plate/plugins/date-base-kit';
 import { BaseFontKit } from '@/features/presentations/components/plate/plugins/font-base-kit';
-import { BaseLineHeightKit } from '@/features/presentations/components/plate/plugins/line-height-base-kit';
+import { BaseLineHeightKit } from '@/components/editor/plugins/line-height-base-kit';
 import { BaseLinkKit } from '@/features/presentations/components/plate/plugins/link-base-kit';
 import { BaseListKit } from '@/features/presentations/components/plate/plugins/list-base-kit';
 import { MarkdownKit } from '@/features/presentations/components/plate/plugins/markdown-kit';

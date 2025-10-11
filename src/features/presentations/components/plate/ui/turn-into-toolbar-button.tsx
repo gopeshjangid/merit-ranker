@@ -31,7 +31,7 @@ import {
   DropdownMenuContent,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "@/features/presentations/components/plate/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import {
   getBlockType,
   setBlockType,

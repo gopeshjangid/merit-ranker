@@ -14,7 +14,7 @@ import {
   useSelected,
 } from "platejs/react";
 
-import { useMounted } from "@/features/presentations/components/plate/hooks/use-mounted";
+import { useMounted } from "@/hooks/use-mounted";
 import { cn } from "@/lib/utils";
 
 import {

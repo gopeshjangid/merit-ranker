@@ -29,7 +29,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/features/presentations/components/plate/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { ToolbarButton } from "@/features/presentations/components/plate/ui/toolbar";
 import { cn } from "@/features/presentations/lib/utils";
 

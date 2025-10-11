@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/performance/noImgElement: This is a valid use case */
 "use client";
 
-import { Spinner } from "@/features/presentations/components/ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 import {
   BASE_HEIGHT,
   BASE_WIDTH_PERCENTAGE,

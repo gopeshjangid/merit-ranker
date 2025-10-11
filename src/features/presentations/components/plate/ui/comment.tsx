@@ -39,15 +39,15 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/features/presentations/components/plate/ui/avatar";
-import { Button } from "@/features/presentations/components/plate/ui/button";
+} from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/features/presentations/components/plate/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
 import { Editor, EditorContainer } from "./editor";

@@ -5,7 +5,7 @@ import React, { useEffect, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { usePresentationState } from "@/states/presentation-state";
 import { type PlateSlide } from "../utils/parser";
-import { EditorStatic } from "./custom-elements/static/editor-static";
+import { EditorStatic } from "@/components/ui/editor-static";
 import RootImageStatic from "./custom-elements/static/root-image-static";
 import { PresentationEditorBaseKit } from "./plugins/presentation-editor-base-kit";
 import { PresentationStaticCustomKit } from "./plugins/static-custom-kit";
