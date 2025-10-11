@@ -11,14 +11,14 @@ import {
 import { KEYS } from "platejs";
 import { useEditorReadOnly } from "platejs/react";
 
-import { AIToolbarButton } from "./ai-toolbar-button";
-import { InlineEquationToolbarButton } from "./equation-toolbar-button";
-import { FontFamilyToolbarButton } from "./font-family-toolbar-button";
-import { LinkToolbarButton } from "./link-toolbar-button";
-import { MarkToolbarButton } from "./mark-toolbar-button";
-import { MoreToolbarButton } from "./more-toolbar-button";
-import { ToolbarGroup } from "./toolbar";
-import { TurnIntoToolbarButton } from "./turn-into-toolbar-button";
+import { AIToolbarButton } from "@/components/ui/ai-toolbar-button";
+import { InlineEquationToolbarButton } from "@/components/ui/equation-toolbar-button";
+import { FontFamilyToolbarButton } from "@/components/ui/font-family-toolbar-button";
+import { LinkToolbarButton } from "@/components/ui/link-toolbar-button";
+import { MarkToolbarButton } from "@/components/ui/mark-toolbar-button";
+import { MoreToolbarButton } from "@/components/ui/more-toolbar-button";
+import { ToolbarGroup } from "@/components/ui/toolbar";
+import { TurnIntoToolbarButton } from "@/components/ui/turn-into-toolbar-button";
 
 export function FloatingToolbarButtons() {
   const readOnly = useEditorReadOnly();
