@@ -3,7 +3,7 @@
 import { DndPlugin } from '@platejs/dnd';
 import { PlaceholderPlugin } from '@platejs/media/react';
 
-import { BlockDraggable } from '@/components/ui/block-draggable';
+import { BlockDraggable } from '@/features/presentations/plate/ui/block-draggable';
 
 export const MultiDndPlugin = DndPlugin.extend({
   options: {

@@ -14,13 +14,13 @@ import {
 } from 'platejs';
 import { createPlatePlugin, toTPlatePlugin } from 'platejs/react';
 
-import { BlockSuggestion } from '@/components/ui/block-suggestion';
+import { BlockSuggestion } from '@/features/presentations/plate/ui/block-suggestion';
 import {
   SuggestionLeaf,
   SuggestionLineBreak,
-} from '@/components/ui/suggestion-node';
+} from '@/features/presentations/plate/ui/suggestion-node';
 
-import { discussionPlugin } from '@/components/editor/plugins/discussion-kit';
+import { discussionPlugin } from './discussion-kit';
 
 export type SuggestionConfig = ExtendConfig<
   BaseSuggestionConfig,

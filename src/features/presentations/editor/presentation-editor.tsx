@@ -1,6 +1,6 @@
 'use client';
 
-import { Editor } from '@/components/ui/editor';
+
 import debounce from 'lodash.debounce';
 import { type Value } from 'platejs';
 import { Plate } from 'platejs/react';
@@ -20,6 +20,7 @@ import RootImage from './custom-elements/root-image';
 import LayoutImageDrop from './dnd/components/LayoutImageDrop';
 import { presentationPlugins } from './plugins';
 import PresentationEditorStaticView from './presentation-editor-static';
+import { Editor } from '../plate/ui/editor';
 
 function slideSignature(slide?: PlateSlide): string {
   try {
