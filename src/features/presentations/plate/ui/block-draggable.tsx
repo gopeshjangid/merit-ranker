@@ -24,12 +24,12 @@ import {
 } from 'platejs/react';
 import * as React from 'react';
 
-import { Button } from '@/features/presentations/plate/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/features/presentations/plate/ui/tooltip';
+} from '@/components/ui/tooltip';
 import { useDraggable } from '@/hooks/presentation/useDraggable';
 import { useDropLine } from '@/hooks/presentation/useDropLine';
 import { getGridClassForElement } from '@/features/presentations/editor/lib';

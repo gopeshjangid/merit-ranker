@@ -31,12 +31,8 @@ import {
   discussionPlugin,
 } from '@/features/presentations/plate/plugins/discussion-kit';
 import { suggestionPlugin } from '@/features/presentations/plate/plugins/suggestion-kit';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/features/presentations/plate/ui/avatar';
-import { Button } from '@/features/presentations/plate/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 import {

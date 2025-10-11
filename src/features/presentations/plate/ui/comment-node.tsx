@@ -6,7 +6,7 @@ import { type PlateLeafProps } from 'platejs/react';
 import { getCommentCount } from '@platejs/comment';
 import { PlateLeaf, useEditorPlugin, usePluginOption } from 'platejs/react';
 
-import { commentPlugin } from '@/features/presentations/plate/plugins/comment-kit';
+import { commentPlugin } from '@/components/editor/plugins/comment-kit';
 import { cn } from '@/lib/utils';
 
 export function CommentLeaf(props: PlateLeafProps<TCommentText>) {

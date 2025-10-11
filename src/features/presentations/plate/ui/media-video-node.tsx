@@ -14,7 +14,7 @@ import { PlateElement, useEditorMounted, withHOC } from "platejs/react";
 
 import { cn } from "@/lib/utils";
 
-import { Caption, CaptionTextarea } from "./caption";
+import { Caption, CaptionTextarea } from "@/components/ui/caption";
 import {
   mediaResizeHandleVariants,
   Resizable,

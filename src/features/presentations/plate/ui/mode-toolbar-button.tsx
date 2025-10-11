@@ -16,7 +16,7 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from '@/features/presentations/plate/ui/dropdown-menu';
+} from '@/components/ui/dropdown-menu';
 
 import { ToolbarButton } from './toolbar';
 

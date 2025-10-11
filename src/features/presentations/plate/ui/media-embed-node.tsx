@@ -13,7 +13,7 @@ import { PlateElement, withHOC } from "platejs/react";
 
 import { cn } from "@/lib/utils";
 
-import { Caption, CaptionTextarea } from "./caption";
+import { Caption, CaptionTextarea } from "@/components/ui/caption";
 import { MediaToolbar } from "./media-toolbar";
 import {
   mediaResizeHandleVariants,

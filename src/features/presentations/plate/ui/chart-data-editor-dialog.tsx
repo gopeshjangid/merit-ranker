@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Plus, Trash2 } from "lucide-react";
 import React, { useState } from "react";
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -18,8 +18,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./dialog";
-import { Input } from "./input";
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 // Data types for different chart types
 export type LabelValueData = {
@@ -157,7 +157,6 @@ export function ChartDataEditorDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className="ignore-click-outside/toolbar max-w-2xl max-h-[80vh] overflow-hidden flex flex-col"
-        showCloseButton={true}
       >
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>

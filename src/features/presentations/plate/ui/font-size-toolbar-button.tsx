@@ -14,7 +14,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/features/presentations/plate/ui/popover';
+} from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 
 import { ToolbarButton } from './toolbar';

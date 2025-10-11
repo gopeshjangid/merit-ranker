@@ -30,7 +30,7 @@ import { PlateElement } from 'platejs/react';
 import {
   insertBlock,
   insertInlineElement,
-} from '@/features/presentations/plate/utils/transforms';
+} from '@/components/editor/transforms';
 
 import {
   InlineCombobox,

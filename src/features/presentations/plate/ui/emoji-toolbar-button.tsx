@@ -31,14 +31,14 @@ import {
   XIcon,
 } from 'lucide-react';
 
-import { Button } from '@/features/presentations/plate/ui/button';
-import { ToolbarButton } from '@/features/presentations/plate/ui/toolbar';
+import { Button } from '@/components/ui/button';
+import { ToolbarButton } from '@/components/ui/toolbar';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/features/presentations/plate/ui/tooltip';
+} from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 
 export function EmojiToolbarButton({

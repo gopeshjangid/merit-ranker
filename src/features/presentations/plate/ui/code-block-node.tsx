@@ -15,7 +15,7 @@ import {
   useReadOnly,
 } from 'platejs/react';
 
-import { Button } from '@/features/presentations/plate/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -23,12 +23,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/features/presentations/plate/ui/command';
+} from '@/components/ui/command';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/features/presentations/plate/ui/popover';
+} from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 
 export function CodeBlockElement(props: PlateElementProps<TCodeBlockElement>) {

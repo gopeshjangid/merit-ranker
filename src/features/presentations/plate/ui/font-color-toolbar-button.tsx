@@ -11,19 +11,19 @@ import debounce from 'lodash.debounce';
 import { EraserIcon, PlusIcon } from 'lucide-react';
 import { useComposedRef, useEditorRef, useEditorSelector } from 'platejs/react';
 
-import { buttonVariants } from '@/features/presentations/plate/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/features/presentations/plate/ui/dropdown-menu';
+} from '@/components/ui/dropdown-menu';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/features/presentations/plate/ui/tooltip';
+} from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 
 import { ToolbarButton, ToolbarMenuGroup } from './toolbar';
