@@ -2,6 +2,10 @@ import type { Metadata } from 'next';
 
 import localFont from 'next/font/local';
 
+import NextAuthProvider from '@/provider/NextAuthProvider';
+import TanStackQueryProvider from '@/provider/TanstackProvider';
+import { ThemeProvider } from '@/provider/theme-provider';
+
 import './globals.css';
 
 const geistSans = localFont({
@@ -26,12 +30,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <TanStackQueryProvider>
+      <NextAuthProvider>
+        <html lang="en" suppressHydrationWarning>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+            </ThemeProvider>
+          </body>
+        </html>
+      </NextAuthProvider>
+    </TanStackQueryProvider>
   );
 }

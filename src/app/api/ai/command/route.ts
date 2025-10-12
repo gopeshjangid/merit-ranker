@@ -1,10 +1,6 @@
-import type {
-  ChatMessage,
-  ToolName,
-} from '@/components/editor/use-chat';
+import type { ChatMessage, ToolName } from '@/components/editor/use-chat';
 import type { NextRequest } from 'next/server';
-
-import { google } from '@ai-sdk/google';
+import { openai } from '@ai-sdk/openai';
 import { replacePlaceholders } from '@platejs/ai';
 import { serializeMd } from '@platejs/markdown';
 import {
@@ -70,7 +66,7 @@ export async function POST(req: NextRequest) {
             enum: isSelecting
               ? ['generate', 'edit', 'comment']
               : ['generate', 'comment'],
-            model: google('gemini-2.5-flash'),
+            model: openai('gpt-4.1'),
             output: 'enum',
             prompt: `User message:
             ${JSON.stringify(lastUserMessage)}`,
@@ -95,7 +91,7 @@ export async function POST(req: NextRequest) {
             experimental_transform: markdownJoinerTransform(),
             maxOutputTokens: 2048,
             messages: convertToModelMessages(messages),
-            model: google('gemini-2.5-flash'),
+            model: openai('gpt-4.1'),
             system: generateSystem,
           });
 
@@ -112,7 +108,7 @@ export async function POST(req: NextRequest) {
             experimental_transform: markdownJoinerTransform(),
             maxOutputTokens: 2048,
             messages: convertToModelMessages(messages),
-            model: google('gemini-2.5-flash'),
+            model: openai('gpt-4.1'),
             system: editSystem,
           });
 
@@ -135,7 +131,7 @@ export async function POST(req: NextRequest) {
 
           const { elementStream } = streamObject({
             maxOutputTokens: 2048,
-            model: google('gemini-2.5-flash'),
+            model: openai('gpt-4.1'),
             output: 'array',
             prompt: removeEscapeSelection(editor, commentPrompt),
             schema: z

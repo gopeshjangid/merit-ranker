@@ -8,10 +8,12 @@ import { Plate, usePlateEditor } from 'platejs/react';
 import { EditorKit } from '@/components/editor/editor-kit';
 import { SettingsDialog } from '@/components/editor/settings-dialog';
 import { Editor, EditorContainer } from '@/components/ui/editor';
+import { ExcalidrawPlugin } from '@platejs/excalidraw/react';
+import { ExcalidrawElement } from '@/components/ui/excalidraw-node';
 
 export function PlateEditor() {
   const editor = usePlateEditor({
-    plugins: EditorKit,
+    plugins: [...EditorKit, ExcalidrawPlugin.withComponent(ExcalidrawElement)],
     value,
   });
 
