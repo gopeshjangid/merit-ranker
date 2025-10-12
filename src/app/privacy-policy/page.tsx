@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import { Navbar } from "@/components/landing/navbar"
-import { Footer } from "@/components/landing/footer"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -11,7 +9,6 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <Navbar />
       <main className="pt-20 md:pt-24 bg-background text-foreground">
         <div className="container mx-auto py-12 px-4 min-h-[calc(100vh-10rem-4rem)]">
           <article className="prose dark:prose-invert max-w-3xl mx-auto">
@@ -116,7 +113,6 @@ export default function PrivacyPolicyPage() {
           </article>
         </div>
       </main>
-      <Footer />
     </>
   )
 }

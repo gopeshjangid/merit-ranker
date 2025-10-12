@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
-import { Navbar } from "@/components/landing/navbar"
 import { HeroSection } from "@/components/landing/hero-section"
-import { CtaSection } from "@/components/landing/cta-section" // Added CTA Section
-import { Footer } from "@/components/landing/footer"
+import { CtaSection } from "@/components/landing/cta-section" 
 import { AICapabilitiesSection } from "@/components/landing/ai-capabilities-section"
 import { StudentsSection } from "@/components/landing/students-section"
 import { TeachersSection } from "@/components/landing/teachers-section"
@@ -42,7 +40,6 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col bg-darkBlue selection:bg-cyan-500 selection:text-white">
-      <Navbar />
       <main className="flex-grow">
           <HeroSection />
           <AICapabilitiesSection />
@@ -52,7 +49,6 @@ export default function HomePage() {
           <ShowcaseSection />
           <CtaSection />
       </main>
-      <Footer />
     </div>
   )
 }

@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import { Navbar } from "@/components/landing/navbar"
-import { Footer } from "@/components/landing/footer"
 import FaqClientPage from "./FaqClientPage"
 
 export const metadata: Metadata = {
@@ -11,9 +9,7 @@ export const metadata: Metadata = {
 export default function FAQPage() {
   return (
     <>
-      <Navbar />
       <FaqClientPage />
-      <Footer />
     </>
   )
 }

@@ -1,7 +1,5 @@
 import Link from "next/link"
 import type { Metadata } from "next"
-import { Navbar } from "@/components/landing/navbar"
-import { Footer } from "@/components/landing/footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Building, Users } from "lucide-react"
@@ -156,7 +154,6 @@ const categories = ["Telecommunication", "Financial Institution", "Payment Gatew
 export default function PartnersPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar /> {/* Navigation menu as specified */}
       <main className="flex-grow pt-20 pb-12 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <header className="text-center mb-12 md:mb-16">
@@ -228,7 +225,6 @@ export default function PartnersPage() {
           </section>
         </div>
       </main>
-      <Footer />
     </div>
   )
 }

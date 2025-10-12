@@ -21,7 +21,7 @@ export default function TeacherDashboardLayout({ children }: { children: React.R
   ]
 
   return (
-    <div className="min-h-screen flex bg-background">
+    <div className="min-h-screen flex bg-background pt-16 pb-20">
       <aside className="w-64 border-r border-border/60 hidden md:flex flex-col">
         <div className="h-16 flex items-center px-4 border-b border-border/60">
           <span className="text-sm text-muted-foreground">Teacher Dashboard</span>

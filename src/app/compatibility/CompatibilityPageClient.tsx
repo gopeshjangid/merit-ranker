@@ -1,8 +1,6 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Navbar } from "@/components/landing/navbar"
-import { Footer } from "@/components/landing/footer"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -135,7 +133,6 @@ export default function CompatibilityPageClient() {
     <>
       {/* Static metadata for client components should be in layout or parent server component */}
       {/* For this example, we'll assume it's handled by app/layout.tsx or a similar mechanism */}
-      <Navbar />
       <main className="pt-20 md:pt-24 bg-slate-900 text-slate-200">
         <div className="container mx-auto py-12 px-4">
           <div className="text-center mb-12">
@@ -223,7 +220,6 @@ export default function CompatibilityPageClient() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   )
 }

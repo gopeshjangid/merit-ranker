@@ -19,7 +19,7 @@ export default function TeachersMarketplacePage() {
   }, [q])
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-10">
+    <main className="mx-auto w-full max-w-6xl px-4 pt-28 pb-20">
       <header className="mb-6">
         <h1 className="text-2xl font-semibold text-balance">Find Your Teacher</h1>
         <p className="mt-1 text-sm text-muted-foreground">

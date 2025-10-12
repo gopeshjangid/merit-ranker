@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import { Navbar } from "@/components/landing/navbar"
-import { Footer } from "@/components/landing/footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Eye, Target, Zap, Smartphone, Settings, Globe, Shield, CheckCircle, Users, HelpCircle } from "lucide-react"
 
@@ -51,7 +49,6 @@ const comparisonData = [
 export default function AboutPage() {
   return (
     <>
-      <Navbar />
       <main className="pt-20 md:pt-24 bg-slate-900 text-slate-200">
         <div className="container mx-auto py-12 px-4">
           <div className="text-center mb-12">
@@ -173,7 +170,6 @@ export default function AboutPage() {
           </section>
         </div>
       </main>
-      <Footer />
     </>
   )
 }
