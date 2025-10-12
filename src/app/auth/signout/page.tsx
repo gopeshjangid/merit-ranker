@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { signOut } from 'next-auth/react';
+// import { signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function SignOut() {
@@ -17,7 +17,7 @@ export default function SignOut() {
   const callbackUrl = searchParams.get('callbackUrl') ?? '/';
 
   const handleSignOut = async () => {
-    await signOut({ callbackUrl });
+  //  await signOut({ callbackUrl });
   };
 
   const handleCancel = () => {

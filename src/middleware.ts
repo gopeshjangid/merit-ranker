@@ -1,9 +1,9 @@
-import { auth } from '@/server/auth';
+// import { auth } from '@/server/auth';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  const session = await auth();
-  const isAuthPage = request.nextUrl.pathname.startsWith('/auth');
+  // const session = await auth();
+  // const isAuthPage = request.nextUrl.pathname.startsWith('/auth');
 
   // // Always redirect from root to /presentation
   // if (request.nextUrl.pathname === "/") {

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import localFont from 'next/font/local';
 
-import NextAuthProvider from '@/provider/NextAuthProvider';
+import NextAuthProvider from '@/provider/AuthProvider';
 import TanStackQueryProvider from '@/provider/TanstackProvider';
 import { ThemeProvider } from '@/provider/theme-provider';
 import { FloatingActionButton } from "@/components/landing/floating-action-button"

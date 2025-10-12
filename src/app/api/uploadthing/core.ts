@@ -1,9 +1,12 @@
-import { auth } from '@/server/auth';
+// import { auth } from '@/server/auth';
 import 'server-only';
 import { createUploadthing, type FileRouter } from 'uploadthing/next';
 import { UploadThingError, UTApi } from 'uploadthing/server';
 
 const f = createUploadthing();
+
+const session = null; // await auth(); --- IGNORE ---
+const userId = 'cmgi94l4c0000teq0hejotfen'; // session?.user.id; --- IGNORE ---
 
 export const utapi = new UTApi();
 // FileRouter for your app, can contain multiple FileRoutes
@@ -13,14 +16,14 @@ export const ourFileRouter = {
     // Set permissions and file types for this FileRoute
     .middleware(async () => {
       // This code runs on your server before upload
-      const session = await auth();
+     // const session = await auth();
 
       console.log(session);
       // If you throw, the user will not be able to upload
       if (!session) throw new UploadThingError('Unauthorized');
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId: session.user.id };
+      return { userId: userId };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
@@ -38,9 +41,9 @@ export const ourFileRouter = {
     video: { maxFileSize: '64MB' },
   })
     .middleware(async () => {
-      const session = await auth();
+      // const session = await auth();
       if (!session) throw new UploadThingError('Unauthorized');
-      return { userId: session.user.id };
+      return { userId: userId };
     })
     .onUploadComplete(async ({ file }) => {
       // Simply return the file URL and name
