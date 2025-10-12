@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import localFont from 'next/font/local';
 
-import NextAuthProvider from '@/provider/AuthProvider';
+import AuthProvider from '@/provider/AuthProvider';
 import TanStackQueryProvider from '@/provider/TanstackProvider';
 import { ThemeProvider } from '@/provider/theme-provider';
 import { FloatingActionButton } from "@/components/landing/floating-action-button"
@@ -132,8 +132,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <TanStackQueryProvider>
-      <NextAuthProvider>
         <html lang="en" suppressHydrationWarning>
           <head>
         {/* JSON-LD Schema */}
@@ -143,16 +141,18 @@ export default function RootLayout({
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
+            <TanStackQueryProvider>
+      <AuthProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Navbar />
               {children}
               <Footer />
               <FloatingActionButton />
               <Toaster />
-            </ThemeProvider>
+            </ThemeProvider>            
+      </AuthProvider>
+    </TanStackQueryProvider>
           </body>
         </html>
-      </NextAuthProvider>
-    </TanStackQueryProvider>
   );
 }
