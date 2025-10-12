@@ -1,10 +1,10 @@
 "use client"
 
 import { Clock, Wand2, Bot, TrendingUp } from "lucide-react"
-import { useT } from "./i18n"
+import { t } from "./ai-capabilities-section"
 
 export function WhyTeachersChooseSection() {
-  const t = useT()
+  
   const items = [
     { icon: Clock, title: t("why.saveTime.title"), desc: t("why.saveTime.desc") },
     { icon: Wand2, title: t("why.aiAccuracy.title"), desc: t("why.aiAccuracy.desc") },

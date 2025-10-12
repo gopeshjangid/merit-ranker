@@ -19,7 +19,6 @@ import {
   Mail,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/mode-toggle"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
 
@@ -124,7 +123,6 @@ export function Navbar() {
               <Globe className="h-4 w-4" />
               <span className="sr-only">Language</span>
             </Button>
-            <ModeToggle />
           </div>
           <div className="flex md:hidden items-center">
             <Button
@@ -182,7 +180,6 @@ export function Navbar() {
                 <Globe className="h-4 w-4" />
                 <span>English</span>
               </Button>
-              <ModeToggle />
             </div>
           </div>
         </div>

@@ -3,10 +3,9 @@
 import { motion } from "framer-motion"
 import { Newspaper, HelpCircle, Youtube, Mic, ImageIcon, ListChecks } from "lucide-react"
 import { AnimatedTechParticles } from "./animated-tech-patterns"
-import { useT, LanguageSwitcher } from "./i18n"
+export const t = (key: string) => key; // Placeholder translation function
 
 export function AICapabilitiesSection() {
-  const t = useT()
 
   const items = [
     {
@@ -57,7 +56,6 @@ export function AICapabilitiesSection() {
             <p className="text-slate-300 mt-3 max-w-2xl">{t("ai.desc")}</p>
           </div>
           <div className="ml-6 shrink-0">
-            <LanguageSwitcher />
           </div>
         </motion.div>
 
