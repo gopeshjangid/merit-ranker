@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import type * as React from "react";
+import type * as React from 'react';
 
 import {
   Dialog,
@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Drawer,
   DrawerClose,
@@ -21,9 +21,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/drawer';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { cn } from '@/lib/utils';
 
 type DialogProps = React.ComponentProps<typeof Dialog>;
 type DrawerProps = React.ComponentProps<typeof Drawer>;
@@ -45,7 +45,7 @@ type CredenzaHeaderProps = DialogHeaderProps;
 type CredenzaTitleProps = DialogTitleProps;
 type CredenzaFooterProps = DialogFooterProps;
 
-const desktop = "(min-width: 768px)";
+const desktop = '(min-width: 768px)';
 
 const Credenza = ({ children, ...props }: CredenzaProps) => {
   const isDesktop = useMediaQuery(desktop);
@@ -107,7 +107,7 @@ const CredenzaBody = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <div className={cn("px-4 md:px-0", className)} {...props}>
+    <div className={cn('px-4 md:px-0', className)} {...props}>
       {children}
     </div>
   );

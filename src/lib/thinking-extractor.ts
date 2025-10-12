@@ -20,7 +20,7 @@ export function extractThinking(response: string): ThinkingResult {
 
   if (!thinkStartPattern.test(response)) {
     return {
-      thinking: "",
+      thinking: '',
       content: response,
       hasThinking: false,
     };
@@ -32,7 +32,7 @@ export function extractThinking(response: string): ThinkingResult {
     // If no closing tag found, treat entire response as thinking
     return {
       thinking: response,
-      content: "",
+      content: '',
       hasThinking: true,
     };
   }
@@ -57,7 +57,7 @@ export function extractThinking(response: string): ThinkingResult {
  * @returns Content with thinking tags removed
  */
 export function removeThinkingTags(content: string): string {
-  return content.replace(/^<think>[\s\S]*?<\/think>/i, "").trim();
+  return content.replace(/^<think>[\s\S]*?<\/think>/i, '').trim();
 }
 
 /**

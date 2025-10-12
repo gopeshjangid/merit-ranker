@@ -1,5 +1,5 @@
-[class*=" font-preview-"],
-[class^="font-preview-"] {
+[class*=' font-preview-'],
+[class^='font-preview-'] {
   background-size: 30em auto;
   background-repeat: no-repeat;
 
@@ -207,7 +207,7 @@
 .font-preview-birthstone,
 .font-preview-birthstone_bounce,
 .font-preview-on-all {
-  background-image: url("/font-preview/sprite.1.svg");
+  background-image: url('/font-preview/sprite.1.svg');
 }
 .font-preview-biryani,
 .font-preview-bitter,
@@ -410,7 +410,7 @@
 .font-preview-edu_au_vic_wa_nt_hand,
 .font-preview-edu_au_vic_wa_nt_pre,
 .font-preview-on-all {
-  background-image: url("/font-preview/sprite.2.svg");
+  background-image: url('/font-preview/sprite.2.svg');
 }
 .font-preview-edu_nsw_act_foundation,
 .font-preview-edu_qld_beginner,
@@ -613,7 +613,7 @@
 .font-preview-ibm_plex_sans_thai_looped,
 .font-preview-ibm_plex_serif,
 .font-preview-on-all {
-  background-image: url("/font-preview/sprite.3.svg");
+  background-image: url('/font-preview/sprite.3.svg');
 }
 .font-preview-iceberg,
 .font-preview-iceland,
@@ -816,7 +816,7 @@
 .font-preview-lxgw_wenkai_tc,
 .font-preview-m_plus_1,
 .font-preview-on-all {
-  background-image: url("/font-preview/sprite.4.svg");
+  background-image: url('/font-preview/sprite.4.svg');
 }
 .font-preview-m_plus_1_code,
 .font-preview-m_plus_1p,
@@ -1019,7 +1019,7 @@
 .font-preview-noto_sans_hanunoo,
 .font-preview-noto_sans_hatran,
 .font-preview-on-all {
-  background-image: url("/font-preview/sprite.5.svg");
+  background-image: url('/font-preview/sprite.5.svg');
 }
 .font-preview-noto_sans_hebrew,
 .font-preview-noto_sans_hk,
@@ -1222,7 +1222,7 @@
 .font-preview-pacifico,
 .font-preview-padauk,
 .font-preview-on-all {
-  background-image: url("/font-preview/sprite.6.svg");
+  background-image: url('/font-preview/sprite.6.svg');
 }
 .font-preview-padyakke_expanded_one,
 .font-preview-palanquin,
@@ -1425,7 +1425,7 @@
 .font-preview-rakkas,
 .font-preview-raleway,
 .font-preview-on-all {
-  background-image: url("/font-preview/sprite.7.svg");
+  background-image: url('/font-preview/sprite.7.svg');
 }
 .font-preview-raleway_dots,
 .font-preview-ramabhadra,
@@ -1628,7 +1628,7 @@
 .font-preview-spline_sans_mono,
 .font-preview-squada_one,
 .font-preview-on-all {
-  background-image: url("/font-preview/sprite.8.svg");
+  background-image: url('/font-preview/sprite.8.svg');
 }
 .font-preview-square_peg,
 .font-preview-sree_krushnadevaraya,
@@ -1816,7 +1816,7 @@
 .font-preview-zilla_slab,
 .font-preview-zilla_slab_highlight,
 .font-preview-on-all {
-  background-image: url("/font-preview/sprite.9.svg");
+  background-image: url('/font-preview/sprite.9.svg');
 }
 .font-preview-42dot_sans {
   background-position: 0px -0em;

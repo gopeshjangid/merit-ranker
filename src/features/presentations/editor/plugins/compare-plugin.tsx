@@ -1,8 +1,8 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import CompareGroup from "../custom-elements/compare";
-import { CompareSide } from "../custom-elements/compare-side";
-import { COMPARE_GROUP, COMPARE_SIDE } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import CompareGroup from '../custom-elements/compare';
+import { CompareSide } from '../custom-elements/compare-side';
+import { COMPARE_GROUP, COMPARE_SIDE } from '../lib';
 
 export const CompareGroupPlugin = createTPlatePlugin({
   key: COMPARE_GROUP,

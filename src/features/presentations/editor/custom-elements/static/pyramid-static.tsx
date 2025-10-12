@@ -1,6 +1,6 @@
-import { type SlateElementProps } from "platejs";
+import { type SlateElementProps } from 'platejs';
 
-import { SlateElement } from "platejs";
+import { SlateElement } from 'platejs';
 
 export default function PyramidStatic(props: SlateElementProps) {
   return (

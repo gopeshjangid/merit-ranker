@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { NodeApi, PathApi } from "platejs";
-import { PlateElement, type PlateElementProps } from "platejs/react";
+import { cn } from '@/lib/utils';
+import { NodeApi, PathApi } from 'platejs';
+import { PlateElement, type PlateElementProps } from 'platejs/react';
 
 export const BeforeAfterSide = (props: PlateElementProps) => {
   const parentPath = PathApi.parent(props.path);
@@ -14,20 +14,20 @@ export const BeforeAfterSide = (props: PlateElementProps) => {
 
   return (
     <div
-      className={cn("flex w-full max-w-[520px] flex-col items-center gap-5")}
+      className={cn('flex w-full max-w-[520px] flex-col items-center gap-5')}
       style={{ gridColumn }}
     >
       <div
         className={cn(
-          "w-full rounded-xl border bg-card p-6 shadow-md",
-          "border-t-4",
+          'w-full rounded-xl border bg-card p-6 shadow-md',
+          'border-t-4'
         )}
         style={{
-          backgroundColor: "var(--presentation-background)",
-          color: "var(--presentation-text)",
-          borderColor: "hsl(var(--border))",
+          backgroundColor: 'var(--presentation-background)',
+          color: 'var(--presentation-text)',
+          borderColor: 'hsl(var(--border))',
           borderTopColor:
-            (parentElement?.color as string) || "var(--presentation-primary)",
+            (parentElement?.color as string) || 'var(--presentation-primary)',
         }}
       >
         <PlateElement {...props}>{props.children}</PlateElement>

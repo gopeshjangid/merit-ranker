@@ -1,5 +1,5 @@
-import { FontFamilyPlugin } from "@platejs/basic-styles/react";
-import { type PlateEditor } from "platejs/react";
+import { FontFamilyPlugin } from '@platejs/basic-styles/react';
+import { type PlateEditor } from 'platejs/react';
 
 export function extractFontsFromEditor(editor: PlateEditor) {
   const fontFamilies = new Set<string>();
@@ -26,7 +26,7 @@ export function extractFontsFromEditor(editor: PlateEditor) {
       }
     }
   } catch (error) {
-    console.error("Error scanning editor for fonts:", error);
+    console.error('Error scanning editor for fonts:', error);
     return [];
   }
 

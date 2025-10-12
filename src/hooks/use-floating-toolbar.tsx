@@ -1,11 +1,11 @@
-import { DndPlugin } from "@platejs/dnd";
+import { DndPlugin } from '@platejs/dnd';
 import {
   getSelectionBoundingClientRect,
   useVirtualFloating,
   type UseVirtualFloatingOptions,
-} from "@platejs/floating";
-import { BlockSelectionPlugin } from "@platejs/selection/react";
-import { mergeProps, type TElement } from "platejs";
+} from '@platejs/floating';
+import { BlockSelectionPlugin } from '@platejs/selection/react';
+import { mergeProps, type TElement } from 'platejs';
 import {
   useEditorReadOnly,
   useEditorRef,
@@ -13,10 +13,10 @@ import {
   useFocused,
   useOnClickOutside,
   usePluginOption,
-} from "platejs/react";
-import React from "react";
-import { type MyEditor } from "@/features/presentations/plate/editor-kit";
-import { MultiDndPlugin } from "@/features/presentations/plate/plugins/dnd-kit";
+} from 'platejs/react';
+import React from 'react';
+import { type MyEditor } from '@/features/presentations/plate/editor-kit';
+import { MultiDndPlugin } from '@/features/presentations/plate/plugins/dnd-kit';
 
 export type FloatingToolbarState = {
   floatingOptions?: UseVirtualFloatingOptions;
@@ -41,22 +41,22 @@ export const useFloatingToolbarState = ({
   // Existing text selection state
   const selectionExpanded = useEditorSelector(
     () => editor.api.isExpanded(),
-    [],
+    []
   );
   const selectionText = useEditorSelector(() => editor.api.string(), []);
 
   // Block selection state
-  const selectedIds = usePluginOption(BlockSelectionPlugin, "selectedIds");
+  const selectedIds = usePluginOption(BlockSelectionPlugin, 'selectedIds');
   const hasBlockSelection =
     enableBlockSelection && selectedIds && selectedIds.size > 0;
 
   // Check if dragging is active
-  const isDragging = usePluginOption(DndPlugin, "isDragging");
+  const isDragging = usePluginOption(DndPlugin, 'isDragging');
 
   // Check if mouse is down (prevents toolbar from showing during mouse down phase)
   const isDragMouseDown = usePluginOption(
     MultiDndPlugin,
-    "isMouseDown",
+    'isMouseDown'
   ) as boolean;
 
   const readOnly = useEditorReadOnly();
@@ -119,8 +119,8 @@ export const useFloatingToolbarState = ({
         getBoundingClientRect,
         onOpenChange: setOpen,
       },
-      floatingOptions,
-    ),
+      floatingOptions
+    )
   );
 
   return {
@@ -188,11 +188,11 @@ export const useFloatingToolbar = ({
   React.useEffect(() => {
     const mouseup = () => setMousedown(false);
     const mousedown = () => setMousedown(true);
-    document.addEventListener("mouseup", mouseup);
-    document.addEventListener("mousedown", mousedown);
+    document.addEventListener('mouseup', mouseup);
+    document.addEventListener('mousedown', mousedown);
     return () => {
-      document.removeEventListener("mouseup", mouseup);
-      document.removeEventListener("mousedown", mousedown);
+      document.removeEventListener('mouseup', mouseup);
+      document.removeEventListener('mousedown', mousedown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -250,8 +250,8 @@ export const useFloatingToolbar = ({
       setOpen(false);
     },
     {
-      ignoreClass: "ignore-click-outside/toolbar",
-    },
+      ignoreClass: 'ignore-click-outside/toolbar',
+    }
   );
 
   return {

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { NodeApi, PathApi } from "platejs";
-import { PlateElement, type PlateElementProps } from "platejs/react";
-import { type TBulletItemElement } from "../plugins/bullet-plugin";
+import { cn } from '@/lib/utils';
+import { NodeApi, PathApi } from 'platejs';
+import { PlateElement, type PlateElementProps } from 'platejs/react';
+import { type TBulletItemElement } from '../plugins/bullet-plugin';
 
 // BulletItem component for numbered blocks with content
 export const BulletItem = (props: PlateElementProps<TBulletItemElement>) => {
@@ -15,7 +15,7 @@ export const BulletItem = (props: PlateElementProps<TBulletItemElement>) => {
 
   // Force sibling refresh when index changes
   return (
-    <div className={cn("group/bullet-item relative")}>
+    <div className={cn('group/bullet-item relative')}>
       {/* The bullet item layout with numbered block and content */}
       <div className="flex items-start">
         {/* Numbered square/block */}
@@ -23,8 +23,8 @@ export const BulletItem = (props: PlateElementProps<TBulletItemElement>) => {
           className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md bg-primary text-xl font-bold text-primary-foreground"
           style={{
             backgroundColor:
-              (parentElement?.color as string) || "var(--presentation-primary)",
-            color: "var(--presentation-background)",
+              (parentElement?.color as string) || 'var(--presentation-primary)',
+            color: 'var(--presentation-background)',
           }}
         >
           {index + 1}

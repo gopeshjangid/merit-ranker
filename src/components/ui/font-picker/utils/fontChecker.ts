@@ -1,4 +1,4 @@
-export type FontStyle = "italic" | "normal";
+export type FontStyle = 'italic' | 'normal';
 export type FontWeight =
   | 100
   | 200
@@ -40,7 +40,7 @@ export async function checkLoaded({
           } else {
             // ref: https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/check
             const loaded = document.fonts.check(
-              `${fontStyle ?? ""} ${fontWeight ?? ""} 0 ${fontFamily}`,
+              `${fontStyle ?? ''} ${fontWeight ?? ''} 0 ${fontFamily}`
             );
             if (loaded) {
               resolve(true);
@@ -54,7 +54,7 @@ export async function checkLoaded({
       const timer = new Promise<boolean>((_resolve, reject) => {
         timeoutId = setTimeout(
           () => reject(new Error(`Font not loaded within ${timeout} ms`)),
-          timeout,
+          timeout
         );
       });
       Promise.race<boolean>([timer, checker]).then((value) => {
@@ -62,7 +62,7 @@ export async function checkLoaded({
         resolve(value);
       }, reject);
     } else {
-      reject(new Error("Fonts API not supported by client"));
+      reject(new Error('Fonts API not supported by client'));
     }
   });
 }

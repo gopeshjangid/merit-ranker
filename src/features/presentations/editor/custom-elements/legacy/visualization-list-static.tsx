@@ -1,26 +1,26 @@
-import { type SlateElementProps, type TElement } from "platejs";
+import { type SlateElementProps, type TElement } from 'platejs';
 
-import { SlateElement } from "platejs";
+import { SlateElement } from 'platejs';
 
-import { ARROW_LIST, PYRAMID_GROUP, TIMELINE_GROUP } from "../../lib";
-import { type TArrowListElement } from "../../plugins/arrow-plugin";
-import { type TTimelineGroupElement } from "../../plugins/timeline-plugin";
-import ArrowListStatic from "../static/arrow-list-static";
-import PyramidStatic from "../static/pyramid-static";
-import TimelineStatic from "../static/timeline-static";
+import { ARROW_LIST, PYRAMID_GROUP, TIMELINE_GROUP } from '../../lib';
+import { type TArrowListElement } from '../../plugins/arrow-plugin';
+import { type TTimelineGroupElement } from '../../plugins/timeline-plugin';
+import ArrowListStatic from '../static/arrow-list-static';
+import PyramidStatic from '../static/pyramid-static';
+import TimelineStatic from '../static/timeline-static';
 
 export default function VisualizationListElementStatic(
-  props: SlateElementProps,
+  props: SlateElementProps
 ) {
   const { element, className, children, ...rest } = props;
   const visualizationType = element.visualizationType as
-    | "arrow"
-    | "pyramid"
-    | "timeline";
+    | 'arrow'
+    | 'pyramid'
+    | 'timeline';
 
   const renderer = () => {
     switch (visualizationType) {
-      case "pyramid": {
+      case 'pyramid': {
         const pyramidElement = {
           ...element,
           children: element.children,
@@ -37,7 +37,7 @@ export default function VisualizationListElementStatic(
           </PyramidStatic>
         );
       }
-      case "arrow": {
+      case 'arrow': {
         const arrowElement = {
           ...element,
           children: element.children,
@@ -53,13 +53,13 @@ export default function VisualizationListElementStatic(
           </ArrowListStatic>
         );
       }
-      case "timeline": {
+      case 'timeline': {
         const timelineElement = {
           ...element,
           children: element.children,
           type: TIMELINE_GROUP,
-          orientation: "vertical",
-          sidedness: "single",
+          orientation: 'vertical',
+          sidedness: 'single',
         };
 
         return (

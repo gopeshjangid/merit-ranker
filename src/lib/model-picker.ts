@@ -1,6 +1,6 @@
-import { createOpenAI } from "@ai-sdk/openai";
-import { type LanguageModel } from "ai";
-import { createOllama } from "ollama-ai-provider";
+import { createOpenAI } from '@ai-sdk/openai';
+import { type LanguageModel } from 'ai';
+import { createOllama } from 'ollama-ai-provider';
 
 /**
  * Centralized model picker function for all presentation generation routes
@@ -8,25 +8,25 @@ import { createOllama } from "ollama-ai-provider";
  */
 export function modelPicker(
   modelProvider: string,
-  modelId?: string,
+  modelId?: string
 ): LanguageModel {
-  if (modelProvider === "ollama" && modelId) {
+  if (modelProvider === 'ollama' && modelId) {
     // Use Ollama AI provider
     const ollama = createOllama();
     return ollama(modelId) as unknown as LanguageModel;
   }
 
-  if (modelProvider === "lmstudio" && modelId) {
+  if (modelProvider === 'lmstudio' && modelId) {
     // Use LM Studio with OpenAI compatible provider
     const lmstudio = createOpenAI({
-      name: "lmstudio",
-      baseURL: "http://localhost:1234/v1",
-      apiKey: "lmstudio",
+      name: 'lmstudio',
+      baseURL: 'http://localhost:1234/v1',
+      apiKey: 'lmstudio',
     });
     return lmstudio(modelId) as unknown as LanguageModel;
   }
 
   // Default to OpenAI
   const openai = createOpenAI();
-  return openai("gpt-4o-mini") as unknown as LanguageModel;
+  return openai('gpt-4o-mini') as unknown as LanguageModel;
 }

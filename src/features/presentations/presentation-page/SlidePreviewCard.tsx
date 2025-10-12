@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { cn } from '@/lib/utils';
+import { useEffect, useRef, useState } from 'react';
 
 interface SlidePreviewCardProps {
   index: number;
@@ -56,12 +56,12 @@ export function SlidePreviewCard({
   return (
     <div
       className={cn(
-        "group relative cursor-pointer overflow-hidden rounded-md border transition-all hover:border-primary",
-        isActive ? "border-primary ring-1 ring-primary" : "border-muted",
+        'group relative cursor-pointer overflow-hidden rounded-md border transition-all hover:border-primary',
+        isActive ? 'border-primary ring-1 ring-primary' : 'border-muted'
       )}
       onClick={onClick}
     >
-      <div className="absolute left-2 top-1 z-10 rounded-sm bg-muted px-1 py-0.5 text-xs font-medium text-muted-foreground">
+      <div className="absolute top-1 left-2 z-10 rounded-sm bg-muted px-1 py-0.5 text-xs font-medium text-muted-foreground">
         {index + 1}
       </div>
       <div
@@ -69,16 +69,16 @@ export function SlidePreviewCard({
         className="pointer-events-none w-full overflow-hidden bg-card"
         style={{
           height: height ?? undefined,
-          aspectRatio: height === undefined ? "16/9" : undefined,
+          aspectRatio: height === undefined ? '16/9' : undefined,
           // scale: height === undefined ? `${scale}` : undefined,
-          transition: "height 150ms ease-in-out",
+          transition: 'height 150ms ease-in-out',
         }}
       >
         <div
           ref={contentRef}
           style={{
             transform: `scale(${scale})`,
-            transformOrigin: "top left",
+            transformOrigin: 'top left',
             width: BASE_WIDTH,
           }}
         >

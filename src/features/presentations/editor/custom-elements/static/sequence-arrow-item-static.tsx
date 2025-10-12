@@ -1,10 +1,10 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 import {
   NodeApi,
   PathApi,
   SlateElement,
   type SlateElementProps,
-} from "platejs";
+} from 'platejs';
 
 export function SequenceArrowItemStatic(props: SlateElementProps) {
   const path = props.editor.api.findPath(props.element) ?? [-1];
@@ -15,13 +15,13 @@ export function SequenceArrowItemStatic(props: SlateElementProps) {
   const isLast = index === total - 1;
 
   return (
-    <div className={cn("relative w-full")} style={{ pointerEvents: "none" }}>
+    <div className={cn('relative w-full')} style={{ pointerEvents: 'none' }}>
       <div
-        className={cn("rounded-xl p-6 shadow-lg")}
+        className={cn('rounded-xl p-6 shadow-lg')}
         style={{
           backgroundColor:
-            (parent?.color as string) || "var(--presentation-primary)",
-          color: "var(--presentation-background)",
+            (parent?.color as string) || 'var(--presentation-primary)',
+          color: 'var(--presentation-background)',
         }}
       >
         <SlateElement {...props}>{props.children}</SlateElement>
@@ -29,12 +29,12 @@ export function SequenceArrowItemStatic(props: SlateElementProps) {
 
       {!isLast && (
         <div
-          className={cn("mx-auto h-0 w-0")}
+          className={cn('mx-auto h-0 w-0')}
           style={{
-            borderLeft: "13px solid transparent",
-            borderRight: "13px solid transparent",
-            borderTop: `19px solid ${(parent?.color as string) || "var(--presentation-primary)"}`,
-            filter: "drop-shadow(0 6px 8px rgba(0,0,0,0.08))",
+            borderLeft: '13px solid transparent',
+            borderRight: '13px solid transparent',
+            borderTop: `19px solid ${(parent?.color as string) || 'var(--presentation-primary)'}`,
+            filter: 'drop-shadow(0 6px 8px rgba(0,0,0,0.08))',
           }}
         />
       )}

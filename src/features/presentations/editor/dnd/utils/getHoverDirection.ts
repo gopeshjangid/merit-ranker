@@ -1,12 +1,12 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: This use requires any */
-import { type TElement } from "platejs";
-import { type DropTargetMonitor, type XYCoord } from "react-dnd";
+import { type TElement } from 'platejs';
+import { type DropTargetMonitor, type XYCoord } from 'react-dnd';
 
 import {
   type DragItemNode,
   type DropDirection,
   type ElementDragItemNode,
-} from "@platejs/dnd";
+} from '@platejs/dnd';
 
 export interface GetHoverDirectionOptions {
   dragItem: DragItemNode;
@@ -19,7 +19,7 @@ export interface GetHoverDirectionOptions {
   /** The node ref of the node being dragged. */
   nodeRef: any;
 
-  orientation?: "vertical" | "horizontal";
+  orientation?: 'vertical' | 'horizontal';
   /** Removed orientation parameter to support multi-directional */
 }
 
@@ -83,18 +83,18 @@ export const getHoverDirection = ({
   const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
 
   if (hoverClientX < HORIZONTAL_THRESHOLD) {
-    return "left";
+    return 'left';
   }
 
   // 2. Check for 'right': This is the new calculation.
   const hoverMiddleX = (hoverBoundingRect.left + hoverBoundingRect.width) / 2;
   // The 'right' zone starts at the center point PLUS the threshold.
   if (hoverClientX > hoverMiddleX + HORIZONTAL_THRESHOLD) {
-    return "right";
+    return 'right';
   }
 
   // 3. Fallback: If not in the left or right zones, calculate vertically.
   const hoverMiddleY = hoverBoundingRect.height / 2;
-  return hoverClientY < hoverMiddleY ? "top" : "bottom";
+  return hoverClientY < hoverMiddleY ? 'top' : 'bottom';
   // }
 };

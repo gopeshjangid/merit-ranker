@@ -1,9 +1,9 @@
-import ProseMirrorEditor from "@/features/presentations/prose-mirror/ProseMirrorEditor";
-import { cn } from "@/lib/utils";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { GripVertical, X } from "lucide-react";
-import { memo, useEffect, useState } from "react";
+import ProseMirrorEditor from '@/features/presentations/prose-mirror/ProseMirrorEditor';
+import { cn } from '@/lib/utils';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { GripVertical, X } from 'lucide-react';
+import { memo, useEffect, useState } from 'react';
 
 interface OutlineItemProps {
   id: string;
@@ -60,8 +60,8 @@ export const OutlineItem = memo(function OutlineItem({
       ref={setNodeRef}
       style={style}
       className={cn(
-        "group flex items-center gap-4 rounded-md bg-muted p-4",
-        isDragging && "opacity-50",
+        'group flex items-center gap-4 rounded-md bg-muted p-4',
+        isDragging && 'opacity-50'
       )}
     >
       <div
@@ -84,7 +84,7 @@ export const OutlineItem = memo(function OutlineItem({
       </div>
       <button
         onClick={() => onDelete(id)}
-        className="text-muted-foreground opacity-0 transition-opacity hover:text-red-400 group-hover:opacity-100"
+        className="text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 hover:text-red-400"
       >
         <X size={20} />
       </button>
@@ -93,4 +93,4 @@ export const OutlineItem = memo(function OutlineItem({
 });
 
 // Add a display name for debugging purposes
-OutlineItem.displayName = "OutlineItem";
+OutlineItem.displayName = 'OutlineItem';

@@ -1,4 +1,4 @@
-import { type Font, type FourFonts, type Variant } from "../types";
+import { type Font, type FourFonts, type Variant } from '../types';
 
 // Helper to get the sprite number for a given font index
 export function getSpriteNumber(index: number): number {
@@ -7,11 +7,11 @@ export function getSpriteNumber(index: number): number {
 
 export const getFourVariants = (variants: string[]) => {
   const regularWeights = variants
-    .filter((v: string) => v.substring(0, 2) === "0,")
+    .filter((v: string) => v.substring(0, 2) === '0,')
     .map((v: string) => parseInt(v.substring(2), 10))
     .sort((a, b) => a - b);
   const italicWeights = variants
-    .filter((v: string) => v.substring(0, 2) === "1,")
+    .filter((v: string) => v.substring(0, 2) === '1,')
     .map((v: string) => parseInt(v.substring(2), 10))
     .sort((a, b) => a - b);
 
@@ -33,16 +33,16 @@ export const getFourVariants = (variants: string[]) => {
 
   const fourVariants: string[] = [];
   if (fourFonts.regular) {
-    fourVariants.push("0," + fourFonts.regular);
+    fourVariants.push('0,' + fourFonts.regular);
   }
   if (fourFonts.bold) {
-    fourVariants.push("0," + fourFonts.bold);
+    fourVariants.push('0,' + fourFonts.bold);
   }
   if (fourFonts.italic) {
-    fourVariants.push("1," + fourFonts.italic);
+    fourVariants.push('1,' + fourFonts.italic);
   }
   if (fourFonts.boldItalic) {
-    fourVariants.push("1," + fourFonts.boldItalic);
+    fourVariants.push('1,' + fourFonts.boldItalic);
   }
   return fourVariants;
 };
@@ -51,7 +51,7 @@ export const loadFontFromObject = (
   font: Font,
   loadAllVariants: boolean,
   getFourVariants: (variants: string[]) => string[],
-  variants: Variant[] = [],
+  variants: Variant[] = []
 ) => {
   if (font?.isLocal) {
     return;
@@ -64,29 +64,29 @@ export const loadFontFromObject = (
     variants = getFourVariants(font.variants.map((v) => v.toString()));
   }
 
-  let cssId = "google-font-" + font.sane;
-  const cssIdAll = cssId + "-all";
+  let cssId = 'google-font-' + font.sane;
+  const cssIdAll = cssId + '-all';
   if (variants.length === font.variants.length) {
     cssId = cssIdAll;
   } else {
     cssId +=
-      "-" +
-      variants.sort().join("-").replaceAll("1,", "i").replaceAll("0,", "");
+      '-' +
+      variants.sort().join('-').replaceAll('1,', 'i').replaceAll('0,', '');
   }
 
   const existing = document.getElementById(cssId);
   const existingAll = document.getElementById(cssIdAll);
   if (!existing && !existingAll && font?.name && variants?.length > 0) {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
     link.id = cssId;
     link.href =
-      "https://fonts.googleapis.com/css2?family=" +
+      'https://fonts.googleapis.com/css2?family=' +
       font.name +
-      ":ital,wght@" +
-      variants.sort().join(";") +
-      "&display=swap";
-    link.setAttribute("data-testid", cssId);
+      ':ital,wght@' +
+      variants.sort().join(';') +
+      '&display=swap';
+    link.setAttribute('data-testid', cssId);
     document.head.appendChild(link);
   }
 };

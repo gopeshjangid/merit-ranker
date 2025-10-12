@@ -1,10 +1,10 @@
-import { cn } from "@/lib/utils";
-import { Check } from "lucide-react";
-import { useImageLoaded } from "../utils/useImageLoaded";
+import { cn } from '@/lib/utils';
+import { Check } from 'lucide-react';
+import { useImageLoaded } from '../utils/useImageLoaded';
 
-import { Button } from "@/components/ui/button";
-import { type Font } from "../types";
-import { getSpriteNumber } from "../utils/utils";
+import { Button } from '@/components/ui/button';
+import { type Font } from '../types';
+import { getSpriteNumber } from '../utils/utils';
 
 export const FontListItem = ({
   font,
@@ -19,20 +19,20 @@ export const FontListItem = ({
 }) => {
   const spriteNumber = getSpriteNumber(fontIndex);
   const isSpriteLoaded = useImageLoaded(
-    `/font-preview/sprite.${spriteNumber}.svg`,
+    `/font-preview/sprite.${spriteNumber}.svg`
   );
 
   return (
     <Button
       key={font.sane}
-      variant={isCurrent ? "secondary" : "ghost"}
+      variant={isCurrent ? 'secondary' : 'ghost'}
       className="h-auto w-full justify-start p-2"
       onClick={onSelect}
     >
       <div
         className={cn(
-          "flex w-full items-center rounded-sm px-1 py-2 transition-colors",
-          isCurrent && "bg-accent",
+          'flex w-full items-center rounded-sm px-1 py-2 transition-colors',
+          isCurrent && 'bg-accent'
         )}
       >
         {isSpriteLoaded ? (

@@ -8,9 +8,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Check, Trash2, X } from "lucide-react";
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+import { Check, Trash2, X } from 'lucide-react';
 
 interface SelectionControlsProps {
   isSelecting: boolean;
@@ -89,16 +89,16 @@ export function SelectionControls({
             <AlertDialogHeader>
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete{" "}
-                {selectedCount} selected{" "}
-                {selectedCount === 1 ? "item" : "items"}.
+                This action cannot be undone. This will permanently delete{' '}
+                {selectedCount} selected{' '}
+                {selectedCount === 1 ? 'item' : 'items'}.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 onClick={onDelete}
-                className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
               >
                 Delete
               </AlertDialogAction>

@@ -1,10 +1,10 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: This is a valid use case */
-import React from "react";
+import React from 'react';
 
-import { useEditorRef } from "platejs/react";
+import { useEditorRef } from 'platejs/react';
 
-import { DRAG_ITEM_BLOCK } from "@platejs/dnd";
-import { type UseDndNodeOptions, useDndNode } from "./useDndNode";
+import { DRAG_ITEM_BLOCK } from '@platejs/dnd';
+import { type UseDndNodeOptions, useDndNode } from './useDndNode';
 
 export type DraggableState = {
   /**
@@ -23,7 +23,7 @@ export type DraggableState = {
       | Element
       | React.ReactElement<any>
       | React.RefObject<any>
-      | null,
+      | null
   ) => void;
 };
 
@@ -38,8 +38,8 @@ export const useDraggable = (props: UseDndNodeOptions): DraggableState => {
 
   if (!editor.plugins.dnd) return {} as any;
 
-// We don't need to calculate anything when props are not available
-// eslint-disable-next-line react-hooks/rules-of-hooks 
+  // We don't need to calculate anything when props are not available
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { dragRef, isAboutToDrag, isDragging } = useDndNode({
     multiplePreviewRef,
     nodeRef,

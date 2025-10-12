@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 // A small helper used to build a stable signature of a slide for memoization.
 // Lives in hooks/presentation per request to centralize extra functions.
@@ -21,6 +21,6 @@ export function previewSignature(slide: unknown): string {
       rootImage: s?.rootImage,
     });
   } catch {
-    return "";
+    return '';
   }
 }

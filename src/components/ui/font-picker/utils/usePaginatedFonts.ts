@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { type Font } from "../types";
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { type Font } from '../types';
 // Hook for paginated font loading with virtual scrolling
 export function usePaginatedFonts(
   fonts: Font[],
   searchValue: string,
-  chunkSize: number = 50,
+  chunkSize: number = 50
 ) {
   const [visibleCount, setVisibleCount] = useState(chunkSize);
   const [isLoadingMore, setIsLoadingMore] = useState(false); // Filter fonts based on search - immediate, no debounce
@@ -25,7 +25,7 @@ export function usePaginatedFonts(
     setIsLoadingMore(true); // Small delay to prevent too many rapid calls
     setTimeout(() => {
       setVisibleCount((prev) =>
-        Math.min(prev + chunkSize, filteredFonts.length),
+        Math.min(prev + chunkSize, filteredFonts.length)
       );
       setIsLoadingMore(false);
     }, 100);

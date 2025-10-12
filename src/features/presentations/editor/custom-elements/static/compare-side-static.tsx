@@ -1,10 +1,10 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 import {
   NodeApi,
   PathApi,
   SlateElement,
   type SlateElementProps,
-} from "platejs";
+} from 'platejs';
 
 export function CompareSideStatic(props: SlateElementProps) {
   const path = props.editor.api.findPath(props.element) ?? [-1];
@@ -17,20 +17,20 @@ export function CompareSideStatic(props: SlateElementProps) {
 
   return (
     <div
-      className={cn("flex w-full max-w-[520px] flex-col items-center gap-5")}
+      className={cn('flex w-full max-w-[520px] flex-col items-center gap-5')}
       style={{ gridColumn }}
     >
       <div
         className={cn(
-          "w-full rounded-xl border bg-card p-6 shadow-md",
-          "border-t-4",
+          'w-full rounded-xl border bg-card p-6 shadow-md',
+          'border-t-4'
         )}
         style={{
-          backgroundColor: "var(--presentation-background)",
-          color: "var(--presentation-text)",
-          borderColor: "hsl(var(--border))",
+          backgroundColor: 'var(--presentation-background)',
+          color: 'var(--presentation-text)',
+          borderColor: 'hsl(var(--border))',
           borderTopColor:
-            (parentElement?.color as string) || "var(--presentation-primary)",
+            (parentElement?.color as string) || 'var(--presentation-primary)',
         }}
       >
         <SlateElement {...props}>{props.children}</SlateElement>

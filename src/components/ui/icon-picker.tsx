@@ -1,17 +1,17 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+'use client';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
-import React, { useEffect, useState, type ReactNode } from "react";
-import { type IconType } from "react-icons";
+} from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
+import { Loader2 } from 'lucide-react';
+import React, { useEffect, useState, type ReactNode } from 'react';
+import { type IconType } from 'react-icons';
 
 // Define interfaces for type safety
 interface IconItem {
@@ -26,22 +26,22 @@ interface IconPickerProps {
   onIconSelect?: (iconName: string, iconComponent: ReactNode) => void;
   defaultIcon?: string;
   searchTerm?: string; // Added prop to automatically search and select the first matching icon
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
 // Main Icon Picker Component
 const IconPicker = ({
   onIconSelect,
-  defaultIcon = "FaHome",
-  searchTerm = "",
-  size = "md",
+  defaultIcon = 'FaHome',
+  searchTerm = '',
+  size = 'md',
   className,
 }: IconPickerProps) => {
   const [icon, setIcon] = useState<string>(defaultIcon);
   const [iconComponent, setIconComponent] = useState<ReactNode>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [internalSearchTerm, setInternalSearchTerm] = useState<string>("");
+  const [internalSearchTerm, setInternalSearchTerm] = useState<string>('');
   const [filteredIcons, setFilteredIcons] = useState<IconItem[]>([]);
   const [availableIcons, setAvailableIcons] = useState<IconItem[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -49,9 +49,9 @@ const IconPicker = ({
 
   // Size mappings for the trigger button
   const sizeClasses = {
-    sm: "h-8 w-8",
-    md: "h-10 w-10",
-    lg: "h-12 w-12",
+    sm: 'h-8 w-8',
+    md: 'h-10 w-10',
+    lg: 'h-12 w-12',
   };
 
   // Load some initial popular icons when the sheet opens
@@ -66,38 +66,38 @@ const IconPicker = ({
     setIsLoading(true);
     try {
       // Load a set of common icons from Font Awesome
-      const faModule = await import("react-icons/fa");
+      const faModule = await import('react-icons/fa');
       const popularIconNames = [
-        "FaHome",
-        "FaUser",
-        "FaCog",
-        "FaSearch",
-        "FaBell",
-        "FaCalendar",
-        "FaEnvelope",
-        "FaHeart",
-        "FaStar",
-        "FaBookmark",
-        "FaCheck",
-        "FaTimes",
-        "FaEdit",
-        "FaTrash",
-        "FaDownload",
-        "FaUpload",
-        "FaShare",
-        "FaLink",
-        "FaMapMarker",
-        "FaClock",
-        "FaCamera",
-        "FaVideo",
-        "FaMusic",
-        "FaFile",
-        "FaFolder",
-        "FaComments",
-        "FaThumbsUp",
-        "FaPhone",
-        "FaLock",
-        "FaUserPlus",
+        'FaHome',
+        'FaUser',
+        'FaCog',
+        'FaSearch',
+        'FaBell',
+        'FaCalendar',
+        'FaEnvelope',
+        'FaHeart',
+        'FaStar',
+        'FaBookmark',
+        'FaCheck',
+        'FaTimes',
+        'FaEdit',
+        'FaTrash',
+        'FaDownload',
+        'FaUpload',
+        'FaShare',
+        'FaLink',
+        'FaMapMarker',
+        'FaClock',
+        'FaCamera',
+        'FaVideo',
+        'FaMusic',
+        'FaFile',
+        'FaFolder',
+        'FaComments',
+        'FaThumbsUp',
+        'FaPhone',
+        'FaLock',
+        'FaUserPlus',
       ];
 
       const iconList = popularIconNames
@@ -112,7 +112,7 @@ const IconPicker = ({
       setAvailableIcons(iconList);
       setFilteredIcons(iconList);
     } catch (error) {
-      console.error("Error loading popular icons:", error);
+      console.error('Error loading popular icons:', error);
     } finally {
       setIsLoading(false);
     }
@@ -131,29 +131,29 @@ const IconPicker = ({
       const modules: IconModule[] = [];
 
       // Try to load the most likely library based on prefix
-      if (termLower.startsWith("fa")) {
-        const mod = await import("react-icons/fa");
+      if (termLower.startsWith('fa')) {
+        const mod = await import('react-icons/fa');
         modules.push(mod as unknown as IconModule);
-      } else if (termLower.startsWith("fi")) {
-        const mod = await import("react-icons/fi");
+      } else if (termLower.startsWith('fi')) {
+        const mod = await import('react-icons/fi');
         modules.push(mod as unknown as IconModule);
-      } else if (termLower.startsWith("ai")) {
-        const mod = await import("react-icons/ai");
+      } else if (termLower.startsWith('ai')) {
+        const mod = await import('react-icons/ai');
         modules.push(mod as unknown as IconModule);
-      } else if (termLower.startsWith("bs")) {
-        const mod = await import("react-icons/bs");
+      } else if (termLower.startsWith('bs')) {
+        const mod = await import('react-icons/bs');
         modules.push(mod as unknown as IconModule);
-      } else if (termLower.startsWith("bi")) {
-        const mod = await import("react-icons/bi");
+      } else if (termLower.startsWith('bi')) {
+        const mod = await import('react-icons/bi');
         modules.push(mod as unknown as IconModule);
-      } else if (termLower.startsWith("md")) {
-        const mod = await import("react-icons/md");
+      } else if (termLower.startsWith('md')) {
+        const mod = await import('react-icons/md');
         modules.push(mod as unknown as IconModule);
       } else {
         // If no prefix match, search in common libraries
         const [fa, md] = await Promise.all([
-          import("react-icons/fa"),
-          import("react-icons/md"),
+          import('react-icons/fa'),
+          import('react-icons/md'),
         ]);
         modules.push(fa as unknown as IconModule, md as unknown as IconModule);
       }
@@ -178,7 +178,7 @@ const IconPicker = ({
 
       setFilteredIcons(results.slice(0, 60)); // Limit total results
     } catch (error) {
-      console.error("Error searching icons:", error);
+      console.error('Error searching icons:', error);
     } finally {
       setIsLoading(false);
     }
@@ -194,83 +194,83 @@ const IconPicker = ({
       // Dynamic import based on the prefix
       let iconModule: IconModule;
       switch (prefix) {
-        case "fa": {
-          const mod = await import("react-icons/fa");
+        case 'fa': {
+          const mod = await import('react-icons/fa');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "fi": {
-          const mod = await import("react-icons/fi");
+        case 'fi': {
+          const mod = await import('react-icons/fi');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "ai": {
-          const mod = await import("react-icons/ai");
+        case 'ai': {
+          const mod = await import('react-icons/ai');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "bs": {
-          const mod = await import("react-icons/bs");
+        case 'bs': {
+          const mod = await import('react-icons/bs');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "bi": {
-          const mod = await import("react-icons/bi");
+        case 'bi': {
+          const mod = await import('react-icons/bi');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "gi": {
-          const mod = await import("react-icons/gi");
+        case 'gi': {
+          const mod = await import('react-icons/gi');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "hi": {
-          const mod = await import("react-icons/hi");
+        case 'hi': {
+          const mod = await import('react-icons/hi');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "im": {
-          const mod = await import("react-icons/im");
+        case 'im': {
+          const mod = await import('react-icons/im');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "io": {
-          const mod = await import("react-icons/io");
+        case 'io': {
+          const mod = await import('react-icons/io');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "md": {
-          const mod = await import("react-icons/md");
+        case 'md': {
+          const mod = await import('react-icons/md');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "ri": {
-          const mod = await import("react-icons/ri");
+        case 'ri': {
+          const mod = await import('react-icons/ri');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "si": {
-          const mod = await import("react-icons/si");
+        case 'si': {
+          const mod = await import('react-icons/si');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "ti": {
-          const mod = await import("react-icons/ti");
+        case 'ti': {
+          const mod = await import('react-icons/ti');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "vsc": {
-          const mod = await import("react-icons/vsc");
+        case 'vsc': {
+          const mod = await import('react-icons/vsc');
           iconModule = mod as unknown as IconModule;
           break;
         }
-        case "wi": {
-          const mod = await import("react-icons/wi");
+        case 'wi': {
+          const mod = await import('react-icons/wi');
           iconModule = mod as unknown as IconModule;
           break;
         }
         default: {
-          const mod = await import("react-icons/fa");
+          const mod = await import('react-icons/fa');
           iconModule = mod as unknown as IconModule;
           break;
         }
@@ -279,7 +279,7 @@ const IconPicker = ({
       const IconComponent = iconModule[iconName];
       return IconComponent ? <IconComponent size={24} /> : null;
     } catch (error) {
-      console.error("Error loading icon:", error);
+      console.error('Error loading icon:', error);
       return null;
     } finally {
       setIsLoading(false);
@@ -297,25 +297,25 @@ const IconPicker = ({
           const prefix = searchTerm.toLowerCase().slice(0, 2);
           let iconModule: IconModule;
 
-          if (prefix === "fa" || !prefix) {
-            const mod = await import("react-icons/fa");
+          if (prefix === 'fa' || !prefix) {
+            const mod = await import('react-icons/fa');
             iconModule = mod as unknown as IconModule;
-          } else if (prefix === "md") {
-            const mod = await import("react-icons/md");
+          } else if (prefix === 'md') {
+            const mod = await import('react-icons/md');
             iconModule = mod as unknown as IconModule;
-          } else if (prefix === "bs") {
-            const mod = await import("react-icons/bs");
+          } else if (prefix === 'bs') {
+            const mod = await import('react-icons/bs');
             iconModule = mod as unknown as IconModule;
           } else {
             // Default to FA
-            const mod = await import("react-icons/fa");
+            const mod = await import('react-icons/fa');
             iconModule = mod as unknown as IconModule;
           }
 
           // Find first matching icon
           const termLower = searchTerm.toLowerCase();
           const matchingIconName = Object.keys(iconModule).find((key) =>
-            key.toLowerCase().includes(termLower),
+            key.toLowerCase().includes(termLower)
           );
 
           if (matchingIconName) {
@@ -336,7 +336,7 @@ const IconPicker = ({
             setIconComponent(component);
           }
         } catch (error) {
-          console.error("Error initializing from search term:", error);
+          console.error('Error initializing from search term:', error);
           // Fall back to default icon
           const component = await loadIconComponent(defaultIcon);
           setIconComponent(component);
@@ -393,8 +393,8 @@ const IconPicker = ({
           size="icon"
           className={cn(
             sizeClasses[size],
-            "flex items-center justify-center rounded-md border shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-            className,
+            'flex items-center justify-center rounded-md border shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
+            className
           )}
           aria-label="Select icon"
         >
@@ -429,7 +429,7 @@ const IconPicker = ({
                 filteredIcons.map((item, index) => (
                   <Button
                     key={`${item.name}-${index}`}
-                    variant={icon === item.name ? "default" : "outline"}
+                    variant={icon === item.name ? 'default' : 'outline'}
                     className="flex aspect-square h-12 items-center justify-center p-2"
                     onClick={() => handleSelectIcon(item.name)}
                     title={item.name}

@@ -1,6 +1,5 @@
 'use client';
 
-
 import debounce from 'lodash.debounce';
 import { type Value } from 'platejs';
 import { Plate } from 'platejs/react';

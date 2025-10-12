@@ -1,8 +1,8 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import Staircase from "../custom-elements/staircase";
-import { StairItem } from "../custom-elements/staircase-item";
-import { STAIR_ITEM, STAIRCASE_GROUP } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import Staircase from '../custom-elements/staircase';
+import { StairItem } from '../custom-elements/staircase-item';
+import { STAIR_ITEM, STAIRCASE_GROUP } from '../lib';
 
 // Create plugin for staircase group (container)
 export const StaircaseGroupPlugin = createTPlatePlugin({

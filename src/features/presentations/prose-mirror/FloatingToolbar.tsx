@@ -1,17 +1,17 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Bold, ChevronDown, Code, Heading, Italic, List } from "lucide-react";
-import { setBlockType, toggleMark } from "prosemirror-commands";
-import { type NodeType } from "prosemirror-model";
-import { liftListItem, wrapInList } from "prosemirror-schema-list";
-import { type Command } from "prosemirror-state";
-import { type EditorView } from "prosemirror-view";
-import type React from "react";
+} from '@/components/ui/dropdown-menu';
+import { Bold, ChevronDown, Code, Heading, Italic, List } from 'lucide-react';
+import { setBlockType, toggleMark } from 'prosemirror-commands';
+import { type NodeType } from 'prosemirror-model';
+import { liftListItem, wrapInList } from 'prosemirror-schema-list';
+import { type Command } from 'prosemirror-state';
+import { type EditorView } from 'prosemirror-view';
+import type React from 'react';
 
 interface FloatingToolbarProps {
   view: EditorView;
@@ -21,7 +21,7 @@ interface FloatingToolbarProps {
 }
 
 interface ListType {
-  type: "bullet" | "ordered";
+  type: 'bullet' | 'ordered';
   label: string;
   node: NodeType;
 }
@@ -63,7 +63,6 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
   }
 
   const execCommand = (cmd: Command): void => {
-     
     cmd(view.state, view.dispatch, view);
     view.focus();
   };
@@ -71,7 +70,7 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
   // Helper to check if selection is in a specific node type
   const isInNode = (
     nodeType: NodeType,
-    attrs: { level?: number } = {},
+    attrs: { level?: number } = {}
   ): boolean => {
     const { $from } = view.state.selection;
     const node = $from.node($from.depth);
@@ -121,21 +120,21 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
     };
   };
 
-  const buttonVariants = "h-8 w-8 p-0";
-  const iconClass = "h-4 w-4";
+  const buttonVariants = 'h-8 w-8 p-0';
+  const iconClass = 'h-4 w-4';
 
   const headingLevels: HeadingLevel[] = [
-    { level: 1, label: "Heading 1" },
-    { level: 2, label: "Heading 2" },
-    { level: 3, label: "Heading 3" },
-    { level: 4, label: "Heading 4" },
-    { level: 5, label: "Heading 5" },
-    { level: 6, label: "Heading 6" },
+    { level: 1, label: 'Heading 1' },
+    { level: 2, label: 'Heading 2' },
+    { level: 3, label: 'Heading 3' },
+    { level: 4, label: 'Heading 4' },
+    { level: 5, label: 'Heading 5' },
+    { level: 6, label: 'Heading 6' },
   ];
 
   const listTypes: ListType[] = [
-    { type: "bullet", label: "Bullet List", node: bulletListNode },
-    { type: "ordered", label: "Numbered List", node: orderedListNode },
+    { type: 'bullet', label: 'Bullet List', node: bulletListNode },
+    { type: 'ordered', label: 'Numbered List', node: orderedListNode },
   ];
 
   const handleMouseDown = (e: React.MouseEvent): void => {
@@ -150,7 +149,7 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
         top: 0,
         left: 0,
         transform: `translate(${left}px, ${top - 60}px)`,
-        transformOrigin: "0 0",
+        transformOrigin: '0 0',
       }}
       onMouseDown={handleMouseDown}
       onClick={(e) => e.stopPropagation()}
@@ -161,8 +160,8 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
             view.state.selection.$from
               .marks()
               .some((mark) => mark.type === strongMark)
-              ? "secondary"
-              : "ghost"
+              ? 'secondary'
+              : 'ghost'
           }
           size="icon"
           className={buttonVariants}
@@ -177,8 +176,8 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
             view.state.selection.$from
               .marks()
               .some((mark) => mark.type === emMark)
-              ? "secondary"
-              : "ghost"
+              ? 'secondary'
+              : 'ghost'
           }
           size="icon"
           className={buttonVariants}
@@ -193,8 +192,8 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
             view.state.selection.$from
               .marks()
               .some((mark) => mark.type === codeMark)
-              ? "secondary"
-              : "ghost"
+              ? 'secondary'
+              : 'ghost'
           }
           size="icon"
           className={buttonVariants}
@@ -212,8 +211,8 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
             <Button
               variant={
                 listTypes.some((lt) => isInList(lt.node))
-                  ? "secondary"
-                  : "ghost"
+                  ? 'secondary'
+                  : 'ghost'
               }
               size="icon"
               className={buttonVariants}
@@ -236,7 +235,7 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
                 key={listType.type}
                 onMouseDown={handleMouseDown}
                 onClick={() => execCommand(toggleList(listType.node))}
-                className={isInList(listType.node) ? "bg-secondary" : ""}
+                className={isInList(listType.node) ? 'bg-secondary' : ''}
               >
                 {listType.label}
               </DropdownMenuItem>
@@ -248,7 +247,7 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button
-              variant={isInNode(headingNode) ? "secondary" : "ghost"}
+              variant={isInNode(headingNode) ? 'secondary' : 'ghost'}
               size="icon"
               className={buttonVariants}
               onMouseDown={handleMouseDown}
@@ -272,8 +271,8 @@ const FloatingToolbar: React.FC<FloatingToolbarProps> = ({
                 onClick={() => execCommand(toggleHeading(heading.level))}
                 className={
                   isInNode(headingNode, { level: heading.level })
-                    ? "bg-secondary"
-                    : ""
+                    ? 'bg-secondary'
+                    : ''
                 }
               >
                 {heading.label}

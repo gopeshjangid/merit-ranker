@@ -1,4 +1,4 @@
-import { createTPlatePlugin } from "platejs/react";
+import { createTPlatePlugin } from 'platejs/react';
 import {
   ARROW_LIST,
   ARROW_LIST_ITEM,
@@ -27,50 +27,50 @@ import {
   STAIR_ITEM,
   TIMELINE_GROUP,
   TIMELINE_ITEM,
-} from "../lib";
+} from '../lib';
 
 import {
   BaseTableCellHeaderPlugin,
   BaseTableCellPlugin,
   BaseTablePlugin,
   BaseTableRowPlugin,
-} from "@platejs/table";
-import VisualizationItemElementStatic from "../custom-elements/legacy/visualization-item-static";
-import VisualizationListElementStatic from "../custom-elements/legacy/visualization-list-static";
-import { ArrowItemStatic } from "../custom-elements/static/arrow-item-static";
-import ArrowListStatic from "../custom-elements/static/arrow-list-static";
-import { BeforeAfterSideStatic } from "../custom-elements/static/before-after-side-static";
-import BeforeAfterGroupStatic from "../custom-elements/static/before-after-static";
-import { BoxItemStatic } from "../custom-elements/static/box-item-static";
-import BoxGroupStatic from "../custom-elements/static/box-static";
-import { BulletItemStatic } from "../custom-elements/static/bullet-item-static";
-import { BulletsElementStatic } from "../custom-elements/static/bullet-static";
-import ButtonStatic from "../custom-elements/static/button-static";
-import { CompareSideStatic } from "../custom-elements/static/compare-side-static";
-import CompareGroupStatic from "../custom-elements/static/compare-static";
-import { ConsItemStatic } from "../custom-elements/static/cons-item-static";
-import { CycleElementStatic } from "../custom-elements/static/cycle-element-static";
-import { CycleItemStatic } from "../custom-elements/static/cycle-item-static";
-import { GeneratingLeafStatic } from "../custom-elements/static/generating-leaf-static";
-import { IconListItemStatic } from "../custom-elements/static/icon-list-item-static";
-import { IconListStatic } from "../custom-elements/static/icon-list-static";
-import { IconStatic } from "../custom-elements/static/icon-static";
+} from '@platejs/table';
+import VisualizationItemElementStatic from '../custom-elements/legacy/visualization-item-static';
+import VisualizationListElementStatic from '../custom-elements/legacy/visualization-list-static';
+import { ArrowItemStatic } from '../custom-elements/static/arrow-item-static';
+import ArrowListStatic from '../custom-elements/static/arrow-list-static';
+import { BeforeAfterSideStatic } from '../custom-elements/static/before-after-side-static';
+import BeforeAfterGroupStatic from '../custom-elements/static/before-after-static';
+import { BoxItemStatic } from '../custom-elements/static/box-item-static';
+import BoxGroupStatic from '../custom-elements/static/box-static';
+import { BulletItemStatic } from '../custom-elements/static/bullet-item-static';
+import { BulletsElementStatic } from '../custom-elements/static/bullet-static';
+import ButtonStatic from '../custom-elements/static/button-static';
+import { CompareSideStatic } from '../custom-elements/static/compare-side-static';
+import CompareGroupStatic from '../custom-elements/static/compare-static';
+import { ConsItemStatic } from '../custom-elements/static/cons-item-static';
+import { CycleElementStatic } from '../custom-elements/static/cycle-element-static';
+import { CycleItemStatic } from '../custom-elements/static/cycle-item-static';
+import { GeneratingLeafStatic } from '../custom-elements/static/generating-leaf-static';
+import { IconListItemStatic } from '../custom-elements/static/icon-list-item-static';
+import { IconListStatic } from '../custom-elements/static/icon-list-static';
+import { IconStatic } from '../custom-elements/static/icon-static';
 import {
   PresentationTableCellElementStatic,
   PresentationTableCellHeaderElementStatic,
   PresentationTableElementStatic,
   PresentationTableRowElementStatic,
-} from "../custom-elements/static/presentation-table-static";
-import ProsConsGroupStatic from "../custom-elements/static/pros-cons-static";
-import { ProsItemStatic } from "../custom-elements/static/pros-item-static";
-import { PyramidItemStatic } from "../custom-elements/static/pyramid-item-static";
-import PyramidStatic from "../custom-elements/static/pyramid-static";
-import { SequenceArrowItemStatic } from "../custom-elements/static/sequence-arrow-item-static";
-import SequenceArrowStatic from "../custom-elements/static/sequence-arrow-static";
-import { StairItemStatic } from "../custom-elements/static/staircase-item-static";
-import StaircaseStatic from "../custom-elements/static/staircase-static";
-import { TimelineItemStatic } from "../custom-elements/static/timeline-item-static";
-import TimelineStatic from "../custom-elements/static/timeline-static";
+} from '../custom-elements/static/presentation-table-static';
+import ProsConsGroupStatic from '../custom-elements/static/pros-cons-static';
+import { ProsItemStatic } from '../custom-elements/static/pros-item-static';
+import { PyramidItemStatic } from '../custom-elements/static/pyramid-item-static';
+import PyramidStatic from '../custom-elements/static/pyramid-static';
+import { SequenceArrowItemStatic } from '../custom-elements/static/sequence-arrow-item-static';
+import SequenceArrowStatic from '../custom-elements/static/sequence-arrow-static';
+import { StairItemStatic } from '../custom-elements/static/staircase-item-static';
+import StaircaseStatic from '../custom-elements/static/staircase-static';
+import { TimelineItemStatic } from '../custom-elements/static/timeline-item-static';
+import TimelineStatic from '../custom-elements/static/timeline-static';
 import {
   AreaChartStaticPlugin,
   BarChartStaticPlugin,
@@ -78,7 +78,7 @@ import {
   PieChartStaticPlugin,
   RadarChartStaticPlugin,
   ScatterChartStaticPlugin,
-} from "./chart-plugin";
+} from './chart-plugin';
 export const PresentationStaticCustomKit = [
   createTPlatePlugin({
     key: ARROW_LIST,
@@ -196,11 +196,11 @@ export const PresentationStaticCustomKit = [
   }),
   // Legacy adapters
   createTPlatePlugin({
-    key: "visualization-list",
+    key: 'visualization-list',
     node: { isElement: true, component: VisualizationListElementStatic },
   }),
   createTPlatePlugin({
-    key: "visualization-item",
+    key: 'visualization-item',
     node: { isElement: true, component: VisualizationItemElementStatic },
   }),
 
@@ -208,7 +208,7 @@ export const PresentationStaticCustomKit = [
   BaseTableRowPlugin.withComponent(PresentationTableRowElementStatic),
   BaseTableCellPlugin.withComponent(PresentationTableCellElementStatic),
   BaseTableCellHeaderPlugin.withComponent(
-    PresentationTableCellHeaderElementStatic,
+    PresentationTableCellHeaderElementStatic
   ),
 
   // Removed generic chart element router per request
@@ -221,7 +221,7 @@ export const PresentationStaticCustomKit = [
   LineChartStaticPlugin,
   // Leaf for generating caret in static mode
   createTPlatePlugin({
-    key: "generating",
+    key: 'generating',
     node: { isLeaf: true, component: GeneratingLeafStatic },
   }),
 ];

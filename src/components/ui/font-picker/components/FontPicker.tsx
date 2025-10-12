@@ -1,33 +1,33 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: This use requires any */
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 // The font info is now imported statically at the top of the file.
-import fontInfos from "../font-preview/fontInfo.json";
+import fontInfos from '../font-preview/fontInfo.json';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 import {
   type Font,
   type FontPickerProps,
   defaultFont,
   toString,
-} from "../types";
-import { checkLoaded } from "../utils/fontChecker";
-import { sanify } from "../utils/sanify";
-import { getFourVariants, loadFontFromObject } from "../utils/utils";
-import { FontCombobox } from "./FontCombobox";
-import { FontList } from "./FontList";
+} from '../types';
+import { checkLoaded } from '../utils/fontChecker';
+import { sanify } from '../utils/sanify';
+import { getFourVariants, loadFontFromObject } from '../utils/utils';
+import { FontCombobox } from './FontCombobox';
+import { FontList } from './FontList';
 
 export default function FontPicker({
-  defaultValue = "Open Sans",
-  noMatches = "No matches",
+  defaultValue = 'Open Sans',
+  noMatches = 'No matches',
   autoLoad = true,
   loaderOnly = false,
   loadAllVariants = false,
-  loadFonts = "",
-  googleFonts = "all",
-  fontCategories = "all",
+  loadFonts = '',
+  googleFonts = 'all',
+  fontCategories = 'all',
   localFonts = [],
-  mode = "combo",
+  mode = 'combo',
   fontVariants,
   value,
   fontsLoaded,
@@ -36,13 +36,13 @@ export default function FontPicker({
   ...rest
 }: FontPickerProps) {
   const [open, setOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   // All state and effects for loading have been removed (fontInfos, isLoadingFonts, error).
 
   const allGoogleFonts: Font[] = useMemo(() => {
     // The data from fontInfos is available immediately.
-    return (fontInfos as any[]).map((info: Omit<Font, "cased">) => ({
+    return (fontInfos as any[]).map((info: Omit<Font, 'cased'>) => ({
       ...info,
       cased: info.name.toLowerCase(),
     }));
@@ -51,22 +51,22 @@ export default function FontPicker({
   const fonts = useMemo(() => {
     let activeFonts: Font[];
 
-    if (googleFonts === "all") {
+    if (googleFonts === 'all') {
       activeFonts = [...allGoogleFonts];
-    } else if (typeof googleFonts === "string") {
-      const fontNames = googleFonts.trim().toLowerCase().split(",");
+    } else if (typeof googleFonts === 'string') {
+      const fontNames = googleFonts.trim().toLowerCase().split(',');
       activeFonts = allGoogleFonts.filter((font) =>
-        fontNames.includes(font.cased),
+        fontNames.includes(font.cased)
       );
-    } else if (typeof googleFonts === "function") {
+    } else if (typeof googleFonts === 'function') {
       activeFonts = allGoogleFonts.filter(googleFonts);
     } else {
       const fontNames =
         googleFonts?.map((v) =>
-          typeof v === "string" ? v.toLowerCase() : v.cased,
+          typeof v === 'string' ? v.toLowerCase() : v.cased
         ) ?? [];
       activeFonts = allGoogleFonts.filter((font) =>
-        fontNames.includes(font.cased),
+        fontNames.includes(font.cased)
       );
     }
 
@@ -80,20 +80,20 @@ export default function FontPicker({
 
     activeFonts = [...activeFonts, ...processedLocalFonts];
 
-    if (fontCategories === "all") {
+    if (fontCategories === 'all') {
       return activeFonts;
     }
 
     const categories = Array.isArray(fontCategories)
       ? fontCategories.map((c) => c.toLowerCase())
-      : fontCategories.trim().toLowerCase().split(",");
+      : fontCategories.trim().toLowerCase().split(',');
 
     return activeFonts.filter((font) => categories.includes(font.category));
   }, [googleFonts, allGoogleFonts, localFonts, fontCategories]);
 
   const getFontByName = useCallback(
     (name: string) => fonts.find((font) => font.name.trim() === name.trim()),
-    [fonts],
+    [fonts]
   );
 
   const saneDefaultValue = useMemo(() => {
@@ -107,7 +107,7 @@ export default function FontPicker({
   }, [fonts, defaultValue]);
 
   const [currentFont, setCurrentFont] = useState<Font>(
-    () => getFontByName(saneDefaultValue!) || defaultFont,
+    () => getFontByName(saneDefaultValue!) || defaultFont
   );
 
   useEffect(() => {
@@ -122,18 +122,18 @@ export default function FontPicker({
       fontVariants?.({ fontName: font.name, variants: font.variants });
       value?.(font.name);
     },
-    [autoLoad, loadAllVariants, fontVariants, value],
+    [autoLoad, loadAllVariants, fontVariants, value]
   );
 
   useEffect(() => {
     if (!fontsLoaded) return;
 
     const fontsToLoad: string[] = [];
-    if (typeof loadFonts === "string" && loadFonts) {
+    if (typeof loadFonts === 'string' && loadFonts) {
       fontsToLoad.push(loadFonts);
     } else if (Array.isArray(loadFonts)) {
       loadFonts.forEach((font) => {
-        const fontName = typeof font === "string" ? font : font?.fontName;
+        const fontName = typeof font === 'string' ? font : font?.fontName;
         if (fontName) fontsToLoad.push(fontName);
       });
     }
@@ -144,12 +144,12 @@ export default function FontPicker({
       try {
         const results = await Promise.all(
           fontsToCheck.map((font) =>
-            checkLoaded({ fontFamily: font, timeout: fontsLoadedTimeout }),
-          ),
+            checkLoaded({ fontFamily: font, timeout: fontsLoadedTimeout })
+          )
         );
         fontsLoaded(!results.some((res) => !res));
       } catch (e) {
-        console.error("Error checking if font families loaded", e);
+        console.error('Error checking if font families loaded', e);
         fontsLoaded(false);
       }
     };
@@ -164,8 +164,8 @@ export default function FontPicker({
   // Error display is removed as a static import will fail at build time, not run time.
 
   return (
-    <div className={cn("w-full", className)} {...rest}>
-      {mode === "combo" ? (
+    <div className={cn('w-full', className)} {...rest}>
+      {mode === 'combo' ? (
         <FontCombobox
           fonts={fonts}
           currentFont={currentFont}

@@ -1,8 +1,8 @@
-import { type SlateElementProps } from "platejs";
+import { type SlateElementProps } from 'platejs';
 
-import { SlateElement } from "platejs";
+import { SlateElement } from 'platejs';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 export function HrElementStatic(props: SlateElementProps) {
   return (
@@ -10,7 +10,7 @@ export function HrElementStatic(props: SlateElementProps) {
       <div className="cursor-text py-6" contentEditable={false}>
         <hr
           className={cn(
-            "h-0.5 rounded-sm border-none bg-muted bg-clip-content",
+            'h-0.5 rounded-sm border-none bg-muted bg-clip-content'
           )}
         />
       </div>

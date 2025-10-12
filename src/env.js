@@ -1,13 +1,13 @@
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from '@t3-oss/env-nextjs';
+import { z } from 'zod';
 
 export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
     TAVILY_API_KEY: z.string(),
     NODE_ENV: z
-      .enum(["development", "test", "production"])
-      .default("development"),
+      .enum(['development', 'test', 'production'])
+      .default('development'),
 
     OPENAI_API_KEY: z.string(),
     TOGETHER_AI_API_KEY: z.string(),
@@ -16,10 +16,10 @@ export const env = createEnv({
     UNSPLASH_ACCESS_KEY: z.string(),
     NEXTAUTH_URL: z.preprocess(
       (str) => process.env.VERCEL_URL ?? str,
-      process.env.VERCEL ? z.string() : z.string().url(),
+      process.env.VERCEL ? z.string() : z.string().url()
     ),
     NEXTAUTH_SECRET:
-      process.env.NODE_ENV === "production"
+      process.env.NODE_ENV === 'production'
         ? z.string()
         : z.string().optional(),
   },

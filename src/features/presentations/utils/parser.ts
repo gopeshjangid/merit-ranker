@@ -1,46 +1,46 @@
-import { ColumnItemPlugin, ColumnPlugin } from "@platejs/layout/react";
-import { nanoid } from "nanoid"; // Import nanoid for unique ID generation
+import { ColumnItemPlugin, ColumnPlugin } from '@platejs/layout/react';
+import { nanoid } from 'nanoid'; // Import nanoid for unique ID generation
 import {
   type Descendant,
   type TColumnElement,
   type TColumnGroupElement,
   type TText,
-} from "platejs";
+} from 'platejs';
 import {
   type TArrowListElement,
   type TArrowListItemElement,
-} from "../editor/plugins/arrow-plugin";
+} from '../editor/plugins/arrow-plugin';
 import {
   type TBulletGroupElement,
   type TBulletItemElement,
-} from "../editor/plugins/bullet-plugin";
+} from '../editor/plugins/bullet-plugin';
 import {
   type TCycleGroupElement,
   type TCycleItemElement,
-} from "../editor/plugins/cycle-plugin";
+} from '../editor/plugins/cycle-plugin';
 import {
   type TIconListElement,
   type TIconListItemElement,
-} from "../editor/plugins/icon-list-plugin";
-import { type TIconElement } from "../editor/plugins/icon-plugin";
+} from '../editor/plugins/icon-list-plugin';
+import { type TIconElement } from '../editor/plugins/icon-plugin';
 import {
   type TPyramidGroupElement,
   type TPyramidItemElement,
-} from "../editor/plugins/pyramid-plugin";
+} from '../editor/plugins/pyramid-plugin';
 import {
   type TStairGroupElement,
   type TStairItemElement,
-} from "../editor/plugins/staircase-plugin";
+} from '../editor/plugins/staircase-plugin';
 import {
   type TTimelineGroupElement,
   type TTimelineItemElement,
-} from "../editor/plugins/timeline-plugin";
+} from '../editor/plugins/timeline-plugin';
 
 import {
   type TTableCellElement,
   type TTableElement,
   type TTableRowElement,
-} from "platejs";
+} from 'platejs';
 import {
   AREA_CHART_ELEMENT,
   BAR_CHART_ELEMENT,
@@ -48,29 +48,29 @@ import {
   PIE_CHART_ELEMENT,
   RADAR_CHART_ELEMENT,
   SCATTER_CHART_ELEMENT,
-} from "../editor/lib";
+} from '../editor/lib';
 import {
   type TBeforeAfterGroupElement,
   type TBeforeAfterSideElement,
-} from "../editor/plugins/before-after-plugin";
+} from '../editor/plugins/before-after-plugin';
 import {
   type TBoxGroupElement,
   type TBoxItemElement,
-} from "../editor/plugins/box-plugin";
-import { type TButtonElement } from "../editor/plugins/button-plugin";
+} from '../editor/plugins/box-plugin';
+import { type TButtonElement } from '../editor/plugins/button-plugin';
 import {
   type TCompareGroupElement,
   type TCompareSideElement,
-} from "../editor/plugins/compare-plugin";
+} from '../editor/plugins/compare-plugin';
 import {
   type TConsItemElement,
   type TProsConsGroupElement,
   type TProsItemElement,
-} from "../editor/plugins/pros-cons-plugin";
+} from '../editor/plugins/pros-cons-plugin';
 import {
   type TSequenceArrowGroupElement,
   type TSequenceArrowItemElement,
-} from "../editor/plugins/sequence-arrow-plugin";
+} from '../editor/plugins/sequence-arrow-plugin';
 import {
   type GeneratingText,
   type HeadingElement,
@@ -78,7 +78,7 @@ import {
   type ImageElement,
   type ParagraphElement,
   type TChartElement,
-} from "./types";
+} from './types';
 
 // Union type for all possible Plate elements
 export type PlateNode =
@@ -120,7 +120,7 @@ export type PlateNode =
   | TTableRowElement
   | TTableCellElement;
 
-export type LayoutType = "left" | "right" | "vertical" | "background";
+export type LayoutType = 'left' | 'right' | 'vertical' | 'background';
 export type RootImage = {
   query: string;
   url?: string;
@@ -134,9 +134,9 @@ export type PlateSlide = {
   content: PlateNode[];
   rootImage?: RootImage;
   layoutType?: LayoutType | undefined;
-  alignment?: "start" | "center" | "end";
+  alignment?: 'start' | 'center' | 'end';
   bgColor?: string;
-  width?: "S" | "M" | "L";
+  width?: 'S' | 'M' | 'L';
 };
 
 // Simple XML node interface for our parser
@@ -152,14 +152,14 @@ interface XMLNode {
  * Class to parse XML presentation data into Plate.js format with improved streaming support
  */
 export class SlideParser {
-  private buffer = "";
+  private buffer = '';
   private completedSections: string[] = [];
   private parsedSlides: PlateSlide[] = [];
   private lastInputLength = 0;
 
   // Map to store section identifiers to slide IDs to maintain consistency
   private sectionIdMap = new Map<string, string>();
-  private latestContent = "";
+  private latestContent = '';
 
   /**
    * Parse a chunk of XML data
@@ -211,16 +211,16 @@ export class SlideParser {
       let remainingBuffer = this.buffer.trim();
 
       // Skip PRESENTATION tag if present
-      if (remainingBuffer.startsWith("<PRESENTATION")) {
-        const tagEndIdx = remainingBuffer.indexOf(">");
+      if (remainingBuffer.startsWith('<PRESENTATION')) {
+        const tagEndIdx = remainingBuffer.indexOf('>');
         if (tagEndIdx !== -1) {
           remainingBuffer = remainingBuffer.substring(tagEndIdx + 1).trim();
         }
       }
 
-      if (remainingBuffer.startsWith("<SECTION")) {
+      if (remainingBuffer.startsWith('<SECTION')) {
         // We have an incomplete section, force close it
-        const fixedSection = remainingBuffer + "</SECTION>";
+        const fixedSection = remainingBuffer + '</SECTION>';
         this.completedSections.push(fixedSection);
       }
 
@@ -228,11 +228,11 @@ export class SlideParser {
       const finalSlides = this.processSections();
 
       // Clear the generating mark tracking for completed content
-      this.latestContent = "";
+      this.latestContent = '';
 
       return finalSlides;
     } catch (e) {
-      console.error("Error during finalization:", e);
+      console.error('Error during finalization:', e);
       return [];
     }
   }
@@ -248,11 +248,11 @@ export class SlideParser {
    * Reset the parser state
    */
   public reset(): void {
-    this.buffer = "";
+    this.buffer = '';
     this.completedSections = [];
     this.parsedSlides = [];
     this.lastInputLength = 0;
-    this.latestContent = "";
+    this.latestContent = '';
     // Don't reset sectionIdMap to maintain IDs across reset calls
   }
 
@@ -267,7 +267,7 @@ export class SlideParser {
     }
 
     // Clear tracking state
-    this.latestContent = "";
+    this.latestContent = '';
   }
 
   /**
@@ -275,12 +275,12 @@ export class SlideParser {
    */
   private clearGeneratingMarksFromNodes(nodes: Descendant[]): void {
     for (const node of nodes) {
-      if ("text" in node && (node as GeneratingText).generating !== undefined) {
+      if ('text' in node && (node as GeneratingText).generating !== undefined) {
         (node as GeneratingText).generating = undefined;
       }
 
       if (
-        "children" in node &&
+        'children' in node &&
         Array.isArray(node.children) &&
         node.children.length > 0
       ) {
@@ -313,18 +313,18 @@ export class SlideParser {
     let extractedSectionEndIdx = 0;
 
     // Handle potential PRESENTATION wrapper tag - skip it
-    const presentationStartIdx = this.buffer.indexOf("<PRESENTATION");
+    const presentationStartIdx = this.buffer.indexOf('<PRESENTATION');
     if (presentationStartIdx !== -1 && presentationStartIdx < 10) {
       // Found PRESENTATION tag at the beginning, find the end of the opening tag
-      const tagEndIdx = this.buffer.indexOf(">", presentationStartIdx);
+      const tagEndIdx = this.buffer.indexOf('>', presentationStartIdx);
       if (tagEndIdx !== -1) {
         // Skip past the full opening tag including any attributes
         startIdx = tagEndIdx + 1;
 
         // Also skip any comments after the PRESENTATION tag
-        const commentStartIdx = this.buffer.indexOf("<!--", startIdx);
+        const commentStartIdx = this.buffer.indexOf('<!--', startIdx);
         if (commentStartIdx !== -1 && commentStartIdx < startIdx + 20) {
-          const commentEndIdx = this.buffer.indexOf("-->", commentStartIdx);
+          const commentEndIdx = this.buffer.indexOf('-->', commentStartIdx);
           if (commentEndIdx !== -1) {
             startIdx = commentEndIdx + 3;
           }
@@ -334,14 +334,14 @@ export class SlideParser {
 
     while (true) {
       // Find the next SECTION start tag
-      const sectionStartIdx = this.buffer.indexOf("<SECTION", startIdx);
+      const sectionStartIdx = this.buffer.indexOf('<SECTION', startIdx);
       if (sectionStartIdx === -1) break;
 
       // Find the corresponding end tag, or another SECTION start
-      const sectionEndIdx = this.buffer.indexOf("</SECTION>", sectionStartIdx);
+      const sectionEndIdx = this.buffer.indexOf('</SECTION>', sectionStartIdx);
       const nextSectionIdx = this.buffer.indexOf(
-        "<SECTION",
-        sectionStartIdx + 1,
+        '<SECTION',
+        sectionStartIdx + 1
       );
 
       // If we found a complete section with proper ending
@@ -352,11 +352,11 @@ export class SlideParser {
         // Extract the complete section
         const completeSection = this.buffer.substring(
           sectionStartIdx,
-          sectionEndIdx + "</SECTION>".length,
+          sectionEndIdx + '</SECTION>'.length
         );
 
         this.completedSections.push(completeSection);
-        startIdx = sectionEndIdx + "</SECTION>".length;
+        startIdx = sectionEndIdx + '</SECTION>'.length;
         extractedSectionEndIdx = startIdx;
       }
       // If we found another SECTION starting before this one ends
@@ -364,23 +364,23 @@ export class SlideParser {
         // Force close the current section
         const partialSection = this.buffer.substring(
           sectionStartIdx,
-          nextSectionIdx,
+          nextSectionIdx
         );
 
         // Check if it has actual content
         if (
-          partialSection.includes("<H1>") ||
-          partialSection.includes("<H2>") ||
-          partialSection.includes("<H3>") ||
-          partialSection.includes("<PYRAMID>") ||
-          partialSection.includes("<ARROWS>") ||
-          partialSection.includes("<TIMELINE>") ||
-          partialSection.includes("<P>") ||
-          partialSection.includes("<ICON>") ||
-          partialSection.includes("<IMG")
+          partialSection.includes('<H1>') ||
+          partialSection.includes('<H2>') ||
+          partialSection.includes('<H3>') ||
+          partialSection.includes('<PYRAMID>') ||
+          partialSection.includes('<ARROWS>') ||
+          partialSection.includes('<TIMELINE>') ||
+          partialSection.includes('<P>') ||
+          partialSection.includes('<ICON>') ||
+          partialSection.includes('<IMG')
         ) {
           // Add a closing tag and process it
-          this.completedSections.push(partialSection + "</SECTION>");
+          this.completedSections.push(partialSection + '</SECTION>');
         }
 
         startIdx = nextSectionIdx;
@@ -406,7 +406,7 @@ export class SlideParser {
   private generateSectionIdentifier(sectionNode: XMLNode): string {
     // Try to find a unique heading to identify the section
     const h1Node = sectionNode.children.find(
-      (child) => child.tag.toUpperCase() === "H1",
+      (child) => child.tag.toUpperCase() === 'H1'
     );
 
     // Use H1 content as a primary identifier if available
@@ -419,14 +419,14 @@ export class SlideParser {
 
     // No reliable heading found, use a combination of the first few child elements
     // and any section attributes to create a fingerprint
-    let fingerprint = "";
+    let fingerprint = '';
 
     // Add section attributes
     const attrKeys = Object.keys(sectionNode.attributes).sort();
     if (attrKeys.length > 0) {
       fingerprint += attrKeys
         .map((key) => `${key}=${sectionNode.attributes[key]}`)
-        .join(";");
+        .join(';');
     }
 
     // Add first few child element tags
@@ -434,7 +434,7 @@ export class SlideParser {
       .slice(0, 3)
       .map((child) => child.tag.toUpperCase());
     if (childTags.length > 0) {
-      fingerprint += "|" + childTags.join("-");
+      fingerprint += '|' + childTags.join('-');
     }
 
     // If we still don't have a usable fingerprint, use the full section content hash
@@ -442,7 +442,7 @@ export class SlideParser {
     if (fingerprint.length < 5) {
       // Simple string hash function
       let hash = 0;
-      const fullContent = sectionNode.originalTagContent ?? "";
+      const fullContent = sectionNode.originalTagContent ?? '';
       for (let i = 0; i < fullContent.length; i++) {
         const char = fullContent.charCodeAt(i);
         hash = (hash << 5) - hash + char;
@@ -464,7 +464,7 @@ export class SlideParser {
 
     // Find the SECTION node (should be the first child of ROOT)
     const sectionNode = rootNode.children.find(
-      (child) => child.tag.toUpperCase() === "SECTION",
+      (child) => child.tag.toUpperCase() === 'SECTION'
     );
 
     if (!sectionNode) {
@@ -472,7 +472,7 @@ export class SlideParser {
         id: nanoid(),
         content: [],
         layoutType: undefined,
-        alignment: "center",
+        alignment: 'center',
       }; // Return empty content object with a new ID if no section found
     }
 
@@ -498,14 +498,14 @@ export class SlideParser {
     if (layoutAttr) {
       // Validate that the layout attribute is one of our allowed values
       if (
-        layoutAttr === "left" ||
-        layoutAttr === "right" ||
-        layoutAttr === "vertical" ||
-        layoutAttr === "background"
+        layoutAttr === 'left' ||
+        layoutAttr === 'right' ||
+        layoutAttr === 'vertical' ||
+        layoutAttr === 'background'
       ) {
         layoutType = layoutAttr as LayoutType;
       } else {
-        layoutType = "left";
+        layoutType = 'left';
       }
     }
 
@@ -517,18 +517,18 @@ export class SlideParser {
 
     for (const child of sectionNode.children) {
       // Check if this is a root-level IMG
-      if (child.tag.toUpperCase() === "IMG") {
+      if (child.tag.toUpperCase() === 'IMG') {
         // Only process if we have the complete original tag content
         if (child.originalTagContent) {
-          const url = child.attributes.url ?? child.attributes.src ?? "";
+          const url = child.attributes.url ?? child.attributes.src ?? '';
 
           // Check for complete quotes in the query attribute
-          const queryStart = child.originalTagContent.indexOf("query=");
+          const queryStart = child.originalTagContent.indexOf('query=');
           let isCompleteQuery = false;
 
           if (queryStart !== -1) {
             const afterQuery = child.originalTagContent.substring(
-              queryStart + 6,
+              queryStart + 6
             );
             if (afterQuery.length > 0) {
               const quoteChar = afterQuery[0];
@@ -543,7 +543,7 @@ export class SlideParser {
                 if (isCompleteQuery) {
                   const extractedQuery = afterQuery.substring(
                     1,
-                    closingQuoteIdx,
+                    closingQuoteIdx
                   );
 
                   // Only set rootImage if the query is valid and we don't already have one
@@ -568,7 +568,7 @@ export class SlideParser {
       }
 
       // FIXED: Special handling for top-level DIV elements
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         // Process each child of the DIV as a top-level element
         for (const divChild of child.children) {
           const processedElement = this.processTopLevelNode(divChild);
@@ -591,7 +591,7 @@ export class SlideParser {
       content: plateElements,
       ...(rootImage ? { rootImage } : {}),
       ...(layoutType ? { layoutType: layoutType } : {}),
-      alignment: "center",
+      alignment: 'center',
     };
   };
 
@@ -603,70 +603,70 @@ export class SlideParser {
 
     // Handle each possible top-level element type
     switch (tag) {
-      case "H1":
-      case "H2":
-      case "H3":
-      case "H4":
-      case "H5":
-      case "H6":
+      case 'H1':
+      case 'H2':
+      case 'H3':
+      case 'H4':
+      case 'H5':
+      case 'H6':
         return this.createHeading(
-          tag.toLowerCase() as "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
-          node,
+          tag.toLowerCase() as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
+          node
         );
 
-      case "P":
+      case 'P':
         return this.createParagraph(node);
 
-      case "IMG":
+      case 'IMG':
         return this.createImage(node);
 
-      case "COLUMNS":
+      case 'COLUMNS':
         return this.createColumns(node);
 
-      case "BULLETS":
+      case 'BULLETS':
         return this.createBulletGroup(node);
 
-      case "ICONS":
+      case 'ICONS':
         return this.createIconList(node);
 
-      case "CYCLE":
+      case 'CYCLE':
         return this.createCycle(node);
 
-      case "STAIRCASE":
+      case 'STAIRCASE':
         return this.createStaircase(node);
 
-      case "CHART":
+      case 'CHART':
         return this.createChart(node);
 
-      case "ARROWS":
+      case 'ARROWS':
         return this.createArrowList(node);
 
       // New components
-      case "BOXES":
+      case 'BOXES':
         return this.createBoxes(node);
-      case "COMPARE":
+      case 'COMPARE':
         return this.createCompare(node);
-      case "BEFORE-AFTER":
-      case "BEFOREAFTER":
+      case 'BEFORE-AFTER':
+      case 'BEFOREAFTER':
         return this.createBeforeAfter(node);
-      case "PROS-CONS":
-      case "PROSCONS":
+      case 'PROS-CONS':
+      case 'PROSCONS':
         return this.createProsCons(node);
-      case "ARROW-VERTICAL":
-      case "ARROW_VERTICAL":
-      case "VERTICAL-ARROWS":
-      case "VERTICAL_ARROWS":
+      case 'ARROW-VERTICAL':
+      case 'ARROW_VERTICAL':
+      case 'VERTICAL-ARROWS':
+      case 'VERTICAL_ARROWS':
         return this.createArrowVertical(node);
-      case "TABLE":
+      case 'TABLE':
         return this.createPlainTable(node);
 
-      case "BUTTON":
+      case 'BUTTON':
         return this.createButton(node);
 
-      case "PYRAMID":
+      case 'PYRAMID':
         return this.createPyramid(node);
 
-      case "TIMELINE":
+      case 'TIMELINE':
         return this.createTimeline(node);
 
       default:
@@ -683,9 +683,9 @@ export class SlideParser {
   private parseXML(xmlString: string): XMLNode {
     // Create a root node to hold all parsed content
     const rootNode: XMLNode = {
-      tag: "ROOT",
+      tag: 'ROOT',
       attributes: {},
-      content: "",
+      content: '',
       children: [],
     };
 
@@ -693,11 +693,11 @@ export class SlideParser {
     let processedXml = xmlString;
 
     // Handle opening tag with possible attributes
-    const presentationOpenStart = processedXml.indexOf("<PRESENTATION");
+    const presentationOpenStart = processedXml.indexOf('<PRESENTATION');
     if (presentationOpenStart !== -1) {
       const presentationOpenEnd = processedXml.indexOf(
-        ">",
-        presentationOpenStart,
+        '>',
+        presentationOpenStart
       );
       if (presentationOpenEnd !== -1) {
         // Remove the entire opening tag including attributes
@@ -708,21 +708,21 @@ export class SlideParser {
     }
 
     // Handle closing tag
-    processedXml = processedXml.replace("</PRESENTATION>", "");
+    processedXml = processedXml.replace('</PRESENTATION>', '');
 
     try {
       // Add simple recovery - force close any unclosed tags
       let fixedXml = processedXml;
 
       // If there's no </SECTION> at the end but there is a <SECTION>, add one
-      if (fixedXml.includes("<SECTION") && !fixedXml.endsWith("</SECTION>")) {
-        fixedXml += "</SECTION>";
+      if (fixedXml.includes('<SECTION') && !fixedXml.endsWith('</SECTION>')) {
+        fixedXml += '</SECTION>';
       }
 
       // Manually parse the XML
       this.parseElement(fixedXml, rootNode);
     } catch (error) {
-      console.error("Error parsing XML:", error);
+      console.error('Error parsing XML:', error);
 
       // Fall back to a very basic parser that just captures top level tags
       // First remove the PRESENTATION tags if present
@@ -730,11 +730,11 @@ export class SlideParser {
 
       // Handle opening tag with possible attributes
       const presentationOpenStart =
-        withoutPresentation.indexOf("<PRESENTATION");
+        withoutPresentation.indexOf('<PRESENTATION');
       if (presentationOpenStart !== -1) {
         const presentationOpenEnd = withoutPresentation.indexOf(
-          ">",
-          presentationOpenStart,
+          '>',
+          presentationOpenStart
         );
         if (presentationOpenEnd !== -1) {
           // Remove the entire opening tag including attributes
@@ -745,7 +745,7 @@ export class SlideParser {
       }
 
       // Handle closing tag
-      withoutPresentation = withoutPresentation.replace("</PRESENTATION>", "");
+      withoutPresentation = withoutPresentation.replace('</PRESENTATION>', '');
 
       const sections = withoutPresentation.split(/<\/?SECTION[^>]*>/);
       let inSection = false;
@@ -754,9 +754,9 @@ export class SlideParser {
         if (inSection && section.trim()) {
           // Create a synthetic section
           const sectionNode: XMLNode = {
-            tag: "SECTION",
+            tag: 'SECTION',
             attributes: {},
-            content: "",
+            content: '',
             children: [],
           };
 
@@ -779,7 +779,7 @@ export class SlideParser {
 
     while (currentIndex < xml.length) {
       // Find next tag
-      const tagStart = xml.indexOf("<", currentIndex);
+      const tagStart = xml.indexOf('<', currentIndex);
 
       // No more tags, add remaining text as content
       if (tagStart === -1) {
@@ -793,7 +793,7 @@ export class SlideParser {
       }
 
       // Find end of tag
-      const tagEnd = xml.indexOf(">", tagStart);
+      const tagEnd = xml.indexOf('>', tagStart);
 
       // Incomplete tag, treat as text
       if (tagEnd === -1) {
@@ -805,7 +805,7 @@ export class SlideParser {
       const tagContent = xml.substring(tagStart + 1, tagEnd);
 
       // Check if this is a closing tag for the current node
-      if (tagContent.startsWith("/")) {
+      if (tagContent.startsWith('/')) {
         const closingTag = tagContent.substring(1);
 
         if (closingTag.toUpperCase() === parentNode.tag.toUpperCase()) {
@@ -820,8 +820,8 @@ export class SlideParser {
       }
 
       // Skip comments
-      if (tagContent.startsWith("!--")) {
-        const commentEnd = xml.indexOf("-->", tagStart);
+      if (tagContent.startsWith('!--')) {
+        const commentEnd = xml.indexOf('-->', tagStart);
         currentIndex = commentEnd !== -1 ? commentEnd + 3 : xml.length;
         continue;
       }
@@ -830,25 +830,25 @@ export class SlideParser {
       let tagName: string;
       let attrString: string;
 
-      const firstSpace = tagContent.indexOf(" ");
+      const firstSpace = tagContent.indexOf(' ');
       if (firstSpace === -1) {
         tagName = tagContent;
-        attrString = "";
+        attrString = '';
       } else {
         tagName = tagContent.substring(0, firstSpace);
         attrString = tagContent.substring(firstSpace + 1);
       }
 
       // Skip special tags
-      if (tagName.startsWith("!") || tagName.startsWith("?")) {
+      if (tagName.startsWith('!') || tagName.startsWith('?')) {
         currentIndex = tagEnd + 1;
         continue;
       }
 
       // Check if this is a self-closing tag
-      const isSelfClosing = tagContent.endsWith("/");
+      const isSelfClosing = tagContent.endsWith('/');
       if (isSelfClosing) {
-        tagName = tagName.replace(/\/$/, "");
+        tagName = tagName.replace(/\/$/, '');
       }
 
       // Parse attributes
@@ -857,7 +857,7 @@ export class SlideParser {
 
       while (attrRemaining.length > 0) {
         // Find next attribute name
-        const eqIndex = attrRemaining.indexOf("=");
+        const eqIndex = attrRemaining.indexOf('=');
         if (eqIndex === -1) {
           // No more attributes with values
           break;
@@ -867,7 +867,7 @@ export class SlideParser {
         attrRemaining = attrRemaining.substring(eqIndex + 1).trim();
 
         // Parse attribute value
-        let attrValue = "";
+        let attrValue = '';
         const quoteChar = attrRemaining.charAt(0);
 
         if (quoteChar === '"' || quoteChar === "'") {
@@ -880,18 +880,18 @@ export class SlideParser {
           } else {
             // Unclosed quote, take the rest
             attrValue = attrRemaining.substring(1);
-            attrRemaining = "";
+            attrRemaining = '';
           }
         } else {
           // No quotes, take until next space
-          const nextSpaceIndex = attrRemaining.indexOf(" ");
+          const nextSpaceIndex = attrRemaining.indexOf(' ');
 
           if (nextSpaceIndex !== -1) {
             attrValue = attrRemaining.substring(0, nextSpaceIndex);
             attrRemaining = attrRemaining.substring(nextSpaceIndex + 1).trim();
           } else {
             attrValue = attrRemaining;
-            attrRemaining = "";
+            attrRemaining = '';
           }
         }
 
@@ -902,7 +902,7 @@ export class SlideParser {
       const newNode: XMLNode = {
         tag: tagName,
         attributes,
-        content: "",
+        content: '',
         children: [],
         originalTagContent: xml.substring(tagStart, tagEnd + 1),
       };
@@ -953,15 +953,15 @@ export class SlideParser {
 
     // If the text is followed by a tag, it's not being generated
     const afterText = this.latestContent.substring(textEnd).trim();
-    return !afterText.startsWith("<");
+    return !afterText.startsWith('<');
   }
 
   /**
    * Create a heading element
    */
   private createHeading(
-    level: "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
-    node: XMLNode,
+    level: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
+    node: XMLNode
   ): HeadingElement {
     return {
       type: level,
@@ -974,7 +974,7 @@ export class SlideParser {
    */
   private createParagraph(node: XMLNode): ParagraphElement {
     return {
-      type: "p",
+      type: 'p',
       children: this.getTexDescendants(node),
     } as ParagraphElement;
   }
@@ -988,10 +988,10 @@ export class SlideParser {
       return null;
     }
 
-    const url = node.attributes.url ?? node.attributes.src ?? "";
+    const url = node.attributes.url ?? node.attributes.src ?? '';
 
     // Check for complete quotes in the query attribute
-    const queryStart = node.originalTagContent.indexOf("query=");
+    const queryStart = node.originalTagContent.indexOf('query=');
 
     if (queryStart === -1) {
       return null;
@@ -1025,10 +1025,10 @@ export class SlideParser {
 
     // Query is valid and complete, create the image element
     return {
-      type: "img",
+      type: 'img',
       url: url,
       query: query,
-      children: [{ text: "" } as TText],
+      children: [{ text: '' } as TText],
     } as ImageElement;
   }
 
@@ -1040,11 +1040,11 @@ export class SlideParser {
 
     // Process DIV children as column items
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         const columnItem: TColumnElement = {
           type: ColumnItemPlugin.key,
           children: this.processNodes(child.children) as Descendant[],
-          width: "M",
+          width: 'M',
         };
         columnItems.push(columnItem);
       }
@@ -1068,7 +1068,7 @@ export class SlideParser {
     if (children.length === 0) {
       // If no children, create a paragraph with the text content
       return {
-        type: "p",
+        type: 'p',
         children: [
           {
             text: nodeContent,
@@ -1085,7 +1085,7 @@ export class SlideParser {
     } else {
       // If multiple children, wrap in a paragraph
       return {
-        type: "p",
+        type: 'p',
         children: children as Descendant[],
       } as ParagraphElement;
     }
@@ -1099,9 +1099,9 @@ export class SlideParser {
 
     // Process DIV children as bullet items
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         const bulletItem: TBulletItemElement = {
-          type: "bullet",
+          type: 'bullet',
           children: this.processNodes(child.children) as Descendant[],
         };
         bulletItems.push(bulletItem);
@@ -1109,7 +1109,7 @@ export class SlideParser {
     }
 
     return {
-      type: "bullets",
+      type: 'bullets',
       children: bulletItems,
     } as TBulletGroupElement;
   }
@@ -1122,32 +1122,32 @@ export class SlideParser {
 
     // Process DIV children as icon items
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         // Look for icon name in ICON child
-        let query = "";
+        let query = '';
         const children: Descendant[] = [];
 
         for (const iconChild of child.children) {
-          if (iconChild.tag.toUpperCase() === "ICON") {
+          if (iconChild.tag.toUpperCase() === 'ICON') {
             // Get the query attribute
-            let rawQuery = iconChild.attributes.query ?? "";
+            let rawQuery = iconChild.attributes.query ?? '';
 
             // Clean query by removing any XML fragments
             if (
-              rawQuery.includes("<") ||
-              rawQuery.includes(">") ||
-              rawQuery.includes("</") ||
-              rawQuery.includes("SECTION")
+              rawQuery.includes('<') ||
+              rawQuery.includes('>') ||
+              rawQuery.includes('</') ||
+              rawQuery.includes('SECTION')
             ) {
               const tagIndex = Math.min(
-                rawQuery.indexOf("<") !== -1 ? rawQuery.indexOf("<") : Infinity,
-                rawQuery.indexOf(">") !== -1 ? rawQuery.indexOf(">") : Infinity,
-                rawQuery.indexOf("</") !== -1
-                  ? rawQuery.indexOf("</")
+                rawQuery.indexOf('<') !== -1 ? rawQuery.indexOf('<') : Infinity,
+                rawQuery.indexOf('>') !== -1 ? rawQuery.indexOf('>') : Infinity,
+                rawQuery.indexOf('</') !== -1
+                  ? rawQuery.indexOf('</')
                   : Infinity,
-                rawQuery.indexOf("SECTION") !== -1
-                  ? rawQuery.indexOf("SECTION")
-                  : Infinity,
+                rawQuery.indexOf('SECTION') !== -1
+                  ? rawQuery.indexOf('SECTION')
+                  : Infinity
               );
 
               rawQuery = rawQuery.substring(0, tagIndex).trim();
@@ -1168,14 +1168,14 @@ export class SlideParser {
         // Add icon element if found - with empty name property
         if (query) {
           children.unshift({
-            type: "icon",
+            type: 'icon',
             query: query,
-            children: [{ text: "" } as TText],
+            children: [{ text: '' } as TText],
           } as TIconElement);
         }
 
         const iconItem: TIconListItemElement = {
-          type: "icon-item",
+          type: 'icon-item',
           children,
         };
         iconItems.push(iconItem);
@@ -1183,7 +1183,7 @@ export class SlideParser {
     }
 
     return {
-      type: "icons",
+      type: 'icons',
       children: iconItems,
     } as TIconListElement;
   }
@@ -1196,9 +1196,9 @@ export class SlideParser {
 
     // Process DIV children as cycle items
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         const cycleItem: TCycleItemElement = {
-          type: "cycle-item",
+          type: 'cycle-item',
           children: this.processNodes(child.children) as Descendant[],
         };
         cycleItems.push(cycleItem);
@@ -1206,7 +1206,7 @@ export class SlideParser {
     }
 
     return {
-      type: "cycle",
+      type: 'cycle',
       children: cycleItems,
     } as TCycleGroupElement;
   }
@@ -1219,9 +1219,9 @@ export class SlideParser {
 
     // Process DIV children as stair items
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         const stairItem: TStairItemElement = {
-          type: "stair-item",
+          type: 'stair-item',
           children: this.processNodes(child.children) as Descendant[],
         };
         stairItems.push(stairItem);
@@ -1229,7 +1229,7 @@ export class SlideParser {
     }
 
     return {
-      type: "staircase",
+      type: 'staircase',
       children: stairItems,
     } as TStairGroupElement;
   }
@@ -1242,7 +1242,7 @@ export class SlideParser {
 
     // Process DIV children as arrow items
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         // Process all elements inside the DIV
         const itemChildren: Descendant[] = [];
 
@@ -1268,7 +1268,7 @@ export class SlideParser {
         // Create an arrow-item element
         if (itemChildren.length > 0) {
           arrowItems.push({
-            type: "arrow-item",
+            type: 'arrow-item',
             children: itemChildren,
           } as TArrowListItemElement);
         }
@@ -1276,11 +1276,11 @@ export class SlideParser {
     }
 
     return {
-      type: "arrows",
+      type: 'arrows',
       children:
         arrowItems.length > 0
           ? arrowItems
-          : ([{ text: "" } as TText] as Descendant[]),
+          : ([{ text: '' } as TText] as Descendant[]),
     } as TArrowListElement;
   }
 
@@ -1292,9 +1292,9 @@ export class SlideParser {
 
     // Process DIV children as pyramid items
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         const pyramidItem: TPyramidItemElement = {
-          type: "pyramid-item",
+          type: 'pyramid-item',
           children: this.processNodes(child.children) as Descendant[],
         };
         pyramidItems.push(pyramidItem);
@@ -1302,7 +1302,7 @@ export class SlideParser {
     }
 
     return {
-      type: "pyramid",
+      type: 'pyramid',
       children: pyramidItems,
     } as TPyramidGroupElement;
   }
@@ -1313,14 +1313,14 @@ export class SlideParser {
   private createBoxes(node: XMLNode): TBoxGroupElement {
     const items: TBoxItemElement[] = [];
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         items.push({
-          type: "box-item",
+          type: 'box-item',
           children: this.processNodes(child.children) as Descendant[],
         } as TBoxItemElement);
       }
     }
-    return { type: "boxes", children: items } as TBoxGroupElement;
+    return { type: 'boxes', children: items } as TBoxGroupElement;
   }
 
   /**
@@ -1329,14 +1329,14 @@ export class SlideParser {
   private createCompare(node: XMLNode): TCompareGroupElement {
     const sides: TCompareSideElement[] = [];
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         sides.push({
-          type: "compare-side",
+          type: 'compare-side',
           children: this.processNodes(child.children) as Descendant[],
         } as TCompareSideElement);
       }
     }
-    return { type: "compare", children: sides } as TCompareGroupElement;
+    return { type: 'compare', children: sides } as TCompareGroupElement;
   }
 
   /**
@@ -1345,15 +1345,15 @@ export class SlideParser {
   private createBeforeAfter(node: XMLNode): TBeforeAfterGroupElement {
     const sides: TBeforeAfterSideElement[] = [];
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         sides.push({
-          type: "before-after-side",
+          type: 'before-after-side',
           children: this.processNodes(child.children) as Descendant[],
         } as TBeforeAfterSideElement);
       }
     }
     return {
-      type: "before-after",
+      type: 'before-after',
       children: sides,
     } as TBeforeAfterGroupElement;
   }
@@ -1364,26 +1364,26 @@ export class SlideParser {
   private createProsCons(node: XMLNode): TProsConsGroupElement {
     const children: (TProsItemElement | TConsItemElement)[] = [];
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "PROS") {
+      if (child.tag.toUpperCase() === 'PROS') {
         children.push({
-          type: "pros-item",
+          type: 'pros-item',
           children: this.processNodes(child.children) as Descendant[],
         } as TProsItemElement);
-      } else if (child.tag.toUpperCase() === "CONS") {
+      } else if (child.tag.toUpperCase() === 'CONS') {
         children.push({
-          type: "cons-item",
+          type: 'cons-item',
           children: this.processNodes(child.children) as Descendant[],
         } as TConsItemElement);
-      } else if (child.tag.toUpperCase() === "DIV") {
+      } else if (child.tag.toUpperCase() === 'DIV') {
         // fallback: alternating divs pros/cons
         const isPros = children.length % 2 === 0;
         children.push({
-          type: isPros ? "pros-item" : "cons-item",
+          type: isPros ? 'pros-item' : 'cons-item',
           children: this.processNodes(child.children) as Descendant[],
         } as unknown as TProsItemElement);
       }
     }
-    return { type: "pros-cons", children } as TProsConsGroupElement;
+    return { type: 'pros-cons', children } as TProsConsGroupElement;
   }
 
   /**
@@ -1392,15 +1392,15 @@ export class SlideParser {
   private createArrowVertical(node: XMLNode): TSequenceArrowGroupElement {
     const items: TSequenceArrowItemElement[] = [];
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         items.push({
-          type: "arrow-vertical-item",
+          type: 'arrow-vertical-item',
           children: this.processNodes(child.children) as Descendant[],
         } as TSequenceArrowItemElement);
       }
     }
     return {
-      type: "arrow-vertical",
+      type: 'arrow-vertical',
       children: items,
     } as TSequenceArrowGroupElement;
   }
@@ -1417,11 +1417,11 @@ export class SlideParser {
 
       for (const cellNode of rowNode.children) {
         const tag = cellNode.tag.toUpperCase();
-        if (tag === "TD" || tag === "TH") {
-          const isCellHeader = tag === "TH";
+        if (tag === 'TD' || tag === 'TH') {
+          const isCellHeader = tag === 'TH';
 
           const cellChildren = this.processNodes(
-            cellNode.children,
+            cellNode.children
           ) as Descendant[];
 
           const colSpanStr =
@@ -1445,16 +1445,16 @@ export class SlideParser {
           if (background) extraProps.background = background;
 
           const cell = {
-            type: isCellHeader ? "th" : "td",
+            type: isCellHeader ? 'th' : 'td',
             ...extraProps,
             children:
               cellChildren.length > 0
                 ? cellChildren
                 : ([
                     {
-                      type: "p",
+                      type: 'p',
                       children: [
-                        { text: cellNode.content?.trim?.() || "" } as TText,
+                        { text: cellNode.content?.trim?.() || '' } as TText,
                       ],
                     },
                   ] as unknown as Descendant[]),
@@ -1464,16 +1464,16 @@ export class SlideParser {
         }
       }
 
-      rows.push({ type: "tr", children: cells } as TTableRowElement);
+      rows.push({ type: 'tr', children: cells } as TTableRowElement);
     };
 
     // Handle explicit THEAD
     for (const child of node.children) {
       const tag = child.tag.toUpperCase();
-      if (tag === "THEAD") {
+      if (tag === 'THEAD') {
         for (const row of child.children) {
           const rowTag = row.tag.toUpperCase();
-          if (rowTag === "TR" || rowTag === "ROW") parseRow(row);
+          if (rowTag === 'TR' || rowTag === 'ROW') parseRow(row);
         }
       }
     }
@@ -1483,12 +1483,12 @@ export class SlideParser {
     const bodyRows: XMLNode[] = [];
     for (const child of node.children) {
       const tag = child.tag.toUpperCase();
-      if (tag === "TBODY") {
+      if (tag === 'TBODY') {
         for (const row of child.children) {
           const rowTag = row.tag.toUpperCase();
-          if (rowTag === "TR" || rowTag === "ROW") bodyRows.push(row);
+          if (rowTag === 'TR' || rowTag === 'ROW') bodyRows.push(row);
         }
-      } else if (tag === "TR" || tag === "ROW") {
+      } else if (tag === 'TR' || tag === 'ROW') {
         directRows.push(child);
       }
     }
@@ -1500,7 +1500,7 @@ export class SlideParser {
       parseRow(row);
     }
 
-    return { type: "table", children: rows } as TTableElement;
+    return { type: 'table', children: rows } as TTableElement;
   }
   /**
    * Create a timeline layout element
@@ -1510,7 +1510,7 @@ export class SlideParser {
 
     // Process DIV children as timeline items
     for (const child of node.children) {
-      if (child.tag.toUpperCase() === "DIV") {
+      if (child.tag.toUpperCase() === 'DIV') {
         // Process all elements inside the DIV
         const itemChildren: Descendant[] = [];
 
@@ -1536,7 +1536,7 @@ export class SlideParser {
         // Create a timeline-item element
         if (itemChildren.length > 0) {
           timelineItems.push({
-            type: "timeline-item",
+            type: 'timeline-item',
             children: itemChildren,
           } as TTimelineItemElement);
         }
@@ -1544,11 +1544,11 @@ export class SlideParser {
     }
 
     return {
-      type: "timeline",
+      type: 'timeline',
       children:
         timelineItems.length > 0
           ? timelineItems
-          : ([{ text: "" } as TText] as Descendant[]),
+          : ([{ text: '' } as TText] as Descendant[]),
     } as TTimelineGroupElement;
   }
 
@@ -1557,26 +1557,26 @@ export class SlideParser {
    */
   private createChart(node: XMLNode): PlateNode {
     // Extract chart type from attributes
-    const chartType = (node.attributes.charttype || "bar").toLowerCase();
+    const chartType = (node.attributes.charttype || 'bar').toLowerCase();
 
     // Support DATA-based rows first
     const dataNodes = node.children.filter(
-      (child) => child.tag.toUpperCase() === "DATA",
+      (child) => child.tag.toUpperCase() === 'DATA'
     );
 
     let parsedData: unknown[] | null = null;
 
     if (dataNodes.length > 0) {
-      if (chartType === "scatter") {
+      if (chartType === 'scatter') {
         const points: Array<{ x: number; y: number }> = [];
         for (const d of dataNodes) {
           // Prefer child tags <X>, <Y>; fallback to attributes x,y
-          const xNode = d.children.find((c) => c.tag.toUpperCase() === "X");
-          const yNode = d.children.find((c) => c.tag.toUpperCase() === "Y");
+          const xNode = d.children.find((c) => c.tag.toUpperCase() === 'X');
+          const yNode = d.children.find((c) => c.tag.toUpperCase() === 'Y');
           const xAttr = d.attributes.x;
           const yAttr = d.attributes.y;
-          const x = parseFloat(xNode?.content?.trim?.() || xAttr || "0");
-          const y = parseFloat(yNode?.content?.trim?.() || yAttr || "0");
+          const x = parseFloat(xNode?.content?.trim?.() || xAttr || '0');
+          const y = parseFloat(yNode?.content?.trim?.() || yAttr || '0');
           points.push({
             x: Number.isNaN(x) ? 0 : x,
             y: Number.isNaN(y) ? 0 : y,
@@ -1588,20 +1588,20 @@ export class SlideParser {
         for (const d of dataNodes) {
           // Prefer child tags <LABEL> and <VALUE>; fallback to attributes
           const labelNode = d.children.find(
-            (c) => c.tag.toUpperCase() === "LABEL",
+            (c) => c.tag.toUpperCase() === 'LABEL'
           );
           const valueNode = d.children.find(
-            (c) => c.tag.toUpperCase() === "VALUE",
+            (c) => c.tag.toUpperCase() === 'VALUE'
           );
-          const labelAttr = d.attributes.label ?? d.attributes.name ?? "";
-          const valueAttr = d.attributes.value ?? "";
+          const labelAttr = d.attributes.label ?? d.attributes.name ?? '';
+          const valueAttr = d.attributes.value ?? '';
           const label = (
             labelNode?.content?.trim?.() ||
             labelAttr ||
-            ""
+            ''
           ).toString();
           const valueParsed = parseFloat(
-            (valueNode?.content?.trim?.() || valueAttr || "0").toString(),
+            (valueNode?.content?.trim?.() || valueAttr || '0').toString()
           );
           rows.push({
             label,
@@ -1630,7 +1630,7 @@ export class SlideParser {
     return {
       type: elementType,
       data: parsedData,
-      children: [{ text: "" } as TText],
+      children: [{ text: '' } as TText],
     } as PlateNode;
   }
 
@@ -1638,30 +1638,30 @@ export class SlideParser {
    * Create a non-functional themed Button element from <BUTTON>
    */
   private createButton(node: XMLNode): PlateNode {
-    const variantAttr = (node.attributes.variant || "").toLowerCase();
-    const sizeAttr = (node.attributes.size || "").toLowerCase();
+    const variantAttr = (node.attributes.variant || '').toLowerCase();
+    const sizeAttr = (node.attributes.size || '').toLowerCase();
 
-    const variant: "filled" | "outline" | "ghost" | undefined =
-      variantAttr === "filled" ||
-      variantAttr === "outline" ||
-      variantAttr === "ghost"
-        ? (variantAttr as "filled" | "outline" | "ghost")
+    const variant: 'filled' | 'outline' | 'ghost' | undefined =
+      variantAttr === 'filled' ||
+      variantAttr === 'outline' ||
+      variantAttr === 'ghost'
+        ? (variantAttr as 'filled' | 'outline' | 'ghost')
         : undefined;
 
-    const size: "sm" | "md" | "lg" | undefined =
-      sizeAttr === "sm" || sizeAttr === "md" || sizeAttr === "lg"
-        ? (sizeAttr as "sm" | "md" | "lg")
+    const size: 'sm' | 'md' | 'lg' | undefined =
+      sizeAttr === 'sm' || sizeAttr === 'md' || sizeAttr === 'lg'
+        ? (sizeAttr as 'sm' | 'md' | 'lg')
         : undefined;
 
     const children = this.processNodes(node.children) as Descendant[];
-    const fallback = node.content?.trim?.() || "";
+    const fallback = node.content?.trim?.() || '';
     const finalChildren =
       children.length > 0
         ? children
         : ([{ text: fallback }] as unknown as Descendant[]);
 
     return {
-      type: "button",
+      type: 'button',
       ...(variant ? { variant } : {}),
       ...(size ? { size } : {}),
       children: finalChildren,
@@ -1695,7 +1695,7 @@ export class SlideParser {
       const childTag = child.tag.toUpperCase();
 
       // Handle inline formatting elements
-      if (childTag === "B" || childTag === "STRONG") {
+      if (childTag === 'B' || childTag === 'STRONG') {
         const content = this.getTextContent(child, false);
         descendants.push({
           text: content, // Don't trim
@@ -1705,7 +1705,7 @@ export class SlideParser {
             ? { generating: true }
             : {}),
         } as Descendant);
-      } else if (childTag === "I" || childTag === "EM") {
+      } else if (childTag === 'I' || childTag === 'EM') {
         const content = this.getTextContent(child, false);
         descendants.push({
           text: content, // Don't trim
@@ -1715,7 +1715,7 @@ export class SlideParser {
             ? { generating: true }
             : {}),
         } as Descendant);
-      } else if (childTag === "U") {
+      } else if (childTag === 'U') {
         const content = this.getTextContent(child, false);
         descendants.push({
           text: content, // Don't trim
@@ -1725,7 +1725,7 @@ export class SlideParser {
             ? { generating: true }
             : {}),
         } as Descendant);
-      } else if (childTag === "S" || childTag === "STRIKE") {
+      } else if (childTag === 'S' || childTag === 'STRIKE') {
         const content = this.getTextContent(child, false);
         descendants.push({
           text: content, // Don't trim
@@ -1750,7 +1750,7 @@ export class SlideParser {
 
     for (const descendant of descendants) {
       // Skip completely empty text nodes
-      if ("text" in descendant && descendant.text === "") {
+      if ('text' in descendant && descendant.text === '') {
         continue;
       }
 
@@ -1761,7 +1761,7 @@ export class SlideParser {
     // If we have no descendants, return a single empty text node
     return cleanedDescendants.length > 0
       ? cleanedDescendants
-      : [{ text: "" } as TText];
+      : [{ text: '' } as TText];
   }
 
   /**
@@ -1796,13 +1796,13 @@ export class SlideParser {
       const tag = node.tag.toUpperCase();
 
       // Group consecutive <LI> siblings into Plate list items (unordered by default)
-      if (tag === "LI") {
+      if (tag === 'LI') {
         const liNodes: XMLNode[] = [];
         let j = i;
         while (j < nodes.length) {
           const candidate = nodes[j];
           if (!candidate) break;
-          if (candidate.tag.toUpperCase() !== "LI") break;
+          if (candidate.tag.toUpperCase() !== 'LI') break;
           liNodes.push(candidate);
           j += 1;
         }
@@ -1830,65 +1830,65 @@ export class SlideParser {
     const tag = node.tag.toUpperCase();
 
     switch (tag) {
-      case "H1":
-      case "H2":
-      case "H3":
-      case "H4":
-      case "H5":
-      case "H6":
+      case 'H1':
+      case 'H2':
+      case 'H3':
+      case 'H4':
+      case 'H5':
+      case 'H6':
         return this.createHeading(
-          tag.toLowerCase() as "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
-          node,
+          tag.toLowerCase() as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
+          node
         );
 
-      case "P":
+      case 'P':
         return this.createParagraph(node);
 
-      case "IMG":
+      case 'IMG':
         // The createImage function will return null for incomplete images
         return this.createImage(node);
 
-      case "COLUMNS":
+      case 'COLUMNS':
         return this.createColumns(node);
 
-      case "DIV":
+      case 'DIV':
         // Process DIV contents and add to parent
         return this.processDiv(node);
 
-      case "BULLETS":
+      case 'BULLETS':
         return this.createBulletGroup(node);
 
-      case "ICONS":
+      case 'ICONS':
         return this.createIconList(node);
 
-      case "CYCLE":
+      case 'CYCLE':
         return this.createCycle(node);
 
-      case "STAIRCASE":
+      case 'STAIRCASE':
         return this.createStaircase(node);
 
-      case "CHART":
+      case 'CHART':
         return this.createChart(node);
 
-      case "ARROWS":
+      case 'ARROWS':
         return this.createArrowList(node);
 
-      case "LI":
+      case 'LI':
         // Fallback: single Plate list item (unordered by default)
         return this.createListItemsFromLiNodes([node])[0] ?? null;
 
-      case "PYRAMID":
+      case 'PYRAMID':
         return this.createPyramid(node);
 
-      case "TIMELINE":
+      case 'TIMELINE':
         return this.createTimeline(node);
 
-      case "ICON":
+      case 'ICON':
         // Skip processing ICON tags directly - they should be processed by their parent
         // This prevents incomplete icons from being processed
         return null;
 
-      case "BUTTON":
+      case 'BUTTON':
         return this.createButton(node);
 
       default:
@@ -1899,7 +1899,7 @@ export class SlideParser {
           // default to a paragraph containing the children
           if (children.length > 0) {
             return {
-              type: "p",
+              type: 'p',
               children: children as Descendant[],
             } as ParagraphElement;
           }
@@ -1915,14 +1915,14 @@ export class SlideParser {
    */
   private createListItemsFromLiNodes(
     liNodes: XMLNode[],
-    isOrdered = false,
+    isOrdered = false
   ): ParagraphElement[] {
     const items: ParagraphElement[] = [];
 
     for (const li of liNodes) {
       // Process LI children; if none, use text content
       let itemChildren = this.processNodes(li.children) as Descendant[];
-      const contentText = li.content?.trim?.() ?? "";
+      const contentText = li.content?.trim?.() ?? '';
 
       if ((!itemChildren || itemChildren.length === 0) && contentText) {
         itemChildren = [
@@ -1936,14 +1936,14 @@ export class SlideParser {
       }
 
       if (!itemChildren || itemChildren.length === 0) {
-        itemChildren = [{ text: "" } as TText] as unknown as Descendant[];
+        itemChildren = [{ text: '' } as TText] as unknown as Descendant[];
       }
 
       items.push({
-        type: "p",
+        type: 'p',
         children: itemChildren,
         indent: 1,
-        listStyleType: isOrdered ? "decimal" : "disc",
+        listStyleType: isOrdered ? 'decimal' : 'disc',
       } as unknown as ParagraphElement);
     }
 

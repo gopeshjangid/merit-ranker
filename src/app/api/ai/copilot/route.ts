@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       system,
       temperature: 0.7,
     });
-    return NextResponse.json({text});
+    return NextResponse.json({ text });
   } catch (error) {
     if (error instanceof Error && error.name === 'AbortError') {
       return NextResponse.json(null, { status: 408 });

@@ -1,22 +1,22 @@
-import { type NodeEntry, PathApi, type TElement, type TText } from "platejs";
-import { type PlateEditor } from "platejs/react";
+import { type NodeEntry, PathApi, type TElement, type TText } from 'platejs';
+import { type PlateEditor } from 'platejs/react';
 
 /**
  * Components that require force full sibling updates when their siblings change
  * These components depend on sibling indexes or count for their layout/styling
  */
 export const COMPONENTS_REQUIRING_SIBLING_UPDATES = [
-  "pyramid-item",
-  "cycle-item",
-  "stair-item",
-  "before-after-side",
-  "compare-side",
-  "timeline-item",
-  "arrow-vertical-item",
-  "box-item",
-  "bullet",
-  "cons-item",
-  "pros-item",
+  'pyramid-item',
+  'cycle-item',
+  'stair-item',
+  'before-after-side',
+  'compare-side',
+  'timeline-item',
+  'arrow-vertical-item',
+  'box-item',
+  'bullet',
+  'cons-item',
+  'pros-item',
 ] as const;
 
 /**
@@ -27,7 +27,7 @@ export const COMPONENTS_REQUIRING_SIBLING_UPDATES = [
 export function updateSiblingsForcefully(
   editor: PlateEditor,
   parentElement: NodeEntry<TElement | TText>[0] | null,
-  parentPath: number[],
+  parentPath: number[]
 ) {
   if (
     !parentElement?.children ||
@@ -46,7 +46,7 @@ export function updateSiblingsForcefully(
         try {
           editor.tf.setNodes(
             { lastUpdate: updateTimestamp },
-            { at: siblingPath },
+            { at: siblingPath }
           );
         } catch {
           // ignore errors for siblings that might be mid-edit
@@ -64,12 +64,12 @@ export function updateSiblingsForcefully(
 export function updateSiblingsAfterDrop(
   editor: PlateEditor,
   droppedElement: { type: string; id?: string },
-  dropPath: number[],
+  dropPath: number[]
 ) {
   // Check if the dropped element requires sibling updates
   if (
     !COMPONENTS_REQUIRING_SIBLING_UPDATES.includes(
-      droppedElement.type as (typeof COMPONENTS_REQUIRING_SIBLING_UPDATES)[number],
+      droppedElement.type as (typeof COMPONENTS_REQUIRING_SIBLING_UPDATES)[number]
     )
   ) {
     return;

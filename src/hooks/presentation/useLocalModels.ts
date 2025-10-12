@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 
 interface ModelInfo {
   id: string;
   name: string;
-  provider: "ollama" | "lmstudio";
+  provider: 'ollama' | 'lmstudio';
 }
 
 interface OllamaResponse {
@@ -18,9 +18,9 @@ interface LMStudioResponse {
 // Fetch models from Ollama
 async function fetchOllamaModels(): Promise<ModelInfo[]> {
   try {
-    const response = await fetch("http://localhost:11434/api/tags");
+    const response = await fetch('http://localhost:11434/api/tags');
     if (!response.ok) {
-      throw new Error("Ollama not available");
+      throw new Error('Ollama not available');
     }
 
     const data = (await response.json()) as OllamaResponse;
@@ -31,10 +31,10 @@ async function fetchOllamaModels(): Promise<ModelInfo[]> {
     return data.models.map((model) => ({
       id: `ollama-${model.name}`,
       name: model.name,
-      provider: "ollama" as const,
+      provider: 'ollama' as const,
     }));
   } catch (error) {
-    console.log("Ollama not available:", error);
+    console.log('Ollama not available:', error);
     return [];
   }
 }
@@ -42,22 +42,22 @@ async function fetchOllamaModels(): Promise<ModelInfo[]> {
 // Fetch models from LM Studio
 async function fetchLMStudioModels(): Promise<ModelInfo[]> {
   try {
-    const response = await fetch("http://localhost:1234/v1/models");
+    const response = await fetch('http://localhost:1234/v1/models');
 
     const data = (await response.json()) as LMStudioResponse;
 
     if (!data.data || !Array.isArray(data.data)) {
       return [];
     }
-    console.log("lmstudio models", data);
+    console.log('lmstudio models', data);
 
     return data.data.map((model) => ({
       id: `lmstudio-${model.id}`,
       name: model.id,
-      provider: "lmstudio" as const,
+      provider: 'lmstudio' as const,
     }));
   } catch (error) {
-    console.log("LM Studio not available:", error);
+    console.log('LM Studio not available:', error);
     return [];
   }
 }
@@ -75,54 +75,54 @@ async function fetchLocalModels(): Promise<ModelInfo[]> {
 // Popular downloadable models for Ollama
 export const downloadableModels: ModelInfo[] = [
   {
-    id: "ollama-llama3.1:8b",
-    name: "llama3.1:8b",
-    provider: "ollama",
+    id: 'ollama-llama3.1:8b',
+    name: 'llama3.1:8b',
+    provider: 'ollama',
   },
   {
-    id: "ollama-llama3.1:70b",
-    name: "llama3.1:70b",
-    provider: "ollama",
+    id: 'ollama-llama3.1:70b',
+    name: 'llama3.1:70b',
+    provider: 'ollama',
   },
   {
-    id: "ollama-llama3.2:3b",
-    name: "llama3.2:3b",
-    provider: "ollama",
+    id: 'ollama-llama3.2:3b',
+    name: 'llama3.2:3b',
+    provider: 'ollama',
   },
   {
-    id: "ollama-llama3.2:8b",
-    name: "llama3.2:8b",
-    provider: "ollama",
+    id: 'ollama-llama3.2:8b',
+    name: 'llama3.2:8b',
+    provider: 'ollama',
   },
   {
-    id: "ollama-mistral:7b",
-    name: "mistral:7b",
-    provider: "ollama",
+    id: 'ollama-mistral:7b',
+    name: 'mistral:7b',
+    provider: 'ollama',
   },
   {
-    id: "ollama-codellama:7b",
-    name: "codellama:7b",
-    provider: "ollama",
+    id: 'ollama-codellama:7b',
+    name: 'codellama:7b',
+    provider: 'ollama',
   },
   {
-    id: "ollama-qwen2.5:7b",
-    name: "qwen2.5:7b",
-    provider: "ollama",
+    id: 'ollama-qwen2.5:7b',
+    name: 'qwen2.5:7b',
+    provider: 'ollama',
   },
   {
-    id: "ollama-gemma2:9b",
-    name: "gemma2:9b",
-    provider: "ollama",
+    id: 'ollama-gemma2:9b',
+    name: 'gemma2:9b',
+    provider: 'ollama',
   },
   {
-    id: "ollama-phi3:3.8b",
-    name: "phi3:3.8b",
-    provider: "ollama",
+    id: 'ollama-phi3:3.8b',
+    name: 'phi3:3.8b',
+    provider: 'ollama',
   },
   {
-    id: "ollama-neural-chat:7b",
-    name: "neural-chat:7b",
-    provider: "ollama",
+    id: 'ollama-neural-chat:7b',
+    name: 'neural-chat:7b',
+    provider: 'ollama',
   },
 ];
 
@@ -130,9 +130,9 @@ export const downloadableModels: ModelInfo[] = [
 export const fallbackModels: ModelInfo[] = downloadableModels;
 
 // localStorage keys
-const MODELS_CACHE_KEY = "presentation-models-cache";
-const SELECTED_MODEL_KEY = "presentation-selected-model";
-const CACHE_EXPIRY_KEY = "presentation-models-cache-expiry";
+const MODELS_CACHE_KEY = 'presentation-models-cache';
+const SELECTED_MODEL_KEY = 'presentation-selected-model';
+const CACHE_EXPIRY_KEY = 'presentation-models-cache-expiry';
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 // localStorage utilities
@@ -155,7 +155,7 @@ function setCachedModels(models: ModelInfo[]): void {
     localStorage.setItem(MODELS_CACHE_KEY, JSON.stringify(models));
     localStorage.setItem(
       CACHE_EXPIRY_KEY,
-      (Date.now() + CACHE_DURATION).toString(),
+      (Date.now() + CACHE_DURATION).toString()
     );
   } catch {
     // Ignore localStorage errors
@@ -168,10 +168,10 @@ export function getSelectedModel(): {
 } | null {
   try {
     const selected = localStorage.getItem(SELECTED_MODEL_KEY);
-    console.log("Getting selected model from localStorage:", selected);
+    console.log('Getting selected model from localStorage:', selected);
     return selected ? JSON.parse(selected) : null;
   } catch (error) {
-    console.error("Error getting selected model from localStorage:", error);
+    console.error('Error getting selected model from localStorage:', error);
     return null;
   }
 }
@@ -180,9 +180,9 @@ export function setSelectedModel(modelProvider: string, modelId: string): void {
   try {
     const data = { modelProvider, modelId };
     localStorage.setItem(SELECTED_MODEL_KEY, JSON.stringify(data));
-    console.log("Saved model to localStorage:", data);
+    console.log('Saved model to localStorage:', data);
   } catch (error) {
-    console.error("Error saving model to localStorage:", error);
+    console.error('Error saving model to localStorage:', error);
   }
 }
 
@@ -193,7 +193,7 @@ export function useLocalModels() {
   const cachedModels = getCachedModels();
 
   const query = useQuery({
-    queryKey: ["local-models"],
+    queryKey: ['local-models'],
     queryFn: async () => {
       const freshModels = await fetchLocalModels();
       setCachedModels(freshModels);

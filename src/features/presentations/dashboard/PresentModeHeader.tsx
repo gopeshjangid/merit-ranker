@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { usePresentationState } from "@/states/presentation-state";
+import { Button } from '@/components/ui/button';
+import { usePresentationState } from '@/states/presentation-state';
 
 export function PresentModeHeader({ showHeader, presentationTitle }) {
   return (
     <div
-      className={`fixed left-0 right-0 top-0 z-[1000] transition-all duration-300 ${
-        showHeader ? "translate-y-0" : "translate-y-[-100%]"
+      className={`fixed top-0 right-0 left-0 z-[1000] transition-all duration-300 ${
+        showHeader ? 'translate-y-0' : 'translate-y-[-100%]'
       }`}
     >
       <div className="border-b border-white/10 bg-black/80 backdrop-blur-sm">

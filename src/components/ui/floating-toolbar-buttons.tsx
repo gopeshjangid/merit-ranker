@@ -44,15 +44,15 @@ export function FloatingToolbarButtons() {
             <TurnIntoToolbarButton />
 
             <FontColorToolbarButton nodeType={KEYS.color} tooltip="Text color">
-                          <BaselineIcon />
-                        </FontColorToolbarButton>
-            
-                        <FontColorToolbarButton
-                          nodeType={KEYS.backgroundColor}
-                          tooltip="Background color"
-                        >
-                          <PaintBucketIcon />
-                        </FontColorToolbarButton>
+              <BaselineIcon />
+            </FontColorToolbarButton>
+
+            <FontColorToolbarButton
+              nodeType={KEYS.backgroundColor}
+              tooltip="Background color"
+            >
+              <PaintBucketIcon />
+            </FontColorToolbarButton>
 
             <MarkToolbarButton nodeType={KEYS.bold} tooltip="Bold (⌘+B)">
               <BoldIcon />

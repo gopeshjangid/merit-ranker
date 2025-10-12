@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 // Import IconItem and constants
-import { cn } from "@/lib/utils";
-import { PlateElement, withRef } from "platejs/react";
+import { cn } from '@/lib/utils';
+import { PlateElement, withRef } from 'platejs/react';
 
 // Main icons component with withRef pattern
 export const IconList = withRef<typeof PlateElement>(
@@ -12,20 +12,20 @@ export const IconList = withRef<typeof PlateElement>(
     // Determine number of columns based on item count
     const getColumnClass = () => {
       const count = items.length;
-      if (count <= 2) return "grid-cols-1";
-      if (count <= 2) return "grid-cols-2";
-      return "grid-cols-3"; // Max 3 columns
+      if (count <= 2) return 'grid-cols-1';
+      if (count <= 2) return 'grid-cols-2';
+      return 'grid-cols-3'; // Max 3 columns
     };
 
     return (
       <PlateElement
         ref={ref}
         element={element}
-        className={cn("my-6", className)}
+        className={cn('my-6', className)}
         {...props}
       >
-        <div className={cn("grid gap-6", getColumnClass())}>{children}</div>
+        <div className={cn('grid gap-6', getColumnClass())}>{children}</div>
       </PlateElement>
     );
-  },
+  }
 );

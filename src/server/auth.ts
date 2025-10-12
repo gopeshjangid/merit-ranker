@@ -1,10 +1,10 @@
-import { env } from "@/env";
-import { db } from "@/server/db";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import NextAuth, { type DefaultSession, type Session } from "next-auth";
-import { type Adapter } from "next-auth/adapters";
-import GoogleProvider from "next-auth/providers/google";
-declare module "next-auth" {
+import { env } from '@/env';
+import { db } from '@/server/db';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import NextAuth, { type DefaultSession, type Session } from 'next-auth';
+import { type Adapter } from 'next-auth/adapters';
+import GoogleProvider from 'next-auth/providers/google';
+declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: {
       id: string;
@@ -12,7 +12,7 @@ declare module "next-auth" {
       location?: string;
       role: string;
       isAdmin: boolean;
-    } & DefaultSession["user"];
+    } & DefaultSession['user'];
   }
 
   interface User {
@@ -24,7 +24,7 @@ declare module "next-auth" {
 export const { auth, handlers, signIn, signOut } = NextAuth({
   trustHost: true,
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   callbacks: {
     async jwt({ token, user, trigger, session }) {
@@ -34,29 +34,29 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         token.name = user.name;
         token.image = user.image;
         token.picture = user.image;
-        token.location = (user as Session["user"]).location;
+        token.location = (user as Session['user']).location;
         token.role = user.role;
-        token.isAdmin = user.role === "ADMIN";
+        token.isAdmin = user.role === 'ADMIN';
       }
 
       // Handle updates
-      if (trigger === "update" && (session as Session)?.user) {
+      if (trigger === 'update' && (session as Session)?.user) {
         const user = await db.user.findUnique({
           where: { id: token.id as string },
         });
-        console.log("Session", session, user);
+        console.log('Session', session, user);
         if (session) {
           token.name = (session as Session).user.name;
           token.image = (session as Session).user.image;
           token.picture = (session as Session).user.image;
           token.location = (session as Session).user.location;
           token.role = (session as Session).user.role;
-          token.isAdmin = (session as Session).user.role === "ADMIN";
+          token.isAdmin = (session as Session).user.role === 'ADMIN';
         }
         if (user) {
           token.hasAccess = user?.hasAccess ?? false;
           token.role = user.role;
-          token.isAdmin = user.role === "ADMIN";
+          token.isAdmin = user.role === 'ADMIN';
         }
       }
 
@@ -67,11 +67,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       session.user.hasAccess = token.hasAccess as boolean;
       session.user.location = token.location as string;
       session.user.role = token.role as string;
-      session.user.isAdmin = token.role === "ADMIN";
+      session.user.isAdmin = token.role === 'ADMIN';
       return session;
     },
     async signIn({ user, account }) {
-      if (account?.provider === "google") {
+      if (account?.provider === 'google') {
         const dbUser = await db.user.findUnique({
           where: { email: user.email! },
           select: { id: true, hasAccess: true, role: true },
@@ -82,7 +82,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           user.role = dbUser.role;
         } else {
           user.hasAccess = false;
-          user.role = "USER";
+          user.role = 'USER';
         }
       }
 

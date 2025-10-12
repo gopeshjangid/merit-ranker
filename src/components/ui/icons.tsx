@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 import {
   Book,
   CandlestickChart,
@@ -29,8 +29,8 @@ import {
   User,
   Youtube,
   type LucideProps,
-} from "lucide-react";
-import { forwardRef } from "react";
+} from 'lucide-react';
+import { forwardRef } from 'react';
 
 interface Props {
   className?: string;
@@ -39,10 +39,10 @@ interface Props {
 export const ICON_MAP = {
   calendar: CalendarIcon,
   cake: CakeIcon,
-  "shopping-cart": ShoppingCartIcon,
+  'shopping-cart': ShoppingCartIcon,
   car: CarIcon,
   fork: UtensilsIcon,
-  "cooking-pot": CookingPotIcon,
+  'cooking-pot': CookingPotIcon,
   bottle: PillBottleIcon,
   brain: Brain,
   lightbulb: Lightbulb,
@@ -73,7 +73,7 @@ export const ICON_MAP = {
   command: Command,
   terminal: Terminal,
   pencil: Pencil,
-  "circle-dot": CircleDot,
+  'circle-dot': CircleDot,
   website: PanelsTopLeft,
   mail: Mail,
 };
@@ -82,7 +82,7 @@ export type Icons = keyof typeof ICON_MAP;
 
 export function FontColor(props: { className?: string }) {
   return (
-    <div className={cn("h-full w-full", props.className)}>
+    <div className={cn('h-full w-full', props.className)}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20">
         <path
           d="M11 2 5.5 16h2.25l1.12-3h6.25l1.12 3h2.25L13 2h-2zm-1.38 9L12 4.67 14.38 11H9.62z"
@@ -98,7 +98,7 @@ export function GoogleLogo(props: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("h-full w-full", props.className)}
+      className={cn('h-full w-full', props.className)}
       viewBox="0 0 186.69 190.5"
     >
       <g transform="translate(1184.583 765.171)">
@@ -142,8 +142,8 @@ export function Temple(props: { className?: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={cn(
-        "relative mr-0.5 mt-[-.125em] inline-block size-[1em] shrink-0 transform-cpu text-[1.25em]",
-        props.className,
+        'relative mt-[-.125em] mr-0.5 inline-block size-[1em] shrink-0 transform-cpu text-[1.25em]',
+        props.className
       )}
     >
       <path d="M19.255 16.605a.527.527 0 0 0-.528-.527h-.188v-.779c0-3.34-1.793-6.4-4.694-8.033v-.444a3.48 3.48 0 0 0-1.318-2.73v-.565a.527.527 0 1 0-1.055 0v.565a3.48 3.48 0 0 0-1.317 2.73v.444a9.204 9.204 0 0 0-4.694 8.033v.779h-.188a.527.527 0 0 0 0 1.055h.188V21h13.078v-3.867h.188a.527.527 0 0 0 .527-.528Zm-1.77-1.306v.779H14.53v-2.702a10.76 10.76 0 0 0-1.38-5.27h.035a8.152 8.152 0 0 1 4.299 7.193Zm-6.962.779v-2.702c0-1.716.458-3.406 1.323-4.888L12 8.224l.154.264a9.704 9.704 0 0 1 1.323 4.888v2.702h-2.954Zm2.954 1.055v2.812h-2.954v-2.813h2.954ZM12 5.027c.5.457.79 1.105.79 1.795v.23h-1.58v-.23c0-.69.29-1.338.79-1.795ZM6.515 15.299a8.152 8.152 0 0 1 4.3-7.192h.034a10.76 10.76 0 0 0-1.38 5.27v2.7H6.515V15.3Zm0 1.834H9.47v2.812H6.515v-2.813Zm10.97 2.812H14.53v-2.813h2.954v2.813Z"></path>
@@ -163,8 +163,8 @@ export function Museum(props: { className?: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={cn(
-        "relative mr-0.5 mt-[-.125em] inline-block size-[1em] shrink-0 transform-cpu text-[1.25em]",
-        props.className,
+        'relative mt-[-.125em] mr-0.5 inline-block size-[1em] shrink-0 transform-cpu text-[1.25em]',
+        props.className
       )}
     >
       <path d="M19.599 10.071H4.402c-.72 0-1.03-.784-.463-1.157l7.598-4.975a.913.913 0 0 1 .926 0l7.598 4.975c.566.373.258 1.157-.462 1.157ZM19.714 17.143H4.286a.643.643 0 0 0-.643.643v1.928c0 .355.288.643.643.643h15.428a.643.643 0 0 0 .643-.643v-1.928a.643.643 0 0 0-.643-.643ZM5.571 10.071v7.072M8.786 10.071v7.072M12 10.071v7.072M15.214 10.071v7.072M18.428 10.071v7.072"></path>
@@ -198,7 +198,7 @@ export function Brain({ className }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className={cn("h-6 w-6", className)}
+      className={cn('h-6 w-6', className)}
     >
       <path d="M11.9563 2.53666C10.5312 2.63106 9.01178 3.02217 7.48332 3.69649C7.26304 3.79089 6.97983 3.8853 6.85396 3.90777C6.39093 3.97521 5.53679 4.25392 5.01082 4.51466C3.85998 5.0721 3.01483 5.89027 2.39446 7.02313C2.27758 7.23891 2.03482 7.60304 1.855 7.83231C0.133241 10.0351 0.0523227 12.1345 1.61225 14.2024C1.77858 14.4227 1.98987 14.7194 2.08427 14.8632C2.29106 15.1779 2.82602 15.6949 3.12272 15.8612C3.9364 16.3153 4.9344 16.3557 6.0223 15.9736C6.23358 15.9017 6.43588 15.8297 6.48083 15.8163C6.53478 15.7983 6.59772 15.8567 6.70561 16.032C7.19561 16.7918 7.88342 17.3132 8.71958 17.5515C9.21408 17.6954 10.1671 17.7223 10.8549 17.6189L11.3764 17.5425L11.5922 17.7448C11.8394 17.9786 12.1271 18.1359 12.5452 18.2663C12.8464 18.3607 13.4128 18.4506 13.7095 18.4506C13.8759 18.4506 13.9028 18.4776 15.0042 19.7003C15.6246 20.3881 16.1865 20.977 16.2585 21.013C16.4293 21.0984 17.9712 21.1344 18.2545 21.058C18.4972 20.9905 18.722 20.7703 18.7849 20.5365C18.8254 20.3881 18.8164 20.2802 18.722 19.8936C18.659 19.6419 18.6096 19.4171 18.6096 19.3991C18.6096 19.3812 18.7265 19.3362 18.8703 19.3047C19.2479 19.2193 19.8413 19.0035 20.2504 18.8012C21.653 18.0955 22.6825 16.9806 23.0151 15.7983C23.132 15.3757 23.141 14.7194 23.0331 14.3597C22.9612 14.108 22.7454 13.6809 22.624 13.5416C22.5611 13.4741 22.5701 13.4471 22.687 13.2943C23.8423 11.8018 23.7614 9.88674 22.4757 8.33131C22.3139 8.13351 22.0216 7.77837 21.8283 7.54011C21.2439 6.82533 19.5626 5.17549 18.9468 4.71246C17.1396 3.35933 15.3594 2.68051 13.26 2.53666C12.9004 2.51418 12.5767 2.4962 12.5407 2.50069C12.5048 2.50069 12.2395 2.51868 11.9563 2.53666ZM13.714 4.02466C13.9208 4.05163 14.1006 4.0831 14.1096 4.09209C14.1186 4.10108 14.0467 4.20447 13.9478 4.32136C13.4893 4.8698 13.1881 5.48568 13.0262 6.19147C12.9183 6.66799 12.8914 7.81883 12.9813 8.13351C13.1521 8.73141 13.9748 8.84829 14.2939 8.32232C14.3704 8.19645 14.3794 8.09755 14.3794 7.45919C14.3749 6.62753 14.4513 6.24991 14.7255 5.72844C14.9548 5.28788 15.6561 4.60457 15.8764 4.60457C16.1101 4.60457 18.0791 5.7644 18.1466 5.93523C18.16 5.97569 18.1016 6.13752 18.0207 6.30386C17.8903 6.5556 17.8229 6.63202 17.5352 6.82533C17.3374 6.96469 17.171 7.11753 17.1216 7.21194C17.0092 7.42323 17.0137 7.68846 17.1396 7.90424C17.3688 8.30434 17.8319 8.35379 18.3444 8.03011C18.686 7.81433 19.0322 7.46369 19.212 7.15799L19.3379 6.94671L19.7065 7.33781C19.9133 7.55359 20.21 7.88176 20.3673 8.07057C20.5247 8.25938 20.7854 8.56957 20.9472 8.75838C21.5496 9.47316 21.6305 9.58105 21.7834 9.88674C22.2779 10.8802 22.0981 11.8198 21.2394 12.7414C20.7989 13.2134 20.718 13.3932 20.8124 13.6944C20.8483 13.8203 20.9293 13.9461 21.0461 14.045C21.4327 14.3867 21.5586 14.5306 21.6126 14.7059C21.8463 15.4791 21.2709 16.4501 20.138 17.1874C19.4727 17.6189 18.7355 17.8932 17.8678 18.0235C17.3464 18.1 17.1486 18.2258 17.0362 18.536C16.9777 18.7023 16.9777 18.7608 17.0497 19.1024C17.0901 19.3092 17.1396 19.5115 17.1531 19.552C17.1755 19.6059 17.1486 19.6194 17.0317 19.6194C16.8878 19.6194 16.8024 19.534 15.7595 18.3787C15.0447 17.583 14.5906 17.1154 14.5007 17.0795C14.4243 17.048 14.1096 17.012 13.7994 16.9986C12.9138 16.9536 12.6261 16.8232 12.3384 16.3377C12.289 16.2523 12.1766 16.1354 12.0912 16.077C11.9024 15.9511 11.7001 15.9556 11.0572 16.113C10.7066 16.2029 10.5088 16.2208 9.93335 16.2208C9.15564 16.2253 8.94884 16.1714 8.50829 15.8702C8.29251 15.7218 7.86544 15.2408 7.86544 15.1464C7.86544 15.1195 7.99581 14.9891 8.15315 14.8632C8.70159 14.4272 9.07921 13.8023 9.17811 13.1774C9.21857 12.9122 9.21408 12.7908 9.15563 12.5031C9.07022 12.076 8.94435 11.8692 8.71508 11.7524C8.38241 11.5815 7.96883 11.6894 7.77553 11.9996C7.66764 12.1704 7.65865 12.3098 7.7081 12.8088C7.73507 13.1055 7.73057 13.1325 7.6047 13.3348C7.24506 13.8877 5.92789 14.5935 4.9254 14.7688C4.17017 14.8992 3.88246 14.7239 2.96538 13.573C2.28657 12.7189 2.02134 12.1659 1.9539 11.4602C1.92244 11.1275 2.00335 10.5521 2.12024 10.2733L2.18317 10.116L2.30905 10.3722C2.80804 11.3972 3.84649 12.0715 4.95238 12.085C5.4244 12.0895 5.5278 12.0491 5.7256 11.7793C5.85596 11.604 5.85596 11.1814 5.7256 11.0016C5.57725 10.7993 5.35697 10.6734 5.15018 10.6734C4.25108 10.6689 3.55429 10.0351 3.40594 9.08205C3.30704 8.4437 3.50034 7.85479 4.04879 7.12203C4.74559 6.19596 5.7211 5.61605 7.03378 5.34632C7.68562 5.21146 8.02278 5.34183 8.40489 5.8678C8.66113 6.21844 8.81398 6.31285 9.13765 6.31285C9.51078 6.31285 9.81647 5.98917 9.81647 5.59357C9.81647 5.3643 9.72656 5.18898 9.40738 4.79788L9.21408 4.56411L9.59169 4.44723C10.1132 4.28989 10.9044 4.11457 11.4169 4.04264C11.9563 3.97071 13.215 3.96172 13.714 4.02466Z"></path>
       <path d="M10.248 6.68169C10.1356 6.74013 10.0008 6.85701 9.94234 6.94243C9.84794 7.08178 9.83895 7.13573 9.86142 7.40995C9.8794 7.64372 9.86592 7.7606 9.81197 7.87299C9.60518 8.31354 8.6926 8.71813 8.10819 8.62822C7.95984 8.60575 7.85195 8.5518 7.68562 8.40345C7.51929 8.2551 7.4114 8.20115 7.25855 8.17418C6.80001 8.10675 6.37744 8.52932 6.44487 8.98336C6.50331 9.35649 7.00231 9.81952 7.51929 9.98136C8.08122 10.1522 8.91288 10.0937 9.54225 9.8375L9.81197 9.72961L10.0502 9.99035C10.5312 10.5208 11.1112 10.8085 11.7136 10.8085C12.28 10.8085 12.6981 10.6107 12.8374 10.2826C12.9813 9.94539 12.8689 9.59924 12.5407 9.37897C12.3789 9.27107 12.235 9.26658 11.772 9.3475C11.5652 9.38796 11.4169 9.31153 11.1471 9.03731L10.9448 8.82602L11.0662 8.61474C11.4483 7.92693 11.3944 6.99637 10.9493 6.72215C10.7066 6.5693 10.4908 6.55582 10.248 6.68169Z"></path>
@@ -211,7 +211,7 @@ export function Mouth({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("h-6 w-6 text-inherit", className)}
+      className={cn('h-6 w-6 text-inherit', className)}
       viewBox="0 0 192.756 192.756"
     >
       <g>
@@ -424,7 +424,7 @@ export const MindMapIcon = forwardRef<SVGSVGElement, LucideProps>(
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
-        className={cn("h-4 w-4", props.className)}
+        className={cn('h-4 w-4', props.className)}
         {...props}
       >
         <path
@@ -465,9 +465,9 @@ export const MindMapIcon = forwardRef<SVGSVGElement, LucideProps>(
         ></path>
       </svg>
     );
-  },
+  }
 );
-MindMapIcon.displayName = "MindMapIcon";
+MindMapIcon.displayName = 'MindMapIcon';
 
 export const LogicChartIcon = forwardRef<SVGSVGElement, LucideProps>(
   (props, ref) => {
@@ -481,7 +481,7 @@ export const LogicChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={cn("h-4 w-4", props.className)}
+        className={cn('h-4 w-4', props.className)}
         {...props}
       >
         <path
@@ -504,9 +504,9 @@ export const LogicChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         ></path>
       </svg>
     );
-  },
+  }
 );
-LogicChartIcon.displayName = "LogicChartIcon";
+LogicChartIcon.displayName = 'LogicChartIcon';
 export const ReverseLogicChartIcon = forwardRef<SVGSVGElement, LucideProps>(
   (props, ref) => {
     return (
@@ -519,7 +519,7 @@ export const ReverseLogicChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={cn("h-4 w-4 rotate-180", props.className)}
+        className={cn('h-4 w-4 rotate-180', props.className)}
         {...props}
       >
         <path
@@ -542,9 +542,9 @@ export const ReverseLogicChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         ></path>
       </svg>
     );
-  },
+  }
 );
-ReverseLogicChartIcon.displayName = "ReverseLogicChartIcon";
+ReverseLogicChartIcon.displayName = 'ReverseLogicChartIcon';
 
 export const TreeChartIcon = forwardRef<SVGSVGElement, LucideProps>(
   (props, ref) => {
@@ -554,7 +554,7 @@ export const TreeChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
-        className={cn("h-4 w-4", props.className)}
+        className={cn('h-4 w-4', props.className)}
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
@@ -570,9 +570,9 @@ export const TreeChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         ></path>
       </svg>
     );
-  },
+  }
 );
-TreeChartIcon.displayName = "TreeChartIcon";
+TreeChartIcon.displayName = 'TreeChartIcon';
 
 export const TimelineChartIcon = forwardRef<SVGSVGElement, LucideProps>(
   (props, ref) => {
@@ -582,7 +582,7 @@ export const TimelineChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
-        className={cn("h-4 w-4", props.className)}
+        className={cn('h-4 w-4', props.className)}
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
@@ -627,9 +627,9 @@ export const TimelineChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         ></path>
       </svg>
     );
-  },
+  }
 );
-TimelineChartIcon.displayName = "TimelineChartIcon";
+TimelineChartIcon.displayName = 'TimelineChartIcon';
 
 export const FishboneChartIcon = forwardRef<SVGSVGElement, LucideProps>(
   (props, ref) => {
@@ -639,7 +639,7 @@ export const FishboneChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
-        className={cn("h-4 w-4", props.className)}
+        className={cn('h-4 w-4', props.className)}
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
@@ -683,6 +683,6 @@ export const FishboneChartIcon = forwardRef<SVGSVGElement, LucideProps>(
         ></path>
       </svg>
     );
-  },
+  }
 );
-FishboneChartIcon.displayName = "FishboneChartIcon";
+FishboneChartIcon.displayName = 'FishboneChartIcon';

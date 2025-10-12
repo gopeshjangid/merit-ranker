@@ -1,6 +1,6 @@
-import { usePresentationState } from "@/states/presentation-state";
-import { RefreshCw } from "lucide-react";
-import { toast } from "sonner";
+import { usePresentationState } from '@/states/presentation-state';
+import { RefreshCw } from 'lucide-react';
+import { toast } from 'sonner';
 
 export function PromptInput() {
   const {
@@ -12,7 +12,7 @@ export function PromptInput() {
 
   const handleGenerateOutline = () => {
     if (!presentationInput.trim()) {
-      toast.error("Please enter a presentation topic");
+      toast.error('Please enter a presentation topic');
       return;
     }
 
@@ -30,10 +30,10 @@ export function PromptInput() {
         disabled={isGeneratingOutline}
       />
       <button
-        className={`absolute right-3 top-1/2 -translate-y-1/2 ${
+        className={`absolute top-1/2 right-3 -translate-y-1/2 ${
           isGeneratingOutline
-            ? "text-indigo-400"
-            : "text-indigo-400 hover:text-indigo-500"
+            ? 'text-indigo-400'
+            : 'text-indigo-400 hover:text-indigo-500'
         }`}
         onClick={handleGenerateOutline}
         disabled={isGeneratingOutline || !presentationInput.trim()}

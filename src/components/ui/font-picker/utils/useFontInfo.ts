@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: This use requires any */
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
 // Hook for dynamic font info loading
 export function useFontInfo() {
@@ -15,11 +15,11 @@ export function useFontInfo() {
 
     try {
       // Dynamic import of the large JSON file
-      const fontInfoModule = await import("../font-preview/fontInfo.json");
+      const fontInfoModule = await import('../font-preview/fontInfo.json');
       setFontInfos(fontInfoModule.default);
     } catch (err) {
-      console.error("Failed to load font info:", err);
-      setError("Failed to load fonts");
+      console.error('Failed to load font info:', err);
+      setError('Failed to load fonts');
     } finally {
       setIsLoading(false);
     }

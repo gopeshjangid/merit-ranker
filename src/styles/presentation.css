@@ -13,15 +13,15 @@
   --presentation-muted: #6b7280;
 
   /* Fonts */
-  --presentation-heading-font: "Inter", sans-serif;
-  --presentation-body-font: "Inter", sans-serif;
+  --presentation-heading-font: 'Inter', sans-serif;
+  --presentation-body-font: 'Inter', sans-serif;
 
   /* Transitions */
   --presentation-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dark theme variables */
-[data-theme="dark"] {
+[data-theme='dark'] {
   --presentation-primary: #60a5fa;
   --presentation-secondary: #e5e7eb;
   --presentation-accent: #93c5fd;
@@ -76,40 +76,40 @@
   font-size: 1.3em !important;
 }
 
-:fullscreen [data-slate-editor="true"] *,
-:-webkit-full-screen [data-slate-editor="true"] *,
-:-moz-full-screen [data-slate-editor="true"] *,
-:-ms-fullscreen [data-slate-editor="true"] * {
+:fullscreen [data-slate-editor='true'] *,
+:-webkit-full-screen [data-slate-editor='true'] *,
+:-moz-full-screen [data-slate-editor='true'] *,
+:-ms-fullscreen [data-slate-editor='true'] * {
   font-size: 1.3em !important;
 }
 
 /* Special styles for when isPresenting is true */
-[data-is-presenting="true"] .ProseMirror * {
+[data-is-presenting='true'] .ProseMirror * {
   font-size: 1.4em !important;
 }
 
-[data-is-presenting="true"] h1 {
+[data-is-presenting='true'] h1 {
   font-size: 3em !important;
 }
 
-[data-is-presenting="true"] h2 {
+[data-is-presenting='true'] h2 {
   font-size: 2.5em !important;
 }
 
-[data-is-presenting="true"] h3 {
+[data-is-presenting='true'] h3 {
   font-size: 2em !important;
 }
 
-[data-is-presenting="true"] p {
+[data-is-presenting='true'] p {
   font-size: 1.5em !important;
   line-height: 1.6;
 }
 
 /* Fullscreen responsive styles for PresentationEditor container */
-:fullscreen [class*="PresentationEditor"],
-:-webkit-full-screen [class*="PresentationEditor"],
-:-moz-full-screen [class*="PresentationEditor"],
-:-ms-fullscreen [class*="PresentationEditor"] {
+:fullscreen [class*='PresentationEditor'],
+:-webkit-full-screen [class*='PresentationEditor'],
+:-moz-full-screen [class*='PresentationEditor'],
+:-ms-fullscreen [class*='PresentationEditor'] {
   transform: scale(1.2);
   transform-origin: center center;
 }
@@ -215,11 +215,11 @@ h6.presentation-heading {
 }
 
 /* Styling for presentation slides to stand out from background */
-[data-is-presenting="true"] {
+[data-is-presenting='true'] {
   backdrop-filter: brightness(1.05);
 }
 
-[data-theme="dark"] [data-is-presenting="true"] {
+[data-theme='dark'] [data-is-presenting='true'] {
   backdrop-filter: brightness(1.1);
 }
 
@@ -232,23 +232,23 @@ h6.presentation-heading {
 }
 
 /* Additional theme-specific slide styling */
-[data-theme="light"] [data-slide-content="true"],
-[data-theme="light"] .presentation-slide,
+[data-theme='light'] [data-slide-content='true'],
+[data-theme='light'] .presentation-slide,
 .presentation-slide[style] {
   background-color: var(--presentation-background) !important;
 }
 
-[data-theme="dark"] [data-slide-content="true"],
-[data-theme="dark"] .presentation-slide,
-[data-theme="dark"] .presentation-slide[style] {
+[data-theme='dark'] [data-slide-content='true'],
+[data-theme='dark'] .presentation-slide,
+[data-theme='dark'] .presentation-slide[style] {
   background-color: var(--presentation-background) !important;
 }
 
-[data-theme="dark"] .presentation-slide {
+[data-theme='dark'] .presentation-slide {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 /* Override any inline bgColor from initialContent */
-.presentation-slide[style*="background"] {
+.presentation-slide[style*='background'] {
   background-color: var(--presentation-background) !important;
 }

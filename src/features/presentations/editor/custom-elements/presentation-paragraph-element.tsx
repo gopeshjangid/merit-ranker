@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { PlateElement, withRef } from "platejs/react";
-import type React from "react";
+import { cn } from '@/lib/utils';
+import { PlateElement, withRef } from 'platejs/react';
+import type React from 'react';
 
 export interface PresentationParagraphElementProps {
   className?: string;
@@ -19,8 +19,8 @@ export const PresentationParagraphElement = withRef<
       ref={ref}
       as="p"
       className={cn(
-        "presentation-paragraph m-0 px-0 py-1 text-base",
-        className,
+        'presentation-paragraph m-0 px-0 py-1 text-base',
+        className
       )}
       {...props}
     >
@@ -29,4 +29,4 @@ export const PresentationParagraphElement = withRef<
   );
 });
 
-PresentationParagraphElement.displayName = "PresentationParagraphElement";
+PresentationParagraphElement.displayName = 'PresentationParagraphElement';

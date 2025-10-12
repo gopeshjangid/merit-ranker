@@ -1,16 +1,16 @@
-import { type SlateElementProps } from "platejs";
+import { type SlateElementProps } from 'platejs';
 
-import { NodeApi, PathApi, SlateElement } from "platejs";
+import { NodeApi, PathApi, SlateElement } from 'platejs';
 
-import { cn } from "@/lib/utils";
-import { type TPyramidGroupElement } from "../../plugins/pyramid-plugin";
+import { cn } from '@/lib/utils';
+import { type TPyramidGroupElement } from '../../plugins/pyramid-plugin';
 
 export function PyramidItemStatic(props: SlateElementProps) {
   const path = props.editor.api.findPath(props.element) ?? [-1];
   const parentPath = PathApi.parent(path);
   const parentElement = NodeApi.get(
     props.editor,
-    parentPath,
+    parentPath
   ) as TPyramidGroupElement;
 
   const totalItems =
@@ -42,7 +42,7 @@ export function PyramidItemStatic(props: SlateElementProps) {
   const clipPath = calculateClipPath();
 
   return (
-    <div className={cn("group/pyramid-item relative w-full")}>
+    <div className={cn('group/pyramid-item relative w-full')}>
       <div className="flex items-center">
         <div className="relative flex-1">
           <div
@@ -52,8 +52,8 @@ export function PyramidItemStatic(props: SlateElementProps) {
               clipPath: clipPath as unknown as string,
               backgroundColor:
                 (parentElement?.color as string) ||
-                "var(--presentation-primary)",
-              color: "var(--presentation-background)",
+                'var(--presentation-primary)',
+              color: 'var(--presentation-background)',
             }}
           >
             {index + 1}

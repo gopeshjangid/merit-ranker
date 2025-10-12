@@ -1,7 +1,7 @@
-import { type TElement } from "platejs";
-import { createPlatePlugin } from "platejs/react";
-import ButtonElement from "../custom-elements/button";
-import { BUTTON_ELEMENT } from "../lib";
+import { type TElement } from 'platejs';
+import { createPlatePlugin } from 'platejs/react';
+import ButtonElement from '../custom-elements/button';
+import { BUTTON_ELEMENT } from '../lib';
 
 export const ButtonPlugin = createPlatePlugin({
   key: BUTTON_ELEMENT,
@@ -10,13 +10,13 @@ export const ButtonPlugin = createPlatePlugin({
     component: ButtonElement,
   },
   options: {
-    variant: "filled",
-    size: "md",
+    variant: 'filled',
+    size: 'md',
   },
 });
 
 export type TButtonElement = TElement & {
   type: typeof BUTTON_ELEMENT;
-  variant?: "filled" | "outline" | "ghost";
-  size?: "sm" | "md" | "lg";
+  variant?: 'filled' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
 };

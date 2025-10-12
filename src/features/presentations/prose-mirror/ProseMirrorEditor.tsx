@@ -1,17 +1,17 @@
-import { cn } from "@/lib/utils";
-import { baseKeymap, toggleMark } from "prosemirror-commands";
-import { history, redo, undo } from "prosemirror-history";
-import { keymap } from "prosemirror-keymap";
+import { cn } from '@/lib/utils';
+import { baseKeymap, toggleMark } from 'prosemirror-commands';
+import { history, redo, undo } from 'prosemirror-history';
+import { keymap } from 'prosemirror-keymap';
 import {
   defaultMarkdownParser,
   defaultMarkdownSerializer,
-} from "prosemirror-markdown";
-import { EditorState } from "prosemirror-state";
-import { EditorView } from "prosemirror-view";
-import type React from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import FloatingToolbar from "./FloatingToolbar";
-import mySchema from "./ProseMirrorSchema";
+} from 'prosemirror-markdown';
+import { EditorState } from 'prosemirror-state';
+import { EditorView } from 'prosemirror-view';
+import type React from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import FloatingToolbar from './FloatingToolbar';
+import mySchema from './ProseMirrorSchema';
 
 interface ProseMirrorEditorProps {
   content: string;
@@ -88,7 +88,7 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({
     if (!editorRef.current) return;
 
     // Add global styles to remove ProseMirror focus outline
-    const style = document.createElement("style");
+    const style = document.createElement('style');
     style.textContent = `
       .ProseMirror {
         outline: none !important;
@@ -106,15 +106,15 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({
       plugins: [
         history(),
         keymap({
-          "Mod-z": undo,
-          "Mod-y": redo,
-          "Mod-Shift-z": redo,
-          "Mod-b": (state, dispatch) => {
+          'Mod-z': undo,
+          'Mod-y': redo,
+          'Mod-Shift-z': redo,
+          'Mod-b': (state, dispatch) => {
             const strongMark = state.schema.marks.strong;
             if (!strongMark) return false;
             return toggleMark(strongMark)(state, dispatch);
           },
-          "Mod-i": (state, dispatch) => {
+          'Mod-i': (state, dispatch) => {
             const emMark = state.schema.marks.em;
             if (!emMark) return false;
             return toggleMark(emMark)(state, dispatch);
@@ -132,7 +132,7 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({
         view.updateState(newState);
 
         const markdownContent = defaultMarkdownSerializer.serialize(
-          newState.doc,
+          newState.doc
         );
         onChange(markdownContent);
         checkForChanges(markdownContent);
@@ -147,7 +147,7 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({
           const relatedTarget = event.relatedTarget as HTMLElement;
           if (
             relatedTarget?.closest('[role="menu"]') ??
-            relatedTarget?.closest(".floating-toolbar")
+            relatedTarget?.closest('.floating-toolbar')
           ) {
             // If clicking toolbar or dropdown, don't hide
             return false;
@@ -189,7 +189,7 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({
   useEffect(() => {
     if (viewRef.current) {
       const currentContent = defaultMarkdownSerializer.serialize(
-        viewRef.current.state.doc,
+        viewRef.current.state.doc
       );
       if (currentContent !== content) {
         const newState = EditorState.create({
@@ -209,9 +209,9 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({
       <div
         ref={editorRef}
         className={cn(
-          "prose max-w-none dark:prose-invert focus:outline-none focus:ring-0",
-          isEditing ? "cursor-text" : "cursor-default",
-          className,
+          'prose max-w-none focus:ring-0 focus:outline-none dark:prose-invert',
+          isEditing ? 'cursor-text' : 'cursor-default',
+          className
         )}
       />
       {viewRef.current && showFloatingToolbar && (

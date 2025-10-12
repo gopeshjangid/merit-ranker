@@ -1,6 +1,6 @@
-import { usePresentationState } from "@/states/presentation-state";
-import { useEffect } from "react";
-import { useDebouncedSave } from "./useDebouncedSave";
+import { usePresentationState } from '@/states/presentation-state';
+import { useEffect } from 'react';
+import { useDebouncedSave } from './useDebouncedSave';
 
 interface UseSlideChangeWatcherOptions {
   /**
@@ -15,12 +15,12 @@ interface UseSlideChangeWatcherOptions {
  * a debounced save function whenever changes are detected.
  */
 export const useSlideChangeWatcher = (
-  options: UseSlideChangeWatcherOptions = {},
+  options: UseSlideChangeWatcherOptions = {}
 ) => {
   const { debounceDelay = 1000 } = options;
   const slides = usePresentationState((s) => s.slides);
   const isGeneratingPresentation = usePresentationState(
-    (s) => s.isGeneratingPresentation,
+    (s) => s.isGeneratingPresentation
   );
   const { save, saveImmediately } = useDebouncedSave({ delay: debounceDelay });
 

@@ -1,28 +1,28 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 import {
   type SlateElementProps,
   NodeApi,
   PathApi,
   SlateElement,
-} from "platejs";
-import { type TTimelineGroupElement } from "../../plugins/timeline-plugin";
+} from 'platejs';
+import { type TTimelineGroupElement } from '../../plugins/timeline-plugin';
 import {
   circleVariants,
   containerVariants,
   contentVariants,
   lineVariants,
-} from "../timeline-item";
+} from '../timeline-item';
 
 export function TimelineItemStatic(props: SlateElementProps) {
   const parentPath = PathApi.parent(
-    props.editor.api.findPath(props.element) ?? [-1],
+    props.editor.api.findPath(props.element) ?? [-1]
   );
   const parentElement = NodeApi.get(
     props.editor,
-    parentPath,
+    parentPath
   ) as TTimelineGroupElement;
-  const orientation = parentElement.orientation ?? "vertical";
-  const sidedness = parentElement.sidedness ?? "single";
+  const orientation = parentElement.orientation ?? 'vertical';
+  const sidedness = parentElement.sidedness ?? 'single';
   const showLine = parentElement.showLine ?? true;
   const numbered = parentElement.numbered ?? false;
   const index =
@@ -35,7 +35,7 @@ export function TimelineItemStatic(props: SlateElementProps) {
     //* Container
     <div
       className={cn(
-        containerVariants({ orientation, sidedness, isEven, showLine }),
+        containerVariants({ orientation, sidedness, isEven, showLine })
       )}
     >
       {/* Circle */}
@@ -43,11 +43,11 @@ export function TimelineItemStatic(props: SlateElementProps) {
         className={cn(circleVariants({ orientation, sidedness }), lineClass)}
         style={{
           backgroundColor:
-            (parentElement.color as string) || "var(--presentation-primary)",
-          color: "var(--presentation-background)",
+            (parentElement.color as string) || 'var(--presentation-primary)',
+          color: 'var(--presentation-background)',
         }}
       >
-        {numbered ? itemNumber : ""}
+        {numbered ? itemNumber : ''}
       </div>
       {/* Content */}
       <SlateElement

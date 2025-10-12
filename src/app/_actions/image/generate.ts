@@ -1,31 +1,31 @@
-"use server";
+'use server';
 
-import { utapi } from "@/app/api/uploadthing/core";
-import { env } from "@/env";
-import { auth } from "@/server/auth";
-import { db } from "@/server/db";
-import Together from "together-ai";
-import { UTFile } from "uploadthing/server";
+import { utapi } from '@/app/api/uploadthing/core';
+import { env } from '@/env';
+import { auth } from '@/server/auth';
+import { db } from '@/server/db';
+import Together from 'together-ai';
+import { UTFile } from 'uploadthing/server';
 
 const together = new Together({ apiKey: env.TOGETHER_AI_API_KEY });
 
 export type ImageModelList =
-  | "black-forest-labs/FLUX1.1-pro"
-  | "black-forest-labs/FLUX.1-schnell"
-  | "black-forest-labs/FLUX.1-schnell-Free"
-  | "black-forest-labs/FLUX.1-pro"
-  | "black-forest-labs/FLUX.1-dev";
+  | 'black-forest-labs/FLUX1.1-pro'
+  | 'black-forest-labs/FLUX.1-schnell'
+  | 'black-forest-labs/FLUX.1-schnell-Free'
+  | 'black-forest-labs/FLUX.1-pro'
+  | 'black-forest-labs/FLUX.1-dev';
 
 export async function generateImageAction(
   prompt: string,
-  model: ImageModelList = "black-forest-labs/FLUX.1-schnell-Free",
+  model: ImageModelList = 'black-forest-labs/FLUX.1-schnell-Free'
 ) {
   // Get the current session
   const session = await auth();
 
   // Check if user is authenticated
   if (!session?.user?.id) {
-    throw new Error("You must be logged in to generate images");
+    throw new Error('You must be logged in to generate images');
   }
 
   try {
@@ -37,7 +37,7 @@ export async function generateImageAction(
       prompt: prompt,
       width: 1024,
       height: 768,
-      steps: model.includes("schnell") ? 4 : 28, // Fewer steps for schnell models
+      steps: model.includes('schnell') ? 4 : 28, // Fewer steps for schnell models
       n: 1,
     })) as unknown as {
       id: string;
@@ -51,7 +51,7 @@ export async function generateImageAction(
     const imageUrl = response.data[0]?.url;
 
     if (!imageUrl) {
-      throw new Error("Failed to generate image");
+      throw new Error('Failed to generate image');
     }
 
     console.log(`Generated image URL: ${imageUrl}`);
@@ -59,14 +59,14 @@ export async function generateImageAction(
     // Download the image from Together AI URL
     const imageResponse = await fetch(imageUrl);
     if (!imageResponse.ok) {
-      throw new Error("Failed to download image from Together AI");
+      throw new Error('Failed to download image from Together AI');
     }
 
     const imageBlob = await imageResponse.blob();
     const imageBuffer = await imageBlob.arrayBuffer();
 
     // Generate a filename based on the prompt
-    const filename = `${prompt.substring(0, 20).replace(/[^a-z0-9]/gi, "_")}_${Date.now()}.png`;
+    const filename = `${prompt.substring(0, 20).replace(/[^a-z0-9]/gi, '_')}_${Date.now()}.png`;
 
     // Create a UTFile from the downloaded image
     const utFile = new UTFile([new Uint8Array(imageBuffer)], filename);
@@ -75,8 +75,8 @@ export async function generateImageAction(
     const uploadResult = await utapi.uploadFiles([utFile]);
 
     if (!uploadResult[0]?.data?.ufsUrl) {
-      console.error("Upload error:", uploadResult[0]?.error);
-      throw new Error("Failed to upload image to UploadThing");
+      console.error('Upload error:', uploadResult[0]?.error);
+      throw new Error('Failed to upload image to UploadThing');
     }
 
     console.log(uploadResult);
@@ -97,11 +97,11 @@ export async function generateImageAction(
       image: generatedImage,
     };
   } catch (error) {
-    console.error("Error generating image:", error);
+    console.error('Error generating image:', error);
     return {
       success: false,
       error:
-        error instanceof Error ? error.message : "Failed to generate image",
+        error instanceof Error ? error.message : 'Failed to generate image',
     };
   }
 }

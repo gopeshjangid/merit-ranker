@@ -1,15 +1,15 @@
-"use client";
-import { createSlateEditor, type Value } from "platejs";
-import React, { useEffect, useMemo } from "react";
+'use client';
+import { createSlateEditor, type Value } from 'platejs';
+import React, { useEffect, useMemo } from 'react';
 
-import { cn } from "@/lib/utils";
-import { usePresentationState } from "@/states/presentation-state";
-import { type PlateSlide } from "../utils/parser";
-import { EditorStatic } from "./custom-elements/static/editor-static";
-import RootImageStatic from "./custom-elements/static/root-image-static";
-import { PresentationEditorBaseKit } from "./plugins/presentation-editor-base-kit";
-import { PresentationStaticCustomKit } from "./plugins/static-custom-kit";
-import { PresentationStaticComponents } from "./plugins/static-kit";
+import { cn } from '@/lib/utils';
+import { usePresentationState } from '@/states/presentation-state';
+import { type PlateSlide } from '../utils/parser';
+import { EditorStatic } from './custom-elements/static/editor-static';
+import RootImageStatic from './custom-elements/static/root-image-static';
+import { PresentationEditorBaseKit } from './plugins/presentation-editor-base-kit';
+import { PresentationStaticCustomKit } from './plugins/static-custom-kit';
+import { PresentationStaticComponents } from './plugins/static-kit';
 
 interface PresentationEditorStaticViewProps {
   initialContent?: PlateSlide;
@@ -29,7 +29,7 @@ function slideSignature(slide?: PlateSlide): string {
       bgColor: slide?.bgColor,
     });
   } catch {
-    return String(slide?.id ?? "");
+    return String(slide?.id ?? '');
   }
 }
 
@@ -46,7 +46,7 @@ const PresentationEditorStaticView = React.memo(
           components: PresentationStaticComponents,
           value: initialContent?.content ?? ([] as Value),
         }),
-      [],
+      []
     );
 
     // Keep value in sync without recreating editor
@@ -58,39 +58,39 @@ const PresentationEditorStaticView = React.memo(
     return (
       <div
         className={cn(
-          "flex min-h-[500px] w-full",
-          "scrollbar-thumb-muted-foreground/20 hover:scrollbar-thumb-muted-foreground/30 overflow-hidden p-0 scrollbar-thin scrollbar-track-transparent",
-          "relative text-foreground",
-          "focus-within:ring-2 focus-within:ring-primary focus-within:ring-opacity-50",
+          'flex min-h-[500px] w-full',
+          'scrollbar-thin overflow-hidden p-0 scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent hover:scrollbar-thumb-muted-foreground/30',
+          'relative text-foreground',
+          'focus-within:ring-opacity-50 focus-within:ring-2 focus-within:ring-primary',
           className,
-          initialContent?.layoutType === "right" && "flex-row",
-          initialContent?.layoutType === "vertical" && "flex-col-reverse",
-          initialContent?.layoutType === "left" && "flex-row-reverse",
-          initialContent?.layoutType === "background" && "flex-col",
-          "presentation-slide",
+          initialContent?.layoutType === 'right' && 'flex-row',
+          initialContent?.layoutType === 'vertical' && 'flex-col-reverse',
+          initialContent?.layoutType === 'left' && 'flex-row-reverse',
+          initialContent?.layoutType === 'background' && 'flex-col',
+          'presentation-slide'
         )}
         style={{
-          borderRadius: "var(--presentation-border-radius, 0.5rem)",
+          borderRadius: 'var(--presentation-border-radius, 0.5rem)',
           backgroundColor: initialContent?.bgColor || undefined,
           backgroundImage:
-            initialContent?.layoutType === "background" &&
+            initialContent?.layoutType === 'background' &&
             initialContent?.rootImage?.url
               ? `url(${initialContent.rootImage.url})`
               : undefined,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
-        data-is-presenting={isPresenting ? "true" : "false"}
+        data-is-presenting={isPresenting ? 'true' : 'false'}
         data-slide-content="true"
       >
         <EditorStatic
           className={cn(
             className,
-            "flex flex-col border-none !bg-transparent p-12 outline-none h-full",
-            initialContent?.alignment === "start" && "justify-start",
-            initialContent?.alignment === "center" && "justify-center",
-            initialContent?.alignment === "end" && "justify-end",
+            'flex h-full flex-col border-none !bg-transparent p-12 outline-none',
+            initialContent?.alignment === 'start' && 'justify-start',
+            initialContent?.alignment === 'center' && 'justify-center',
+            initialContent?.alignment === 'end' && 'justify-end'
           )}
           id={id}
           editor={editor}
@@ -98,7 +98,7 @@ const PresentationEditorStaticView = React.memo(
 
         {initialContent?.rootImage &&
           initialContent.layoutType !== undefined &&
-          initialContent.layoutType !== "background" && (
+          initialContent.layoutType !== 'background' && (
             <RootImageStatic
               image={initialContent.rootImage}
               layoutType={initialContent.layoutType}
@@ -117,7 +117,7 @@ const PresentationEditorStaticView = React.memo(
       return false;
     if (prev.className !== next.className) return false;
     return true;
-  },
+  }
 );
 
 export default PresentationEditorStaticView;

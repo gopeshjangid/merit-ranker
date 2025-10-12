@@ -1,7 +1,7 @@
-import { updatePresentation } from "@/app/_actions/presentation/presentationActions";
-import { usePresentationState } from "@/states/presentation-state";
-import debounce from "lodash.debounce";
-import { useCallback, useEffect, useRef } from "react";
+import { updatePresentation } from '@/app/_actions/presentation/presentationActions';
+import { usePresentationState } from '@/states/presentation-state';
+import debounce from 'lodash.debounce';
+import { useCallback, useEffect, useRef } from 'react';
 
 interface UseDebouncedSaveOptions {
   /**
@@ -40,7 +40,7 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
         // Don't save if there's no presentation or slides
         if (!currentPresentationId || slides.length === 0) return;
         try {
-          setSavingStatus("saving");
+          setSavingStatus('saving');
 
           await updatePresentation({
             id: currentPresentationId,
@@ -48,7 +48,7 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
               slides,
               config,
             },
-            title: currentPresentationTitle ?? "",
+            title: currentPresentationTitle ?? '',
             outline,
             imageSource,
             presentationStyle,
@@ -56,19 +56,19 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
             thumbnailUrl,
           });
 
-          setSavingStatus("saved");
+          setSavingStatus('saved');
           // Reset to idle after 2 seconds
           setTimeout(() => {
-            setSavingStatus("idle");
+            setSavingStatus('idle');
           }, 2000);
         } catch (error) {
-          console.error("Failed to save presentation:", error);
-          setSavingStatus("idle");
+          console.error('Failed to save presentation:', error);
+          setSavingStatus('idle');
         }
       },
       delay,
-      { maxWait: delay * 2 },
-    ),
+      { maxWait: delay * 2 }
+    )
   ).current;
 
   // Cleanup debounce on unmount
@@ -99,7 +99,7 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
     if (!currentPresentationId || slides.length === 0) return;
 
     try {
-      setSavingStatus("saving");
+      setSavingStatus('saving');
 
       await updatePresentation({
         id: currentPresentationId,
@@ -107,7 +107,7 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
           slides,
           config,
         },
-        title: currentPresentationTitle ?? "",
+        title: currentPresentationTitle ?? '',
         outline,
         language,
         imageSource,
@@ -115,20 +115,20 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
         thumbnailUrl,
       });
 
-      setSavingStatus("saved");
+      setSavingStatus('saved');
       // Reset to idle after 2 seconds
       setTimeout(() => {
-        setSavingStatus("idle");
+        setSavingStatus('idle');
       }, 2000);
     } catch (error) {
-      console.error("Failed to save presentation:", error);
-      setSavingStatus("idle");
+      console.error('Failed to save presentation:', error);
+      setSavingStatus('idle');
     }
   }, [debouncedSave, setSavingStatus]);
 
   // Trigger save function
   const save = useCallback(() => {
-    setSavingStatus("saving");
+    setSavingStatus('saving');
     void debouncedSave();
   }, [debouncedSave, setSavingStatus]);
 

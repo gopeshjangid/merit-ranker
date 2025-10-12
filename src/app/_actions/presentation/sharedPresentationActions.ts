@@ -1,7 +1,7 @@
-"use server";
+'use server';
 
-import { auth } from "@/server/auth";
-import { db } from "@/server/db";
+import { auth } from '@/server/auth';
+import { db } from '@/server/db';
 
 /**
  * Get a public presentation without requiring authentication
@@ -37,7 +37,7 @@ export async function getSharedPresentation(id: string) {
     if (!presentation) {
       return {
         success: false,
-        message: "Presentation not found or not public",
+        message: 'Presentation not found or not public',
       };
     }
 
@@ -46,10 +46,10 @@ export async function getSharedPresentation(id: string) {
       presentation,
     };
   } catch (error) {
-    console.error("Error fetching shared presentation:", error);
+    console.error('Error fetching shared presentation:', error);
     return {
       success: false,
-      message: "Failed to fetch presentation",
+      message: 'Failed to fetch presentation',
     };
   }
 }
@@ -59,13 +59,13 @@ export async function getSharedPresentation(id: string) {
  */
 export async function togglePresentationPublicStatus(
   id: string,
-  isPublic: boolean,
+  isPublic: boolean
 ) {
   const session = await auth();
   if (!session?.user) {
     return {
       success: false,
-      message: "Unauthorized",
+      message: 'Unauthorized',
     };
   }
 
@@ -82,15 +82,15 @@ export async function togglePresentationPublicStatus(
     return {
       success: true,
       message: isPublic
-        ? "Presentation is now publicly accessible"
-        : "Presentation is now private",
+        ? 'Presentation is now publicly accessible'
+        : 'Presentation is now private',
       presentation,
     };
   } catch (error) {
-    console.error("Error updating presentation public status:", error);
+    console.error('Error updating presentation public status:', error);
     return {
       success: false,
-      message: "Failed to update presentation public status",
+      message: 'Failed to update presentation public status',
     };
   }
 }

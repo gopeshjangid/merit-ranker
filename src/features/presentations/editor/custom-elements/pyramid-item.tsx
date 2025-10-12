@@ -1,12 +1,12 @@
 // custom-elements/pyramid-item.tsx
-"use client";
-import { cn } from "@/lib/utils";
-import { NodeApi, PathApi } from "platejs";
-import { PlateElement, type PlateElementProps } from "platejs/react";
+'use client';
+import { cn } from '@/lib/utils';
+import { NodeApi, PathApi } from 'platejs';
+import { PlateElement, type PlateElementProps } from 'platejs/react';
 import {
   type TPyramidGroupElement,
   type TPyramidItemElement,
-} from "../plugins/pyramid-plugin";
+} from '../plugins/pyramid-plugin';
 
 // PyramidItem component for individual items in the pyramid
 export const PyramidItem = (props: PlateElementProps<TPyramidItemElement>) => {
@@ -14,7 +14,7 @@ export const PyramidItem = (props: PlateElementProps<TPyramidItemElement>) => {
   const parentPath = PathApi.parent(props.path);
   const parentElement = NodeApi.get(
     props.editor,
-    parentPath,
+    parentPath
   ) as TPyramidGroupElement;
 
   // Get total items from parent element, fallback to calculating from parent's children
@@ -50,7 +50,7 @@ export const PyramidItem = (props: PlateElementProps<TPyramidItemElement>) => {
   const clipPath = calculateClipPath();
 
   return (
-    <div className={cn("group/pyramid-item relative w-full")}>
+    <div className={cn('group/pyramid-item relative w-full')}>
       {/* The pyramid item layout */}
       <div className="flex items-center">
         {/* Shape with number */}
@@ -62,8 +62,8 @@ export const PyramidItem = (props: PlateElementProps<TPyramidItemElement>) => {
               clipPath: clipPath,
               backgroundColor:
                 (parentElement?.color as string) ||
-                "var(--presentation-primary)",
-              color: "var(--presentation-background)",
+                'var(--presentation-primary)',
+              color: 'var(--presentation-background)',
             }}
           >
             {index + 1}

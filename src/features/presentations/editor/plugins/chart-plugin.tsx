@@ -1,17 +1,17 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import AreaChartElement from "../custom-elements/area-chart";
-import BarGraphElement from "../custom-elements/bar-graph";
-import LineGraphElement from "../custom-elements/line-graph";
-import PieChartElement from "../custom-elements/pie-chart";
-import RadarChartElement from "../custom-elements/radar-chart";
-import ScatterPlotElement from "../custom-elements/scatter-plot";
-import AreaChartStatic from "../custom-elements/static/area-chart-static";
-import BarGraphStatic from "../custom-elements/static/bar-graph-static";
-import LineGraphStatic from "../custom-elements/static/line-graph-static";
-import PieChartStatic from "../custom-elements/static/pie-chart-static";
-import RadarChartStatic from "../custom-elements/static/radar-chart-static";
-import ScatterPlotStatic from "../custom-elements/static/scatter-plot-static";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import AreaChartElement from '../custom-elements/area-chart';
+import BarGraphElement from '../custom-elements/bar-graph';
+import LineGraphElement from '../custom-elements/line-graph';
+import PieChartElement from '../custom-elements/pie-chart';
+import RadarChartElement from '../custom-elements/radar-chart';
+import ScatterPlotElement from '../custom-elements/scatter-plot';
+import AreaChartStatic from '../custom-elements/static/area-chart-static';
+import BarGraphStatic from '../custom-elements/static/bar-graph-static';
+import LineGraphStatic from '../custom-elements/static/line-graph-static';
+import PieChartStatic from '../custom-elements/static/pie-chart-static';
+import RadarChartStatic from '../custom-elements/static/radar-chart-static';
+import ScatterPlotStatic from '../custom-elements/static/scatter-plot-static';
 import {
   AREA_CHART_ELEMENT,
   BAR_CHART_ELEMENT,
@@ -19,10 +19,10 @@ import {
   PIE_CHART_ELEMENT,
   RADAR_CHART_ELEMENT,
   SCATTER_CHART_ELEMENT,
-} from "../lib";
+} from '../lib';
 
 export type TChartNode = TElement & {
-  chartType?: "bar" | "line" | "pie" | "scatter" | "histogram";
+  chartType?: 'bar' | 'line' | 'pie' | 'scatter' | 'histogram';
   data?: unknown;
   options?: Record<string, unknown>;
 };

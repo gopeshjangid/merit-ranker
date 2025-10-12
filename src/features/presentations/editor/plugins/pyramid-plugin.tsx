@@ -1,9 +1,9 @@
 // plugins/pyramid-plugin.ts
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import Pyramid from "../custom-elements/pyramid";
-import { PyramidItem } from "../custom-elements/pyramid-item";
-import { PYRAMID_GROUP, PYRAMID_ITEM } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import Pyramid from '../custom-elements/pyramid';
+import { PyramidItem } from '../custom-elements/pyramid-item';
+import { PYRAMID_GROUP, PYRAMID_ITEM } from '../lib';
 
 // Create plugin for pyramid group (container)
 export const PyramidGroupPlugin = createTPlatePlugin({

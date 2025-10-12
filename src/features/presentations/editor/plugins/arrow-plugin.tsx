@@ -1,9 +1,9 @@
-import { createPlatePlugin } from "platejs/react";
-import { ARROW_LIST, ARROW_LIST_ITEM } from "../lib";
+import { createPlatePlugin } from 'platejs/react';
+import { ARROW_LIST, ARROW_LIST_ITEM } from '../lib';
 
-import { type TElement } from "platejs";
-import { ArrowItem } from "../custom-elements/arrow-item";
-import ArrowList from "../custom-elements/arrow-list";
+import { type TElement } from 'platejs';
+import { ArrowItem } from '../custom-elements/arrow-item';
+import ArrowList from '../custom-elements/arrow-list';
 // Create plugin for visualization item
 export const ArrowListPlugin = createPlatePlugin({
   key: ARROW_LIST,
@@ -21,7 +21,7 @@ export const ArrowListItemPlugin = createPlatePlugin({
     component: ArrowItem,
   },
   options: {
-    visualizationType: "arrow",
+    visualizationType: 'arrow',
   },
 });
 

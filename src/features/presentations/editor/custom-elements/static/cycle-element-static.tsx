@@ -1,12 +1,12 @@
-import { type SlateElementProps } from "platejs";
+import { type SlateElementProps } from 'platejs';
 
-import { SlateElement } from "platejs";
+import { SlateElement } from 'platejs';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 export function CycleElementStatic(props: SlateElementProps) {
   return (
-    <SlateElement {...props} className={cn("relative my-8", props.className)}>
+    <SlateElement {...props} className={cn('relative my-8', props.className)}>
       <div className="mx-auto grid grid-cols-3 gap-4 px-12">
         <div className="relative col-start-2 row-span-2 row-start-2 mx-auto h-64 w-64">
           <svg

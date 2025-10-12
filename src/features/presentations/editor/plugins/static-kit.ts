@@ -1,24 +1,24 @@
-import { KEYS } from "platejs";
-import VisualizationItemElementStatic from "../custom-elements/legacy/visualization-item-static";
-import VisualizationListElementStatic from "../custom-elements/legacy/visualization-list-static";
-import { ArrowItemStatic } from "../custom-elements/static/arrow-item-static";
-import ArrowListStatic from "../custom-elements/static/arrow-list-static";
-import { BulletItemStatic } from "../custom-elements/static/bullet-item-static";
-import { BulletsElementStatic } from "../custom-elements/static/bullet-static";
-import ButtonStatic from "../custom-elements/static/button-static";
-import { CycleElementStatic } from "../custom-elements/static/cycle-element-static";
-import { CycleItemStatic } from "../custom-elements/static/cycle-item-static";
-import { GeneratingLeafStatic } from "../custom-elements/static/generating-leaf-static";
-import { IconListItemStatic } from "../custom-elements/static/icon-list-item-static";
-import { IconListStatic } from "../custom-elements/static/icon-list-static";
-import { IconStatic } from "../custom-elements/static/icon-static";
-import { PresentationImageElementStatic } from "../custom-elements/static/presentation-image-element-static";
-import { PyramidItemStatic } from "../custom-elements/static/pyramid-item-static";
-import PyramidStatic from "../custom-elements/static/pyramid-static";
-import { StairItemStatic } from "../custom-elements/static/staircase-item-static";
-import StaircaseStatic from "../custom-elements/static/staircase-static";
-import { TimelineItemStatic } from "../custom-elements/static/timeline-item-static";
-import TimelineStatic from "../custom-elements/static/timeline-static";
+import { KEYS } from 'platejs';
+import VisualizationItemElementStatic from '../custom-elements/legacy/visualization-item-static';
+import VisualizationListElementStatic from '../custom-elements/legacy/visualization-list-static';
+import { ArrowItemStatic } from '../custom-elements/static/arrow-item-static';
+import ArrowListStatic from '../custom-elements/static/arrow-list-static';
+import { BulletItemStatic } from '../custom-elements/static/bullet-item-static';
+import { BulletsElementStatic } from '../custom-elements/static/bullet-static';
+import ButtonStatic from '../custom-elements/static/button-static';
+import { CycleElementStatic } from '../custom-elements/static/cycle-element-static';
+import { CycleItemStatic } from '../custom-elements/static/cycle-item-static';
+import { GeneratingLeafStatic } from '../custom-elements/static/generating-leaf-static';
+import { IconListItemStatic } from '../custom-elements/static/icon-list-item-static';
+import { IconListStatic } from '../custom-elements/static/icon-list-static';
+import { IconStatic } from '../custom-elements/static/icon-static';
+import { PresentationImageElementStatic } from '../custom-elements/static/presentation-image-element-static';
+import { PyramidItemStatic } from '../custom-elements/static/pyramid-item-static';
+import PyramidStatic from '../custom-elements/static/pyramid-static';
+import { StairItemStatic } from '../custom-elements/static/staircase-item-static';
+import StaircaseStatic from '../custom-elements/static/staircase-static';
+import { TimelineItemStatic } from '../custom-elements/static/timeline-item-static';
+import TimelineStatic from '../custom-elements/static/timeline-static';
 import {
   ARROW_LIST,
   ARROW_LIST_ITEM,
@@ -36,7 +36,7 @@ import {
   STAIR_ITEM,
   TIMELINE_GROUP,
   TIMELINE_ITEM,
-} from "../lib";
+} from '../lib';
 
 // Components mapping for static rendering
 export const PresentationStaticComponents = {
@@ -57,8 +57,8 @@ export const PresentationStaticComponents = {
   [TIMELINE_ITEM]: TimelineItemStatic,
   [BUTTON_ELEMENT]: ButtonStatic,
   // Legacy visualization adapters
-  "visualization-list": VisualizationListElementStatic,
-  "visualization-item": VisualizationItemElementStatic,
+  'visualization-list': VisualizationListElementStatic,
+  'visualization-item': VisualizationItemElementStatic,
   // Override image key to use presentation image static with crop support
   [KEYS.img]: PresentationImageElementStatic,
   // Marks

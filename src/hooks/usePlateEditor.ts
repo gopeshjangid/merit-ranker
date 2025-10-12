@@ -1,15 +1,15 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: This use requires any */
-import React from "react";
+import React from 'react';
 
-import { MarkdownPlugin } from "@platejs/markdown";
-import { type Value } from "@platejs/slate";
-import { type AnyPluginConfig } from "platejs";
+import { MarkdownPlugin } from '@platejs/markdown';
+import { type Value } from '@platejs/slate';
+import { type AnyPluginConfig } from 'platejs';
 import {
   createPlateEditor,
   type CreatePlateEditorOptions,
   type PlateCorePlugin,
   type TPlateEditor,
-} from "platejs/react";
+} from 'platejs/react';
 
 /**
  * Creates a memoized Plate editor for React components.
@@ -51,7 +51,7 @@ export function usePlateEditor<
     enabled?: TEnabled;
     initialMarkdown?: string;
   } = {},
-  deps: React.DependencyList = [],
+  deps: React.DependencyList = []
 ): TEnabled extends false
   ? null
   : TEnabled extends true | undefined
@@ -72,7 +72,7 @@ export function usePlateEditor<
     : (editor: TPlateEditor) =>
         editor
           .getApi(MarkdownPlugin)
-          .markdown.deserialize(options?.initialMarkdown ?? "");
+          .markdown.deserialize(options?.initialMarkdown ?? '');
 
   return React.useMemo((): any => {
     if (options.enabled === false) return null;

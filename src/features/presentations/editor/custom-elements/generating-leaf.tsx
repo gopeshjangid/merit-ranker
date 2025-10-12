@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { usePresentationState } from "@/states/presentation-state";
-import { PlateLeaf, type PlateLeafProps } from "platejs/react";
+import { usePresentationState } from '@/states/presentation-state';
+import { PlateLeaf, type PlateLeafProps } from 'platejs/react';
 
 export const GeneratingLeaf = ({ children, ref, ...props }: PlateLeafProps) => {
   const { leaf } = props;
@@ -15,8 +15,8 @@ export const GeneratingLeaf = ({ children, ref, ...props }: PlateLeafProps) => {
         {isGenerating && (
           <div
             style={{
-              color: "var(--presentation-text , black) !important",
-              backgroundColor: "var(--presentation-text , black) !important",
+              color: 'var(--presentation-text , black) !important',
+              backgroundColor: 'var(--presentation-text , black) !important',
             }}
             className="animate-blink z-[1000] max-h-8"
           >

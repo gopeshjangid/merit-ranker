@@ -1,8 +1,8 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import { BulletsElement } from "../custom-elements/bullet";
-import { BulletItem } from "../custom-elements/bullet-item";
-import { BULLET_GROUP, BULLET_ITEM } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import { BulletsElement } from '../custom-elements/bullet';
+import { BulletItem } from '../custom-elements/bullet-item';
+import { BULLET_GROUP, BULLET_ITEM } from '../lib';
 
 // Create plugin for bullets
 export const BulletGroupPlugin = createTPlatePlugin({

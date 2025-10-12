@@ -1,1 +1,1 @@
-export { default as FontPicker } from "./components/FontPicker";
+export { default as FontPicker } from './components/FontPicker';

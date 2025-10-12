@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -6,23 +6,23 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from '@/components/ui/command';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ChevronDown, Loader2 } from "lucide-react";
-import dynamic from "next/dynamic";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { type Font } from "../types";
-import { usePaginatedFonts } from "../utils/usePaginatedFonts";
-import { FontItem } from "./FontItem";
+} from '@/components/ui/popover';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Skeleton } from '@/components/ui/skeleton';
+import { ChevronDown, Loader2 } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { type Font } from '../types';
+import { usePaginatedFonts } from '../utils/usePaginatedFonts';
+import { FontItem } from './FontItem';
 
-const FontPreviews = dynamic(() => import("./FontPreviews"), {
+const FontPreviews = dynamic(() => import('./FontPreviews'), {
   loading: () => <Skeleton className="h-8 w-full" />,
   ssr: false,
 });
@@ -48,7 +48,7 @@ export function FontCombobox({
 }) {
   const { visibleFonts, hasMore, isLoadingMore, loadMore } = usePaginatedFonts(
     fonts,
-    searchValue,
+    searchValue
   );
 
   const { ref: loadMoreRef, inView } = useInView({
@@ -78,7 +78,7 @@ export function FontCombobox({
                 key={currentFont.sane}
                 font={currentFont}
                 fontIndex={fonts.findIndex(
-                  (font) => font.sane === currentFont.sane,
+                  (font) => font.sane === currentFont.sane
                 )}
                 isCurrent={false}
               />

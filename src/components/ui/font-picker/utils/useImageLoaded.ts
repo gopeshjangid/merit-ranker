@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function useImageLoaded(src: string) {
   const [loaded, setLoaded] = useState(false);
@@ -14,12 +14,12 @@ export function useImageLoaded(src: string) {
     const handleLoad = () => setLoaded(true);
     const handleError = () => setLoaded(false);
 
-    image.addEventListener("load", handleLoad);
-    image.addEventListener("error", handleError);
+    image.addEventListener('load', handleLoad);
+    image.addEventListener('error', handleError);
 
     return () => {
-      image.removeEventListener("load", handleLoad);
-      image.removeEventListener("error", handleError);
+      image.removeEventListener('load', handleLoad);
+      image.removeEventListener('error', handleError);
     };
   }, [src]);
 

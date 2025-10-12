@@ -1,10 +1,10 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import { VisualizationItemElement } from "../../custom-elements/legacy/visualization-item";
-import { VisualizationListElement } from "../../custom-elements/legacy/visualization-list";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import { VisualizationItemElement } from '../../custom-elements/legacy/visualization-item';
+import { VisualizationListElement } from '../../custom-elements/legacy/visualization-list';
 
-export const VISUALIZATION_LIST = "visualization-list";
-export const VISUALIZATION_LIST_ITEM = "visualization-item";
+export const VISUALIZATION_LIST = 'visualization-list';
+export const VISUALIZATION_LIST_ITEM = 'visualization-item';
 export const VisualizationListPlugin = createTPlatePlugin({
   key: VISUALIZATION_LIST,
   node: {
@@ -13,7 +13,7 @@ export const VisualizationListPlugin = createTPlatePlugin({
     component: VisualizationListElement,
   },
   options: {
-    visualizationType: "arrow",
+    visualizationType: 'arrow',
   },
 });
 
@@ -28,7 +28,7 @@ export const VisualizationItemPlugin = createTPlatePlugin({
 });
 export interface TVisualizationListElement extends TElement {
   type: typeof VISUALIZATION_LIST;
-  visualizationType: "arrow" | "pyramid" | "timeline";
+  visualizationType: 'arrow' | 'pyramid' | 'timeline';
   totalChildren: number;
 }
 

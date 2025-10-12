@@ -4,10 +4,10 @@ import {
   type TCodeBlockElement,
   SlateElement,
   SlateLeaf,
-} from "platejs";
+} from 'platejs';
 
 export function CodeBlockElementStatic(
-  props: SlateElementProps<TCodeBlockElement>,
+  props: SlateElementProps<TCodeBlockElement>
 ) {
   return (
     <SlateElement

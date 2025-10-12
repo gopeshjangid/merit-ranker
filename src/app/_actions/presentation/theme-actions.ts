@@ -1,9 +1,9 @@
-"use server";
+'use server';
 
-import { utapi } from "@/app/api/uploadthing/core";
-import { auth } from "@/server/auth";
-import { db } from "@/server/db";
-import { z } from "zod";
+import { utapi } from '@/app/api/uploadthing/core';
+import { auth } from '@/server/auth';
+import { db } from '@/server/db';
+import { z } from 'zod';
 
 // Schema for creating/updating a theme
 const themeSchema = z.object({
@@ -23,7 +23,7 @@ export async function createCustomTheme(formData: ThemeFormData) {
     if (!session?.user) {
       return {
         success: false,
-        message: "You must be signed in to create a theme",
+        message: 'You must be signed in to create a theme',
       };
     }
 
@@ -43,26 +43,26 @@ export async function createCustomTheme(formData: ThemeFormData) {
     return {
       success: true,
       themeId: newTheme.id,
-      message: "Theme created successfully",
+      message: 'Theme created successfully',
     };
   } catch (error) {
-    console.error("Failed to create custom theme:", error);
+    console.error('Failed to create custom theme:', error);
 
     // Log the actual error but return a generic message
     if (error instanceof z.ZodError) {
       return {
         success: false,
-        message: "Invalid theme data. Please check your inputs and try again.",
+        message: 'Invalid theme data. Please check your inputs and try again.',
       };
-    } else if (error instanceof Error && error.message.includes("Prisma")) {
+    } else if (error instanceof Error && error.message.includes('Prisma')) {
       return {
         success: false,
-        message: "Database error. Please try again later.",
+        message: 'Database error. Please try again later.',
       };
     } else {
       return {
         success: false,
-        message: "Something went wrong. Please try again later.",
+        message: 'Something went wrong. Please try again later.',
       };
     }
   }
@@ -71,14 +71,14 @@ export async function createCustomTheme(formData: ThemeFormData) {
 // Update an existing custom theme
 export async function updateCustomTheme(
   themeId: string,
-  formData: ThemeFormData,
+  formData: ThemeFormData
 ) {
   try {
     const session = await auth();
     if (!session?.user) {
       return {
         success: false,
-        message: "You must be signed in to update a theme",
+        message: 'You must be signed in to update a theme',
       };
     }
 
@@ -90,11 +90,11 @@ export async function updateCustomTheme(
     });
 
     if (!existingTheme) {
-      return { success: false, message: "Theme not found" };
+      return { success: false, message: 'Theme not found' };
     }
 
     if (existingTheme.userId !== session.user.id) {
-      return { success: false, message: "Not authorized to update this theme" };
+      return { success: false, message: 'Not authorized to update this theme' };
     }
 
     await db.customTheme.update({
@@ -111,26 +111,26 @@ export async function updateCustomTheme(
 
     return {
       success: true,
-      message: "Theme updated successfully",
+      message: 'Theme updated successfully',
     };
   } catch (error) {
-    console.error("Failed to update custom theme:", error);
+    console.error('Failed to update custom theme:', error);
 
     // Log the actual error but return a generic message
     if (error instanceof z.ZodError) {
       return {
         success: false,
-        message: "Invalid theme data. Please check your inputs and try again.",
+        message: 'Invalid theme data. Please check your inputs and try again.',
       };
-    } else if (error instanceof Error && error.message.includes("Prisma")) {
+    } else if (error instanceof Error && error.message.includes('Prisma')) {
       return {
         success: false,
-        message: "Database error. Please try again later.",
+        message: 'Database error. Please try again later.',
       };
     } else {
       return {
         success: false,
-        message: "Something went wrong. Please try again later.",
+        message: 'Something went wrong. Please try again later.',
       };
     }
   }
@@ -143,7 +143,7 @@ export async function deleteCustomTheme(themeId: string) {
     if (!session?.user) {
       return {
         success: false,
-        message: "You must be signed in to delete a theme",
+        message: 'You must be signed in to delete a theme',
       };
     }
 
@@ -153,22 +153,22 @@ export async function deleteCustomTheme(themeId: string) {
     });
 
     if (!existingTheme) {
-      return { success: false, message: "Theme not found" };
+      return { success: false, message: 'Theme not found' };
     }
 
     if (existingTheme.userId !== session.user.id) {
-      return { success: false, message: "Not authorized to delete this theme" };
+      return { success: false, message: 'Not authorized to delete this theme' };
     }
 
     // Delete logo from uploadthing if exists
     if (existingTheme.logoUrl) {
       try {
-        const fileKey = existingTheme.logoUrl.split("/").pop();
+        const fileKey = existingTheme.logoUrl.split('/').pop();
         if (fileKey) {
           await utapi.deleteFiles(fileKey);
         }
       } catch (deleteError) {
-        console.error("Failed to delete theme logo:", deleteError);
+        console.error('Failed to delete theme logo:', deleteError);
         // Continue with theme deletion even if logo deletion fails
       }
     }
@@ -179,14 +179,14 @@ export async function deleteCustomTheme(themeId: string) {
 
     return {
       success: true,
-      message: "Theme deleted successfully",
+      message: 'Theme deleted successfully',
     };
   } catch (error) {
-    console.error("Failed to delete custom theme:", error);
+    console.error('Failed to delete custom theme:', error);
     return {
       success: false,
       message:
-        "Something went wrong while deleting the theme. Please try again later.",
+        'Something went wrong while deleting the theme. Please try again later.',
     };
   }
 }
@@ -198,7 +198,7 @@ export async function getUserCustomThemes() {
     if (!session?.user) {
       return {
         success: false,
-        message: "You must be signed in to view your themes",
+        message: 'You must be signed in to view your themes',
         themes: [],
       };
     }
@@ -208,7 +208,7 @@ export async function getUserCustomThemes() {
         userId: session.user.id,
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
     });
 
@@ -217,10 +217,10 @@ export async function getUserCustomThemes() {
       themes,
     };
   } catch (error) {
-    console.error("Failed to fetch custom themes:", error);
+    console.error('Failed to fetch custom themes:', error);
     return {
       success: false,
-      message: "Unable to load themes at this time. Please try again later.",
+      message: 'Unable to load themes at this time. Please try again later.',
       themes: [],
     };
   }
@@ -234,7 +234,7 @@ export async function getPublicCustomThemes() {
         isPublic: true,
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
       include: {
         user: {
@@ -250,11 +250,11 @@ export async function getPublicCustomThemes() {
       themes,
     };
   } catch (error) {
-    console.error("Failed to fetch public themes:", error);
+    console.error('Failed to fetch public themes:', error);
     return {
       success: false,
       message:
-        "Unable to load public themes at this time. Please try again later.",
+        'Unable to load public themes at this time. Please try again later.',
       themes: [],
     };
   }
@@ -275,7 +275,7 @@ export async function getCustomThemeById(themeId: string) {
     });
 
     if (!theme) {
-      return { success: false, message: "Theme not found" };
+      return { success: false, message: 'Theme not found' };
     }
 
     return {
@@ -283,10 +283,10 @@ export async function getCustomThemeById(themeId: string) {
       theme,
     };
   } catch (error) {
-    console.error("Failed to fetch theme:", error);
+    console.error('Failed to fetch theme:', error);
     return {
       success: false,
-      message: "Unable to load the theme at this time. Please try again later.",
+      message: 'Unable to load the theme at this time. Please try again later.',
     };
   }
 }

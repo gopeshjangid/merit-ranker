@@ -1,8 +1,8 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import { IconList } from "../custom-elements/icon-list";
-import { IconListElement } from "../custom-elements/icon-list-item";
-import { ICON_LIST, ICON_LIST_ITEM } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import { IconList } from '../custom-elements/icon-list';
+import { IconListElement } from '../custom-elements/icon-list-item';
+import { ICON_LIST, ICON_LIST_ITEM } from '../lib';
 
 export const IconListPlugin = createTPlatePlugin({
   key: ICON_LIST,

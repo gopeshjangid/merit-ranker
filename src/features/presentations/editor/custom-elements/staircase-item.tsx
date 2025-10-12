@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { NodeApi, PathApi } from "platejs";
-import { PlateElement, type PlateElementProps } from "platejs/react";
+import { cn } from '@/lib/utils';
+import { NodeApi, PathApi } from 'platejs';
+import { PlateElement, type PlateElementProps } from 'platejs/react';
 import {
   type TStairGroupElement,
   type TStairItemElement,
-} from "../plugins/staircase-plugin";
+} from '../plugins/staircase-plugin';
 
 // StairItem component aligned with PyramidItem behavior
 export const StairItem = (props: PlateElementProps<TStairItemElement>) => {
@@ -14,7 +14,7 @@ export const StairItem = (props: PlateElementProps<TStairItemElement>) => {
   const parentPath = PathApi.parent(props.path);
   const parentElement = NodeApi.get(
     props.editor,
-    parentPath,
+    parentPath
   ) as TStairGroupElement;
 
   const totalItems = parentElement?.children?.length || 1;
@@ -27,16 +27,16 @@ export const StairItem = (props: PlateElementProps<TStairItemElement>) => {
   const widthPx = baseWidth + index * increment;
 
   return (
-    <div className={cn("group/stair-item relative mb-2 w-full")}>
+    <div className={cn('group/stair-item relative mb-2 w-full')}>
       <div className="flex items-center gap-4 border-b border-gray-700">
         {/* Width-growing block with number */}
         <div
           style={{
             width: `${widthPx}px`,
-            minHeight: "70px",
+            minHeight: '70px',
             backgroundColor:
-              (parentElement?.color as string) || "var(--presentation-primary)",
-            color: "var(--presentation-background)",
+              (parentElement?.color as string) || 'var(--presentation-primary)',
+            color: 'var(--presentation-background)',
           }}
           className="flex flex-shrink-0 items-center justify-center rounded-md text-2xl font-bold"
         >

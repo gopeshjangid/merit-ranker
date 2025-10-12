@@ -1,9 +1,9 @@
-import { auth } from "@/server/auth";
-import { NextResponse, type NextRequest } from "next/server";
+import { auth } from '@/server/auth';
+import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const session = await auth();
-  const isAuthPage = request.nextUrl.pathname.startsWith("/auth");
+  const isAuthPage = request.nextUrl.pathname.startsWith('/auth');
 
   // // Always redirect from root to /presentation
   // if (request.nextUrl.pathname === "/") {
@@ -30,5 +30,5 @@ export async function middleware(request: NextRequest) {
 
 // Add routes that should be protected by authentication
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };

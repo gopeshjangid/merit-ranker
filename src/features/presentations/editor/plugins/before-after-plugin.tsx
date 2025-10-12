@@ -1,8 +1,8 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import BeforeAfterGroup from "../custom-elements/before-after";
-import { BeforeAfterSide } from "../custom-elements/before-after-side";
-import { BEFORE_AFTER_GROUP, BEFORE_AFTER_SIDE } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import BeforeAfterGroup from '../custom-elements/before-after';
+import { BeforeAfterSide } from '../custom-elements/before-after-side';
+import { BEFORE_AFTER_GROUP, BEFORE_AFTER_SIDE } from '../lib';
 
 export const BeforeAfterGroupPlugin = createTPlatePlugin({
   key: BEFORE_AFTER_GROUP,

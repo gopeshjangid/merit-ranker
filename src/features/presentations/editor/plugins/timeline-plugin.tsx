@@ -1,8 +1,8 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import Timeline from "../custom-elements/timeline";
-import { TimelineItem } from "../custom-elements/timeline-item";
-import { TIMELINE_GROUP, TIMELINE_ITEM } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import Timeline from '../custom-elements/timeline';
+import { TimelineItem } from '../custom-elements/timeline-item';
+import { TIMELINE_GROUP, TIMELINE_ITEM } from '../lib';
 
 export const TimelinePlugin = createTPlatePlugin({
   key: TIMELINE_GROUP,
@@ -13,8 +13,8 @@ export const TimelinePlugin = createTPlatePlugin({
     isContainer: true,
   },
   options: {
-    orientation: "vertical",
-    sidedness: "single",
+    orientation: 'vertical',
+    sidedness: 'single',
     numbered: true,
     showLine: true,
   },
@@ -30,8 +30,8 @@ export const TimelineItemPlugin = createTPlatePlugin({
 });
 export interface TTimelineGroupElement extends TElement {
   type: typeof TIMELINE_GROUP;
-  orientation: "vertical" | "horizontal";
-  sidedness: "single" | "double";
+  orientation: 'vertical' | 'horizontal';
+  sidedness: 'single' | 'double';
   numbered: boolean;
   showLine: boolean;
 }

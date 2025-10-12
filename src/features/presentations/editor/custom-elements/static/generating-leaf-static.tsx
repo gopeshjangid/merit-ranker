@@ -1,7 +1,7 @@
-import { type SlateLeafProps } from "platejs";
+import { type SlateLeafProps } from 'platejs';
 
-import { usePresentationState } from "@/states/presentation-state";
-import { SlateLeaf } from "platejs";
+import { usePresentationState } from '@/states/presentation-state';
+import { SlateLeaf } from 'platejs';
 
 export function GeneratingLeafStatic(props: SlateLeafProps) {
   const { isGeneratingPresentation } = usePresentationState();
@@ -9,7 +9,7 @@ export function GeneratingLeafStatic(props: SlateLeafProps) {
   const isGenerating =
     isGeneratingPresentation &&
     Boolean(
-      (props.leaf as unknown as LeafWithGenerating | undefined)?.generating,
+      (props.leaf as unknown as LeafWithGenerating | undefined)?.generating
     );
 
   return (
@@ -19,8 +19,8 @@ export function GeneratingLeafStatic(props: SlateLeafProps) {
         {isGenerating && (
           <span
             style={{
-              color: "var(--presentation-text , black) !important",
-              backgroundColor: "var(--presentation-text , black) !important",
+              color: 'var(--presentation-text , black) !important',
+              backgroundColor: 'var(--presentation-text , black) !important',
             }}
             className="animate-blink z-[1000] max-h-8"
           >

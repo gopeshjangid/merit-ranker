@@ -1,23 +1,23 @@
 /** Get new direction if updated */
-import { type DropLineDirection } from "@platejs/dnd";
+import { type DropLineDirection } from '@platejs/dnd';
 
 export const getNewDirection = (
   previousDir: string,
-  dir?: string,
+  dir?: string
 ): DropLineDirection | undefined => {
   if (!dir && previousDir) {
-    return "";
+    return '';
   }
-  if (dir === "top" && previousDir !== "top") {
-    return "top";
+  if (dir === 'top' && previousDir !== 'top') {
+    return 'top';
   }
-  if (dir === "bottom" && previousDir !== "bottom") {
-    return "bottom";
+  if (dir === 'bottom' && previousDir !== 'bottom') {
+    return 'bottom';
   }
-  if (dir === "left" && previousDir !== "left") {
-    return "left";
+  if (dir === 'left' && previousDir !== 'left') {
+    return 'left';
   }
-  if (dir === "right" && previousDir !== "right") {
-    return "right";
+  if (dir === 'right' && previousDir !== 'right') {
+    return 'right';
   }
 };

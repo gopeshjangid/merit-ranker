@@ -1,29 +1,29 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: This use requires any */
-import { getEmptyImage, NativeTypes } from "react-dnd-html5-backend";
+import { getEmptyImage, NativeTypes } from 'react-dnd-html5-backend';
 
-import { type ConnectDragSource, type DropTargetMonitor } from "react-dnd";
+import { type ConnectDragSource, type DropTargetMonitor } from 'react-dnd';
 
-import { type PlateEditor, useEditorRef } from "platejs/react";
+import { type PlateEditor, useEditorRef } from 'platejs/react';
 
-import { type DragItemNode } from "@platejs/dnd";
+import { type DragItemNode } from '@platejs/dnd';
 
-import { DRAG_ITEM_BLOCK } from "@platejs/dnd";
-import { type UseDragNodeOptions, useDragNode } from "./useDragNode";
-import { type UseDropNodeOptions, useDropNode } from "./useDropNode";
+import { DRAG_ITEM_BLOCK } from '@platejs/dnd';
+import { type UseDragNodeOptions, useDragNode } from './useDragNode';
+import { type UseDropNodeOptions, useDropNode } from './useDropNode';
 
-export type UseDndNodeOptions = Pick<UseDropNodeOptions, "element"> &
+export type UseDndNodeOptions = Pick<UseDropNodeOptions, 'element'> &
   Partial<
     Pick<
       UseDropNodeOptions,
-      "canDropNode" | "multiplePreviewRef" | "nodeRef" | "orientation"
+      'canDropNode' | 'multiplePreviewRef' | 'nodeRef' | 'orientation'
     >
   > &
-  Partial<Pick<UseDragNodeOptions, "type">> & {
+  Partial<Pick<UseDragNodeOptions, 'type'>> & {
     /** Options passed to the drag hook. */
-    drag?: Partial<Omit<UseDragNodeOptions, "type">>;
+    drag?: Partial<Omit<UseDragNodeOptions, 'type'>>;
     /** Options passed to the drop hook, excluding element, nodeRef. */
     drop?: Partial<
-      Omit<UseDropNodeOptions, "canDropNode" | "element" | "nodeRef">
+      Omit<UseDropNodeOptions, 'canDropNode' | 'element' | 'nodeRef'>
     >;
     preview?: {
       /** Whether to disable the preview. */
@@ -38,7 +38,7 @@ export type UseDndNodeOptions = Pick<UseDropNodeOptions, "element"> &
         dragItem: DragItemNode;
         monitor: DropTargetMonitor<DragItemNode, unknown>;
         nodeRef: any;
-      },
+      }
     ) => boolean | undefined;
   };
 
@@ -76,7 +76,7 @@ export const useDndNode = ({
       type,
       orientation,
       ...dragOptions,
-    },
+    }
   );
 
   // Remove orientation from drop options to support multi-directional

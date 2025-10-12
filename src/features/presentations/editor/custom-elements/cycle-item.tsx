@@ -1,39 +1,39 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { NodeApi, PathApi, type TElement } from "platejs";
+import { cn } from '@/lib/utils';
+import { NodeApi, PathApi, type TElement } from 'platejs';
 import {
   PlateElement,
   type PlateEditor,
   type StyledPlateElementProps,
-} from "platejs/react";
-import { type TCycleItemElement } from "../plugins/cycle-plugin";
+} from 'platejs/react';
+import { type TCycleItemElement } from '../plugins/cycle-plugin';
 
 // CycleItem component for individual items in the cycle
 export const CycleItem = (
-  props: StyledPlateElementProps<TCycleItemElement>,
+  props: StyledPlateElementProps<TCycleItemElement>
 ) => {
   const index = props.path.at(-1) as number;
 
   // Calculate item color based on index
   const getItemColor = () => {
     const colors = [
-      "bg-blue-500",
-      "bg-purple-500",
-      "bg-indigo-500",
-      "bg-pink-500",
+      'bg-blue-500',
+      'bg-purple-500',
+      'bg-indigo-500',
+      'bg-pink-500',
     ];
     return colors[index % colors.length];
   };
   const gridClass = getCycleItemGridClass(
     props.editor,
     props.element as TElement,
-    props.path,
+    props.path
   );
 
   return (
     <div className={cn(gridClass)}>
-      <div className={cn("group/cycle-item relative mb-6")}>
+      <div className={cn('group/cycle-item relative mb-6')}>
         {/* Drop target indicator lines */}
         {/* Content container with heading */}
         <div className="rounded-md border border-primary/20 bg-card p-4 shadow-sm">
@@ -41,8 +41,8 @@ export const CycleItem = (
           <div className="mb-2 flex items-center">
             <div
               className={cn(
-                "mr-3 flex h-8 w-8 items-center justify-center rounded-full text-white",
-                getItemColor(),
+                'mr-3 flex h-8 w-8 items-center justify-center rounded-full text-white',
+                getItemColor()
               )}
             >
               {index + 1}
@@ -63,10 +63,10 @@ export const CycleItem = (
 export function getCycleItemGridClass(
   editor: PlateEditor,
   element: TElement,
-  path: number[],
+  path: number[]
 ): string {
   try {
-    if (element.type !== "cycle-item") return "";
+    if (element.type !== 'cycle-item') return '';
     const parentPath = PathApi.parent(path);
     const parent = NodeApi.get(editor, parentPath) as {
       children?: unknown[];
@@ -78,14 +78,14 @@ export function getCycleItemGridClass(
 
     let columnStart: string;
     if (hasOddItems && index === 0) {
-      columnStart = "col-start-2";
+      columnStart = 'col-start-2';
     } else {
       const adjustedIndex = hasOddItems ? index - 1 : index;
-      columnStart = adjustedIndex % 2 === 0 ? "col-start-1" : "col-start-3";
+      columnStart = adjustedIndex % 2 === 0 ? 'col-start-1' : 'col-start-3';
     }
 
-    return cn("col-span-1", columnStart);
+    return cn('col-span-1', columnStart);
   } catch {
-    return "";
+    return '';
   }
 }

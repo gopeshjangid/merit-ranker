@@ -1,7 +1,7 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import { Icon } from "../custom-elements/icon";
-import { ICON_ELEMENT } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import { Icon } from '../custom-elements/icon';
+import { ICON_ELEMENT } from '../lib';
 
 // Create plugin for d item
 export const IconPlugin = createTPlatePlugin({
@@ -11,8 +11,8 @@ export const IconPlugin = createTPlatePlugin({
     component: Icon,
   },
   options: {
-    query: "",
-    name: "",
+    query: '',
+    name: '',
   },
 });
 

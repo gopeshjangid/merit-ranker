@@ -6,7 +6,6 @@ import NextAuthProvider from '@/provider/NextAuthProvider';
 import TanStackQueryProvider from '@/provider/TanstackProvider';
 import { ThemeProvider } from '@/provider/theme-provider';
 
-
 import './globals.css';
 
 const geistSans = localFont({
@@ -37,11 +36,7 @@ export default function RootLayout({
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
-            <ThemeProvider 
-              attribute="class" 
-              defaultTheme="system" 
-              enableSystem
-            >
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               {children}
             </ThemeProvider>
           </body>

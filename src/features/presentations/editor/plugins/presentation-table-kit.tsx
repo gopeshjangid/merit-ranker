@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
 import {
   TableCellHeaderPlugin,
   TableCellPlugin,
   TablePlugin,
   TableRowPlugin,
-} from "@platejs/table/react";
+} from '@platejs/table/react';
 
 import {
   PresentationTableCellElement,
   PresentationTableCellHeaderElement,
   PresentationTableElement,
   PresentationTableRowElement,
-} from "../custom-elements/presentation-table-node";
+} from '../custom-elements/presentation-table-node';
 
 export const PresentationTableKit = [
   TablePlugin.withComponent(PresentationTableElement),

@@ -1,4 +1,4 @@
-export interface FontPickerProps extends React.ComponentPropsWithoutRef<"div"> {
+export interface FontPickerProps extends React.ComponentPropsWithoutRef<'div'> {
   defaultValue?: string;
   noMatches?: string;
   autoLoad?: boolean;
@@ -8,7 +8,7 @@ export interface FontPickerProps extends React.ComponentPropsWithoutRef<"div"> {
   googleFonts?: string[] | Font[] | string | ((font: Font) => boolean);
   fontCategories?: string[] | string;
   localFonts?: Font[] | undefined;
-  mode?: "combo" | "list";
+  mode?: 'combo' | 'list';
   fontVariants?: (fontVariants: FontToVariant) => void;
   value?: (value: string) => void;
   fontsLoaded?: (fontsLoaded: boolean) => void;
@@ -45,29 +45,29 @@ export interface FontToVariant {
 }
 
 export function toString(v: Variant) {
-  if (typeof v === "string") {
+  if (typeof v === 'string') {
     return v;
   }
-  return (v.italic ? "1" : "0") + "," + v.weight;
+  return (v.italic ? '1' : '0') + ',' + v.weight;
 }
 
 export const defaultFont: Font = {
-  category: "sans-serif",
-  name: "Open Sans",
-  sane: "open_sans",
-  cased: "open sans",
+  category: 'sans-serif',
+  name: 'Open Sans',
+  sane: 'open_sans',
+  cased: 'open sans',
   variants: [
-    "0,300",
-    "0,400",
-    "0,500",
-    "0,600",
-    "0,700",
-    "0,800",
-    "1,300",
-    "1,400",
-    "1,500",
-    "1,600",
-    "1,700",
-    "1,800",
+    '0,300',
+    '0,400',
+    '0,500',
+    '0,600',
+    '0,700',
+    '0,800',
+    '1,300',
+    '1,400',
+    '1,500',
+    '1,600',
+    '1,700',
+    '1,800',
   ],
 };

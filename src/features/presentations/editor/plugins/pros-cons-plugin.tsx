@@ -1,9 +1,9 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import { ConsItem } from "../custom-elements/cons-item";
-import ProsConsGroup from "../custom-elements/pros-cons";
-import { ProsItem } from "../custom-elements/pros-item";
-import { CONS_ITEM, PROS_CONS_GROUP, PROS_ITEM } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import { ConsItem } from '../custom-elements/cons-item';
+import ProsConsGroup from '../custom-elements/pros-cons';
+import { ProsItem } from '../custom-elements/pros-item';
+import { CONS_ITEM, PROS_CONS_GROUP, PROS_ITEM } from '../lib';
 
 export const ProsConsGroupPlugin = createTPlatePlugin({
   key: PROS_CONS_GROUP,

@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { Skeleton } from "@/components/ui/skeleton";
-import { FontFamilyPlugin } from "@platejs/basic-styles/react";
-import dynamic from "next/dynamic";
-import { KEYS } from "platejs";
-import { useEditorRef, useEditorSelector } from "platejs/react";
+import { Skeleton } from '@/components/ui/skeleton';
+import { FontFamilyPlugin } from '@platejs/basic-styles/react';
+import dynamic from 'next/dynamic';
+import { KEYS } from 'platejs';
+import { useEditorRef, useEditorSelector } from 'platejs/react';
 
 // Dynamically import FontPicker with a skeleton loader
 const FontPicker = dynamic(
-  () => import("@/components/ui/font-picker").then((mod) => mod.FontPicker),
+  () => import('@/components/ui/font-picker').then((mod) => mod.FontPicker),
   {
     loading: () => <Skeleton className="h-8 w-full" />,
     ssr: false,
-  },
+  }
 );
 
 // Define a default font to fall back to if no mark is present.
-const DEFAULT_FONT_FAMILY = "Open Sans";
+const DEFAULT_FONT_FAMILY = 'Open Sans';
 
 export function FontFamilyToolbarButton() {
   const editor = useEditorRef();
@@ -26,7 +26,7 @@ export function FontFamilyToolbarButton() {
   const fontFamily = useEditorSelector(
     (editor) =>
       (editor.api.marks()?.[KEYS.fontFamily] as string) ?? DEFAULT_FONT_FAMILY,
-    [],
+    []
   );
 
   console.log(fontFamily);

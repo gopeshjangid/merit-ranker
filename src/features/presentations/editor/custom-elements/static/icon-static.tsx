@@ -1,13 +1,13 @@
-"use client";
-import type React from "react";
-import { useEffect, useState, type ReactNode } from "react";
+'use client';
+import type React from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
-import { type SlateElementProps } from "platejs";
+import { type SlateElementProps } from 'platejs';
 
-import { SlateElement } from "platejs";
+import { SlateElement } from 'platejs';
 
-import { cn } from "@/lib/utils";
-import { type TIconElement } from "../../plugins/icon-plugin";
+import { cn } from '@/lib/utils';
+import { type TIconElement } from '../../plugins/icon-plugin';
 
 type IconModule = Record<string, React.ComponentType<{ size?: number }>>;
 
@@ -16,20 +16,20 @@ async function loadIconComponent(iconName: string): Promise<ReactNode> {
     const prefix = iconName.slice(0, 2).toLowerCase();
     let mod: IconModule;
     switch (prefix) {
-      case "fa":
-        mod = (await import("react-icons/fa")) as unknown as IconModule;
+      case 'fa':
+        mod = (await import('react-icons/fa')) as unknown as IconModule;
         break;
-      case "md":
-        mod = (await import("react-icons/md")) as unknown as IconModule;
+      case 'md':
+        mod = (await import('react-icons/md')) as unknown as IconModule;
         break;
-      case "bs":
-        mod = (await import("react-icons/bs")) as unknown as IconModule;
+      case 'bs':
+        mod = (await import('react-icons/bs')) as unknown as IconModule;
         break;
-      case "ai":
-        mod = (await import("react-icons/ai")) as unknown as IconModule;
+      case 'ai':
+        mod = (await import('react-icons/ai')) as unknown as IconModule;
         break;
       default:
-        mod = (await import("react-icons/fa")) as unknown as IconModule;
+        mod = (await import('react-icons/fa')) as unknown as IconModule;
     }
     const Comp = mod[iconName];
     return Comp ? <Comp size={24} /> : null;
@@ -39,7 +39,7 @@ async function loadIconComponent(iconName: string): Promise<ReactNode> {
 }
 
 export function IconStatic(props: SlateElementProps<TIconElement>) {
-  const { name, query = "home" } = props.element;
+  const { name, query = 'home' } = props.element;
   const [iconEl, setIconEl] = useState<ReactNode>(null);
 
   useEffect(() => {
@@ -53,15 +53,15 @@ export function IconStatic(props: SlateElementProps<TIconElement>) {
       if (query) {
         // Try FA then MD for a fuzzy match
         const [fa, md] = await Promise.all([
-          import("react-icons/fa"),
-          import("react-icons/md"),
+          import('react-icons/fa'),
+          import('react-icons/md'),
         ]);
         const term = query.toLowerCase();
         const faKey = Object.keys(fa).find((k) =>
-          k.toLowerCase().includes(term),
+          k.toLowerCase().includes(term)
         );
         const mdKey = Object.keys(md).find((k) =>
-          k.toLowerCase().includes(term),
+          k.toLowerCase().includes(term)
         );
         const key = faKey ?? mdKey;
         if (key) {
@@ -81,7 +81,7 @@ export function IconStatic(props: SlateElementProps<TIconElement>) {
   return (
     <SlateElement
       {...props}
-      className={cn("inline-flex justify-center", props.className)}
+      className={cn('inline-flex justify-center', props.className)}
     >
       <div className="mb-2 p-2">
         <div className="flex h-10 w-10 items-center justify-center rounded-md border shadow-sm">

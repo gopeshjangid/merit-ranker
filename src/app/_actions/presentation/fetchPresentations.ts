@@ -1,9 +1,9 @@
-"use server";
-import "server-only";
+'use server';
+import 'server-only';
 
-import { auth } from "@/server/auth";
-import { db } from "@/server/db";
-import { type Prisma, DocumentType } from "@prisma/client";
+import { auth } from '@/server/auth';
+import { db } from '@/server/db';
+import { type Prisma, DocumentType } from '@prisma/client';
 
 export type PresentationDocument = Prisma.BaseDocumentGetPayload<{
   include: {
@@ -32,7 +32,7 @@ export async function fetchPresentations(page = 0) {
       type: DocumentType.PRESENTATION,
     },
     orderBy: {
-      updatedAt: "desc",
+      updatedAt: 'desc',
     },
     take: ITEMS_PER_PAGE,
     skip: skip,
@@ -56,7 +56,7 @@ export async function fetchPublicPresentations(page = 0) {
         isPublic: true,
       },
       orderBy: {
-        updatedAt: "desc",
+        updatedAt: 'desc',
       },
       take: ITEMS_PER_PAGE,
       skip: skip,
@@ -103,7 +103,7 @@ export async function fetchUserPresentations(userId: string, page = 0) {
         ],
       },
       orderBy: {
-        updatedAt: "desc",
+        updatedAt: 'desc',
       },
       take: ITEMS_PER_PAGE,
       skip: skip,

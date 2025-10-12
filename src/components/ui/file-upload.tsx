@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   AudioWaveform,
   File,
@@ -10,43 +10,43 @@ import {
   UploadCloud,
   Video,
   X,
-} from "lucide-react";
-import { useCallback } from "react";
-import { type FileRejection, useDropzone } from "react-dropzone";
-import { Button } from "./button";
-import { useToast } from "./use-toast";
+} from 'lucide-react';
+import { useCallback } from 'react';
+import { type FileRejection, useDropzone } from 'react-dropzone';
+import { Button } from './button';
+import { useToast } from './use-toast';
 
 enum FileTypes {
-  Image = "image",
-  Pdf = "pdf",
-  Audio = "audio",
-  Video = "video",
-  Other = "other",
+  Image = 'image',
+  Pdf = 'pdf',
+  Audio = 'audio',
+  Video = 'video',
+  Other = 'other',
 }
 
 const ImageColor = {
-  bgColor: "bg-purple-600",
-  fillColor: "fill-purple-600",
+  bgColor: 'bg-purple-600',
+  fillColor: 'fill-purple-600',
 };
 
 const PdfColor = {
-  bgColor: "bg-blue-400",
-  fillColor: "fill-blue-400",
+  bgColor: 'bg-blue-400',
+  fillColor: 'fill-blue-400',
 };
 
 const AudioColor = {
-  bgColor: "bg-yellow-400",
-  fillColor: "fill-yellow-400",
+  bgColor: 'bg-yellow-400',
+  fillColor: 'fill-yellow-400',
 };
 
 const VideoColor = {
-  bgColor: "bg-green-400",
-  fillColor: "fill-green-400",
+  bgColor: 'bg-green-400',
+  fillColor: 'fill-green-400',
 };
 
 const OtherColor = {
-  bgColor: "bg-gray-400",
-  fillColor: "fill-gray-400",
+  bgColor: 'bg-gray-400',
+  fillColor: 'fill-gray-400',
 };
 
 export default function FileUpload({
@@ -57,7 +57,7 @@ export default function FileUpload({
   multiple = false,
   maxFiles = 1,
   maxSize = 16 * 1024 * 1024,
-  acceptedTypes = ["pdf", "docx", "txt"],
+  acceptedTypes = ['pdf', 'docx', 'txt'],
   info,
   showUploadButton = true,
 }: {
@@ -129,12 +129,12 @@ export default function FileUpload({
       });
       if (fileRejected.length > 0) {
         toast({
-          title: "File type not allowed",
-          description: "Please upload a valid file type",
+          title: 'File type not allowed',
+          description: 'Please upload a valid file type',
         });
       }
     },
-    [],
+    []
   );
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -142,34 +142,34 @@ export default function FileUpload({
     accept: acceptedTypes.reduce(
       (acc, type) => {
         switch (type) {
-          case "pdf":
-            acc["application/pdf"] = [".pdf"];
+          case 'pdf':
+            acc['application/pdf'] = ['.pdf'];
             break;
-          case "doc":
-            acc["application/msword"] = [".doc"];
+          case 'doc':
+            acc['application/msword'] = ['.doc'];
             break;
-          case "docx":
+          case 'docx':
             acc[
-              "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-            ] = [".docx"];
+              'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            ] = ['.docx'];
             break;
-          case "txt":
-            acc["text/plain"] = [".txt"];
+          case 'txt':
+            acc['text/plain'] = ['.txt'];
             break;
-          case "webm":
-            acc["video/webm"] = [".webm"];
+          case 'webm':
+            acc['video/webm'] = ['.webm'];
             break;
-          case "mp4":
-            acc["video/mp4"] = [".mp4"];
+          case 'mp4':
+            acc['video/mp4'] = ['.mp4'];
             break;
-          case "mov":
-            acc["video/quicktime"] = [".mov"];
+          case 'mov':
+            acc['video/quicktime'] = ['.mov'];
             break;
           // Add more cases for other file types as needed
         }
         return acc;
       },
-      {} as Record<string, string[]>,
+      {} as Record<string, string[]>
     ),
     maxFiles,
     maxSize,
@@ -183,8 +183,8 @@ export default function FileUpload({
           {...getRootProps()}
           className="relative flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary bg-background py-6 hover:bg-muted"
         >
-          <div className=" text-center">
-            <div className=" mx-auto max-w-min rounded-md border p-2">
+          <div className="text-center">
+            <div className="mx-auto max-w-min rounded-md border p-2">
               <UploadCloud className="text-primary" size={20} />
             </div>
 
@@ -194,11 +194,11 @@ export default function FileUpload({
               </span>
             </p>
             <p className="text-xs text-gray-500">
-              {acceptedTypes.join(", ").toUpperCase()} (MAX{" "}
+              {acceptedTypes.join(', ').toUpperCase()} (MAX{' '}
               {maxSize / 1024 / 1024} MB)
             </p>
             {info && (
-              <p className="whitespace-pre-line text-xs text-gray-500">
+              <p className="text-xs whitespace-pre-line text-gray-500">
                 {info}
               </p>
             )}
@@ -208,7 +208,7 @@ export default function FileUpload({
         <Input
           {...getInputProps()}
           id="dropzone-file"
-          accept={acceptedTypes.map((type) => `.${type}`).join(", ")}
+          accept={acceptedTypes.map((type) => `.${type}`).join(', ')}
           type="file"
           className="hidden"
         />
@@ -234,7 +234,7 @@ export default function FileUpload({
 
                       <div className="ml-2 w-full space-y-1">
                         <div className="flex justify-between text-sm">
-                          <p className="text-muted-foreground ">
+                          <p className="text-muted-foreground">
                             {file.name.slice(0, 25)}
                           </p>
                         </div>
@@ -257,7 +257,7 @@ export default function FileUpload({
       {showUploadButton && files.length > 0 && (
         <div className="flex justify-end pt-4">
           <Button
-            variant={isLoading ? "loading" : "default"}
+            variant={isLoading ? 'loading' : 'default'}
             onClick={async () => onUpload?.(files)}
           >
             Upload

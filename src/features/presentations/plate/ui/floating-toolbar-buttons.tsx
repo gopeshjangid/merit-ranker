@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   BoldIcon,
@@ -7,18 +7,18 @@ import {
   StrikethroughIcon,
   UnderlineIcon,
   WandSparklesIcon,
-} from "lucide-react";
-import { KEYS } from "platejs";
-import { useEditorReadOnly } from "platejs/react";
+} from 'lucide-react';
+import { KEYS } from 'platejs';
+import { useEditorReadOnly } from 'platejs/react';
 
-import { AIToolbarButton } from "@/components/ui/ai-toolbar-button";
-import { InlineEquationToolbarButton } from "@/components/ui/equation-toolbar-button";
-import { FontFamilyToolbarButton } from "@/components/ui/font-family-toolbar-button";
-import { LinkToolbarButton } from "@/components/ui/link-toolbar-button";
-import { MarkToolbarButton } from "@/components/ui/mark-toolbar-button";
-import { MoreToolbarButton } from "@/components/ui/more-toolbar-button";
-import { ToolbarGroup } from "@/components/ui/toolbar";
-import { TurnIntoToolbarButton } from "@/components/ui/turn-into-toolbar-button";
+import { AIToolbarButton } from '@/components/ui/ai-toolbar-button';
+import { InlineEquationToolbarButton } from '@/components/ui/equation-toolbar-button';
+import { FontFamilyToolbarButton } from '@/components/ui/font-family-toolbar-button';
+import { LinkToolbarButton } from '@/components/ui/link-toolbar-button';
+import { MarkToolbarButton } from '@/components/ui/mark-toolbar-button';
+import { MoreToolbarButton } from '@/components/ui/more-toolbar-button';
+import { ToolbarGroup } from '@/components/ui/toolbar';
+import { TurnIntoToolbarButton } from '@/components/ui/turn-into-toolbar-button';
 
 export function FloatingToolbarButtons() {
   const readOnly = useEditorReadOnly();

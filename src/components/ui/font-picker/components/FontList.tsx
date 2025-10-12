@@ -1,15 +1,15 @@
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Loader2, Search } from "lucide-react";
-import dynamic from "next/dynamic";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { type Font } from "../types";
-import { usePaginatedFonts } from "../utils/usePaginatedFonts";
-import { FontListItem } from "./FontListItem";
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Loader2, Search } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { type Font } from '../types';
+import { usePaginatedFonts } from '../utils/usePaginatedFonts';
+import { FontListItem } from './FontListItem';
 
-const FontPreviews = dynamic(() => import("./FontPreviews"), {
+const FontPreviews = dynamic(() => import('./FontPreviews'), {
   loading: () => <Skeleton className="h-8 w-full" />,
   ssr: false,
 });
@@ -31,7 +31,7 @@ export function FontList({
 }) {
   const { visibleFonts, hasMore, isLoadingMore, loadMore } = usePaginatedFonts(
     fonts,
-    searchValue,
+    searchValue
   );
 
   const { ref: loadMoreRef, inView } = useInView({
@@ -49,7 +49,7 @@ export function FontList({
     return (
       <div className="w-full space-y-2">
         <div className="relative">
-          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute top-2.5 left-2 h-4 w-4 text-muted-foreground" />
           <Input placeholder="Loading fonts..." disabled className="pl-8" />
         </div>
         <div className="flex h-96 w-full items-center justify-center rounded-md border">
@@ -65,7 +65,7 @@ export function FontList({
   return (
     <div className="w-full space-y-2">
       <div className="relative">
-        <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+        <Search className="absolute top-2.5 left-2 h-4 w-4 text-muted-foreground" />
         <Input
           placeholder="Search fonts..."
           value={searchValue}

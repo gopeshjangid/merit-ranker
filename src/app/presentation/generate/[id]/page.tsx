@@ -221,7 +221,7 @@ export default function PresentationGenerateWithIdPage() {
       <div className="flex flex-row justify-center">
         {/* <GoogleAdsBanner isVertical={true} /> */}
 
-        <div className="max-w-4xl space-y-8 p-8 pt-6">
+        <div className="max-w-4xl space-y-8 bg-amber-500 p-8 pt-6">
           <div className="space-y-8">
             <Header />
             <PromptInput />
@@ -231,11 +231,15 @@ export default function PresentationGenerateWithIdPage() {
               title="AI is thinking about your outline..."
             />
             <ToolCallDisplay />
-            <OutlineList />
 
-            <div className="!mb-32 space-y-4 rounded-lg border bg-muted/30 p-6">
-              <h2 className="text-lg font-semibold">Customize Theme</h2>
-              <ThemeSettings />
+            <div className="flex flex-col space-y-4 lg:flex-row lg:space-y-0 lg:space-x-8">
+              <div className="flex-1">
+                <OutlineList />
+              </div>
+              <div className="!mb-32 flex-1 space-y-4 rounded-lg border bg-muted/30 p-6">
+                <h2 className="text-lg font-semibold">Customize Theme</h2>
+                <ThemeSettings />
+              </div>
             </div>
           </div>
         </div>

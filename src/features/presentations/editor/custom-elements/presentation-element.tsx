@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { PlateElement, type StyledPlateElementProps } from "platejs/react";
+import { cn } from '@/lib/utils';
+import { PlateElement, type StyledPlateElementProps } from 'platejs/react';
 
 export const PresentationElement = ({
   children,
@@ -12,7 +12,7 @@ export const PresentationElement = ({
   return (
     <PlateElement
       ref={ref}
-      className={cn("presentation-element relative !select-text", className)}
+      className={cn('presentation-element relative !select-text', className)}
       {...props}
     >
       {children}
@@ -20,4 +20,4 @@ export const PresentationElement = ({
   );
 };
 
-PresentationElement.displayName = "PresentationElement";
+PresentationElement.displayName = 'PresentationElement';

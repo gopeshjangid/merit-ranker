@@ -1,14 +1,14 @@
-import type * as React from "react";
+import type * as React from 'react';
 
-import { type SlateElementProps, type TElement } from "platejs";
+import { type SlateElementProps, type TElement } from 'platejs';
 
-import { NodeApi, PathApi } from "platejs";
+import { NodeApi, PathApi } from 'platejs';
 
-import { ARROW_LIST_ITEM, PYRAMID_ITEM, TIMELINE_ITEM } from "../../lib";
-import { type TArrowListItemElement } from "../../plugins/arrow-plugin";
-import { ArrowItemStatic } from "../static/arrow-item-static";
-import { PyramidItemStatic } from "../static/pyramid-item-static";
-import { TimelineItemStatic } from "../static/timeline-item-static";
+import { ARROW_LIST_ITEM, PYRAMID_ITEM, TIMELINE_ITEM } from '../../lib';
+import { type TArrowListItemElement } from '../../plugins/arrow-plugin';
+import { ArrowItemStatic } from '../static/arrow-item-static';
+import { PyramidItemStatic } from '../static/pyramid-item-static';
+import { TimelineItemStatic } from '../static/timeline-item-static';
 export default function VisualizationItemElementStatic({
   element,
   ...props
@@ -17,12 +17,12 @@ export default function VisualizationItemElementStatic({
   const parentElement = NodeApi.get(props.editor, parentPath);
 
   const visualizationType = parentElement?.visualizationType as
-    | "arrow"
-    | "pyramid"
-    | "timeline";
+    | 'arrow'
+    | 'pyramid'
+    | 'timeline';
 
   switch (visualizationType) {
-    case "pyramid": {
+    case 'pyramid': {
       const pyramidItemElement = {
         ...element,
         children: element.children,
@@ -34,7 +34,7 @@ export default function VisualizationItemElementStatic({
         </PyramidItemStatic>
       );
     }
-    case "arrow": {
+    case 'arrow': {
       const arrowItemElement = {
         ...element,
         children: element.children,
@@ -49,7 +49,7 @@ export default function VisualizationItemElementStatic({
         </ArrowItemStatic>
       );
     }
-    case "timeline": {
+    case 'timeline': {
       const timelineItemElement = {
         ...element,
         children: element.children,

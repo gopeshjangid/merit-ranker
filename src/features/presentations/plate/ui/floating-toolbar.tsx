@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 
-import { type FloatingToolbarState, flip, offset } from "@platejs/floating";
-import { BlockSelectionPlugin } from "@platejs/selection/react";
-import { KEYS } from "platejs";
+import { type FloatingToolbarState, flip, offset } from '@platejs/floating';
+import { BlockSelectionPlugin } from '@platejs/selection/react';
+import { KEYS } from 'platejs';
 import {
   useComposedRef,
   useEditorId,
   useEditorRef,
   useEventEditorValue,
   usePluginOption,
-} from "platejs/react";
+} from 'platejs/react';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
-import { BLOCKS } from "@/features/presentations/editor/lib";
-import { type MyEditor } from "../editor-kit";
+import { BLOCKS } from '@/features/presentations/editor/lib';
+import { type MyEditor } from '../editor-kit';
 import {
   useFloatingToolbar,
   useFloatingToolbarState,
-} from "@/hooks/use-floating-toolbar";
-import { Toolbar } from "./toolbar";
+} from '@/hooks/use-floating-toolbar';
+import { Toolbar } from './toolbar';
 
 export function FloatingToolbar({
   children,
@@ -33,12 +33,12 @@ export function FloatingToolbar({
 }) {
   const editorId = useEditorId();
   const editor = useEditorRef<MyEditor>();
-  const focusedEditorId = useEventEditorValue("focus");
-  const isFloatingLinkOpen = !!usePluginOption({ key: KEYS.link }, "mode");
-  const isAIChatOpen = usePluginOption({ key: KEYS.aiChat }, "open");
+  const focusedEditorId = useEventEditorValue('focus');
+  const isFloatingLinkOpen = !!usePluginOption({ key: KEYS.link }, 'mode');
+  const isAIChatOpen = usePluginOption({ key: KEYS.aiChat }, 'open');
 
   // Check if any blocks are selected
-  const selectedIds = usePluginOption(BlockSelectionPlugin, "selectedIds");
+  const selectedIds = usePluginOption(BlockSelectionPlugin, 'selectedIds');
   const hasBlockSelection = selectedIds && selectedIds.size > 0;
 
   // Check if the selected blocks are layout blocks
@@ -71,15 +71,15 @@ export function FloatingToolbar({
         offset(12),
         flip({
           fallbackPlacements: [
-            "top-start",
-            "top-end",
-            "bottom-start",
-            "bottom-end",
+            'top-start',
+            'top-end',
+            'bottom-start',
+            'bottom-end',
           ],
           padding: 12,
         }),
       ],
-      placement: "top",
+      placement: 'top',
       ...state?.floatingOptions,
     },
   });
@@ -103,9 +103,9 @@ export function FloatingToolbar({
         {...rootProps}
         ref={ref}
         className={cn(
-          "absolute z-50 overflow-x-auto whitespace-nowrap rounded-md border bg-popover p-1 opacity-100 shadow-md scrollbar-hide print:hidden",
-          "max-w-[80vw]",
-          className,
+          'absolute z-50 scrollbar-hide overflow-x-auto rounded-md border bg-popover p-1 whitespace-nowrap opacity-100 shadow-md print:hidden',
+          'max-w-[80vw]',
+          className
         )}
       >
         {children}

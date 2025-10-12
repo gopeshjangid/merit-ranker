@@ -5,8 +5,6 @@
 @plugin '@tailwindcss/typography';
 @plugin 'tailwind-scrollbar-hide';
 
-
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

@@ -1,8 +1,8 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import SequenceArrow from "../custom-elements/sequence-arrow";
-import { SequenceArrowItem } from "../custom-elements/sequence-arrow-item";
-import { SEQUENCE_ARROW_GROUP, SEQUENCE_ARROW_ITEM } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import SequenceArrow from '../custom-elements/sequence-arrow';
+import { SequenceArrowItem } from '../custom-elements/sequence-arrow-item';
+import { SEQUENCE_ARROW_GROUP, SEQUENCE_ARROW_ITEM } from '../lib';
 
 export const SequenceArrowGroupPlugin = createTPlatePlugin({
   key: SEQUENCE_ARROW_GROUP,

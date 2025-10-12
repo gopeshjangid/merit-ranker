@@ -1,8 +1,8 @@
-import { type TElement } from "platejs";
-import { createTPlatePlugin } from "platejs/react";
-import { CycleElement } from "../custom-elements/cycle-element";
-import { CycleItem } from "../custom-elements/cycle-item";
-import { CYCLE_GROUP, CYCLE_ITEM } from "../lib";
+import { type TElement } from 'platejs';
+import { createTPlatePlugin } from 'platejs/react';
+import { CycleElement } from '../custom-elements/cycle-element';
+import { CycleItem } from '../custom-elements/cycle-item';
+import { CYCLE_GROUP, CYCLE_ITEM } from '../lib';
 
 // Create plugin for cycle
 export const CyclePlugin = createTPlatePlugin({

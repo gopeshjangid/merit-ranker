@@ -1,15 +1,15 @@
-import type * as React from "react";
+import type * as React from 'react';
 
 import {
   type SlateElementProps,
   type TTableCellElement,
   type TTableElement,
-} from "platejs";
+} from 'platejs';
 
-import { BaseTablePlugin } from "@platejs/table";
-import { SlateElement } from "platejs";
+import { BaseTablePlugin } from '@platejs/table';
+import { SlateElement } from 'platejs';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 export function PresentationTableElementStatic({
   children,
@@ -25,7 +25,7 @@ export function PresentationTableElementStatic({
       style={{ paddingLeft: marginLeft }}
     >
       <div className="group/table relative w-full bg-transparent">
-        <table className="ml-px mr-0 table h-px w-full max-w-[calc(100%-2rem)] table-fixed border-collapse bg-transparent text-[var(--presentation-text)]">
+        <table className="mr-0 ml-px table h-px w-full max-w-[calc(100%-2rem)] table-fixed border-collapse bg-transparent text-[var(--presentation-text)]">
           <tbody className="w-full">{children}</tbody>
         </table>
       </div>
@@ -56,23 +56,23 @@ export function PresentationTableCellElementStatic({
   return (
     <SlateElement
       {...props}
-      as={isHeader ? "th" : "td"}
+      as={isHeader ? 'th' : 'td'}
       className={cn(
-        "h-full overflow-visible border-none bg-transparent p-0",
-        element.background ? "bg-(--cellBackground)" : "bg-transparent",
-        isHeader && "text-left *:m-0",
-        "before:size-full",
-        "before:absolute before:box-border before:select-none before:content-['']",
+        'h-full overflow-visible border-none bg-transparent p-0',
+        element.background ? 'bg-(--cellBackground)' : 'bg-transparent',
+        isHeader && 'text-left *:m-0',
+        'before:size-full',
+        "before:absolute before:box-border before:content-[''] before:select-none",
         borders.bottom?.size && `before:border-b before:border-b-border`,
         borders.right?.size && `before:border-r before:border-r-border`,
         borders.left?.size && `before:border-l before:border-l-border`,
-        borders.top?.size && `before:border-t before:border-t-border`,
+        borders.top?.size && `before:border-t before:border-t-border`
       )}
       style={
         {
-          "--cellBackground": element.background,
+          '--cellBackground': element.background,
           ...(isHeader && {
-            backgroundColor: element.color || "var(--presentation-primary)",
+            backgroundColor: element.color || 'var(--presentation-primary)',
           }),
         } as React.CSSProperties
       }
@@ -84,8 +84,8 @@ export function PresentationTableCellElementStatic({
     >
       <div
         className={cn(
-          "relative z-20 box-border h-full rounded-md px-3 py-2",
-          isHeader ? "text-lg font-bold text-primary" : "presentation-text",
+          'relative z-20 box-border h-full rounded-md px-3 py-2',
+          isHeader ? 'text-lg font-bold text-primary' : 'presentation-text'
         )}
         style={{ minHeight }}
       >
@@ -96,7 +96,7 @@ export function PresentationTableCellElementStatic({
 }
 
 export function PresentationTableCellHeaderElementStatic(
-  props: SlateElementProps<TTableCellElement>,
+  props: SlateElementProps<TTableCellElement>
 ) {
   return <PresentationTableCellElementStatic {...props} isHeader />;
 }

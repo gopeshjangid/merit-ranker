@@ -1,8 +1,8 @@
-import { SlateElement, type SlateElementProps } from "platejs";
-import { type TArrowListElement } from "../../plugins/arrow-plugin";
+import { SlateElement, type SlateElementProps } from 'platejs';
+import { type TArrowListElement } from '../../plugins/arrow-plugin';
 
 export default function ArrowListStatic(
-  props: SlateElementProps<TArrowListElement>,
+  props: SlateElementProps<TArrowListElement>
 ) {
   return (
     <div className="my-4 mb-8 flex w-full flex-col overflow-visible">

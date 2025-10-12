@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useUploadFile } from "@/hooks/use-upload-file";
-import { Button } from "@/components/ui/button";
-import { usePresentationState } from "@/states/presentation-state";
-import { Crop, Loader2, Upload } from "lucide-react";
-import { type TElement } from "platejs";
-import { useEditorRef } from "platejs/react";
-import { useRef } from "react";
-import { toast } from "sonner";
-import { type RootImage as RootImageType } from "../../../utils/parser";
-import { type EditorMode } from "../presentation-image-editor";
+import { useUploadFile } from '@/hooks/use-upload-file';
+import { Button } from '@/components/ui/button';
+import { usePresentationState } from '@/states/presentation-state';
+import { Crop, Loader2, Upload } from 'lucide-react';
+import { type TElement } from 'platejs';
+import { useEditorRef } from 'platejs/react';
+import { useRef } from 'react';
+import { toast } from 'sonner';
+import { type RootImage as RootImageType } from '../../../utils/parser';
+import { type EditorMode } from '../presentation-image-editor';
 
 interface ActionButtonsProps {
   currentMode: EditorMode;
@@ -41,18 +41,18 @@ export function ActionButtons({
                   ...slide,
                   rootImage: { ...slide.rootImage!, url: file.ufsUrl },
                 }
-              : slide,
-          ),
+              : slide
+          )
         );
       } else {
         editor.tf.setNodes(
           { url: file.ufsUrl },
-          { at: editor.api.findPath(element) },
+          { at: editor.api.findPath(element) }
         );
       }
     },
     onUploadError: (error) => {
-      toast.error("Failed to upload image");
+      toast.error('Failed to upload image');
       console.error(error);
     },
   });
@@ -80,18 +80,18 @@ export function ActionButtons({
         ) : (
           <Upload className="h-4 w-4" />
         )}
-        {isUploading ? `${progress}%` : "Upload"}
+        {isUploading ? `${progress}%` : 'Upload'}
       </Button>
 
       {/* Crop Button - Mode Toggle */}
       <Button
-        variant={currentMode === "crop" ? "default" : "outline"}
+        variant={currentMode === 'crop' ? 'default' : 'outline'}
         size="sm"
         onClick={() => {
-          if (currentMode === "crop") {
-            onModeChange("generate");
+          if (currentMode === 'crop') {
+            onModeChange('generate');
           } else {
-            onModeChange("crop");
+            onModeChange('crop');
           }
         }}
         disabled={!element.url}

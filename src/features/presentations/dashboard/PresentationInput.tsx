@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 // import { Button } from "@/components/ui/button";
-import { usePresentationState } from "@/states/presentation-state";
+import { usePresentationState } from '@/states/presentation-state';
 // import { Sparkles } from "lucide-react";
-import { WebSearchToggle } from "./WebSearchToggle";
+import { WebSearchToggle } from './WebSearchToggle';
 
 export function PresentationInput({
   handleGenerate,
@@ -30,30 +30,30 @@ export function PresentationInput({
         </Button> */}
       </div>
 
-      <div className="relative group">
+      <div className="group relative">
         <textarea
           value={presentationInput}
           onChange={(e) => setPresentationInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && e.ctrlKey) {
+            if (e.key === 'Enter' && e.ctrlKey) {
               e.preventDefault();
               handleGenerate();
             }
           }}
           placeholder="Describe your topic or paste your content here. Our AI will structure it into a compelling presentation."
-          className="h-40 w-full resize-none rounded-lg border border-border bg-card px-4 py-3.5 pb-14 text-base text-foreground placeholder:text-muted-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+          className="h-40 w-full resize-none rounded-lg border border-border bg-card px-4 py-3.5 pb-14 text-base text-foreground transition-colors placeholder:text-muted-foreground focus:border-transparent focus:ring-2 focus:ring-ring focus:outline-none"
         />
 
-        <div className="absolute flex justify-between items-center bottom-3 inset-x-3 z-10">
+        <div className="absolute inset-x-3 bottom-3 z-10 flex items-center justify-between">
           <p className="text-xs text-muted-foreground">
-            Press{" "}
-            <kbd className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono text-[10px] border border-border">
+            Press{' '}
+            <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
               Ctrl
-            </kbd>{" "}
-            +{" "}
-            <kbd className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono text-[10px] border border-border">
+            </kbd>{' '}
+            +{' '}
+            <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
               Enter
-            </kbd>{" "}
+            </kbd>{' '}
             to generate
           </p>
           <WebSearchToggle />

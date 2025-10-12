@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
 // Import CycleItem and constants
-import { cn } from "@/lib/utils";
-import { PlateElement, type StyledPlateElementProps } from "platejs/react";
-import { type TCycleItemElement } from "../plugins/cycle-plugin";
+import { cn } from '@/lib/utils';
+import { PlateElement, type StyledPlateElementProps } from 'platejs/react';
+import { type TCycleItemElement } from '../plugins/cycle-plugin';
 
 // Main cycle component with withRef pattern
 export const CycleElement = ({
@@ -14,7 +14,7 @@ export const CycleElement = ({
   return (
     <PlateElement
       ref={ref}
-      className={cn("relative my-8", className)}
+      className={cn('relative my-8', className)}
       {...props}
     >
       {/* Three-column grid layout for content */}
