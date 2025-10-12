@@ -1,11 +1,11 @@
 import Link from "next/link"
 import type { Metadata } from "next"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+import { Navbar } from "@/components/landing/navbar"
+import { Footer } from "@/components/landing/footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Building, Users } from "lucide-react"
-import { PartnerImage } from "@/components/partner-image" // Import the new Client Component
+import { PartnerImage } from "@/components/landing/partner-image" // Import the new Client Component
 
 export const metadata: Metadata = {
   title: "Our Partners - eSIM Myanmar",

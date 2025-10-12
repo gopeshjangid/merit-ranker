@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
+import { Navbar } from "@/components/landing/navbar"
+import { Footer } from "@/components/landing/footer"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"

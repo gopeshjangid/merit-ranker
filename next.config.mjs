@@ -2,15 +2,7 @@ await import('./src/env.js');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async redirects() {
-    return [
-      {
-        destination: '/editor',
-        permanent: false,
-        source: '/',
-      },
-    ];
-  },
+  // Redirects removed
 };
 
 export default nextConfig;

@@ -1,6 +1,6 @@
-import { ContactForm } from "@/components/contact-form" // Assuming ContactForm is now a named export
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
+import { ContactForm } from "@/components/forms/contact-form" // Assuming ContactForm is now a named export
+import { Footer } from "@/components/landing/footer"
+import { Navbar } from "@/components/landing/navbar"
 import type { Metadata } from "next"
 import { Mail, Phone, GlobeIcon, MessageSquare } from "lucide-react" // Renamed Globe to avoid conflict
 

@@ -1,14 +1,13 @@
 import type { Metadata } from "next"
-import { Navbar } from "@/components/navbar"
-import { HeroSection } from "@/components/hero-section"
-import { CtaSection } from "@/components/cta-section" // Added CTA Section
-import { Footer } from "@/components/footer"
-import { AICapabilitiesSection } from "@/components/ai-capabilities-section"
-import { StudentsSection } from "@/components/students-section"
-import { TeachersSection } from "@/components/teachers-section"
-import { ShowcaseSection } from "@/components/showcase-section"
-import AppProviders from "@/components/app-providers"
-import { WhyTeachersChooseSection } from "@/components/why-teachers-choose"
+import { Navbar } from "@/components/landing/navbar"
+import { HeroSection } from "@/components/landing/hero-section"
+import { CtaSection } from "@/components/landing/cta-section" // Added CTA Section
+import { Footer } from "@/components/landing/footer"
+import { AICapabilitiesSection } from "@/components/landing/ai-capabilities-section"
+import { StudentsSection } from "@/components/landing/students-section"
+import { TeachersSection } from "@/components/landing/teachers-section"
+import { ShowcaseSection } from "@/components/landing/showcase-section"
+import { WhyTeachersChooseSection } from "@/components/landing/why-teachers-choose"
 
 export const metadata: Metadata = {
   title: "Meritranker | AI Learning App & Teacher Tools for Govt & Competitive Exam Preparation",
@@ -45,7 +44,6 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-darkBlue selection:bg-cyan-500 selection:text-white">
       <Navbar />
       <main className="flex-grow">
-        <AppProviders>
           <HeroSection />
           <AICapabilitiesSection />
           <StudentsSection />
@@ -53,7 +51,6 @@ export default function HomePage() {
           <WhyTeachersChooseSection />
           <ShowcaseSection />
           <CtaSection />
-        </AppProviders>
       </main>
       <Footer />
     </div>

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Wifi, Server, Smartphone, CheckCircle } from "lucide-react" // Icons for stages
-import { AnimatedTechParticles } from "@/components/animated-tech-patterns" // Re-use existing cool background
+import { AnimatedTechParticles } from "@/components/landing/animated-tech-patterns" // Re-use existing cool background
 
 const loadingStages = [
   { text: "Initializing connection...", icon: Wifi, duration: 2000 }, // Duration for this stage
