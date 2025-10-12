@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { AnimatedQRCode } from "./animated-qr-code"
-import { AnimatedBlob } from "./animated-shapes"
+import { AnimatedBlob } from "@/components/landing/animated-shapes"
 
 const paymentMethods = [
   { name: "KBZPay", color: "bg-blue-500" },
