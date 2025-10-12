@@ -232,18 +232,22 @@ export default function PresentationGenerateWithIdPage() {
             />
             <ToolCallDisplay />
 
-            <OutlineList />
-
-            <div className="!mb-32 space-y-4 rounded-lg border bg-muted/30 p-6">
-              <h2 className="text-lg font-semibold">Customize Theme</h2>
-              <ThemeSettings />
-            </div>
+            
           </div>
         </div>
+        
 
         {/* <GoogleAdsBanner isVertical={true} /> */}
       </div>
-
+      <div className="flex flex-col lg:flex-row lg:space-x-8 lg:space-y-0 space-y-4 px-4">
+  <div className="lg:!mb-32 space-y-4 rounded-lg border bg-muted/30 p-6">
+    <OutlineList />
+  </div>
+  <div className="!mb-32 space-y-4 rounded-lg border bg-muted/30 p-6 lg:self-start">
+    <h2 className="text-lg font-semibold">Customize Theme</h2>
+    <ThemeSettings />
+  </div>
+</div>   
       <div className="absolute right-0 bottom-0 left-0 flex justify-center border-t bg-background/80 p-4 backdrop-blur-sm">
         <Button
           size="lg"
