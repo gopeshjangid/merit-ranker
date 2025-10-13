@@ -6,6 +6,12 @@ import { useEditorMounted } from 'platejs/react';
 import { useTocSideBar, useTocSideBarState } from '@platejs/toc/react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from '@/components/ui/collapsible';
+import { ChevronRightIcon } from 'lucide-react';
 
 const headingItemVariants = cva(
   'block h-auto w-full cursor-pointer truncate rounded-md px-2 py-1.5 text-left text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
@@ -38,6 +44,10 @@ interface TocSideBarProps {
   className?: string;
 }
 
+// Utility to truncate title with ellipsis
+function truncateTitle(title: string, maxLength: number = 15) {
+  return title.length > maxLength ? title.slice(0, maxLength) + '…' : title;
+}
 
 export function TocSideBar({
   open = true,
@@ -47,11 +57,10 @@ export function TocSideBar({
 }: TocSideBarProps) {
   const isEditorMounted = useEditorMounted();
 
-
   if (!isEditorMounted) {
     return (
       <div className={`p-4 ${className}`}>
-        <div className="text-xs font-medium text-muted-foreground mb-3">
+        <div className="mb-3 text-xs font-medium text-muted-foreground">
           TABLE OF CONTENTS
         </div>
         <div className="text-sm text-muted-foreground/70 italic">
@@ -62,7 +71,14 @@ export function TocSideBar({
   }
 
   // Now safe to use TOC hooks - editor is guaranteed to be mounted
-  return <TocSideBarContent open={open} rootMargin={rootMargin} topOffset={topOffset} className={className} />;
+  return (
+    <TocSideBarContent
+      open={open}
+      rootMargin={rootMargin}
+      topOffset={topOffset}
+      className={className}
+    />
+  );
 }
 
 /**
@@ -87,11 +103,48 @@ function TocSideBarContent({
 
   const { headingList, activeContentId } = state;
 
+  // Group headings by main heading (depth 1)
+  const groupedHeadings: Array<{
+    main: (typeof headingList)[0];
+    children: typeof headingList;
+  }> = [];
+  let currentMain: (typeof headingList)[0] | null = null;
+  let currentChildren: typeof headingList = [];
+
+  headingList.forEach((heading) => {
+    if (heading.depth === 1) {
+      if (currentMain) {
+        groupedHeadings.push({ main: currentMain, children: currentChildren });
+      }
+      currentMain = heading;
+      currentChildren = [];
+    } else if (currentMain) {
+      currentChildren.push(heading);
+    }
+  });
+  if (currentMain) {
+    groupedHeadings.push({ main: currentMain, children: currentChildren });
+  }
+
+  // Maintain open state for each main heading at parent level
+  const [openStates, setOpenStates] = React.useState<boolean[]>(() =>
+    groupedHeadings.map(() => true)
+  );
+
+  // If headings change, reset openStates length
+  React.useEffect(() => {
+    setOpenStates((prev) =>
+      groupedHeadings.length === prev.length
+        ? prev
+        : groupedHeadings.map(() => true)
+    );
+  }, [groupedHeadings.length]);
+
   // Handle empty state when no headings are present
   if (!headingList || headingList.length === 0) {
     return (
       <div className={`p-4 ${className}`}>
-        <div className="text-xs font-medium text-muted-foreground mb-3">
+        <div className="mb-3 text-xs font-medium text-muted-foreground">
           TABLE OF CONTENTS
         </div>
         <div className="text-sm text-muted-foreground/70 italic">
@@ -104,11 +157,11 @@ function TocSideBarContent({
   return (
     <nav
       {...navProps}
-      className={`flex flex-col h-full ${className}`}
+      className={`flex h-full flex-col ${className}`}
       aria-label="Table of contents"
     >
       {/* Header section */}
-      <div className="px-4 py-3 border-b">
+      <div className="border-b px-4 py-3">
         <div className="text-xs font-medium text-muted-foreground">
           TABLE OF CONTENTS
         </div>
@@ -116,27 +169,68 @@ function TocSideBarContent({
 
       {/* Scrollable heading list */}
       <ScrollArea className="flex-1">
-        <div className="p-2 space-y-0.5">
-          {headingList.map((heading) => {
-            // Determine if this heading is currently active
-            const isActive = activeContentId === heading.id;
-
-            return (
-              <Button
-                key={heading.id}
-                variant="ghost"
-                className={headingItemVariants({
-                  depth: Math.min(heading.depth, 6) as 1 | 2 | 3 | 4 | 5 | 6,
-                  isActive,
-                })}
-                onClick={(e) => onContentClick(e, heading, 'smooth')}
-                title={heading.title}
-                aria-current={isActive ? 'location' : undefined}
-              >
-                <span className="truncate">{heading.title}</span>
-              </Button>
-            );
-          })}
+        <div className="space-y-0.5 p-2">
+          {groupedHeadings.map(({ main, children }, idx) => (
+            <Collapsible
+              key={main.id}
+              open={openStates[idx]}
+              onOpenChange={(open) => {
+                setOpenStates((prev) =>
+                  prev.map((v, i) => (i === idx ? open : v))
+                );
+              }}
+            >
+              <div className="flex items-center gap-2">
+                <CollapsibleTrigger asChild>
+                  <Button
+                    variant='ghost'
+                  >
+                    <ChevronRightIcon
+                      className={`h-4 w-4 transition-transform duration-200 ${
+                        openStates[idx] ? 'rotate-90' : ''
+                      }`}
+                    />
+                  </Button>
+                </CollapsibleTrigger>
+                <Button
+                  variant="ghost"
+                  className={headingItemVariants({
+                    depth: 1,
+                    isActive: activeContentId === main.id,
+                  })}
+                  onClick={(e) => onContentClick(e, main, 'smooth')}
+                  title={main.title}
+                  aria-current={
+                    activeContentId === main.id ? 'location' : undefined
+                  }
+                  style={{ flex: 1, justifyContent: 'flex-start' }}
+                >
+                  <span className="truncate">{truncateTitle(main.title)}</span>
+                </Button>
+              </div>
+              <CollapsibleContent>
+                {children.map((heading) => (
+                  <Button
+                    key={heading.id}
+                    variant="ghost"
+                    className={headingItemVariants({
+                      depth: Math.min(heading.depth, 6) as 2 | 3 | 4 | 5 | 6,
+                      isActive: activeContentId === heading.id,
+                    })}
+                    onClick={(e) => onContentClick(e, heading, 'smooth')}
+                    title={heading.title}
+                    aria-current={
+                      activeContentId === heading.id ? 'location' : undefined
+                    }
+                  >
+                    <span className="truncate">
+                      {truncateTitle(heading.title)}
+                    </span>
+                  </Button>
+                ))}
+              </CollapsibleContent>
+            </Collapsible>
+          ))}
         </div>
       </ScrollArea>
     </nav>
