@@ -6,7 +6,6 @@ import { normalizeNodeId } from 'platejs';
 import { Plate, usePlateEditor } from 'platejs/react';
 
 import { EditorKit } from '@/components/editor/editor-kit';
-import { SettingsDialog } from '@/components/editor/settings-dialog';
 import { Editor, EditorContainer } from '@/components/ui/editor';
 import { ExcalidrawPlugin } from '@platejs/excalidraw/react';
 import { ExcalidrawElement } from '@/components/ui/excalidraw-node';
@@ -22,8 +21,6 @@ export function PlateEditor() {
       <EditorContainer>
         <Editor variant="demo" />
       </EditorContainer>
-
-      <SettingsDialog />
     </Plate>
   );
 }

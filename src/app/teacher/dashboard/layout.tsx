@@ -4,8 +4,18 @@ import type React from "react"
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
 import { NotebookText, FileCheck2, GraduationCap, MessageCircle, Settings } from "lucide-react"
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 
 export default function TeacherDashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -21,47 +31,37 @@ export default function TeacherDashboardLayout({ children }: { children: React.R
   ]
 
   return (
-    <div className="min-h-screen flex bg-background pt-16 pb-20">
-      <aside className="w-64 border-r border-border/60 hidden md:flex flex-col">
-        <div className="h-16 flex items-center px-4 border-b border-border/60">
-          <span className="text-sm text-muted-foreground">Teacher Dashboard</span>
-        </div>
-        <nav className="flex-1 p-2">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center gap-2 px-3 py-2 rounded-md text-sm text-foreground/80 hover:bg-muted/50",
-                pathname === item.href && "bg-primary/10 text-primary",
-              )}
-            >
-              <item.icon className="h-4 w-4 opacity-70" />
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-      <main className="flex-1 min-w-0">
-        <div className="md:hidden sticky top-0 z-10 bg-background/80 backdrop-blur border-b border-border/60 px-4 py-3">
-          <div className="text-sm text-muted-foreground">Teacher Dashboard</div>
-          <div className="mt-2 flex gap-2 overflow-x-auto">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "px-3 py-1.5 rounded-full border text-xs",
-                  pathname === item.href ? "border-primary text-primary" : "border-border text-foreground/70",
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
+    <SidebarProvider>
+      <Sidebar>
+        <SidebarHeader>
+          <div className="flex items-center px-4 pt-16">
+            <span className="text-sm text-muted-foreground">Teacher Dashboard</span>
           </div>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarMenu>
+            {nav.map((item) => (
+              <SidebarMenuItem key={item.href}>
+                <SidebarMenuButton asChild isActive={pathname === item.href}>
+                  <Link href={item.href}>
+                    <item.icon className="h-4 w-4" />
+                    {item.label}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarContent>
+      </Sidebar>
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 mt-16">
+          <SidebarTrigger className="-ml-1" />
+          <div className="text-sm text-muted-foreground">Teacher Dashboard</div>
+        </header>
+        <div className="flex flex-1 flex-col gap-4 p-4">
+          {children}
         </div>
-        <div className="p-4 sm:p-6">{children}</div>
-      </main>
-    </div>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
