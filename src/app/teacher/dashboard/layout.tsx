@@ -8,7 +8,7 @@ import { NotebookText, FileCheck2, GraduationCap, MessageCircle, Settings } from
 import {
   Sidebar,
   SidebarContent,
-  SidebarHeader,
+  SidebarFooter,
   SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
@@ -27,22 +27,24 @@ export default function TeacherDashboardLayout({ children }: { children: React.R
     { href: "/teacher/dashboard/quizzes", label: "Quiz", icon: FileCheck2 },
     { href: "/teacher/dashboard/mocks", label: "Mock Test", icon: FileCheck2 },
     { href: "/teacher/dashboard/students", label: "Students", icon: MessageCircle },
-    { href: "/teacher/dashboard/settings", label: "Profile Settings", icon: Settings },
+  ]
+  const navFooter = [
+    { href: "/teacher/dashboard/settings", label: "Settings", icon: Settings },
   ]
 
   return (
     <SidebarProvider>
-      <Sidebar>
-        <SidebarHeader>
+      <Sidebar collapsible="icon">
+        {/* <SidebarHeader>
           <div className="flex items-center px-4 pt-16">
             <span className="text-sm text-muted-foreground">Teacher Dashboard</span>
           </div>
-        </SidebarHeader>
-        <SidebarContent>
+        </SidebarHeader> */}
+        <SidebarContent className="pt-18 px-2">
           <SidebarMenu>
             {nav.map((item) => (
               <SidebarMenuItem key={item.href}>
-                <SidebarMenuButton asChild isActive={pathname === item.href}>
+                <SidebarMenuButton tooltip={item.label} asChild isActive={pathname === item.href}>
                   <Link href={item.href}>
                     <item.icon className="h-4 w-4" />
                     {item.label}
@@ -52,10 +54,24 @@ export default function TeacherDashboardLayout({ children }: { children: React.R
             ))}
           </SidebarMenu>
         </SidebarContent>
+        <SidebarFooter className="mb-4">
+          <SidebarMenu>
+            {navFooter.map((item) => (
+              <SidebarMenuItem key={item.href}>
+                <SidebarMenuButton tooltip={item.label} asChild isActive={pathname === item.href}>
+                  <Link href={item.href}>
+                    <item.icon className="h-4 w-4" />
+                    {item.label}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+      </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 mt-16">
-          <SidebarTrigger className="-ml-1" />
+        <header className="flex h-12 shrink-0 items-center gap-2 border-b mt-16">
+          <SidebarTrigger className="ml-1" />
           <div className="text-sm text-muted-foreground">Teacher Dashboard</div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
