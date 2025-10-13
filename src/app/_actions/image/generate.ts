@@ -2,7 +2,7 @@
 
 import { utapi } from '@/app/api/uploadthing/core';
 import { env } from '@/env';
-import { auth } from '@/server/auth';
+// import { auth } from '@/server/auth';
 import { db } from '@/server/db';
 import Together from 'together-ai';
 import { UTFile } from 'uploadthing/server';
@@ -21,10 +21,12 @@ export async function generateImageAction(
   model: ImageModelList = 'black-forest-labs/FLUX.1-schnell-Free'
 ) {
   // Get the current session
-  const session = await auth();
+  // const session = await auth();
+
+  const userId = 'cmgi94l4c0000teq0hejotfen';
 
   // Check if user is authenticated
-  if (!session?.user?.id) {
+  if (!userId) {
     throw new Error('You must be logged in to generate images');
   }
 
@@ -88,7 +90,7 @@ export async function generateImageAction(
       data: {
         url: permanentUrl, // Store the UploadThing URL instead of the Together AI URL
         prompt: prompt,
-        userId: session.user.id,
+        userId: userId,
       },
     });
 

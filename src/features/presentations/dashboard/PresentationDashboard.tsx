@@ -59,7 +59,7 @@ export function PresentationDashboard({
           result.presentation.id,
           result.presentation.title
         );
-        router.push(`/presentation/generate/${result.presentation.id}`);
+        router.push(`/teacher/dashboard/live-class/presentation/generate/${result.presentation.id}`);
       } else {
         setIsGeneratingOutline(false);
         toast.error(result.message || 'Failed to create presentation');

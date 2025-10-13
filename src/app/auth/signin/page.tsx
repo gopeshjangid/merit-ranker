@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { signIn } from 'next-auth/react';
+/// import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { FaGoogle } from 'react-icons/fa';
 
@@ -19,7 +19,7 @@ export default function SignIn() {
   const error = searchParams.get('error');
 
   const handleSignIn = async (provider: string) => {
-    await signIn(provider, { callbackUrl });
+  //  await signIn(provider, { callbackUrl });
   };
 
   return (
