@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { usePresentationState } from '@/states/presentation-state';
 import { Wand2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { toast } from 'sonner';
 import { PresentationControls } from './PresentationControls';
 import { PresentationExamples } from './PresentationExamples';
@@ -32,18 +32,20 @@ export function PresentationDashboard({
 
   useEffect(() => {
     setCurrentPresentation('', '');
-    // Make sure to reset any generation flags when landing on dashboard
     setIsGeneratingOutline(false);
     setShouldStartOutlineGeneration(false);
-  }, []);
+  }, [
+    setCurrentPresentation,
+    setIsGeneratingOutline,
+    setShouldStartOutlineGeneration,
+  ]);
 
-  const handleGenerate = async () => {
+  const handleGenerate = useCallback(async () => {
     if (!presentationInput.trim()) {
       toast.error('Please enter a topic for your presentation');
       return;
     }
 
-    // Set UI loading state
     setIsGeneratingOutline(true);
 
     try {
@@ -54,7 +56,6 @@ export function PresentationDashboard({
       );
 
       if (result.success && result.presentation) {
-        // Set the current presentation
         setCurrentPresentation(
           result.presentation.id,
           result.presentation.title
@@ -64,12 +65,18 @@ export function PresentationDashboard({
         setIsGeneratingOutline(false);
         toast.error(result.message || 'Failed to create presentation');
       }
-    } catch (error) {
+    } catch {
       setIsGeneratingOutline(false);
-      console.error('Error creating presentation:', error);
       toast.error('Failed to create presentation');
     }
-  };
+  }, [
+    presentationInput,
+    theme,
+    language,
+    setIsGeneratingOutline,
+    setCurrentPresentation,
+    router,
+  ]);
 
   return (
     <div className="notebook-section relative h-full w-full">

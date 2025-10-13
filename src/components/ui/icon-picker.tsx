@@ -119,6 +119,7 @@ const IconPicker = ({
   };
 
   // Function to dynamically load icons based on search
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const searchIcons = async (term: string) => {
     if (!term || term.length < 2) {
       setFilteredIcons(availableIcons);
@@ -367,7 +368,7 @@ const IconPicker = ({
     }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [internalSearchTerm, initialLoadDone]);
+  }, [internalSearchTerm, initialLoadDone, searchTerm, searchIcons]);
 
   const handleSelectIcon = async (selectedName: string) => {
     setIcon(selectedName);

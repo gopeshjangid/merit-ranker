@@ -175,7 +175,6 @@ export function PresentationItem({
         );
       }
 
-      console.log(response);
       // Route based on content status
       if (Object.keys(response?.presentation?.content ?? {}).length > 0) {
         router.push(`/presentation/${presentation.id}`);

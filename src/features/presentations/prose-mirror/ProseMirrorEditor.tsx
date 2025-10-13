@@ -42,10 +42,13 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({
     left: 0,
   });
 
-  const checkForChanges = (newContent: string) => {
-    const hasChanges = newContent !== originalContentRef.current;
-    onChangeState?.(hasChanges);
-  };
+  const checkForChanges = useCallback(
+    (newContent: string) => {
+      const hasChanges = newContent !== originalContentRef.current;
+      onChangeState?.(hasChanges);
+    },
+    [onChangeState]
+  );
 
   const updateToolbarPosition = useCallback((view: EditorView) => {
     const { from, to } = view.state.selection;
@@ -183,7 +186,15 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({
       }
       document.head.removeChild(style);
     };
-  }, [isEditing, updateToolbarPosition]);
+  }, [
+    checkForChanges,
+    content,
+    isEditing,
+    onBlur,
+    onChange,
+    onChangeState,
+    updateToolbarPosition,
+  ]);
 
   // Update content when it changes externally
   useEffect(() => {
@@ -202,7 +213,7 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({
         onChangeState?.(false);
       }
     }
-  }, [content]);
+  }, [content, onChangeState]);
 
   return (
     <div className="relative">

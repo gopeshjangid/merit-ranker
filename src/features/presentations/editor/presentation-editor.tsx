@@ -74,7 +74,7 @@ const PresentationEditor = React.memo(
           editor.tf.setValue(initialContent.content);
         });
       }
-    }, []);
+    }, [editor.tf, initialContent]);
 
     useEffect(() => {
       if (isGenerating) {
@@ -82,7 +82,7 @@ const PresentationEditor = React.memo(
           editor.tf.setValue(initialContent?.content);
         });
       }
-    }, [initialContent, isGenerating]);
+    }, [editor.tf, initialContent, isGenerating]);
 
     const handleSlideChange = useCallback(
       (value: Value, slideIndex: number) => {

@@ -134,7 +134,7 @@ export default function FileUpload({
         });
       }
     },
-    []
+    [setFiles, toast]
   );
 
   const { getRootProps, getInputProps } = useDropzone({

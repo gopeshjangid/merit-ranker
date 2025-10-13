@@ -22,7 +22,7 @@ import { ArrowLeft, Wand2 } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
-export const PRESENTATION_GENERATION_COOKIE = 'presentation_generation_pending';
+const PRESENTATION_GENERATION_COOKIE = 'presentation_generation_pending';
 
 export default function PresentationGenerateWithIdPage() {
   const router = useRouter();
@@ -89,7 +89,6 @@ export default function PresentationGenerateWithIdPage() {
     // If isGeneratingOutline is true but generation hasn't been started yet,
     // this indicates we just came from the dashboard and should start generation
     if (isGeneratingOutline && !generationStarted.current) {
-      console.log('Starting outline generation after navigation');
       generationStarted.current = true;
 
       // Give the component time to fully mount and establish connections
@@ -185,6 +184,9 @@ export default function PresentationGenerateWithIdPage() {
     setImageSource,
     setPresentationStyle,
     setLanguage,
+    isGeneratingOutline,
+    setWebSearchEnabled,
+    setSearchResults,
   ]);
 
   const handleGenerate = () => {

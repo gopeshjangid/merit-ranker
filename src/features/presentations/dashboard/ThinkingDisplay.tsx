@@ -19,6 +19,7 @@ interface ThinkingDisplayProps {
 
 export function ThinkingDisplay({
   thinking,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isGenerating: _isGenerating,
   title = 'AI is thinking...',
 }: ThinkingDisplayProps) {

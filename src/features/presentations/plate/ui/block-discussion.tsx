@@ -164,10 +164,9 @@ const BlockCommentContent = ({
 
     return editor.api.toDOMNode(activeNode[0])!;
   }, [
-    open,
     activeSuggestion,
     activeCommentId,
-    editor.api,
+    editor,
     suggestionNodes,
     draftCommentNode,
     commentNodes,

@@ -7,7 +7,6 @@ import {
   useTheme,
 } from 'next-themes';
 
-import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
@@ -22,22 +21,21 @@ export function ThemeToggle() {
   };
 
   return (
-    <Button
-      variant="outline"
-      className="flex w-full items-center justify-between gap-2 text-primary"
+    <div
+      className="flex w-full cursor-pointer items-center justify-between gap-2 rounded-md px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
       onClick={toggleTheme}
     >
       <span>Change Theme</span>
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
         <Sun className="h-4 w-4 rotate-0 transition-all dark:hidden" />
         <Moon className="hidden h-4 w-4 rotate-0 transition-all dark:block" />
         <Switch
           checked={theme === 'dark'}
           onCheckedChange={toggleTheme}
-          className="ml-2"
+          onClick={(e) => e.stopPropagation()}
         />
       </div>
       <span className="sr-only">Toggle theme</span>
-    </Button>
+    </div>
   );
 }

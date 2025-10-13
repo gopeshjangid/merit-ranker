@@ -37,6 +37,7 @@ export const getHoverDirection = ({
   element,
   monitor,
   nodeRef,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   orientation: _,
 }: GetHoverDirectionOptions): DropDirection => {
   if (!nodeRef.current) return;

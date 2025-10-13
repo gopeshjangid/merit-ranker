@@ -10,8 +10,7 @@ export function PresentationInput({
 }: {
   handleGenerate: () => void;
 }) {
-  const { presentationInput, setPresentationInput, setShowTemplates } =
-    usePresentationState();
+  const { presentationInput, setPresentationInput } = usePresentationState();
 
   return (
     <div className="space-y-3">

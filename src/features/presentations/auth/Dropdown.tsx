@@ -37,11 +37,8 @@ function useSession() {
 
 // Dummy signOut function
 async function signOut() {
-  console.log('🚪 User signing out...');
-  console.log('Session data:', dummySession.data);
   // Simulate async operation
   await new Promise((resolve) => setTimeout(resolve, 500));
-  console.log('✅ Sign out complete');
 }
 
 export function getInitials(name: string): string {
@@ -67,10 +64,11 @@ export function UserAvatar() {
 
 export function UserDetail() {
   const session = useSession();
+  const isAuthenticated = session.status === 'authenticated';
 
   return (
     <div className="max-w-max overflow-hidden">
-      {session.status !== 'loading' && (
+      {isAuthenticated && (
         <div className="max-w-full px-2 py-1.5 text-ellipsis">
           <p className="text-start text-sm leading-none font-medium text-ellipsis">
             {session?.data?.user?.name}
@@ -80,8 +78,7 @@ export function UserDetail() {
           </p>
         </div>
       )}
-      {(session.status === 'loading' ||
-        session.status === 'unauthenticated') && (
+      {!isAuthenticated && (
         <div className="grid gap-0.5 px-2 py-1.5">
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-2 w-full" />
@@ -123,7 +120,7 @@ export default function SideBarDropdown({
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup className="flex flex-col gap-2 p-1">
-          <DropdownMenuItem asChild>
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
             <ThemeToggle />
           </DropdownMenuItem>
         </DropdownMenuGroup>

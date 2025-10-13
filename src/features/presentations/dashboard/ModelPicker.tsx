@@ -34,7 +34,6 @@ export function ModelPicker({
     if (!hasRestoredFromStorage.current) {
       const savedModel = getSelectedModel();
       if (savedModel) {
-        console.log('Restoring model from localStorage:', savedModel);
         setModelProvider(
           savedModel.modelProvider as 'openai' | 'ollama' | 'lmstudio'
         );
@@ -131,24 +130,20 @@ export function ModelPicker({
 
   // Handle model change
   const handleModelChange = (value: string) => {
-    console.log('Model changed to:', value);
     if (value === 'openai') {
       setModelProvider('openai');
       setModelId('');
       setSelectedModel('openai', '');
-      console.log("Saved to localStorage: openai, ''");
     } else if (value.startsWith('ollama-')) {
       const model = value.replace('ollama-', '');
       setModelProvider('ollama');
       setModelId(model);
       setSelectedModel('ollama', model);
-      console.log('Saved to localStorage: ollama,', model);
     } else if (value.startsWith('lmstudio-')) {
       const model = value.replace('lmstudio-', '');
       setModelProvider('lmstudio');
       setModelId(model);
       setSelectedModel('lmstudio', model);
-      console.log('Saved to localStorage: lmstudio,', model);
     }
   };
 

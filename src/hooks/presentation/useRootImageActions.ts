@@ -154,6 +154,7 @@ export function useRootImageActions(
           if (matchUrls && !matchUrls.includes(slide.rootImage.url ?? '')) {
             return slide;
           }
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { rootImage: _rootImage, ...rest } = slide as PlateSlide & {
             rootImage?: PlateSlide['rootImage'];
           };
@@ -188,7 +189,7 @@ export function useRootImageActions(
       setSlides(updatedSlides);
       void saveImmediately();
     },
-    [setSlides, slideIndex]
+    [saveImmediately, setSlides, slideIndex]
   );
 
   // Resizable handler logic moved here

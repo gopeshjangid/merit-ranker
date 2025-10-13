@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Image, Wand2 } from 'lucide-react';
+import { Image as ImageIcon, Wand2 } from 'lucide-react';
 
 export const IMAGE_MODELS: { value: ImageModelList; label: string }[] = [
   { value: 'black-forest-labs/FLUX.1-schnell-Free', label: 'FLUX Fast' },
@@ -81,7 +81,7 @@ export function ImageSourceSelector({
           </SelectGroup>
           <SelectGroup>
             <SelectLabel className="flex items-center gap-1 text-primary/80">
-              <Image size={10} />
+              <ImageIcon size={10} />
               Stock Images
             </SelectLabel>
             <SelectItem value="stock-unsplash">Unsplash</SelectItem>

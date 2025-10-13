@@ -188,9 +188,8 @@ export function ImagePreview({
       actualHeight = parentHeight;
     }
 
-    console.log('actualWidth', actualWidth, 'actualHeight', actualHeight);
     return { width: actualWidth, height: actualHeight };
-  }, [slideIndex]);
+  }, [element.size?.h, element.size?.w, layoutType, slideIndex]);
 
   const containerScale = useMemo(() => {
     const maxHeight = window.innerHeight * MAX_HEIGHT_RATIO_WITH_WINDOW;
@@ -204,7 +203,6 @@ export function ImagePreview({
     } else {
       maxWidth = windowWidth; // max-w-full (full width for small screens)
     }
-    console.log('maxWidth', maxWidth, 'maxHeight', maxHeight);
 
     let heightFits = imageDimensionInPresentation.height <= maxHeight;
     let widthFits = imageDimensionInPresentation.width <= maxWidth;
@@ -228,16 +226,6 @@ export function ImagePreview({
     const widthScale = maxWidth / imageDimensionInPresentation.width;
     return Math.min(heightScale, widthScale);
   }, [imageDimensionInPresentation]);
-
-  // Debug logging for container dimensions
-  useEffect(() => {
-    console.log('Container dimensions:', {
-      width: imageDimensionInPresentation.width * containerScale,
-      height: imageDimensionInPresentation.height * containerScale,
-      containerScale,
-      imageDimensions: imageDimensionInPresentation,
-    });
-  }, [imageDimensionInPresentation, containerScale]);
 
   const handleDownload = useCallback(async () => {
     if (!element.url) return;

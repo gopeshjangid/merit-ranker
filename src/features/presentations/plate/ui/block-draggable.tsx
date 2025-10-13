@@ -35,6 +35,7 @@ import { useDropLine } from '@/hooks/presentation/useDropLine';
 import { getGridClassForElement } from '@/features/presentations/editor/lib';
 import { cn } from '@/lib/utils';
 import { MultiDndPlugin } from '../plugins/dnd-kit';
+import { useCallback } from 'react';
 
 // Configuration constants
 const UNDRAGGABLE_KEYS = [KEYS.tr, KEYS.td];
@@ -164,19 +165,19 @@ export function Draggable(props: PlateElementProps) {
 
   const [previewTop, setPreviewTop] = React.useState(0);
 
-  const resetPreview = () => {
+  const resetPreview = useCallback(() => {
     if (previewRef.current) {
       previewRef.current.replaceChildren();
       previewRef.current?.classList.add('hidden');
     }
-  };
+  }, [previewRef]);
 
   // Clear up virtual multiple preview when drag ends
   React.useEffect(() => {
     if (!isDragging) {
       resetPreview();
     }
-  }, [isDragging, previewRef]);
+  }, [isDragging, previewRef, resetPreview]);
 
   React.useEffect(() => {
     if (isAboutToDrag) {

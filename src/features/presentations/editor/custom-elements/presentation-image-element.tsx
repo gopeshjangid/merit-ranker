@@ -60,11 +60,11 @@ export const PresentationImageElement = withHOC(
         zoom: 1,
       };
 
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       const generateImage = async (prompt: string) => {
         const container = document.querySelector('.presentation-slides');
         const isEditorReadOnly = !container?.contains(imageRef?.current);
         // Prevent image generation in read-only mode
-        console.log(isEditorReadOnly, hasHandledGenerationRef.current);
         if (isEditorReadOnly) {
           return;
         }
@@ -138,6 +138,7 @@ export const PresentationImageElement = withHOC(
         props.element.url,
         imageUrl,
         props.element.setNodeValue,
+        generateImage,
       ]);
 
       // Apply crop settings to the image

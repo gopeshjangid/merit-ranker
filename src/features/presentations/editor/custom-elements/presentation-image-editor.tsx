@@ -19,7 +19,7 @@ import { usePresentationState } from '@/states/presentation-state';
 import { Save, X } from 'lucide-react';
 import { type TElement } from 'platejs';
 import { useEditorRef } from 'platejs/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { type RootImage as RootImageType } from '../../utils/parser';
 import { type ImageCropSettings } from '../../utils/types';
 import {
@@ -50,10 +50,6 @@ export const PresentationImageEditor = ({
   const [currentMode, setCurrentMode] = useState<EditorMode>('generate');
   const setSlides = usePresentationState((s) => s.setSlides);
   const slides = usePresentationState((s) => s.slides);
-
-  useEffect(() => {
-    console.log('Element on mount', element);
-  }, []);
 
   // Local crop settings state - only saved when user clicks save
   const [localCropSettings, setLocalCropSettings] = useState<ImageCropSettings>(
@@ -113,7 +109,6 @@ export const PresentationImageEditor = ({
     <Sheet
       open={open}
       onOpenChange={(open) => {
-        console.log('opened editor for ', element);
         onOpenChange(open);
       }}
     >

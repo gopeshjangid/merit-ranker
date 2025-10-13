@@ -25,7 +25,7 @@ const eslintConfig = [
       '@typescript-eslint/no-empty-object-type': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-expressions': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'error',
       'import/no-anonymous-default-export': 'off',
       'linebreak-style': ['error', 'unix'],
       'no-case-declarations': 'off',
@@ -33,6 +33,7 @@ const eslintConfig = [
       'no-empty-function': 'off',
       'no-prototype-builtins': 'off',
       'no-unused-vars': 'off',
+      'react-hooks/exhaustive-deps': 'error',
       'react/display-name': 'off',
       'react/jsx-curly-brace-presence': [
         'warn',

@@ -31,7 +31,7 @@ export function OutlineList() {
     numSlides,
     isGeneratingOutline,
     webSearchEnabled,
-    outlineThinking,
+    // outlineThinking,
   } = usePresentationState();
 
   const [items, setItems] = useState<OutlineItemType[]>(
@@ -57,6 +57,7 @@ export function OutlineList() {
     })
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
@@ -72,6 +73,7 @@ export function OutlineList() {
     }
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleTitleChange = (id: string, newTitle: string) => {
     setItems((items) => {
       const newItems = items.map((item) =>
@@ -96,6 +98,7 @@ export function OutlineList() {
     setOutline(newItems.map((item) => item.title));
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleDeleteCard = (id: string) => {
     setItems((items) => {
       const newItems = items.filter((item) => item.id !== id);

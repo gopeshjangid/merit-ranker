@@ -74,10 +74,6 @@ import { Popover, PopoverContent } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 
 import { blockSelectionVariants } from './block-selection';
-import {
-  ColorDropdownMenuItems,
-  DEFAULT_COLORS,
-} from './font-color-toolbar-button';
 import { ResizeHandle } from './resize-handle';
 import {
   BorderAllIcon,
@@ -93,6 +89,10 @@ import {
   ToolbarGroup,
   ToolbarMenuGroup,
 } from './toolbar';
+import {
+  ColorDropdownMenuItems,
+  DEFAULT_COLORS,
+} from '@/components/ui/font-color-toolbar-button';
 export const TableElement = withHOC(
   TableProvider,
   function TableElement({

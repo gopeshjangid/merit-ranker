@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { auth } from '@/server/auth';
 import { NextResponse, type NextRequest } from 'next/server';
 

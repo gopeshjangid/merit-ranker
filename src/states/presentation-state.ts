@@ -3,6 +3,7 @@ import { type PlateSlide } from '@/features/presentations/utils/parser';
 import { type ThemeProperties, type Themes } from '@/lib/presentation/themes';
 import { type TElement } from 'platejs';
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface PresentationState {
   currentPresentationId: string | null;
@@ -123,193 +124,205 @@ interface PresentationState {
   setPendingInsertNode: (node: TElement | null) => void;
 }
 
-export const usePresentationState = create<PresentationState>((set) => ({
-  currentPresentationId: null,
-  currentPresentationTitle: null,
-  isGridView: true,
-  isSheetOpen: false,
-  shouldShowExitHeader: false,
-  setShouldShowExitHeader: (update) => set({ shouldShowExitHeader: update }),
-  thumbnailUrl: undefined,
-  setThumbnailUrl: (url) => set({ thumbnailUrl: url }),
-  numSlides: 5,
-  language: 'en-US',
-  pageStyle: 'default',
-  showTemplates: false,
-  presentationInput: '',
-  outline: [],
-  searchResults: [],
-  webSearchEnabled: false,
-  theme: 'mystique',
-  customThemeData: null,
-  imageModel: 'black-forest-labs/FLUX.1-schnell-Free',
-  imageSource: 'stock',
-  stockImageProvider: 'unsplash',
-  presentationStyle: 'professional',
-  modelProvider: 'openai',
-  modelId: 'llama3.1:8b',
-  slides: [], // Now holds the new slide object structure
-  outlineThinking: '',
-  presentationThinking: '',
-  rootImageGeneration: {},
-  savingStatus: 'idle',
-  isPresenting: false,
-  currentSlideIndex: 0,
-  isThemeCreatorOpen: false,
-  config: {},
-  pendingInsertNode: null,
-
-  // Sidebar states
-  isSidebarCollapsed: false,
-  setIsSidebarCollapsed: (update) => set({ isSidebarCollapsed: update }),
-  isRightPanelCollapsed: false,
-  setIsRightPanelCollapsed: (update) => set({ isRightPanelCollapsed: update }),
-
-  // Generation states
-  shouldStartOutlineGeneration: false,
-  shouldStartPresentationGeneration: false,
-  isGeneratingOutline: false,
-  isGeneratingPresentation: false,
-
-  setSlides: (slides) => {
-    set({ slides });
-  },
-  setPendingInsertNode: (node) => set({ pendingInsertNode: node }),
-  setConfig: (config) => set({ config }),
-  startRootImageGeneration: (slideId, query) =>
-    set((state) => ({
-      rootImageGeneration: {
-        ...state.rootImageGeneration,
-        [slideId]: { query, status: 'pending' },
-      },
-    })),
-  completeRootImageGeneration: (slideId, url) =>
-    set((state) => ({
-      rootImageGeneration: {
-        ...state.rootImageGeneration,
-        [slideId]: {
-          ...(state.rootImageGeneration[slideId] ?? { query: '' }),
-          status: 'success',
-          url,
-        },
-      },
-    })),
-  failRootImageGeneration: (slideId, error) =>
-    set((state) => ({
-      rootImageGeneration: {
-        ...state.rootImageGeneration,
-        [slideId]: {
-          ...(state.rootImageGeneration[slideId] ?? { query: '' }),
-          status: 'error',
-          error,
-        },
-      },
-    })),
-  clearRootImageGeneration: (slideId) =>
-    set((state) => {
-      const { [slideId]: _removed, ...rest } = state.rootImageGeneration;
-      return { rootImageGeneration: rest } as Partial<PresentationState>;
-    }),
-  setCurrentPresentation: (id, title) =>
-    set({ currentPresentationId: id, currentPresentationTitle: title }),
-  setIsGridView: (isGrid) => set({ isGridView: isGrid }),
-  setIsSheetOpen: (isOpen) => set({ isSheetOpen: isOpen }),
-  setNumSlides: (num) => set({ numSlides: num }),
-  setLanguage: (lang) => set({ language: lang }),
-  setTheme: (theme, customData = null) =>
-    set({
-      theme: theme,
-      customThemeData: customData,
-    }),
-  setPageStyle: (style) => set({ pageStyle: style }),
-  setShowTemplates: (show) => set({ showTemplates: show }),
-  setPresentationInput: (input) => set({ presentationInput: input }),
-  setOutline: (topics) => set({ outline: topics }),
-  setSearchResults: (results) => set({ searchResults: results }),
-  setOutlineThinking: (thinking) => set({ outlineThinking: thinking }),
-  setPresentationThinking: (thinking) =>
-    set({ presentationThinking: thinking }),
-  setWebSearchEnabled: (enabled) => set({ webSearchEnabled: enabled }),
-  setImageModel: (model) => set({ imageModel: model }),
-  setImageSource: (source) => set({ imageSource: source }),
-  setStockImageProvider: (provider) => set({ stockImageProvider: provider }),
-  setPresentationStyle: (style) => set({ presentationStyle: style }),
-  setModelProvider: (provider) => set({ modelProvider: provider }),
-  setModelId: (id) => set({ modelId: id }),
-  setSavingStatus: (status) => set({ savingStatus: status }),
-  setIsPresenting: (isPresenting) => set({ isPresenting }),
-  setCurrentSlideIndex: (index) => set({ currentSlideIndex: index }),
-  nextSlide: () =>
-    set((state) => ({
-      currentSlideIndex: Math.min(
-        state.currentSlideIndex + 1,
-        state.slides.length - 1
-      ),
-    })),
-  previousSlide: () =>
-    set((state) => ({
-      currentSlideIndex: Math.max(state.currentSlideIndex - 1, 0),
-    })),
-
-  // Generation actions
-  setShouldStartOutlineGeneration: (shouldStart) =>
-    set({ shouldStartOutlineGeneration: shouldStart }),
-  setShouldStartPresentationGeneration: (shouldStart) =>
-    set({ shouldStartPresentationGeneration: shouldStart }),
-  setIsGeneratingOutline: (isGenerating) =>
-    set({ isGeneratingOutline: isGenerating }),
-  setIsGeneratingPresentation: (isGenerating) =>
-    set({ isGeneratingPresentation: isGenerating }),
-  startOutlineGeneration: () =>
-    set({
-      shouldStartOutlineGeneration: true,
-      isGeneratingOutline: true,
-      shouldStartPresentationGeneration: false,
-      isGeneratingPresentation: false,
+export const usePresentationState = create<PresentationState>()(
+  devtools(
+    (set) => ({
+      currentPresentationId: null,
+      currentPresentationTitle: null,
+      isGridView: true,
+      isSheetOpen: false,
+      shouldShowExitHeader: false,
+      setShouldShowExitHeader: (update) =>
+        set({ shouldShowExitHeader: update }),
+      thumbnailUrl: undefined,
+      setThumbnailUrl: (url) => set({ thumbnailUrl: url }),
+      numSlides: 5,
+      language: 'en-US',
+      pageStyle: 'default',
+      showTemplates: false,
+      presentationInput: '',
       outline: [],
-    }),
-  startPresentationGeneration: () =>
-    set({
-      shouldStartPresentationGeneration: true,
-      isGeneratingPresentation: true,
-    }),
-  resetGeneration: () =>
-    set({
+      searchResults: [],
+      webSearchEnabled: false,
+      theme: 'mystique',
+      customThemeData: null,
+      imageModel: 'black-forest-labs/FLUX.1-schnell-Free',
+      imageSource: 'stock',
+      stockImageProvider: 'unsplash',
+      presentationStyle: 'professional',
+      modelProvider: 'openai',
+      modelId: 'llama3.1:8b',
+      slides: [], // Now holds the new slide object structure
+      outlineThinking: '',
+      presentationThinking: '',
+      rootImageGeneration: {},
+      savingStatus: 'idle',
+      isPresenting: false,
+      currentSlideIndex: 0,
+      isThemeCreatorOpen: false,
+      config: {},
+      pendingInsertNode: null,
+
+      // Sidebar states
+      isSidebarCollapsed: false,
+      setIsSidebarCollapsed: (update) => set({ isSidebarCollapsed: update }),
+      isRightPanelCollapsed: false,
+      setIsRightPanelCollapsed: (update) =>
+        set({ isRightPanelCollapsed: update }),
+
+      // Generation states
       shouldStartOutlineGeneration: false,
       shouldStartPresentationGeneration: false,
       isGeneratingOutline: false,
       isGeneratingPresentation: false,
-      searchResults: [],
-    }),
 
-  // Reset everything except ID and current input when starting new outline generation
-  resetForNewGeneration: () =>
-    set(() => ({
-      thumbnailUrl: undefined,
-      outline: [],
-      searchResults: [],
-      slides: [],
-      outlineThinking: '',
-      presentationThinking: '',
-      rootImageGeneration: {},
-      config: {},
-    })),
+      setSlides: (slides) => {
+        set({ slides });
+      },
+      setPendingInsertNode: (node) => set({ pendingInsertNode: node }),
+      setConfig: (config) => set({ config }),
+      startRootImageGeneration: (slideId, query) =>
+        set((state) => ({
+          rootImageGeneration: {
+            ...state.rootImageGeneration,
+            [slideId]: { query, status: 'pending' },
+          },
+        })),
+      completeRootImageGeneration: (slideId, url) =>
+        set((state) => ({
+          rootImageGeneration: {
+            ...state.rootImageGeneration,
+            [slideId]: {
+              ...(state.rootImageGeneration[slideId] ?? { query: '' }),
+              status: 'success',
+              url,
+            },
+          },
+        })),
+      failRootImageGeneration: (slideId, error) =>
+        set((state) => ({
+          rootImageGeneration: {
+            ...state.rootImageGeneration,
+            [slideId]: {
+              ...(state.rootImageGeneration[slideId] ?? { query: '' }),
+              status: 'error',
+              error,
+            },
+          },
+        })),
+      clearRootImageGeneration: (slideId) =>
+        set((state) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { [slideId]: _removed, ...rest } = state.rootImageGeneration;
+          return { rootImageGeneration: rest } as Partial<PresentationState>;
+        }),
+      setCurrentPresentation: (id, title) =>
+        set({ currentPresentationId: id, currentPresentationTitle: title }),
+      setIsGridView: (isGrid) => set({ isGridView: isGrid }),
+      setIsSheetOpen: (isOpen) => set({ isSheetOpen: isOpen }),
+      setNumSlides: (num) => set({ numSlides: num }),
+      setLanguage: (lang) => set({ language: lang }),
+      setTheme: (theme, customData = null) =>
+        set({
+          theme: theme,
+          customThemeData: customData,
+        }),
+      setPageStyle: (style) => set({ pageStyle: style }),
+      setShowTemplates: (show) => set({ showTemplates: show }),
+      setPresentationInput: (input) => set({ presentationInput: input }),
+      setOutline: (topics) => set({ outline: topics }),
+      setSearchResults: (results) => set({ searchResults: results }),
+      setOutlineThinking: (thinking) => set({ outlineThinking: thinking }),
+      setPresentationThinking: (thinking) =>
+        set({ presentationThinking: thinking }),
+      setWebSearchEnabled: (enabled) => set({ webSearchEnabled: enabled }),
+      setImageModel: (model) => set({ imageModel: model }),
+      setImageSource: (source) => set({ imageSource: source }),
+      setStockImageProvider: (provider) =>
+        set({ stockImageProvider: provider }),
+      setPresentationStyle: (style) => set({ presentationStyle: style }),
+      setModelProvider: (provider) => set({ modelProvider: provider }),
+      setModelId: (id) => set({ modelId: id }),
+      setSavingStatus: (status) => set({ savingStatus: status }),
+      setIsPresenting: (isPresenting) => set({ isPresenting }),
+      setCurrentSlideIndex: (index) => set({ currentSlideIndex: index }),
+      nextSlide: () =>
+        set((state) => ({
+          currentSlideIndex: Math.min(
+            state.currentSlideIndex + 1,
+            state.slides.length - 1
+          ),
+        })),
+      previousSlide: () =>
+        set((state) => ({
+          currentSlideIndex: Math.max(state.currentSlideIndex - 1, 0),
+        })),
 
-  setIsThemeCreatorOpen: (update) => set({ isThemeCreatorOpen: update }),
-  // Selection state
-  isSelecting: false,
-  selectedPresentations: [],
-  toggleSelecting: () =>
-    set((state) => ({
-      isSelecting: !state.isSelecting,
+      // Generation actions
+      setShouldStartOutlineGeneration: (shouldStart) =>
+        set({ shouldStartOutlineGeneration: shouldStart }),
+      setShouldStartPresentationGeneration: (shouldStart) =>
+        set({ shouldStartPresentationGeneration: shouldStart }),
+      setIsGeneratingOutline: (isGenerating) =>
+        set({ isGeneratingOutline: isGenerating }),
+      setIsGeneratingPresentation: (isGenerating) =>
+        set({ isGeneratingPresentation: isGenerating }),
+      startOutlineGeneration: () =>
+        set({
+          shouldStartOutlineGeneration: true,
+          isGeneratingOutline: true,
+          shouldStartPresentationGeneration: false,
+          isGeneratingPresentation: false,
+          outline: [],
+        }),
+      startPresentationGeneration: () =>
+        set({
+          shouldStartPresentationGeneration: true,
+          isGeneratingPresentation: true,
+        }),
+      resetGeneration: () =>
+        set({
+          shouldStartOutlineGeneration: false,
+          shouldStartPresentationGeneration: false,
+          isGeneratingOutline: false,
+          isGeneratingPresentation: false,
+          searchResults: [],
+        }),
+
+      // Reset everything except ID and current input when starting new outline generation
+      resetForNewGeneration: () =>
+        set(() => ({
+          thumbnailUrl: undefined,
+          outline: [],
+          searchResults: [],
+          slides: [],
+          outlineThinking: '',
+          presentationThinking: '',
+          rootImageGeneration: {},
+          config: {},
+        })),
+
+      setIsThemeCreatorOpen: (update) => set({ isThemeCreatorOpen: update }),
+      // Selection state
+      isSelecting: false,
       selectedPresentations: [],
-    })),
-  selectAllPresentations: (ids) => set({ selectedPresentations: ids }),
-  deselectAllPresentations: () => set({ selectedPresentations: [] }),
-  togglePresentationSelection: (id) =>
-    set((state) => ({
-      selectedPresentations: state.selectedPresentations.includes(id)
-        ? state.selectedPresentations.filter((p) => p !== id)
-        : [...state.selectedPresentations, id],
-    })),
-}));
+      toggleSelecting: () =>
+        set((state) => ({
+          isSelecting: !state.isSelecting,
+          selectedPresentations: [],
+        })),
+      selectAllPresentations: (ids) => set({ selectedPresentations: ids }),
+      deselectAllPresentations: () => set({ selectedPresentations: [] }),
+      togglePresentationSelection: (id) =>
+        set((state) => ({
+          selectedPresentations: state.selectedPresentations.includes(id)
+            ? state.selectedPresentations.filter((p) => p !== id)
+            : [...state.selectedPresentations, id],
+        })),
+    }),
+    {
+      name: 'presentation-storage',
+      enabled: process.env.NODE_ENV === 'development',
+    }
+  )
+);

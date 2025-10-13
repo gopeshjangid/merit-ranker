@@ -66,7 +66,9 @@ export function RecentPresentations() {
       return response;
     },
     initialPageParam: 0,
-    getNextPageParam: (lastPage) => (lastPage?.hasMore ? 0 : 0),
+    getNextPageParam: (lastPage, allPages) => 
+      lastPage?.hasMore ? allPages.length : undefined,
+    staleTime: 2 * 60 * 1000,
   });
 
   const { mutate: deletePresentationMutation } = useMutation({
@@ -88,8 +90,7 @@ export function RecentPresentations() {
         description: 'Presentation deleted successfully',
       });
     },
-    onError: (error) => {
-      console.error('Failed to delete presentation:', error);
+    onError: () => {
       toast({
         variant: 'destructive',
         title: 'Error',
@@ -117,8 +118,7 @@ export function RecentPresentations() {
         description: 'Presentation renamed successfully',
       });
     },
-    onError: (error) => {
-      console.error('Failed to rename presentation:', error);
+    onError: () => {
       toast({
         variant: 'destructive',
         title: 'Error',

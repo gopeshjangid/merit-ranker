@@ -51,6 +51,7 @@ export function usePlateEditor<
     enabled?: TEnabled;
     initialMarkdown?: string;
   } = {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   deps: React.DependencyList = []
 ): TEnabled extends false
   ? null
@@ -67,12 +68,15 @@ export function usePlateEditor<
     };
   }, []);
 
-  const value = !options.initialMarkdown
-    ? options.value
-    : (editor: TPlateEditor) =>
-        editor
-          .getApi(MarkdownPlugin)
-          .markdown.deserialize(options?.initialMarkdown ?? '');
+  const value = React.useMemo(() => {
+    if (!options.initialMarkdown) {
+      return options.value;
+    }
+    return (editor: TPlateEditor) =>
+      editor
+        .getApi(MarkdownPlugin)
+        .markdown.deserialize(options?.initialMarkdown ?? '');
+  }, [options.value, options.initialMarkdown]);
 
   return React.useMemo((): any => {
     if (options.enabled === false) return null;
@@ -84,10 +88,10 @@ export function usePlateEditor<
         if (ctx.isAsync && isMountedRef.current) {
           forceRender({});
         }
-        options.onReady?.(ctx);
+        options.onReady?.(ctx as typeof ctx & { value: V });
       },
     });
 
     return editor;
-  }, [options.id, options.enabled, ...deps]);
+  }, [options, value]);
 }

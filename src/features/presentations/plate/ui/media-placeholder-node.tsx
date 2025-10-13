@@ -115,7 +115,7 @@ export const PlaceholderElement = withHOC(
       });
 
       api.placeholder.removeUploadingFile(element.id as string);
-    }, [uploadedFile, element.id]);
+    }, [uploadedFile, element.id, editor, element, api.placeholder]);
 
     // React dev mode will call React.useEffect twice
     const isReplaced = React.useRef(false);
@@ -132,7 +132,7 @@ export const PlaceholderElement = withHOC(
       if (!currentFiles) return;
 
       replaceCurrentPlaceholder(currentFiles);
-    }, [isReplaced]);
+    }, [api.placeholder, element.id, isReplaced, replaceCurrentPlaceholder]);
 
     return (
       <PlateElement className="my-1" {...props}>

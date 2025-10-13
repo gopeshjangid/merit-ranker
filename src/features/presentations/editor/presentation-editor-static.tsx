@@ -46,7 +46,7 @@ const PresentationEditorStaticView = React.memo(
           components: PresentationStaticComponents,
           value: initialContent?.content ?? ([] as Value),
         }),
-      []
+      [initialContent?.content]
     );
 
     // Keep value in sync without recreating editor
