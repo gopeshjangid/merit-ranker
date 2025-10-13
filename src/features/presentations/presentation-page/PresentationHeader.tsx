@@ -33,7 +33,7 @@ export default function PresentationHeader({ title }: PresentationHeaderProps) {
   const pathname = usePathname();
   // Check if we're on the generate/outline page
   const isPresentationPage =
-    pathname.startsWith('/presentation/') && !pathname.includes('generate');
+    pathname.startsWith('/teacher/dashboard/live-class/presentation/') && !pathname.includes('generate');
 
   // Update title when it changes in the state
   useEffect(() => {

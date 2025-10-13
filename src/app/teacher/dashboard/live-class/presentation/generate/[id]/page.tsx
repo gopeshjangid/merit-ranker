@@ -188,7 +188,7 @@ export default function PresentationGenerateWithIdPage() {
   ]);
 
   const handleGenerate = () => {
-    router.push(`/presentation/${id}`);
+    router.push(`/teacher/dashboard/live-class/presentation/${id}`);
     startPresentationGeneration();
   };
 
