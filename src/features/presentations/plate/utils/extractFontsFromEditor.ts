@@ -25,7 +25,7 @@ export function extractFontsFromEditor(editor: PlateEditor) {
         fontFamilies.add(nodeFontFamily);
       }
     }
-  } catch (error) {
+  } catch (_error) {
     // console.error('Error scanning editor for fonts:', error);
     return [];
   }

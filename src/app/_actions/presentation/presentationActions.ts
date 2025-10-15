@@ -29,7 +29,7 @@ export async function createPresentation({
   //   throw new Error("Unauthorized");
   // }
   // const _userId = session.user.id;
-  const _userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  const userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
   try {
     const presentation = await db.baseDocument.create({
       data: {
@@ -58,7 +58,7 @@ export async function createPresentation({
       message: 'Presentation created successfully',
       presentation,
     };
-  } catch (error) {
+  } catch (_error) {
     // console.error(error);
     return {
       success: false,
@@ -153,7 +153,7 @@ export async function updatePresentation({
       message: 'Presentation updated successfully',
       presentation,
     };
-  } catch (error) {
+  } catch (_error) {
     // console.error(error);
     return {
       success: false,
@@ -184,7 +184,7 @@ export async function updatePresentationTitle(id: string, title: string) {
       message: 'Presentation title updated successfully',
       presentation,
     };
-  } catch (error) {
+  } catch (_error) {
     // console.error(error);
     return {
       success: false,
@@ -203,7 +203,7 @@ export async function deletePresentations(ids: string[]) {
   //   throw new Error("Unauthorized");
   // }
   // const _userId = session.user.id;
-  const _userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  const userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
 
   try {
     // Delete the base documents using deleteMany (this will cascade delete the presentations)
@@ -237,7 +237,7 @@ export async function deletePresentations(ids: string[]) {
           ? 'Presentation deleted successfully'
           : `${deletedCount} presentations deleted successfully`,
     };
-  } catch (error) {
+  } catch (_error) {
     // console.error('Failed to delete presentations:', error);
     return {
       success: false,
@@ -267,7 +267,7 @@ export async function getPresentation(id: string) {
       success: true,
       presentation,
     };
-  } catch (error) {
+  } catch (_error) {
     // console.error(error);
     return {
       success: false,
@@ -282,7 +282,7 @@ export async function getPresentationContent(id: string) {
   //   throw new Error("Unauthorized");
   // }
   // const _userId = session.user.id;
-  const _userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  const userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
 
   try {
     const presentation = await db.baseDocument.findUnique({
@@ -318,7 +318,7 @@ export async function getPresentationContent(id: string) {
       success: true,
       presentation: presentation.presentation,
     };
-  } catch (error) {
+  } catch (_error) {
     // console.error(error);
     return {
       success: false,
@@ -346,7 +346,7 @@ export async function updatePresentationTheme(id: string, theme: string) {
       message: 'Presentation theme updated successfully',
       presentation,
     };
-  } catch (error) {
+  } catch (_error) {
     // console.error(error);
     return {
       success: false,
@@ -361,7 +361,7 @@ export async function duplicatePresentation(id: string, newTitle?: string) {
   //   throw new Error("Unauthorized");
   // }
   // const _userId = session.user.id;
-  const _userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  const userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
 
   try {
     // Get the original presentation
@@ -404,7 +404,7 @@ export async function duplicatePresentation(id: string, newTitle?: string) {
       message: 'Presentation duplicated successfully',
       presentation: duplicated,
     };
-  } catch (error) {
+  } catch (_error) {
     // console.error(error);
     return {
       success: false,

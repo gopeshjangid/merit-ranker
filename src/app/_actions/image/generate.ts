@@ -31,7 +31,6 @@ export async function generateImageAction(
   }
 
   try {
-
     // Generate the image using Together AI
     const response = (await together.images.create({
       model: model,
@@ -54,7 +53,6 @@ export async function generateImageAction(
     if (!imageUrl) {
       throw new Error('Failed to generate image');
     }
-
 
     // Download the image from Together AI URL
     const imageResponse = await fetch(imageUrl);

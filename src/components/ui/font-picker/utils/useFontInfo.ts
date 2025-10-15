@@ -17,7 +17,7 @@ export function useFontInfo() {
       // Dynamic import of the large JSON file
       const fontInfoModule = await import('../font-preview/fontInfo.json');
       setFontInfos(fontInfoModule.default);
-    } catch (err) {
+    } catch (_err) {
       // console.error('Failed to load font info:', err);
       setError('Failed to load fonts');
     } finally {

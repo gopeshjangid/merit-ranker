@@ -413,7 +413,7 @@ export function PresentationGenerationManager() {
               },
             }
           );
-        } catch (error) {
+        } catch (_error) {
           // Error is handled by onError callback
         } finally {
           setIsGeneratingOutline(false);
@@ -452,7 +452,7 @@ export function PresentationGenerationManager() {
         if (slidesRafIdRef.current === null) {
           slidesRafIdRef.current = requestAnimationFrame(updateSlidesWithRAF);
         }
-      } catch (error) {
+      } catch (_error) {
         toast.error('Error processing presentation content');
       }
     }

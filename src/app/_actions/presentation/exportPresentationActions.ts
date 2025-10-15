@@ -49,7 +49,7 @@ export async function exportPresentation(
       data: base64,
       fileName: `${fileName ?? 'presentation'}.pptx`,
     };
-  } catch (error) {
+  } catch {
     // console.error('Error exporting presentation:', error);
     return { success: false, error: 'Failed to export presentation' };
   }

@@ -80,7 +80,7 @@ export function GenerateImageDialogContent({
 
       setOpen(false);
       toast.success('Image generated successfully!');
-    } catch (error) {
+    } catch (_error) {
       toast.error(
         error instanceof Error ? error.message : 'Failed to generate image'
       );

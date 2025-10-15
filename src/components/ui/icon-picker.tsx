@@ -111,7 +111,7 @@ const IconPicker = ({
 
       setAvailableIcons(iconList);
       setFilteredIcons(iconList);
-    } catch (error) {
+    } catch (_error) {
     } finally {
       setIsLoading(false);
     }
@@ -176,7 +176,7 @@ const IconPicker = ({
       });
 
       setFilteredIcons(results.slice(0, 60)); // Limit total results
-    } catch (error) {
+    } catch (_error) {
     } finally {
       setIsLoading(false);
     }
@@ -276,7 +276,7 @@ const IconPicker = ({
 
       const IconComponent = iconModule[iconName];
       return IconComponent ? <IconComponent size={24} /> : null;
-    } catch (error) {
+    } catch (_error) {
       return null;
     } finally {
       setIsLoading(false);
@@ -332,7 +332,7 @@ const IconPicker = ({
             const component = await loadIconComponent(defaultIcon);
             setIconComponent(component);
           }
-        } catch (error) {
+        } catch (_error) {
           // Fall back to default icon
           const component = await loadIconComponent(defaultIcon);
           setIconComponent(component);

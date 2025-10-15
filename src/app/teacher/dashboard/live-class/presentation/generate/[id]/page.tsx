@@ -148,7 +148,7 @@ export default function PresentationGenerateWithIdPage() {
                 setTheme('mystique');
               }
             })
-            .catch((error) => {
+            .catch((_error) => {
               // Fallback to default theme on error
               setTheme('mystique');
             });

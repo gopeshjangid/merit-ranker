@@ -318,7 +318,7 @@ export class PlateJSToPPTXConverter {
 
     try {
       this.currentSlide.addImage(imageOptions);
-    } catch (error) {
+    } catch (_error) {
       // console.warn('Failed to add root image:', error);
     }
   }

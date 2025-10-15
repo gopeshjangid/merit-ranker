@@ -109,7 +109,7 @@ export const PresentationImageElement = withHOC(
               void saveImmediately();
             }, 500);
           }
-        } catch (error) {
+        } catch (_error) {
         } finally {
           setIsGenerating(false);
         }

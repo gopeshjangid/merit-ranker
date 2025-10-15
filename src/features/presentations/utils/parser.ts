@@ -1,11 +1,7 @@
+import type { Descendant, TColumnElement, TColumnGroupElement, TTableCellElement, TTableElement, TTableRowElement, TText } from 'platejs';
+
 import { ColumnItemPlugin, ColumnPlugin } from '@platejs/layout/react';
 import { nanoid } from 'nanoid'; // Import nanoid for unique ID generation
-import {
-  type Descendant,
-  type TColumnElement,
-  type TColumnGroupElement,
-  type TText,
-} from 'platejs';
 import {
   type TArrowListElement,
   type TArrowListItemElement,
@@ -36,11 +32,6 @@ import {
   type TTimelineItemElement,
 } from '../editor/plugins/timeline-plugin';
 
-import {
-  type TTableCellElement,
-  type TTableElement,
-  type TTableRowElement,
-} from 'platejs';
 import {
   AREA_CHART_ELEMENT,
   BAR_CHART_ELEMENT,
@@ -721,7 +712,7 @@ export class SlideParser {
 
       // Manually parse the XML
       this.parseElement(fixedXml, rootNode);
-    } catch (error) {
+    } catch (_error) {
       // console.error('Error parsing XML:', error);
 
       // Fall back to a very basic parser that just captures top level tags

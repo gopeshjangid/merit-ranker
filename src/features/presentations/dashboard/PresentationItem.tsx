@@ -182,7 +182,7 @@ export const PresentationItem = memo(function PresentationItem({
           `/teacher/dashboard/live-class/presentation/generate/${presentation.id}`
         );
       }
-    } catch (error) {
+    } catch (_error) {
       toast({
         variant: 'destructive',
         title: 'Error',

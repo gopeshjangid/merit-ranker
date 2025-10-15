@@ -235,6 +235,7 @@ export default function TeacherBrandingPage() {
             <Button type="submit" className="px-6">
               Save
             </Button>
+            <Button type="button" className="px-6">
               Preview
             </Button>
             {data.name && (

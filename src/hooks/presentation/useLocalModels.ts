@@ -54,7 +54,7 @@ async function fetchLMStudioModels(): Promise<ModelInfo[]> {
       name: model.id,
       provider: 'lmstudio' as const,
     }));
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
