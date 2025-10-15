@@ -16,7 +16,7 @@ const notes = [
     date: 'Oct 12',
   },
   { id: 3,
-    title: 'Indian Geography - Rivers and Drainage System',
+    title: 'Indian Geography - Rivers and Drainage System gjhgj gjg gjg gjg gjg gjg gjg g',
     tags: ['Geography', 'SSC CGL'],
     slidesCount: 12,
     date: 'Oct 13',
@@ -28,6 +28,7 @@ export default function NotesListingPage() {
     <ListingContainer
       header="My Notes"
       subheader="View and manage all your created notes"
+      searchPlaceholder="Search notes..."
       items={notes}
       renderItem={note => (
         <ListingCard

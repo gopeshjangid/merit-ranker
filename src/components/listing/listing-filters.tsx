@@ -7,9 +7,10 @@ export function ListingFilters({
   onChange?: (filters: { subject?: string; exam?: string }) => void
 }) {
   return (
-    <div className="flex gap-2">
-      <Select onValueChange={val => onChange?.({ subject: val })}>
-        <SelectTrigger className="w-40">
+    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-2 w-full sm:w-auto">
+      {/* Subject Filter - Full width on mobile, auto on desktop */}
+      <Select onValueChange={(value) => onChange?.({ subject: value })}>
+        <SelectTrigger className="w-full sm:w-[140px] h-10">
           <SelectValue placeholder="All Subjects" />
         </SelectTrigger>
         <SelectContent>
@@ -19,8 +20,10 @@ export function ListingFilters({
           <SelectItem value="geography">Geography</SelectItem>
         </SelectContent>
       </Select>
-      <Select onValueChange={val => onChange?.({ exam: val })}>
-        <SelectTrigger className="w-40">
+
+      {/* Exam Filter - Full width on mobile, auto on desktop */}
+      <Select onValueChange={(value) => onChange?.({ exam: value })}>
+        <SelectTrigger className="w-full sm:w-[120px] h-10">
           <SelectValue placeholder="All Exams" />
         </SelectTrigger>
         <SelectContent>

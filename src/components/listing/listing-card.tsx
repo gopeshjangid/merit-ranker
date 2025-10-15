@@ -1,10 +1,11 @@
 'use client'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { ListingActions } from './listing-actions'
+import { FileText, Calendar, Layers } from 'lucide-react'
 
 export interface ListingCardProps {
-  icon?: React.ReactNode
   title: string
   tags?: string[]
   slidesCount?: number
@@ -16,7 +17,6 @@ export interface ListingCardProps {
 }
 
 export function ListingCard({
-  icon,
   title,
   tags = [],
   slidesCount,
@@ -27,26 +27,34 @@ export function ListingCard({
   onDelete,
 }: ListingCardProps) {
   return (
-    <Card  className="rounded-xl overflow-hidden">
-      <CardHeader className="flex flex-col items-center justify-center py-8">
-        {icon ?? <span className="text-4xl">📄</span>}
+    <Card  className="rounded-lg overflow-hidden">
+      <CardHeader className="flex flex-col items-center justify-center py-8 border-b">
+        <FileText className="w-16 h-16 text-white/80" />
       </CardHeader>
-      <CardContent className="bg-opacity-10">
-        <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+      <CardContent className="bg-opacity-10 py-2">
+        <CardTitle className="text-md font-semibold truncate">{title}</CardTitle>
         <div className="flex gap-2 mt-2 mb-2 flex-wrap">
           {tags.map(tag => (
-            <span key={tag} className="px-2 py-0.5 rounded bg-muted text-xs">{tag}</span>
+            <Badge key={tag} variant="secondary" className="bg-slate-700 text-slate-200 hover:bg-slate-600">
+              {tag}
+            </Badge>
           ))}
         </div>
-        <CardDescription className="flex gap-4 text-xs">
-          <span>{slidesCount} slides</span>
-          <span>{date}</span>
-        </CardDescription>
-      </CardContent>
-      <CardFooter className="flex gap-2">
+      <div className="flex items-center gap-4 text-slate-400">
+          <div className="flex items-center gap-1">
+            <Layers className="w-4 h-4" />
+            <span>{slidesCount} slides</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Calendar className="w-4 h-4" />
+            <span>{date}</span>
+          </div>
+        </div>
+        <div className="flex gap-2 items-center justify-between flex-end p-2 border-t mt-2">
         <Button size="sm" onClick={onView}>View</Button>
         <ListingActions onEdit={onEdit} onDownload={onDownload} onDelete={onDelete} />
-      </CardFooter>
+      </div>
+      </CardContent>      
     </Card>
   )
 }
