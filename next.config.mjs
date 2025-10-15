@@ -16,19 +16,6 @@ const nextConfig = {
         protocol: "https",
         hostname: "*.ufs.sh",
       },
-      // Added additional remote patterns for images based on migration integration (e.g., from meritranker-web assets)
-      {
-        protocol: "https",
-        hostname: "images.pexels.com",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.pixabay.com",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.sanity.io",
-      },
     ],
   },
 };
