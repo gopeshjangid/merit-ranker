@@ -36,8 +36,6 @@ const nextConfig = {
   compiler: {
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
-  // Enable SWC minification for better performance
-  swcMinify: true,
 };
 
 export default nextConfig;
