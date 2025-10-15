@@ -18,7 +18,7 @@ export function useFontInfo() {
       const fontInfoModule = await import('../font-preview/fontInfo.json');
       setFontInfos(fontInfoModule.default);
     } catch (err) {
-      console.error('Failed to load font info:', err);
+      // console.error('Failed to load font info:', err);
       setError('Failed to load fonts');
     } finally {
       setIsLoading(false);

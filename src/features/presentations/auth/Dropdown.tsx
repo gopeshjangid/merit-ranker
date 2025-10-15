@@ -37,11 +37,8 @@ function useSession() {
 
 // Dummy signOut function
 async function signOut() {
-  console.log('🚪 User signing out...');
-  console.log('Session data:', dummySession.data);
   // Simulate async operation
   await new Promise((resolve) => setTimeout(resolve, 500));
-  console.log('✅ Sign out complete');
 }
 
 export function getInitials(name: string): string {

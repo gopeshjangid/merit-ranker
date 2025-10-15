@@ -261,7 +261,6 @@ const value = normalizeNodeId([
     children: [
       { children: [{ text: 'function hello() {' }], type: 'code_line' },
       {
-        children: [{ text: "  console.info('Code blocks are supported!');" }],
         type: 'code_line',
       },
       { children: [{ text: '}' }], type: 'code_line' },

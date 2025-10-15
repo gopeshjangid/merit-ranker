@@ -39,7 +39,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 interface PresentationItemProps {
   presentation: BaseDocument & {
@@ -55,7 +55,7 @@ interface PresentationItemProps {
   isLoading?: boolean;
 }
 
-export function PresentationItem({
+export const PresentationItem = memo(function PresentationItem({
   presentation,
   isSelecting = false,
   onSelect,
@@ -92,7 +92,6 @@ export function PresentationItem({
         });
       },
       onError: (error) => {
-        console.error('Failed to delete presentation:', error);
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -121,7 +120,6 @@ export function PresentationItem({
       });
     },
     onError: (error) => {
-      console.error('Failed to rename presentation:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
@@ -146,7 +144,6 @@ export function PresentationItem({
       });
     },
     onError: (error) => {
-      console.error('Failed to duplicate presentation:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
@@ -175,15 +172,17 @@ export function PresentationItem({
         );
       }
 
-      console.log(response);
       // Route based on content status
       if (Object.keys(response?.presentation?.content ?? {}).length > 0) {
-        router.push(`/teacher/dashboard/live-class/presentation/${presentation.id}`);
+        router.push(
+          `/teacher/dashboard/live-class/presentation/${presentation.id}`
+        );
       } else {
-        router.push(`/teacher/dashboard/live-class/presentation/generate/${presentation.id}`);
+        router.push(
+          `/teacher/dashboard/live-class/presentation/generate/${presentation.id}`
+        );
       }
     } catch (error) {
-      console.error('Failed to navigate:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
@@ -200,8 +199,8 @@ export function PresentationItem({
     <>
       <div
         className={cn(
-          'group relative flex cursor-pointer items-center justify-between rounded-lg border p-3 transition-all hover:bg-accent/5',
-          isSelected && 'ring-2 ring-primary',
+          'hover:bg-accent/5 group relative flex cursor-pointer items-center justify-between rounded-lg border p-3 transition-all',
+          isSelected && 'ring-primary ring-2',
           isLoading && 'pointer-events-none opacity-70'
         )}
       >
@@ -218,9 +217,9 @@ export function PresentationItem({
               {isSelected && <Check className="h-3 w-3" />}
             </div>
           ) : (
-            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-primary/10">
+            <div className="bg-primary/10 flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg">
               {isLoading ? (
-                <Loader2 className="h-5 w-5 animate-spin text-primary" />
+                <Loader2 className="text-primary h-5 w-5 animate-spin" />
               ) : presentation.thumbnailUrl ? (
                 <Image
                   src={presentation.thumbnailUrl}
@@ -230,15 +229,15 @@ export function PresentationItem({
                   className="h-10 w-10 object-cover"
                 />
               ) : (
-                <Presentation className="h-5 w-5 text-primary" />
+                <Presentation className="text-primary h-5 w-5" />
               )}
             </div>
           )}
           <div>
-            <h3 className="font-medium text-foreground">
+            <h3 className="text-foreground font-medium">
               {isLoading ? 'Loading...' : presentation.title || 'Untitled'}
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               {isLoading
                 ? 'Loading...'
                 : new Date(presentation.updatedAt).toLocaleDateString()}
@@ -247,7 +246,7 @@ export function PresentationItem({
         </div>
 
         {!isSelecting && (
-          <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
+          <div className="absolute right-2 top-2 opacity-0 transition-opacity group-hover:opacity-100">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8">
@@ -309,4 +308,4 @@ export function PresentationItem({
       </AlertDialog>
     </>
   );
-}
+});

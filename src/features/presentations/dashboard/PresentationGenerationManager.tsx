@@ -365,7 +365,6 @@ export function PresentationGenerationManager() {
 
   // Lightweight useEffect that only schedules RAF updates
   useEffect(() => {
-    console.log('outlineMessages', outlineMessages);
     // Only update if we have new messages
     if (outlineMessages.length > 1) {
       lastProcessedMessagesLength.current = outlineMessages.length;
@@ -415,7 +414,6 @@ export function PresentationGenerationManager() {
             }
           );
         } catch (error) {
-          console.log(error);
           // Error is handled by onError callback
         } finally {
           setIsGeneratingOutline(false);
@@ -455,7 +453,6 @@ export function PresentationGenerationManager() {
           slidesRafIdRef.current = requestAnimationFrame(updateSlidesWithRAF);
         }
       } catch (error) {
-        console.error('Error processing presentation XML:', error);
         toast.error('Error processing presentation content');
       }
     }

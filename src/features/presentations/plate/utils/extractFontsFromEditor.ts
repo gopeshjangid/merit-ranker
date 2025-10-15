@@ -26,7 +26,7 @@ export function extractFontsFromEditor(editor: PlateEditor) {
       }
     }
   } catch (error) {
-    console.error('Error scanning editor for fonts:', error);
+    // console.error('Error scanning editor for fonts:', error);
     return [];
   }
 

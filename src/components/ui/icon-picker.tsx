@@ -112,7 +112,6 @@ const IconPicker = ({
       setAvailableIcons(iconList);
       setFilteredIcons(iconList);
     } catch (error) {
-      console.error('Error loading popular icons:', error);
     } finally {
       setIsLoading(false);
     }
@@ -178,7 +177,6 @@ const IconPicker = ({
 
       setFilteredIcons(results.slice(0, 60)); // Limit total results
     } catch (error) {
-      console.error('Error searching icons:', error);
     } finally {
       setIsLoading(false);
     }
@@ -279,7 +277,6 @@ const IconPicker = ({
       const IconComponent = iconModule[iconName];
       return IconComponent ? <IconComponent size={24} /> : null;
     } catch (error) {
-      console.error('Error loading icon:', error);
       return null;
     } finally {
       setIsLoading(false);
@@ -336,7 +333,6 @@ const IconPicker = ({
             setIconComponent(component);
           }
         } catch (error) {
-          console.error('Error initializing from search term:', error);
           // Fall back to default icon
           const component = await loadIconComponent(defaultIcon);
           setIconComponent(component);

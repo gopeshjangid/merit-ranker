@@ -129,7 +129,6 @@ export const onDropNode = (
       // Update siblings for dropped elements that require it
       draggedElementIds.forEach((id) => {
         const entry = editor.api.node<TElement>({ id, at: [] });
-        console.log('Entry:', entry);
         if (entry?.[0].type) {
           updateSiblingsAfterDrop(editor, entry[0], to);
         }
@@ -213,7 +212,6 @@ export const onDropNode = (
       // Update siblings for dropped elements that require it
       draggedElementIds.forEach((id) => {
         const entry = editor.api.node<TElement>({ id });
-        console.log('Entry:', entry);
         if (entry?.[0]?.type) {
           updateSiblingsAfterDrop(editor, entry[0], [...draggedColumnPath, 0]);
         }

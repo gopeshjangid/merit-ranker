@@ -19,7 +19,7 @@ import { usePresentationState } from '@/states/presentation-state';
 import { Save, X } from 'lucide-react';
 import { type TElement } from 'platejs';
 import { useEditorRef } from 'platejs/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { type RootImage as RootImageType } from '../../utils/parser';
 import { type ImageCropSettings } from '../../utils/types';
 import {
@@ -50,10 +50,6 @@ export const PresentationImageEditor = ({
   const [currentMode, setCurrentMode] = useState<EditorMode>('generate');
   const setSlides = usePresentationState((s) => s.setSlides);
   const slides = usePresentationState((s) => s.slides);
-
-  useEffect(() => {
-    console.log('Element on mount', element);
-  }, []);
 
   // Local crop settings state - only saved when user clicks save
   const [localCropSettings, setLocalCropSettings] = useState<ImageCropSettings>(
@@ -113,12 +109,11 @@ export const PresentationImageEditor = ({
     <Sheet
       open={open}
       onOpenChange={(open) => {
-        console.log('opened editor for ', element);
         onOpenChange(open);
       }}
     >
       <SheetContent className="flex w-full max-w-full flex-col overflow-y-auto md:max-w-3xl xl:max-w-5xl">
-        <SheetHeader className="sticky top-0 z-10 space-y-3 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <SheetHeader className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-10 space-y-3 border-b backdrop-blur">
           <div className="flex items-center justify-between py-2">
             <SheetTitle>Image Generator & Editor</SheetTitle>
             {hasUnsavedChanges && (
@@ -158,6 +153,7 @@ export const PresentationImageEditor = ({
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Image Preview Area with Controls */}
+              {/* TODO: */}
               <ImagePreview
                 element={element}
                 currentMode={currentMode}
@@ -191,7 +187,7 @@ export const PresentationImageEditor = ({
             disabled={!hasUnsavedChanges}
             className={cn(
               'gap-2 transition-all',
-              hasUnsavedChanges && 'border-red shadow-lg shadow-primary/25'
+              hasUnsavedChanges && 'border-red shadow-primary/25 shadow-lg'
             )}
           >
             <Save className="h-4 w-4" />

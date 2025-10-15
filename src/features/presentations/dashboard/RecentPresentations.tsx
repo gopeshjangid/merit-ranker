@@ -88,8 +88,7 @@ export function RecentPresentations() {
         description: 'Presentation deleted successfully',
       });
     },
-    onError: (error) => {
-      console.error('Failed to delete presentation:', error);
+    onError: () => {
       toast({
         variant: 'destructive',
         title: 'Error',
@@ -118,7 +117,6 @@ export function RecentPresentations() {
       });
     },
     onError: (error) => {
-      console.error('Failed to rename presentation:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
@@ -146,12 +144,15 @@ export function RecentPresentations() {
         (response?.presentation?.content as { slides: unknown[] })?.slides
           ?.length > 0
       ) {
-        router.push(`/teacher/dashboard/live-class/presentation/${presentation.id}`);
+        router.push(
+          `/teacher/dashboard/live-class/presentation/${presentation.id}`
+        );
       } else {
-        router.push(`/teacher/dashboard/live-class/presentation/generate/${presentation.id}`);
+        router.push(
+          `/teacher/dashboard/live-class/presentation/generate/${presentation.id}`
+        );
       }
     } catch (error) {
-      console.error('Failed to navigate:', error);
       toast({
         variant: 'destructive',
         title: 'Error',
@@ -171,15 +172,15 @@ export function RecentPresentations() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Clock className="h-5 w-5 text-primary" />
-            <h2 className="text-xl font-semibold text-foreground">
+            <Clock className="text-primary h-5 w-5" />
+            <h2 className="text-foreground text-xl font-semibold">
               Recent Presentations
             </h2>
           </div>
           <Button
             variant="ghost"
             disabled
-            className="gap-2 text-primary hover:text-primary/80"
+            className="text-primary hover:text-primary/80 gap-2"
           >
             View all
             <ChevronRight className="h-4 w-4" />
@@ -239,15 +240,15 @@ export function RecentPresentations() {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Clock className="h-5 w-5 text-primary" />
-          <h2 className="text-xl font-semibold text-foreground">
+          <Clock className="text-primary h-5 w-5" />
+          <h2 className="text-foreground text-xl font-semibold">
             Recent Presentations
           </h2>
         </div>
         <Button
           variant="outline"
           onClick={handleViewAll}
-          className="gap-2 text-primary hover:bg-primary/5 hover:text-primary"
+          className="text-primary hover:bg-primary/5 hover:text-primary gap-2"
         >
           View all
           <ChevronRight className="h-4 w-4" />
@@ -261,7 +262,7 @@ export function RecentPresentations() {
             className="group relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
           >
             <div
-              className="relative aspect-video bg-muted"
+              className="bg-muted relative aspect-video"
               onClick={() => handlePresentationClick(presentation)}
             >
               {presentation.thumbnailUrl || presentation.thumbnailUrl ? (
@@ -273,12 +274,12 @@ export function RecentPresentations() {
                   className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center bg-primary/10">
+                <div className="bg-primary/10 flex h-full w-full items-center justify-center">
                   <Clock
                     className={cn(
                       'h-12 w-12 transition-all',
                       isNavigating === presentation.id
-                        ? 'animate-spin text-primary'
+                        ? 'text-primary animate-spin'
                         : 'text-primary/50'
                     )}
                   />
@@ -290,12 +291,12 @@ export function RecentPresentations() {
                 className="flex flex-col space-y-2 p-4"
                 onClick={() => handlePresentationClick(presentation)}
               >
-                <h3 className="line-clamp-1 text-lg font-semibold text-foreground">
+                <h3 className="text-foreground line-clamp-1 text-lg font-semibold">
                   {isNavigating === presentation.id
                     ? 'Loading...'
                     : presentation.title || 'Untitled Presentation'}
                 </h3>
-                <div className="flex items-center text-xs text-muted-foreground">
+                <div className="text-muted-foreground flex items-center text-xs">
                   <Calendar className="mr-1 h-3.5 w-3.5" />
                   {isNavigating === presentation.id
                     ? 'Loading...'
@@ -303,13 +304,13 @@ export function RecentPresentations() {
                 </div>
               </div>
             </CardContent>
-            <div className="absolute top-2 right-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+            <div className="absolute right-2 top-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm"
+                    className="bg-background/80 h-8 w-8 rounded-full backdrop-blur-sm"
                   >
                     <MoreHorizontal className="h-4 w-4" />
                   </Button>
@@ -326,7 +327,7 @@ export function RecentPresentations() {
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => handleDelete(presentation.id)}
-                    className="cursor-pointer text-destructive"
+                    className="text-destructive cursor-pointer"
                   >
                     <Trash2 className="mr-2 h-4 w-4" />
                     Delete

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 interface SlidePreviewCardProps {
   index: number;
@@ -8,7 +8,7 @@ interface SlidePreviewCardProps {
   children: React.ReactNode;
 }
 
-export function SlidePreviewCard({
+export const SlidePreviewCard = memo(function SlidePreviewCard({
   index,
   isActive,
   onClick,
@@ -87,4 +87,4 @@ export function SlidePreviewCard({
       </div>
     </div>
   );
-}
+});

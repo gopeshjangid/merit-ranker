@@ -15,11 +15,11 @@ import { FaGoogle } from 'react-icons/fa';
 
 export default function SignIn() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') ?? '/';
+  // const _callbackUrl = searchParams.get('callbackUrl') ?? '/';
   const error = searchParams.get('error');
 
-  const handleSignIn = async (provider: string) => {
-  //  await signIn(provider, { callbackUrl });
+  const handleSignIn = async (_provider: string) => {
+    //  await signIn(provider, { callbackUrl });
   };
 
   return (

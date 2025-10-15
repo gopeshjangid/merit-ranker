@@ -15,8 +15,7 @@ export const search_tool: any = {
     try {
       const response = await tavilyService.search(query, { max_results: 5 });
       return JSON.stringify(response);
-    } catch (error) {
-      console.error('Search error:', error);
+    } catch {
       return 'Search failed';
     }
   },

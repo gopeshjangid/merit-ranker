@@ -50,7 +50,7 @@ export async function exportPresentation(
       fileName: `${fileName ?? 'presentation'}.pptx`,
     };
   } catch (error) {
-    console.error('Error exporting presentation:', error);
+    // console.error('Error exporting presentation:', error);
     return { success: false, error: 'Failed to export presentation' };
   }
 }

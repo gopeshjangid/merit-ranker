@@ -66,7 +66,6 @@ export function PresentationDashboard({
       }
     } catch (error) {
       setIsGeneratingOutline(false);
-      console.error('Error creating presentation:', error);
       toast.error('Failed to create presentation');
     }
   };

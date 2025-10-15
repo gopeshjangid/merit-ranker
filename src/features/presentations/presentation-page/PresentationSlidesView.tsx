@@ -39,7 +39,6 @@ export const PresentationSlidesView = ({
   );
   const { items, sensors, handleDragEnd } = usePresentationSlides();
 
-  console.log('Rendering PresentationSlidesView', items);
   // Use the slide change watcher to automatically save changes
   useSlideChangeWatcher({ debounceDelay: 600 });
   // Handle keyboard navigation in presentation mode

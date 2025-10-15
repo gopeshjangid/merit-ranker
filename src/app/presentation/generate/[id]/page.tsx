@@ -89,7 +89,6 @@ export default function PresentationGenerateWithIdPage() {
     // If isGeneratingOutline is true but generation hasn't been started yet,
     // this indicates we just came from the dashboard and should start generation
     if (isGeneratingOutline && !generationStarted.current) {
-      console.log('Starting outline generation after navigation');
       generationStarted.current = true;
 
       // Give the component time to fully mount and establish connections
@@ -123,7 +122,6 @@ export default function PresentationGenerateWithIdPage() {
           setWebSearchEnabled(true);
           setSearchResults(searchResults);
         } catch (error) {
-          console.error('Failed to parse search results:', error);
           setSearchResults([]);
         }
       }
@@ -147,12 +145,10 @@ export default function PresentationGenerateWithIdPage() {
                 setTheme(themeId, themeData);
               } else {
                 // Fallback to default theme if custom theme not found
-                console.warn('Custom theme not found:', themeId);
                 setTheme('mystique');
               }
             })
             .catch((error) => {
-              console.error('Failed to load custom theme:', error);
               // Fallback to default theme on error
               setTheme('mystique');
             });

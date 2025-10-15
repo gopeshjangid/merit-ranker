@@ -31,7 +31,6 @@ export async function generateImageAction(
   }
 
   try {
-    console.log(`Generating image with model: ${model}`);
 
     // Generate the image using Together AI
     const response = (await together.images.create({
@@ -56,7 +55,6 @@ export async function generateImageAction(
       throw new Error('Failed to generate image');
     }
 
-    console.log(`Generated image URL: ${imageUrl}`);
 
     // Download the image from Together AI URL
     const imageResponse = await fetch(imageUrl);
@@ -77,13 +75,11 @@ export async function generateImageAction(
     const uploadResult = await utapi.uploadFiles([utFile]);
 
     if (!uploadResult[0]?.data?.ufsUrl) {
-      console.error('Upload error:', uploadResult[0]?.error);
+      // console.error('Upload error:', uploadResult[0]?.error);
       throw new Error('Failed to upload image to UploadThing');
     }
 
-    console.log(uploadResult);
     const permanentUrl = uploadResult[0].data.ufsUrl;
-    console.log(`Uploaded to UploadThing URL: ${permanentUrl}`);
 
     // Store in database with the permanent URL
     const generatedImage = await db.generatedImage.create({
@@ -99,7 +95,7 @@ export async function generateImageAction(
       image: generatedImage,
     };
   } catch (error) {
-    console.error('Error generating image:', error);
+    // console.error('Error generating image:', error);
     return {
       success: false,
       error:

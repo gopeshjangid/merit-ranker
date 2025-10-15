@@ -13,7 +13,7 @@ export default function BuyEsimError({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error("Buy eSIM Page Error:", error)
+    if (process.env.NODE_ENV === "development") console.error("Buy eSIM Page Error:", error)
   }, [error])
 
   return (

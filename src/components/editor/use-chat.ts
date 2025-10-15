@@ -105,8 +105,6 @@ export const useChat = () => {
         const aiComment = data.data;
         const range = aiCommentToRange(editor, aiComment);
 
-        if (!range) return console.warn('No range found for AI comment');
-
         const discussions =
           editor.getOption(discussionPlugin, 'discussions') || [];
 
@@ -287,8 +285,8 @@ const fakeStreamText = ({
             }
 
             // Properly escape the text for JSON
-            const escapedText = chunk.texts
-              .replace(/\\/g, '\\\\') // Escape backslashes first
+            const escapedText = chunk?.texts
+              ?.replace(/\\/g, '\\\\') // Escape backslashes first
               .replace(/"/g, String.raw`\"`) // Escape quotes
               .replace(/\n/g, String.raw`\n`) // Escape newlines
               .replace(/\r/g, String.raw`\r`) // Escape carriage returns
@@ -640,7 +638,6 @@ const mdxChunks = [
     },
     {
       delay,
-      texts: '  console.info("Hello World!")\n',
     },
     {
       delay,
