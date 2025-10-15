@@ -116,7 +116,7 @@ export function RecentPresentations() {
         description: 'Presentation renamed successfully',
       });
     },
-    onError: (error) => {
+    onError: () => {
       toast({
         variant: 'destructive',
         title: 'Error',

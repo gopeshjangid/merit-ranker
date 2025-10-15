@@ -16,7 +16,7 @@ interface Particle {
 export function AnimatedTechParticles({ particleCount = 30, className = "" }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
-  const animationFrameIdRef = useRef<number>()
+  const animationFrameIdRef = useRef<number | undefined>(undefined)
 
   // Using teal colors from your theme, adjust opacity directly
   const tealColors = ["rgba(0, 255, 255, 1)", "rgba(45, 212, 191, 1)"] // Full opacity, will be modulated

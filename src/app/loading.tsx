@@ -21,7 +21,6 @@ export default function Loading() {
     loadingStages.forEach((stage) => (totalDuration += stage.duration))
 
     let accumulatedDelay = 0
-    const _overallProgress = 0
 
     const stageTimeouts = loadingStages.map((stage, index) => {
       const timeoutId = setTimeout(() => {

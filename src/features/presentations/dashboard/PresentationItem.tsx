@@ -91,7 +91,7 @@ export const PresentationItem = memo(function PresentationItem({
           description: 'Presentation deleted successfully',
         });
       },
-      onError: (error) => {
+      onError: () => {
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -119,7 +119,7 @@ export const PresentationItem = memo(function PresentationItem({
         description: 'Presentation renamed successfully',
       });
     },
-    onError: (error) => {
+    onError: () => {
       toast({
         variant: 'destructive',
         title: 'Error',
@@ -143,7 +143,7 @@ export const PresentationItem = memo(function PresentationItem({
         description: 'Presentation duplicated successfully',
       });
     },
-    onError: (error) => {
+    onError: () => {
       toast({
         variant: 'destructive',
         title: 'Error',

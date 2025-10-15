@@ -80,7 +80,7 @@ export function GenerateControls({
       } else {
         setLocalError(result.error ?? 'Failed to generate image');
       }
-    } catch (_error) {
+    } catch (error) {
       setLocalError(
         error instanceof Error ? error.message : 'Failed to generate image'
       );
@@ -122,7 +122,7 @@ export function GenerateControls({
       } else {
         setLocalError(result.error ?? 'Failed to regenerate image');
       }
-    } catch (_error) {
+    } catch (error) {
       setLocalError(
         error instanceof Error ? error.message : 'Failed to regenerate image'
       );

@@ -19,7 +19,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 // Dummy session object for testing
 const dummySession = {
-  status: 'authenticated' as const,
+  status: 'authenticated' as 'authenticated' | 'loading' | 'unauthenticated',
   data: {
     user: {
       id: 'test-user-123',

@@ -114,8 +114,9 @@ export async function updatePresentation({
   // if (!session?.user) {
   //   throw new Error("Unauthorized");
   // }
-  // const _userId = session.user.id;
-  const _userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  // const userId = session.user.id;
+  const userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  void userId; // Mark as intentionally unused for now
 
   try {
     // Extract values from content if provided there
@@ -167,8 +168,9 @@ export async function updatePresentationTitle(id: string, title: string) {
   // if (!session?.user) {
   //   throw new Error("Unauthorized");
   // }
-  // const _userId = session.user.id;
-  const _userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  // const userId = session.user.id;
+  const userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  void userId; // Mark as intentionally unused for now
 
   try {
     const presentation = await db.baseDocument.update({
@@ -252,8 +254,9 @@ export async function getPresentation(id: string) {
   // if (!session?.user) {
   //   throw new Error("Unauthorized");
   // }
-  // const _userId = session.user.id;
-  const _userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  // const userId = session.user.id;
+  const userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  void userId; // Mark as intentionally unused for now
 
   try {
     const presentation = await db.baseDocument.findUnique({
@@ -332,8 +335,9 @@ export async function updatePresentationTheme(id: string, theme: string) {
   // if (!session?.user) {
   //   throw new Error("Unauthorized");
   // }
-  // const _userId = session.user.id;
-  const _userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  // const userId = session.user.id;
+  const userId = 'cmgi94l4c0000teq0hejotfen'; // Temporary hardcoded user ID for testing
+  void userId; // Mark as intentionally unused for now
 
   try {
     const presentation = await db.presentation.update({
