@@ -8,7 +8,7 @@ import { ThemeProvider } from '@/provider/theme-provider';
 import { FloatingActionButton } from "@/components/landing/floating-action-button"
 import { Toaster } from 'sonner';
 import { Navbar } from '@/components/landing/navbar';
-import { Footer } from '@/components/landing/footer';
+import { FooterWrapper } from '@/components/landing/footer-wrapper';
 
 import './globals.css';
 
@@ -146,7 +146,7 @@ export default function RootLayout({
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Navbar />
               {children}
-              <Footer />
+               <FooterWrapper />
               <FloatingActionButton />
               <Toaster />
             </ThemeProvider>            
