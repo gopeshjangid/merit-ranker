@@ -77,8 +77,7 @@ export function PresentationsSidebar({
         description: result.message || 'Selected presentations deleted',
       });
     },
-    onError: (error) => {
-      console.error('Failed to delete presentations:', error);
+    onError: () => {
       toast({
         variant: 'destructive',
         title: 'Error',
@@ -135,8 +134,8 @@ export function PresentationsSidebar({
     if (isError) {
       return (
         <div className="flex flex-col items-center justify-center gap-4 p-8">
-          <FileX className="h-12 w-12 text-muted-foreground" />
-          <p className="text-center text-sm text-muted-foreground">
+          <FileX className="text-muted-foreground h-12 w-12" />
+          <p className="text-muted-foreground text-center text-sm">
             Failed to load presentations
           </p>
         </div>
@@ -146,8 +145,8 @@ export function PresentationsSidebar({
     if (allPresentations.length === 0) {
       return (
         <div className="flex flex-col items-center justify-center gap-4 p-8">
-          <FileX className="h-12 w-12 text-muted-foreground" />
-          <p className="text-center text-sm text-muted-foreground">
+          <FileX className="text-muted-foreground h-12 w-12" />
+          <p className="text-muted-foreground text-center text-sm">
             No presentations found
           </p>
         </div>

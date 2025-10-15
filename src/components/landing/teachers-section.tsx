@@ -12,10 +12,6 @@ import {
   Presentation,
   Youtube,
   ShieldCheck,
-  Bot,
-  Clock,
-  Wand2,
-  TrendingUp,
 } from "lucide-react"
 
 export function TeachersSection() {
@@ -62,28 +58,29 @@ export function TeachersSection() {
     },
   ]
 
-  const why = [
-    {
-      icon: Clock,
-      title: "Save Time & Effort",
-      desc: "Create notes, slides, and tests faster with built‑in automation.",
-    },
-    {
-      icon: Wand2,
-      title: "AI Improves Accuracy",
-      desc: "Smart suggestions help fix mistakes and enhance clarity.",
-    },
-    {
-      icon: Bot,
-      title: "Your Daily Assistant",
-      desc: "No tech team required—an assistant for routine tasks and replies.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Boost Your Brand",
-      desc: "Get discovered by students and grow your presence online.",
-    },
-  ]
+  // Commented out for future use
+  // const why = [
+  //   {
+  //     icon: Clock,
+  //     title: "Save Time & Effort",
+  //     desc: "Create notes, slides, and tests faster with built‑in automation.",
+  //   },
+  //   {
+  //     icon: Wand2,
+  //     title: "AI Improves Accuracy",
+  //     desc: "Smart suggestions help fix mistakes and enhance clarity.",
+  //   },
+  //   {
+  //     icon: Bot,
+  //     title: "Your Daily Assistant",
+  //     desc: "No tech team required—an assistant for routine tasks and replies.",
+  //   },
+  //   {
+  //     icon: TrendingUp,
+  //     title: "Boost Your Brand",
+  //     desc: "Get discovered by students and grow your presence online.",
+  //   },
+  // ]
 
   return (
     <section id="teachers" className="py-20 md:py-28 bg-darkBlue relative overflow-hidden">

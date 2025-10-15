@@ -13,7 +13,7 @@ export default function FaqError({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error("FAQ Page Error:", error)
+    if (process.env.NODE_ENV === "development") console.error("FAQ Page Error:", error)
   }, [error])
 
   return (

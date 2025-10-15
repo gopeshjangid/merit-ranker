@@ -64,7 +64,6 @@ export const PresentationImageElement = withHOC(
         const container = document.querySelector('.presentation-slides');
         const isEditorReadOnly = !container?.contains(imageRef?.current);
         // Prevent image generation in read-only mode
-        console.log(isEditorReadOnly, hasHandledGenerationRef.current);
         if (isEditorReadOnly) {
           return;
         }
@@ -110,8 +109,7 @@ export const PresentationImageElement = withHOC(
               void saveImmediately();
             }, 500);
           }
-        } catch (error) {
-          console.error('Error generating image:', error);
+        } catch (_error) {
         } finally {
           setIsGenerating(false);
         }
@@ -165,10 +163,10 @@ export const PresentationImageElement = withHOC(
                   />
                   {isGenerating ? (
                     <div className="relative w-full">
-                      <div className="absolute inset-0 flex items-center justify-center rounded-sm bg-muted">
+                      <div className="bg-muted absolute inset-0 flex items-center justify-center rounded-sm">
                         <div className="flex flex-col items-center gap-2">
                           <Spinner className="h-6 w-6" />
-                          <span className="text-sm text-muted-foreground">
+                          <span className="text-muted-foreground text-sm">
                             Generating image...
                           </span>
                         </div>
@@ -190,7 +188,7 @@ export const PresentationImageElement = withHOC(
                           'cursor-pointer',
                           focused &&
                             selected &&
-                            'ring-2 ring-ring ring-offset-2',
+                            'ring-ring ring-2 ring-offset-2',
                           isDragging && 'opacity-50'
                         )}
                         alt={props.element.query ?? ''}

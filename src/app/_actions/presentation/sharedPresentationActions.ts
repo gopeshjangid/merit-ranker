@@ -45,8 +45,8 @@ export async function getSharedPresentation(id: string) {
       success: true,
       presentation,
     };
-  } catch (error) {
-    console.error('Error fetching shared presentation:', error);
+  } catch {
+    // console.error('Error fetching shared presentation:', error);
     return {
       success: false,
       message: 'Failed to fetch presentation',
@@ -61,8 +61,8 @@ export async function togglePresentationPublicStatus(
   id: string,
   isPublic: boolean
 ) {
- // const session = await auth();
- const userId = 'cmgi94l4c0000teq0hejotfen';
+  // const session = await auth();
+  const userId = 'cmgi94l4c0000teq0hejotfen';
   if (!userId) {
     return {
       success: false,
@@ -87,8 +87,8 @@ export async function togglePresentationPublicStatus(
         : 'Presentation is now private',
       presentation,
     };
-  } catch (error) {
-    console.error('Error updating presentation public status:', error);
+  } catch {
+    // console.error('Error updating presentation public status:', error);
     return {
       success: false,
       message: 'Failed to update presentation public status',

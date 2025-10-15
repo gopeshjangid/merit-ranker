@@ -19,7 +19,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 // Dummy session object for testing
 const dummySession = {
-  status: 'authenticated' as const,
+  status: 'authenticated' as 'authenticated' | 'loading' | 'unauthenticated',
   data: {
     user: {
       id: 'test-user-123',
@@ -37,11 +37,8 @@ function useSession() {
 
 // Dummy signOut function
 async function signOut() {
-  console.log('🚪 User signing out...');
-  console.log('Session data:', dummySession.data);
   // Simulate async operation
   await new Promise((resolve) => setTimeout(resolve, 500));
-  console.log('✅ Sign out complete');
 }
 
 export function getInitials(name: string): string {

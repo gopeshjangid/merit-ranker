@@ -29,7 +29,6 @@ export function FontFamilyToolbarButton() {
     []
   );
 
-  console.log(fontFamily);
   // 2. Define the function to handle font changes from the picker.
   const handleFontChange = (font: string) => {
     if (!editor || !font) return;

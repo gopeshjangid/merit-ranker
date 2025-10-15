@@ -75,7 +75,7 @@ export default function HowItWorksPage() {
           {/* Visual separators for mobile if needed */}
           <div className="md:hidden space-y-8">
             {steps.map(
-              (step, index) =>
+              (_step, index) =>
                 index < steps.length - 1 && (
                   <div key={`sep-${index}`} className="flex justify-center">
                     <ArrowRight size={24} className="text-cyan-500 rotate-90" />

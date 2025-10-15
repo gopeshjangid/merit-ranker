@@ -188,7 +188,6 @@ export function ImagePreview({
       actualHeight = parentHeight;
     }
 
-    console.log('actualWidth', actualWidth, 'actualHeight', actualHeight);
     return { width: actualWidth, height: actualHeight };
   }, [slideIndex]);
 
@@ -204,7 +203,6 @@ export function ImagePreview({
     } else {
       maxWidth = windowWidth; // max-w-full (full width for small screens)
     }
-    console.log('maxWidth', maxWidth, 'maxHeight', maxHeight);
 
     let heightFits = imageDimensionInPresentation.height <= maxHeight;
     let widthFits = imageDimensionInPresentation.width <= maxWidth;
@@ -229,16 +227,6 @@ export function ImagePreview({
     return Math.min(heightScale, widthScale);
   }, [imageDimensionInPresentation]);
 
-  // Debug logging for container dimensions
-  useEffect(() => {
-    console.log('Container dimensions:', {
-      width: imageDimensionInPresentation.width * containerScale,
-      height: imageDimensionInPresentation.height * containerScale,
-      containerScale,
-      imageDimensions: imageDimensionInPresentation,
-    });
-  }, [imageDimensionInPresentation, containerScale]);
-
   const handleDownload = useCallback(async () => {
     if (!element.url) return;
     try {
@@ -252,14 +240,12 @@ export function ImagePreview({
       a.click();
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error('Failed to download image:', err);
-    }
+    } catch (err) {}
   }, [element.url]);
 
   if (!element.url) {
     return (
-      <div className="flex h-60 items-center justify-center text-muted-foreground">
+      <div className="text-muted-foreground flex h-60 items-center justify-center">
         <div className="flex flex-col items-center gap-2">
           <ImageIcon className="h-10 w-10 opacity-50" />
           <span>No image generated yet</span>
@@ -275,7 +261,7 @@ export function ImagePreview({
         {currentMode === 'crop' ? (
           <div
             ref={containerRef}
-            className="relative aspect-auto shrink-0 cursor-grab overflow-hidden rounded-lg bg-gradient-to-br from-muted/50 to-muted select-none active:cursor-grabbing"
+            className="from-muted/50 to-muted relative aspect-auto shrink-0 cursor-grab select-none overflow-hidden rounded-lg bg-gradient-to-br active:cursor-grabbing"
             style={{
               width: imageDimensionInPresentation.width * containerScale,
               height: imageDimensionInPresentation.height * containerScale,
@@ -313,7 +299,7 @@ export function ImagePreview({
             />
             {/* Crop overlay */}
             <div className="pointer-events-none absolute inset-0 border-2 border-dashed border-blue-500">
-              <div className="absolute top-2 left-2 rounded bg-blue-500 px-2 py-1 text-xs text-white shadow-sm">
+              <div className="absolute left-2 top-2 rounded bg-blue-500 px-2 py-1 text-xs text-white shadow-sm">
                 Drag to pan • Scroll to zoom
               </div>
             </div>
@@ -321,7 +307,7 @@ export function ImagePreview({
         ) : (
           // Normal Preview Mode - Show cropped preview
           <div
-            className="relative aspect-auto shrink-0 overflow-hidden rounded-lg bg-gradient-to-br from-muted/50 to-muted"
+            className="from-muted/50 to-muted relative aspect-auto shrink-0 overflow-hidden rounded-lg bg-gradient-to-br"
             style={{
               ...imageDimensionInPresentation,
               scale: containerScale,
@@ -342,11 +328,11 @@ export function ImagePreview({
               }}
               draggable={false}
             />
-            <div className="absolute right-2 bottom-2 flex gap-1">
+            <div className="absolute bottom-2 right-2 flex gap-1">
               <Button
                 variant="secondary"
                 size="icon"
-                className="h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm"
+                className="bg-background/80 h-8 w-8 rounded-full backdrop-blur-sm"
                 onClick={handleDownload}
               >
                 <Download className="h-4 w-4" />
@@ -358,11 +344,11 @@ export function ImagePreview({
 
       {/* Crop Controls - Only show in crop mode */}
       {currentMode === 'crop' && (
-        <div className="space-y-4 rounded-lg border bg-muted/30 p-4">
+        <div className="bg-muted/30 space-y-4 rounded-lg border p-4">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="text-sm font-medium">Crop Controls</h4>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <div className="text-muted-foreground flex items-center gap-2 text-xs">
                 <span>
                   Position: {localCropSettings.objectPosition.x.toFixed(0)}%,{' '}
                   {localCropSettings.objectPosition.y.toFixed(0)}%
@@ -373,7 +359,7 @@ export function ImagePreview({
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <label className="text-sm font-medium">Zoom Level</label>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-muted-foreground text-sm">
                   {zoom.toFixed(1)}x
                 </span>
               </div>
@@ -385,7 +371,7 @@ export function ImagePreview({
                 step={0.01}
                 className="w-full"
               />
-              <div className="flex justify-between text-xs text-muted-foreground">
+              <div className="text-muted-foreground flex justify-between text-xs">
                 <span>1x</span>
                 <span>2x</span>
               </div>

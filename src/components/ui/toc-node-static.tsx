@@ -1,4 +1,3 @@
-import * as React from 'react';
 
 import type { SlateEditor, SlateElementProps, TElement } from 'platejs';
 

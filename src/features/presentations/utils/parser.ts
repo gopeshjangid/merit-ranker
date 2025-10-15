@@ -1,11 +1,7 @@
+import type { Descendant, TColumnElement, TColumnGroupElement, TTableCellElement, TTableElement, TTableRowElement, TText } from 'platejs';
+
 import { ColumnItemPlugin, ColumnPlugin } from '@platejs/layout/react';
 import { nanoid } from 'nanoid'; // Import nanoid for unique ID generation
-import {
-  type Descendant,
-  type TColumnElement,
-  type TColumnGroupElement,
-  type TText,
-} from 'platejs';
 import {
   type TArrowListElement,
   type TArrowListItemElement,
@@ -36,11 +32,6 @@ import {
   type TTimelineItemElement,
 } from '../editor/plugins/timeline-plugin';
 
-import {
-  type TTableCellElement,
-  type TTableElement,
-  type TTableRowElement,
-} from 'platejs';
 import {
   AREA_CHART_ELEMENT,
   BAR_CHART_ELEMENT,
@@ -231,8 +222,8 @@ export class SlideParser {
       this.latestContent = '';
 
       return finalSlides;
-    } catch (e) {
-      console.error('Error during finalization:', e);
+    } catch {
+      // console.error('Error during finalization:', e);
       return [];
     }
   }
@@ -670,7 +661,7 @@ export class SlideParser {
         return this.createTimeline(node);
 
       default:
-        console.warn(`Unknown top-level tag: ${tag}`);
+        // console.warn(`Unknown top-level tag: ${tag}`);
         return null;
     }
   }
@@ -721,8 +712,8 @@ export class SlideParser {
 
       // Manually parse the XML
       this.parseElement(fixedXml, rootNode);
-    } catch (error) {
-      console.error('Error parsing XML:', error);
+    } catch (_error) {
+      // console.error('Error parsing XML:', error);
 
       // Fall back to a very basic parser that just captures top level tags
       // First remove the PRESENTATION tags if present

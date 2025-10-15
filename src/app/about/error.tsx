@@ -13,7 +13,7 @@ export default function AboutError({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error("About Page Error:", error)
+    if (process.env.NODE_ENV === "development") console.error("About Page Error:", error)
   }, [error])
 
   return (

@@ -48,7 +48,6 @@ export default function TeacherBrandingPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("[v0] Branding UI submission (no backend):", data)
     alert("Branding saved (UI only).")
   }
 
@@ -236,7 +235,7 @@ export default function TeacherBrandingPage() {
             <Button type="submit" className="px-6">
               Save
             </Button>
-            <Button type="button" variant="outline" onClick={() => console.log("[v0] Preview data:", data)}>
+            <Button type="button" className="px-6">
               Preview
             </Button>
             {data.name && (

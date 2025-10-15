@@ -34,7 +34,7 @@ Example format:
 - Supporting detail or example
 - Practical application or takeaway
 
-# Third Main Topic 
+# Third Main Topic
 - Primary concept to understand
 - Evidence or data point
 - Conclusion or future direction
@@ -108,8 +108,7 @@ export async function POST(req: Request) {
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error) {
-    console.error('Error in outline generation:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to generate outline' },
       { status: 500 }

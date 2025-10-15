@@ -1,8 +1,6 @@
-import type { NextRequest } from 'next/server';
-
 import { createOpenAI } from '@ai-sdk/openai';
 import { generateText } from 'ai';
-import { NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const {

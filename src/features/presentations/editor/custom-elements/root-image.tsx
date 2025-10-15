@@ -99,21 +99,21 @@ export default function RootImage({
           !readOnly && layoutType === 'left' ? (
             <div
               aria-label="resize-right"
-              className="h-full w-1 cursor-ew-resize rounded-sm bg-primary/70 opacity-0 transition-opacity duration-150 group-hover/resizable:opacity-100"
+              className="bg-primary/70 h-full w-1 cursor-ew-resize rounded-sm opacity-0 transition-opacity duration-150 group-hover/resizable:opacity-100"
             />
           ) : undefined,
         left:
           !readOnly && layoutType === 'right' ? (
             <div
               aria-label="resize-left"
-              className="h-full w-1 cursor-ew-resize rounded-sm bg-primary/70 opacity-0 transition-opacity duration-150 group-hover/resizable:opacity-100"
+              className="bg-primary/70 h-full w-1 cursor-ew-resize rounded-sm opacity-0 transition-opacity duration-150 group-hover/resizable:opacity-100"
             />
           ) : undefined,
         bottom:
           !readOnly && layoutType === 'vertical' ? (
             <div
               aria-label="resize-bottom"
-              className="h-1 w-full cursor-ns-resize rounded-sm bg-primary/70 opacity-0 transition-opacity duration-150 group-hover/resizable:opacity-100"
+              className="bg-primary/70 h-1 w-full cursor-ns-resize rounded-sm opacity-0 transition-opacity duration-150 group-hover/resizable:opacity-100"
             />
           ) : undefined,
       }}
@@ -121,7 +121,7 @@ export default function RootImage({
     >
       <div
         className={cn(
-          'h-full overflow-hidden border bg-background/80 shadow-md backdrop-blur-sm',
+          'bg-background/80 h-full overflow-hidden border shadow-md backdrop-blur-sm',
           isDragging && 'opacity-50'
         )}
       >
@@ -130,9 +130,9 @@ export default function RootImage({
           className="h-full cursor-grab active:cursor-grabbing"
         >
           {computedGen?.status === 'pending' ? (
-            <div className="flex h-full flex-col items-center justify-center bg-muted/30 p-4">
+            <div className="bg-muted/30 flex h-full flex-col items-center justify-center p-4">
               <Spinner className="mb-2 h-8 w-8" />
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Generating image for &quot;{image.query}&quot;...
               </p>
             </div>

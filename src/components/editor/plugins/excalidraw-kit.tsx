@@ -1,9 +1,23 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { ExcalidrawPlugin } from '@platejs/excalidraw/react';
 
-import { ExcalidrawElement } from '@/components/ui/excalidraw-node';
+const ExcalidrawElement = dynamic(
+  () =>
+    import('@/components/ui/excalidraw-node').then((mod) => ({
+      default: mod.ExcalidrawElement,
+    })),
+  {
+    ssr: false,
+    loading: () => <div>Loading...</div>,
+  }
+);
+
+const ExcalidrawNodeComponent: React.FC<any> = (props) => (
+  <ExcalidrawElement {...props} />
+);
 
 export const ExcalidrawKit = [
-  ExcalidrawPlugin.withComponent(ExcalidrawElement),
+  ExcalidrawPlugin.withComponent(ExcalidrawNodeComponent),
 ];

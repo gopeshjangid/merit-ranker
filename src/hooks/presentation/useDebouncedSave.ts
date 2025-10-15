@@ -61,8 +61,8 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
           setTimeout(() => {
             setSavingStatus('idle');
           }, 2000);
-        } catch (error) {
-          console.error('Failed to save presentation:', error);
+        } catch {
+          // console.error('Failed to save presentation:', error);
           setSavingStatus('idle');
         }
       },
@@ -120,8 +120,8 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
       setTimeout(() => {
         setSavingStatus('idle');
       }, 2000);
-    } catch (error) {
-      console.error('Failed to save presentation:', error);
+    } catch {
+      // console.error('Failed to save presentation:', error);
       setSavingStatus('idle');
     }
   }, [debouncedSave, setSavingStatus]);

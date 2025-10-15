@@ -89,7 +89,6 @@ export default function PresentationGenerateWithIdPage() {
     // If isGeneratingOutline is true but generation hasn't been started yet,
     // this indicates we just came from the dashboard and should start generation
     if (isGeneratingOutline && !generationStarted.current) {
-      console.log('Starting outline generation after navigation');
       generationStarted.current = true;
 
       // Give the component time to fully mount and establish connections
@@ -122,8 +121,7 @@ export default function PresentationGenerateWithIdPage() {
             : JSON.parse(presentationData.presentation.searchResults as string);
           setWebSearchEnabled(true);
           setSearchResults(searchResults);
-        } catch (error) {
-          console.error('Failed to parse search results:', error);
+        } catch {
           setSearchResults([]);
         }
       }
@@ -147,12 +145,10 @@ export default function PresentationGenerateWithIdPage() {
                 setTheme(themeId, themeData);
               } else {
                 // Fallback to default theme if custom theme not found
-                console.warn('Custom theme not found:', themeId);
                 setTheme('mystique');
               }
             })
-            .catch((error) => {
-              console.error('Failed to load custom theme:', error);
+            .catch((_error) => {
               // Fallback to default theme on error
               setTheme('mystique');
             });
@@ -185,6 +181,9 @@ export default function PresentationGenerateWithIdPage() {
     setImageSource,
     setPresentationStyle,
     setLanguage,
+    isGeneratingOutline,
+    setWebSearchEnabled,
+    setSearchResults,
   ]);
 
   const handleGenerate = () => {
@@ -197,7 +196,7 @@ export default function PresentationGenerateWithIdPage() {
       <ThemeBackground>
         <div className="flex h-[calc(100vh-8rem)] flex-col items-center justify-center">
           <div className="relative">
-            <Spinner className="h-10 w-10 text-primary" />
+            <Spinner className="text-primary h-10 w-10" />
           </div>
           <div className="space-y-2 text-center">
             <h2 className="text-2xl font-bold">Loading Presentation Outline</h2>
@@ -211,7 +210,7 @@ export default function PresentationGenerateWithIdPage() {
     <ThemeBackground>
       <Button
         variant="ghost"
-        className="absolute top-4 left-4 flex items-center gap-2 text-muted-foreground hover:text-foreground"
+        className="text-muted-foreground hover:text-foreground absolute left-4 top-4 flex items-center gap-2"
         onClick={() => router.back()}
       >
         <ArrowLeft className="h-4 w-4" />
@@ -231,24 +230,21 @@ export default function PresentationGenerateWithIdPage() {
               title="AI is thinking about your outline..."
             />
             <ToolCallDisplay />
-
-            
           </div>
         </div>
-        
 
         {/* <GoogleAdsBanner isVertical={true} /> */}
       </div>
-      <div className="flex flex-col lg:flex-row lg:space-x-8 lg:space-y-0 space-y-4 px-4">
-  <div className="lg:!mb-32 space-y-4 rounded-lg border bg-muted/30 p-6">
-    <OutlineList />
-  </div>
-  <div className="!mb-32 space-y-4 rounded-lg border bg-muted/30 p-6 lg:self-start">
-    <h2 className="text-lg font-semibold">Customize Theme</h2>
-    <ThemeSettings />
-  </div>
-</div>   
-      <div className="absolute right-0 bottom-0 left-0 flex justify-center border-t bg-background/80 p-4 backdrop-blur-sm">
+      <div className="flex flex-col space-y-4 px-4 lg:flex-row lg:space-x-8 lg:space-y-0">
+        <div className="bg-muted/30 space-y-4 rounded-lg border p-6 lg:!mb-32">
+          <OutlineList />
+        </div>
+        <div className="bg-muted/30 !mb-32 space-y-4 rounded-lg border p-6 lg:self-start">
+          <h2 className="text-lg font-semibold">Customize Theme</h2>
+          <ThemeSettings />
+        </div>
+      </div>
+      <div className="bg-background/80 absolute bottom-0 left-0 right-0 flex justify-center border-t p-4 backdrop-blur-sm">
         <Button
           size="lg"
           className="gap-2 px-8"

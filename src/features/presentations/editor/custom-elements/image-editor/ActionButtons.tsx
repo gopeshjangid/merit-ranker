@@ -51,9 +51,8 @@ export function ActionButtons({
         );
       }
     },
-    onUploadError: (error) => {
+    onUploadError: () => {
       toast.error('Failed to upload image');
-      console.error(error);
     },
   });
 
