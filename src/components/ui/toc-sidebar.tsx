@@ -12,6 +12,7 @@ import {
   CollapsibleContent,
 } from '@/components/ui/collapsible';
 import { ChevronRightIcon } from 'lucide-react';
+import { truncate } from '@/lib/utils';
 
 const headingItemVariants = cva(
   'block h-auto w-full cursor-pointer truncate rounded-md px-2 py-1.5 text-left text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
@@ -44,11 +45,6 @@ interface TocSideBarProps {
   className?: string;
 }
 
-// Utility to truncate title with ellipsis
-function truncateTitle(title: string, maxLength: number = 15) {
-  return title.length > maxLength ? title.slice(0, maxLength) + '…' : title;
-}
-
 export function TocSideBar({
   open = true,
   rootMargin = '0px 0px -80% 0px',
@@ -70,7 +66,6 @@ export function TocSideBar({
     );
   }
 
-  // Now safe to use TOC hooks - editor is guaranteed to be mounted
   return (
     <TocSideBarContent
       open={open}
@@ -81,29 +76,24 @@ export function TocSideBar({
   );
 }
 
-/**
- * Internal component that safely uses TOC hooks
- * Split out to ensure hooks are only called when editor is mounted
- */
 function TocSideBarContent({
   open,
   rootMargin,
   topOffset,
   className,
 }: TocSideBarProps) {
-  // Initialize TOC state with editor integration (editor is guaranteed mounted here)
   const state = useTocSideBarState({
     open,
     rootMargin,
     topOffset,
   });
+  console.log('TocSideBarContent state:', state);
 
-  // Get navigation handlers and interaction props
   const { navProps, onContentClick } = useTocSideBar(state);
 
   const { headingList, activeContentId } = state;
 
-  // Group headings by main heading (depth 1)
+  // grouping logic
   const groupedHeadings: Array<{
     main: (typeof headingList)[0];
     children: typeof headingList;
@@ -111,14 +101,27 @@ function TocSideBarContent({
   let currentMain: (typeof headingList)[0] | null = null;
   let currentChildren: typeof headingList = [];
 
-  headingList.forEach((heading) => {
+  headingList.forEach((heading, idx) => {
     if (heading.depth === 1) {
+      // h1 always starts a new group
       if (currentMain) {
         groupedHeadings.push({ main: currentMain, children: currentChildren });
       }
       currentMain = heading;
       currentChildren = [];
-    } else if (currentMain) {
+    } else if (!currentMain) {
+      // No h1 seen yet
+    if (heading.depth === 2) {
+      // h2 before any h1 starts its own group
+      groupedHeadings.push({ main: heading, children: [] });
+    } else {
+      // h3/h4/h5/h6 before any h1/h2 are ignored or could be grouped under previous h2
+      if (groupedHeadings.length > 0) {
+        groupedHeadings[groupedHeadings.length - 1].children.push(heading);
+      }
+    }
+    } else {
+      // h2/h3/h4/h5/h6 under h1
       currentChildren.push(heading);
     }
   });
@@ -126,21 +129,20 @@ function TocSideBarContent({
     groupedHeadings.push({ main: currentMain, children: currentChildren });
   }
 
-  // Maintain open state for each main heading at parent level
-  const [openStates, setOpenStates] = React.useState<boolean[]>(() =>
-    groupedHeadings.map(() => true)
+  const [openStates, setOpenStates] = React.useState<Record<string, boolean>>(
+    () => Object.fromEntries(groupedHeadings.map(({ main }) => [main.id, true]))
   );
 
-  // If headings change, reset openStates length
   React.useEffect(() => {
-    setOpenStates((prev) =>
-      groupedHeadings.length === prev.length
-        ? prev
-        : groupedHeadings.map(() => true)
-    );
-  }, [groupedHeadings.length]);
+    setOpenStates((prev) => {
+      const newState: Record<string, boolean> = {};
+      groupedHeadings.forEach(({ main }) => {
+        newState[main.id] = prev[main.id] ?? true;
+      });
+      return newState;
+    });
+  }, [groupedHeadings.map(({ main }) => main.id).join(',')]);
 
-  // Handle empty state when no headings are present
   if (!headingList || headingList.length === 0) {
     return (
       <div className={`p-4 ${className}`}>
@@ -160,34 +162,31 @@ function TocSideBarContent({
       className={`flex h-full flex-col ${className}`}
       aria-label="Table of contents"
     >
-      {/* Header section */}
       <div className="border-b px-4 py-3">
         <div className="text-xs font-medium text-muted-foreground">
           TABLE OF CONTENTS
         </div>
       </div>
 
-      {/* Scrollable heading list */}
       <ScrollArea className="flex-1">
         <div className="space-y-0.5 p-2">
           {groupedHeadings.map(({ main, children }, idx) => (
             <Collapsible
               key={main.id}
-              open={openStates[idx]}
+              open={openStates[main.id]}
               onOpenChange={(open) => {
-                setOpenStates((prev) =>
-                  prev.map((v, i) => (i === idx ? open : v))
-                );
+                setOpenStates((prev) => ({
+                  ...prev,
+                  [main.id]: open,
+                }));
               }}
             >
               <div className="flex items-center gap-2">
                 <CollapsibleTrigger asChild>
-                  <Button
-                    variant='ghost'
-                  >
+                  <Button variant="ghost">
                     <ChevronRightIcon
                       className={`h-4 w-4 transition-transform duration-200 ${
-                        openStates[idx] ? 'rotate-90' : ''
+                        openStates[main.id] ? 'rotate-90' : ''
                       }`}
                     />
                   </Button>
@@ -205,7 +204,7 @@ function TocSideBarContent({
                   }
                   style={{ flex: 1, justifyContent: 'flex-start' }}
                 >
-                  <span className="truncate">{truncateTitle(main.title)}</span>
+                  <span className="truncate">{truncate(main.title)}</span>
                 </Button>
               </div>
               <CollapsibleContent>
@@ -224,7 +223,7 @@ function TocSideBarContent({
                     }
                   >
                     <span className="truncate">
-                      {truncateTitle(heading.title)}
+                      {truncate(heading.title)}
                     </span>
                   </Button>
                 ))}
