@@ -26,6 +26,7 @@ export default function TeacherDashboardLayout({ children }: { children: React.R
     { href: "/teacher/dashboard/live-class/presentation", label: "Live Class Slides", icon: NotebookText },
     { href: "/teacher/dashboard/quizzes", label: "Quiz", icon: FileCheck2 },
     { href: "/teacher/dashboard/mocks", label: "Mock Test", icon: FileCheck2 },
+    { href: "/teacher/dashboard/create-mock", label: "Create Mock", icon: FileCheck2 },
     { href: "/teacher/dashboard/students", label: "Students", icon: MessageCircle },
   ]
   const navFooter = [
@@ -44,7 +45,7 @@ export default function TeacherDashboardLayout({ children }: { children: React.R
           <SidebarMenu>
             {nav.map((item) => (
               <SidebarMenuItem key={item.href}>
-                <SidebarMenuButton tooltip={item.label} asChild isActive={pathname === item.href}>
+                <SidebarMenuButton tooltip={item.label} asChild isActive={pathname === item.href} className="text-sm">
                   <Link href={item.href}>
                     <item.icon className="h-4 w-4" />
                     {item.label}
