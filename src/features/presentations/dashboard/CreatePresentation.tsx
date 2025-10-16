@@ -9,6 +9,7 @@ import { PresentationHeader } from './PresentationHeader';
 import { PresentationInput } from './PresentationInput';
 import { PresentationTypeSelector } from './PresentationTypeSelector';
 import { NotesUploadSection } from './NotesUploadSection';
+import { AdditionalOptionsToggle } from './AdditionalOptionsToggle';
 
 interface CreatePresentationProps {
   handleGenerate: () => Promise<void>;
@@ -24,6 +25,7 @@ export function CreatePresentation({ handleGenerate }: CreatePresentationProps) 
       <NotesUploadSection />
       <PresentationInput handleGenerate={handleGenerate} />
       <PresentationControls />
+      <AdditionalOptionsToggle />
       <div className="flex items-center justify-end">
         <Button
           onClick={handleGenerate}

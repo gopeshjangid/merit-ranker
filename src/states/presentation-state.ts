@@ -134,6 +134,32 @@ interface PresentationState {
     content: string;
   } | null;
   setUploadedNotes: (notes: { name: string; size: number; type: string; content: string } | null) => void;
+
+  // new presentation configuration states for educational content
+  subject: string;
+  setSubject: (subject: string) => void;
+  
+  examType: string;
+  setExamType: (examType: string) => void;
+  
+  difficultyLevel: 'beginner' | 'intermediate' | 'advanced';
+  setDifficultyLevel: (level: 'beginner' | 'intermediate' | 'advanced') => void;
+  
+  designStyle: string;
+  setDesignStyle: (style: string) => void;
+  
+  // Toggle options for additional content generation
+  addQuiz: boolean;
+  setAddQuiz: (value: boolean) => void;
+  
+  includeFromNotes: boolean;
+  setIncludeFromNotes: (value: boolean) => void;
+  
+  addDiagrams: boolean;
+  setAddDiagrams: (value: boolean) => void;
+  
+  addSummarySlide: boolean;
+  setAddSummarySlide: (value: boolean) => void;
 }
 
 export const usePresentationState = create<PresentationState>((set) => ({
@@ -332,4 +358,30 @@ export const usePresentationState = create<PresentationState>((set) => ({
   // Default uploaded notes state
   uploadedNotes: null,
   setUploadedNotes: (notes) => set({ uploadedNotes: notes }),
+
+  //  New presentation configuration states for educational content
+  subject: 'general-studies',
+  setSubject: (subject) => set({ subject }),
+  
+  examType: 'upsc-civil-services',
+  setExamType: (examType) => set({ examType }),
+  
+  difficultyLevel: 'intermediate',
+  setDifficultyLevel: (level) => set({ difficultyLevel: level }),
+  
+  designStyle: 'educational',
+  setDesignStyle: (style) => set({ designStyle: style }),
+  
+  // Initialize additional content toggles as disabled by default
+  addQuiz: false,
+  setAddQuiz: (value) => set({ addQuiz: value }),
+  
+  includeFromNotes: false,
+  setIncludeFromNotes: (value) => set({ includeFromNotes: value }),
+  
+  addDiagrams: false,
+  setAddDiagrams: (value) => set({ addDiagrams: value }),
+  
+  addSummarySlide: false,
+  setAddSummarySlide: (value) => set({ addSummarySlide: value }),
 }));
