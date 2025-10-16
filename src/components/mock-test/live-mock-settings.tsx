@@ -13,6 +13,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useCreateMockStore, type Difficulty } from '@/states/mock-test-state';
 import { QuestionEditor } from './question-editor';
+import { exams } from './constants';
 
 const subjects = [
   'General Studies',
@@ -37,6 +38,8 @@ export function LiveMockSettings() {
   const addEmptyQuestion = useCreateMockStore(
     (state) => state.addEmptyQuestion
   );
+  const examType = useCreateMockStore((state) => state.examType);
+  const setExamType = useCreateMockStore((state) => state.setExamType);
 
   const selectedCount =
     includedIds.length > 0 ? includedIds.length : questions.length;
@@ -70,6 +73,23 @@ export function LiveMockSettings() {
               </SelectContent>
             </Select>
           </div>
+          <div>
+      <Label htmlFor="lm-exam-type" className="text-xs">
+        Exam Type
+      </Label>
+      <Select value={examType} onValueChange={setExamType}>
+        <SelectTrigger id="lm-exam-type" className="mt-1">
+          <SelectValue placeholder="Select exam" />
+        </SelectTrigger>
+        <SelectContent>
+          {exams.map((exam) => (
+            <SelectItem key={exam.value} value={exam.value}>
+              {exam.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
           <div>
             <Label htmlFor="lm-difficulty" className="text-xs">
               Difficulty
@@ -114,20 +134,6 @@ export function LiveMockSettings() {
               className="mt-1"
             />
           </div>
-          <div className="flex items-end gap-2 md:col-span-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={addEmptyQuestion}
-              className="gap-2"
-            >
-              <Plus className="h-3.5 w-3.5" />
-              Add Question
-            </Button>
-            <span className="text-xs text-muted-foreground">
-              {selectedCount} added
-            </span>
-          </div>
         </div>
 
         {/* Questions Builder */}
@@ -141,6 +147,20 @@ export function LiveMockSettings() {
             </p>
           )}
         </div>
+         <div className="flex items-end gap-2 md:col-span-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={addEmptyQuestion}
+              className="gap-2"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              Add Question
+            </Button>
+            <span className="text-xs text-muted-foreground">
+              {selectedCount} added
+            </span>
+          </div>
       </CardContent>
     </Card>
   );

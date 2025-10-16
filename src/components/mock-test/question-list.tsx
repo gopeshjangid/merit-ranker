@@ -66,7 +66,7 @@ export function QuestionList({ idPrefix = '' }: QuestionListProps) {
                     className="h-auto justify-start p-0 text-left text-xs text-foreground/90 hover:bg-transparent hover:underline"
                     onClick={() => setSelectedQuestionId(q.id)}
                   >
-                    Q{idx + 1}: {q.prompt ? q.prompt.slice(0, 56) : '(empty)'}
+                    Q{idx + 1}: {q.prompt && q.prompt.length > 30 ? q.prompt.slice(0, 36) + '...' : q.prompt || '(empty question)'}
                   </Button>
                   <div className="flex items-center gap-1.5">
                     <Label
@@ -90,7 +90,7 @@ export function QuestionList({ idPrefix = '' }: QuestionListProps) {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-6 px-2 text-[11px]"
+                    className="px-2 py-4 text-sm"
                     onClick={() => improveQuestion(q.id)}
                   >
                     Improve
@@ -98,7 +98,7 @@ export function QuestionList({ idPrefix = '' }: QuestionListProps) {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-6 px-2 text-[11px]"
+                    className="px-2 py-4 text-sm"
                     onClick={() => generateDifferentQuestion(q.id)}
                   >
                     Generate Diff
@@ -106,7 +106,7 @@ export function QuestionList({ idPrefix = '' }: QuestionListProps) {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-6 px-2 text-[11px]"
+                    className="px-2 py-4 text-sm"
                     onClick={() => increaseDifficultyQuestion(q.id)}
                   >
                     Increase Difficulty

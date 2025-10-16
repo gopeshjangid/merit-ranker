@@ -104,7 +104,7 @@ export function QuestionEditor({ question, index }: QuestionEditorProps) {
           <Button
             variant="outline"
             size="sm"
-            className="h-6 px-2 text-[11px]"
+            className="px-2 py-4 text-sm"
             onClick={() => improveQuestion(question.id)}
           >
             Improve
@@ -112,7 +112,7 @@ export function QuestionEditor({ question, index }: QuestionEditorProps) {
           <Button
             variant="outline"
             size="sm"
-            className="h-6 px-2 text-[11px]"
+            className="px-2 py-4 text-sm"
             onClick={() => generateDifferentQuestion(question.id)}
           >
             Generate Diff
@@ -120,7 +120,7 @@ export function QuestionEditor({ question, index }: QuestionEditorProps) {
           <Button
             variant="outline"
             size="sm"
-            className="h-6 px-2 text-[11px]"
+            className="px-2 py-4 text-sm"
             onClick={() => increaseDifficultyQuestion(question.id)}
           >
             Increase Difficulty

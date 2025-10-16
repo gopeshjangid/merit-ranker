@@ -1,6 +1,5 @@
 import type React from 'react';
 import { Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import {
@@ -11,8 +10,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useCreateMockStore, type Difficulty } from '@/states/mock-test-state';
+import { AttachNotes } from './attach-notes';
+import { exams } from './constants';
 
 const subjects = [
   'General Studies',
@@ -34,9 +34,8 @@ export function AIHelpPanel() {
   const setLmGenerateBatch = useCreateMockStore(
     (state) => state.setLmGenerateBatch
   );
-  const aiSuggestQuestions = useCreateMockStore(
-    (state) => state.aiSuggestQuestions
-  );
+  const examType = useCreateMockStore((state) => state.examType);
+  const setExamType = useCreateMockStore((state) => state.setExamType);
 
   return (
     <Card>
@@ -52,7 +51,7 @@ export function AIHelpPanel() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div className="md:col-span-3">
             <Label htmlFor="ai-context" className="text-xs">
-              Context / Notes
+              Context / Notes / Question Pattern Example
             </Label>
             <Textarea
               id="ai-context"
@@ -118,24 +117,25 @@ export function AIHelpPanel() {
               </SelectContent>
             </Select>
           </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Button onClick={aiSuggestQuestions} size="sm" className="gap-2">
-            <Sparkles className="h-3.5 w-3.5" />
-            Suggest Questions
-          </Button>
-          <span className="text-xs text-muted-foreground">
-            Adds {lmGenerateBatch} sample items (UI only)
-          </span>
-        </div>
-
-        <Alert>
-          <AlertDescription className="text-[11px]">
-            Tip: You can also attach a PDF in the left panel which the AI can
-            consider for suggestions (UI-only).
-          </AlertDescription>
-        </Alert>
+          <div>
+      <Label htmlFor="ai-exam-type" className="text-xs">
+        Exam Type
+      </Label>
+      <Select value={examType} onValueChange={setExamType}>
+        <SelectTrigger id="ai-exam-type" className="mt-1">
+          <SelectValue placeholder="Select exam" />
+        </SelectTrigger>
+        <SelectContent>
+          {exams.map((exam) => (
+            <SelectItem key={exam.value} value={exam.value}>
+              {exam.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+        </div>        
+          <AttachNotes />
       </CardContent>
     </Card>
   );

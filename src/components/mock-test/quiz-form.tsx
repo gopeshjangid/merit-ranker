@@ -12,6 +12,8 @@ import {
 } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useCreateMockStore, type Difficulty } from '@/states/mock-test-state';
+import { AttachNotes } from './attach-notes';
+import { exams } from './constants';
 
 const subjects = [
   'General Studies',
@@ -34,6 +36,8 @@ export function QuizForm() {
   const setQNotes = useCreateMockStore((state) => state.setQNotes);
   const setQTopics = useCreateMockStore((state) => state.setQTopics);
   const createQuiz = useCreateMockStore((state) => state.createQuiz);
+  const examType = useCreateMockStore((state) => state.examType);
+  const setExamType = useCreateMockStore((state) => state.setExamType);
 
   return (
     <Card>
@@ -98,6 +102,23 @@ export function QuizForm() {
               </SelectContent>
             </Select>
           </div>
+           <div>
+      <Label htmlFor="q-exam-type" className="text-xs">
+        Exam Type
+      </Label>
+      <Select value={examType} onValueChange={setExamType}>
+        <SelectTrigger id="q-exam-type" className="mt-1">
+          <SelectValue placeholder="Select exam" />
+        </SelectTrigger>
+        <SelectContent>
+          {exams.map((exam) => (
+            <SelectItem key={exam.value} value={exam.value}>
+              {exam.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
           <div className="md:col-span-3">
             <Label htmlFor="q-notes" className="text-xs">
               Select Your Notes (optional)
@@ -124,7 +145,7 @@ export function QuizForm() {
             />
           </div>
         </div>
-
+      <AttachNotes />
         <div className="flex items-center gap-2 border-t pt-2">
           <Button
             variant="outline"

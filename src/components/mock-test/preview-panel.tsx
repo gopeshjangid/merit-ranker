@@ -62,8 +62,7 @@ export function PreviewPanel() {
               )}
             </ul>
           </div>
-        </CardContent>
-        <CardContent className="flex items-center gap-2 border-t pt-0">
+          <div className="flex items-center gap-2 border-t pt-2">
           <Button
             onClick={startLiveMock}
             disabled={questions.length === 0}
@@ -80,7 +79,8 @@ export function PreviewPanel() {
           >
             Save Draft
           </Button>
-        </CardContent>
+        </div>
+        </CardContent>        
       </Card>
     </>
   );

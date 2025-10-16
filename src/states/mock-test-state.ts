@@ -68,12 +68,15 @@ interface CreateMockState {
   setSelectedQuestionId: (qid: string | null) => void
 
   // Actions
-  aiSuggestQuestions: () => void
   improveQuestion: (qid: string) => void
   generateDifferentQuestion: (qid: string) => void
   increaseDifficultyQuestion: (qid: string) => void
   startLiveMock: () => void
   createQuiz: () => void
+
+  //
+  examType: string
+  setExamType: (exam: string) => void
 }
 
 export const useCreateMockStore = create<CreateMockState>((set, get) => ({
@@ -175,29 +178,7 @@ export const useCreateMockStore = create<CreateMockState>((set, get) => ({
   },
   setSelectedQuestionId: (qid) => set({ selectedQuestionId: qid }),
 
-  // Actions
-  aiSuggestQuestions: () => {
-    const { lmGenerateBatch, aiContext, aiSubject, aiLevel } = get()
-    const batch = Math.max(1, Math.min(5, lmGenerateBatch))
-    const generated: Question[] = Array.from({ length: batch }).map((_, idx) => {
-      const id = crypto.randomUUID()
-      return {
-        id,
-        prompt:
-          aiContext?.trim().length > 0
-            ? `(${idx + 1}) Based on: ${aiContext.slice(0, 80)}...`
-            : `(${idx + 1}) Sample ${aiSubject} question for ${aiLevel} level.`,
-        options: ["A", "B", "C", "D"].map((_, i) => ({
-          id: `${id}-${i + 1}`,
-          text: `Option ${i + 1}`,
-        })),
-        correctId: `${id}-1`,
-        difficulty: aiLevel,
-        subject: aiSubject,
-      }
-    })
-    set((state) => ({ questions: [...state.questions, ...generated] }))
-  },
+
 
   improveQuestion: (qid) => {
     const { questions } = get()
@@ -255,4 +236,8 @@ export const useCreateMockStore = create<CreateMockState>((set, get) => ({
     ].join("\n")
     alert(`Quiz created (UI-only):\n\n${summary}`)
   },
+
+  examType: "upsc-civil-services",
+  setExamType: (exam) => set({ examType: exam }),
+  
 }))
