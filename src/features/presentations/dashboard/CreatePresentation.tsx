@@ -18,6 +18,10 @@ interface CreatePresentationProps {
 export function CreatePresentation({ handleGenerate }: CreatePresentationProps) {
   const { presentationInput, isGeneratingOutline } = usePresentationState();
 
+   const handleSaveDraft = () => {
+    console.log('Draft button pressed');
+  };
+
   return (
     <div className="space-y-8">
       <PresentationHeader />
@@ -26,7 +30,15 @@ export function CreatePresentation({ handleGenerate }: CreatePresentationProps) 
       <PresentationInput handleGenerate={handleGenerate} />
       <PresentationControls />
       <AdditionalOptionsToggle />
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end gap-3">
+        <Button
+          variant="outline"
+          onClick={handleSaveDraft}
+          disabled={isGeneratingOutline}
+        >
+          Save as Draft
+        </Button>
+
         <Button
           onClick={handleGenerate}
           disabled={!presentationInput.trim() || isGeneratingOutline}

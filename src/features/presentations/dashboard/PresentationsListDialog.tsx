@@ -2,14 +2,13 @@
 
 import { fetchPresentations } from '@/app/_actions/presentation/fetchPresentations';
 import { deletePresentations } from '@/app/_actions/presentation/presentationActions';
-import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from '@/components/ui/sheet';
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/components/ui/use-toast';
 import { usePresentationState } from '@/states/presentation-state';
@@ -19,11 +18,13 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-import { FileX, Plus } from 'lucide-react';
-import { useEffect } from 'react';
+import { FileX } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { PresentationItem } from './PresentationItem';
 import { SelectionControls } from './SelectionControls';
+import { ListingSearch } from '@/components/listing/listing-search';
+import { ListingFilters } from '@/components/listing/listing-filters';
 
 type PresentationDocument = Prisma.BaseDocumentGetPayload<{
   include: {
@@ -36,14 +37,11 @@ interface PresentationResponse {
   hasMore: boolean;
 }
 
-export function PresentationsSidebar({
-  side = 'left',
-}: {
-  side?: 'left' | 'right';
-}) {
+export function PresentationsListDialog() {
   const { ref: loadMoreRef, inView } = useInView();
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const [searchQuery, setSearchQuery] = useState('');
   const {
     isSelecting,
     selectedPresentations,
@@ -55,9 +53,6 @@ export function PresentationsSidebar({
     setIsSheetOpen,
   } = usePresentationState();
 
-  const handleCreateNew = () => {
-    setIsSheetOpen(false);
-  };
 
   const { mutate: deleteSelectedPresentations } = useMutation({
     mutationFn: async () => {
@@ -179,41 +174,40 @@ export function PresentationsSidebar({
   };
 
   return (
-    <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-      <SheetContent
-        overlay={false}
-        side={side}
-        className="absolute flex h-full w-[400px] flex-col border p-0"
-      >
-        <div className="p-6">
-          <SheetHeader className="space-y-4">
-            <SheetTitle className="flex items-center justify-between">
-              <span>Your Presentations</span>
-            </SheetTitle>
-
-            {!isSelecting && (
-              <Button onClick={handleCreateNew} className="w-full">
-                <Plus className="mr-2 h-4 w-4" />
-                Create New Presentation
-              </Button>
-            )}
-            <div className="flex items-center justify-end">
-              <SelectionControls
-                isSelecting={isSelecting}
-                selectedCount={selectedPresentations.length}
-                totalCount={allPresentations.length}
-                onToggleSelecting={toggleSelecting}
-                onSelectAll={handleSelectAll}
-                onDeselectAll={deselectAllPresentations}
-                onDelete={deleteSelectedPresentations}
-              />
-            </div>
-          </SheetHeader>
-        </div>
-        <ScrollArea className="flex-1 overflow-y-auto p-6 pt-0">
-          {sidebarContent()}
-        </ScrollArea>
-      </SheetContent>
-    </Sheet>
+    <Dialog open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+          <DialogContent className="max-w-4xl max-h-[85vh] flex flex-col p-0">
+            <DialogHeader className="p-6 pb-4 space-y-4">
+              <DialogTitle className="text-2xl">Your Presentations</DialogTitle>
+              
+              {/* Search and Filters */}
+              <div className="flex flex-col gap-4">
+                <ListingSearch
+                  placeholder="Search presentations by title..."
+                  onSearch={setSearchQuery}
+                />
+                <ListingFilters />
+              </div>
+    
+              {/* Action Buttons */}
+              <div className="flex items-center justify-between">                                
+                <div className="ml-auto">
+                  <SelectionControls
+                    isSelecting={isSelecting}
+                    selectedCount={selectedPresentations.length}
+                    totalCount={allPresentations.length}
+                    onToggleSelecting={toggleSelecting}
+                    onSelectAll={handleSelectAll}
+                    onDeselectAll={deselectAllPresentations}
+                    onDelete={deleteSelectedPresentations}
+                  />
+                </div>
+              </div>
+            </DialogHeader>
+    
+            <ScrollArea className="flex-1 overflow-y-auto px-6 pb-6">
+              {sidebarContent()}
+            </ScrollArea>
+          </DialogContent>
+        </Dialog>
   );
 }

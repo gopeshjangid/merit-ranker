@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 import { CreatePresentation } from './CreatePresentation';
-import { PresentationsSidebar } from './PresentationsSidebar';
+import { PresentationsListDialog } from './PresentationsListDialog';
 import { RecentPresentations } from './RecentPresentations';
 
 export function PresentationDashboard({
@@ -88,7 +88,7 @@ export function PresentationDashboard({
 
   return (
     <div className="relative h-full w-full">
-      <PresentationsSidebar side={sidebarSide} />
+      <PresentationsListDialog  />
       <div className="w-full py-6">
         <CustomTabs tabs={tabItems} defaultValue="my-slides" />
       </div>
