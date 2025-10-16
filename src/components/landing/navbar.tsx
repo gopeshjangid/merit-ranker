@@ -21,6 +21,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
+import { ThemeToggle } from "@/provider/theme-provider"
 
 const mainNavItems = [
   { href: "/", label: "Home", icon: Home },
@@ -123,6 +124,7 @@ export function Navbar() {
               <Globe className="h-4 w-4" />
               <span className="sr-only">Language</span>
             </Button>
+            <ThemeToggle />
           </div>
           <div className="flex md:hidden items-center">
             <Button
