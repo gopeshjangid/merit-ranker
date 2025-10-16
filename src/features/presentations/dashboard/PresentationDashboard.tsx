@@ -1,19 +1,15 @@
 'use client';
 
 import { createEmptyPresentation } from '@/app/_actions/presentation/presentationActions';
-import { Button } from '@/components/ui/button';
+import { CustomTabs } from '@/components/ui/custom-tabs';
 import { usePresentationState } from '@/states/presentation-state';
 import { LayoutGrid, Wand2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
-import { PresentationControls } from './PresentationControls';
-import { PresentationExamples } from './PresentationExamples';
-import { PresentationHeader } from './PresentationHeader';
-import { PresentationInput } from './PresentationInput';
+import { CreatePresentation } from './CreatePresentation';
 import { PresentationsSidebar } from './PresentationsSidebar';
 import { RecentPresentations } from './RecentPresentations';
-import { CustomTabs } from '@/components/ui/custom-tabs';
 
 export function PresentationDashboard({
   sidebarSide,
@@ -23,7 +19,6 @@ export function PresentationDashboard({
   const router = useRouter();
   const {
     presentationInput,
-    isGeneratingOutline,
     setCurrentPresentation,
     setIsGeneratingOutline,
     language,
@@ -72,52 +67,30 @@ export function PresentationDashboard({
     }
   };
 
-    const tabItems = [
-      {
-        value: 'my-slides',
-        label: 'My Slides',
-        icon: LayoutGrid,
-        content: (
-          <div className="space-y-6">
-            <RecentPresentations />
-          </div>
-        ),
-      },
-      {
-        value: 'create-slide',
-        label: 'Create Slide',
-        icon: Wand2,
-        content: (
-          <div className="space-y-8">
-            <PresentationHeader />
-            <PresentationInput handleGenerate={handleGenerate} />
-            <PresentationControls />
-            <div className="flex items-center justify-end">
-              <Button
-                onClick={handleGenerate}
-                disabled={!presentationInput.trim() || isGeneratingOutline}
-                variant={isGeneratingOutline ? 'loading' : 'default'}
-                className="gap-2"
-              >
-                <Wand2 className="h-4 w-4" />
-                Generate Presentation
-              </Button>
-            </div>
-  
-            <PresentationExamples />
-          </div>
-        ),
-      },
-    ];
+  const tabItems = [
+    {
+      value: 'my-slides',
+      label: 'My Slides',
+      icon: LayoutGrid,
+      content: (
+        <div className="space-y-6">
+          <RecentPresentations />
+        </div>
+      ),
+    },
+    {
+      value: 'create-slide',
+      label: 'Create Slide',
+      icon: Wand2,
+      content: <CreatePresentation handleGenerate={handleGenerate} />,
+    },
+  ];
 
   return (
     <div className="relative h-full w-full">
       <PresentationsSidebar side={sidebarSide} />
       <div className="w-full py-6">
-        <CustomTabs
-          tabs={tabItems}
-          defaultValue="my-slides"
-        />
+        <CustomTabs tabs={tabItems} defaultValue="my-slides" />
       </div>
     </div>
   );
