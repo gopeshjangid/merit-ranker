@@ -37,7 +37,7 @@ interface PresentationResponse {
   hasMore: boolean;
 }
 
-export function PresentationsListDialog() {
+export default function PresentationsListDialog() {
   const { ref: loadMoreRef, inView } = useInView();
   const queryClient = useQueryClient();
   const { toast } = useToast();

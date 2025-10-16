@@ -15,7 +15,7 @@ interface CreatePresentationProps {
   handleGenerate: () => Promise<void>;
 }
 
-export function CreatePresentation({ handleGenerate }: CreatePresentationProps) {
+export default function CreatePresentation({ handleGenerate }: CreatePresentationProps) {
   const { presentationInput, isGeneratingOutline } = usePresentationState();
 
    const handleSaveDraft = () => {

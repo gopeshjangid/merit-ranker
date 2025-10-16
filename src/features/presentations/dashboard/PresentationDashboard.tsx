@@ -7,15 +7,34 @@ import { LayoutGrid, Wand2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
-import { CreatePresentation } from './CreatePresentation';
-import { PresentationsListDialog } from './PresentationsListDialog';
 import { RecentPresentations } from './RecentPresentations';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
 
-export function PresentationDashboard({
-  sidebarSide,
-}: {
-  sidebarSide?: 'left' | 'right';
-}) {
+const CreatePresentation = dynamic(() => import("./CreatePresentation"), {
+  loading: () => (
+    <div className="space-y-4">
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-64 w-full" />
+      <Skeleton className="h-10 w-32" />
+    </div>
+  ),
+  ssr: false,
+})
+
+const PresentationsListDialog = dynamic(() => import("./PresentationsListDialog"), {
+  loading: () => (
+    <div className="space-y-4">
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-64 w-full" />
+      <Skeleton className="h-10 w-32" />
+    </div>
+  ),
+  ssr: false,
+})
+
+
+export function PresentationDashboard() {
   const router = useRouter();
   const {
     presentationInput,

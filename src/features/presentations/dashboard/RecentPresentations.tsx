@@ -39,6 +39,7 @@ import {
   Clock,
   MoreHorizontal,
   Pencil,
+  Search,
   Trash2,
 } from 'lucide-react';
 import Image from 'next/image';
@@ -176,14 +177,25 @@ export function RecentPresentations() {
               Recent Presentations
             </h2>
           </div>
+          <div className="flex items-center gap-2">
+          {/* NEWP: Add Search button beside View all */}
           <Button
-            variant="ghost"
+            variant="outline"
             disabled
-            className="gap-2 text-primary hover:text-primary/80"
+            className="gap-2 text-primary hover:bg-primary/5 hover:text-primary"
+            aria-label="Search Presentations"
+          >
+            <Search className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            disabled
+            className="gap-2 text-primary hover:bg-primary/5 hover:text-primary"
           >
             View all
             <ChevronRight className="h-4 w-4" />
           </Button>
+        </div>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -244,18 +256,29 @@ export function RecentPresentations() {
             Recent Presentations
           </h2>
         </div>
-        <Button
-          variant="outline"
-          onClick={handleViewAll}
-          className="gap-2 text-primary hover:bg-primary/5 hover:text-primary"
-        >
-          View all
-          <ChevronRight className="h-4 w-4" />
-        </Button>
+        <div className="flex items-center gap-2">
+          {/* NEWP: Add Search button beside View all */}
+          <Button
+            variant="outline"
+            onClick={handleViewAll}
+            className="gap-2 text-primary hover:bg-primary/5 hover:text-primary"
+            aria-label="Search Presentations"
+          >
+            <Search className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            onClick={handleViewAll}
+            className="gap-2 text-primary hover:bg-primary/5 hover:text-primary"
+          >
+            View all
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {presentations.slice(0, 3).map((presentation) => (
+        {presentations.slice(0, 6).map((presentation) => (
           <Card
             key={presentation.id}
             className="group relative overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
