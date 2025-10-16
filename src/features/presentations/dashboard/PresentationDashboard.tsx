@@ -3,7 +3,7 @@
 import { createEmptyPresentation } from '@/app/_actions/presentation/presentationActions';
 import { Button } from '@/components/ui/button';
 import { usePresentationState } from '@/states/presentation-state';
-import { Wand2 } from 'lucide-react';
+import { LayoutGrid, Wand2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
@@ -13,6 +13,7 @@ import { PresentationHeader } from './PresentationHeader';
 import { PresentationInput } from './PresentationInput';
 import { PresentationsSidebar } from './PresentationsSidebar';
 import { RecentPresentations } from './RecentPresentations';
+import { CustomTabs } from '@/components/ui/custom-tabs';
 
 export function PresentationDashboard({
   sidebarSide,
@@ -71,18 +72,27 @@ export function PresentationDashboard({
     }
   };
 
-  return (
-    <div className="notebook-section relative h-full w-full">
-      <PresentationsSidebar side={sidebarSide} />
-      <div className="mx-auto max-w-4xl space-y-12 px-6 py-12">
-        <PresentationHeader />
-
-        <div className="space-y-8">
-          <PresentationInput handleGenerate={handleGenerate} />
-          <PresentationControls />
-
-          <div className="flex items-center justify-end">
-            <div className="flex items-center gap-2">
+    const tabItems = [
+      {
+        value: 'my-slides',
+        label: 'My Slides',
+        icon: LayoutGrid,
+        content: (
+          <div className="space-y-6">
+            <RecentPresentations />
+          </div>
+        ),
+      },
+      {
+        value: 'create-slide',
+        label: 'Create Slide',
+        icon: Wand2,
+        content: (
+          <div className="space-y-8">
+            <PresentationHeader />
+            <PresentationInput handleGenerate={handleGenerate} />
+            <PresentationControls />
+            <div className="flex items-center justify-end">
               <Button
                 onClick={handleGenerate}
                 disabled={!presentationInput.trim() || isGeneratingOutline}
@@ -93,11 +103,21 @@ export function PresentationDashboard({
                 Generate Presentation
               </Button>
             </div>
+  
+            <PresentationExamples />
           </div>
-        </div>
+        ),
+      },
+    ];
 
-        <PresentationExamples />
-        <RecentPresentations />
+  return (
+    <div className="relative h-full w-full">
+      <PresentationsSidebar side={sidebarSide} />
+      <div className="w-full py-6">
+        <CustomTabs
+          tabs={tabItems}
+          defaultValue="my-slides"
+        />
       </div>
     </div>
   );
