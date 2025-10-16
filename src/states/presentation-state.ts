@@ -121,6 +121,19 @@ interface PresentationState {
   // Palette → Editor communication
   pendingInsertNode: TElement | null;
   setPendingInsertNode: (node: TElement | null) => void;
+
+  // presentation type selection state 
+  presentationType: 'live-online' | 'offline' | 'self-study';
+  setPresentationType: (type: 'live-online' | 'offline' | 'self-study') => void;
+
+  // uploaded notes state
+  uploadedNotes: {
+    name: string;
+    size: number;
+    type: string;
+    content: string;
+  } | null;
+  setUploadedNotes: (notes: { name: string; size: number; type: string; content: string } | null) => void;
 }
 
 export const usePresentationState = create<PresentationState>((set) => ({
@@ -312,4 +325,11 @@ export const usePresentationState = create<PresentationState>((set) => ({
         ? state.selectedPresentations.filter((p) => p !== id)
         : [...state.selectedPresentations, id],
     })),
+
+    presentationType: 'live-online',
+  setPresentationType: (type) => set({ presentationType: type }),
+  
+  // Default uploaded notes state
+  uploadedNotes: null,
+  setUploadedNotes: (notes) => set({ uploadedNotes: notes }),
 }));

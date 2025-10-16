@@ -7,6 +7,8 @@ import { PresentationControls } from './PresentationControls';
 import { PresentationExamples } from './PresentationExamples';
 import { PresentationHeader } from './PresentationHeader';
 import { PresentationInput } from './PresentationInput';
+import { PresentationTypeSelector } from './PresentationTypeSelector';
+import { NotesUploadSection } from './NotesUploadSection';
 
 interface CreatePresentationProps {
   handleGenerate: () => Promise<void>;
@@ -18,6 +20,8 @@ export function CreatePresentation({ handleGenerate }: CreatePresentationProps) 
   return (
     <div className="space-y-8">
       <PresentationHeader />
+      <PresentationTypeSelector />
+      <NotesUploadSection />
       <PresentationInput handleGenerate={handleGenerate} />
       <PresentationControls />
       <div className="flex items-center justify-end">
