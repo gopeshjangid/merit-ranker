@@ -1,13 +1,42 @@
-export default function MocksPage() {
-  return (
+"use client"
+
+import dynamic from "next/dynamic"
+import { LayoutGrid, ListChecks } from "lucide-react"
+import { CustomTabs } from "@/components/ui/custom-tabs"
+import MockTestList from "@/components/mock-test/mock-test-list"
+import { Skeleton } from "@/components/ui/skeleton"
+
+const QuizList = dynamic(() => import("@/components/mock-test/quiz-list"), {
+ loading: () => (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Mock Tests</h1>
-        <button className="rounded-md bg-primary px-3 py-2 text-sm text-primary-foreground">New Mock Test</button>
-      </div>
-      <div className="rounded-lg border p-4 text-sm text-muted-foreground">
-        No mock tests yet. Create one to get started.
-      </div>
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-64 w-full" />
+      <Skeleton className="h-10 w-32" />
     </div>
+  ),
+  ssr: false,
+})
+
+export default function MocksPage() {
+  const tabs = [
+    {
+      value: "mock-list",
+      label: "Mock Tests",
+      icon: LayoutGrid,
+      content: <MockTestList />,
+    },
+    {
+      value: "quiz-list",
+      label: "Quizzes",
+      icon: ListChecks,
+      content: <QuizList />,
+    },
+  ]
+
+  return (
+    <CustomTabs
+      tabs={tabs}
+      defaultValue="mock-list"
+    />
   )
 }

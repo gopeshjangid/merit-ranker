@@ -24,8 +24,7 @@ export default function TeacherDashboardLayout({ children }: { children: React.R
     { href: "/teacher/dashboard", label: "Overview", icon: GraduationCap },
     { href: "/teacher/dashboard/notes", label: "Notes", icon: NotebookText },
     { href: "/teacher/dashboard/live-class/presentation", label: "Live Class Slides", icon: NotebookText },
-    { href: "/teacher/dashboard/quizzes", label: "Quiz", icon: FileCheck2 },
-    { href: "/teacher/dashboard/mocks", label: "Mock Test", icon: FileCheck2 },
+    { href: "/teacher/dashboard/mocks", label: "My Mocks", icon: FileCheck2 },
     { href: "/teacher/dashboard/create-mock", label: "Create Mock", icon: FileCheck2 },
     { href: "/teacher/dashboard/students", label: "Students", icon: MessageCircle },
   ]
