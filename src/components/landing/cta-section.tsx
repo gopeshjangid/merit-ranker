@@ -1,35 +1,36 @@
-"use client"
+'use client';
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { ArrowRight, Zap } from "lucide-react"
-import { AnimatedTechParticles } from "./animated-tech-patterns"
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ArrowRight, Zap } from 'lucide-react';
+import { AnimatedTechParticles } from './animated-tech-patterns';
 
 export function CtaSection() {
   return (
-    <section className="py-20 md:py-28 bg-darkBlue text-slate-100 relative overflow-hidden">
+    <section className="relative overflow-hidden bg-background py-20 text-slate-100 md:py-28">
       <AnimatedTechParticles particleCount={25} className="opacity-30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-darkBlue via-darkBlue/90 to-darkBlue/70 z-[-1]"></div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div className="absolute inset-0 z-[-1] bg-gradient-to-t from-background via-background/90 to-background/70"></div>
+      <div className="relative z-10 container mx-auto px-4 text-center sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <Zap className="mx-auto h-12 w-12 text-yellow-400 mb-6 animate-pulse" />
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Ready to <span className="gradient-text">Learn, Practice & Rank</span>?
+          <Zap className="mx-auto mb-6 h-12 w-12 animate-pulse text-yellow-400" />
+          <h2 className="mb-6 text-3xl font-bold md:text-4xl lg:text-5xl">
+            Ready to{' '}
+            <span className="gradient-text">Learn, Practice & Rank</span>?
           </h2>
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10">
-            Join Meritranker and prepare smarter with AI. Learn from your favorite teachers and master subjects with
-            daily practice.
+          <p className="mx-auto mb-10 max-w-2xl text-lg text-slate-300 md:text-xl">
+            Join Meritranker and prepare smarter with AI. Learn from your
+            favorite teachers and master subjects with daily practice.
           </p>
           <Button
             asChild
             size="lg"
-            className="group relative overflow-hidden shadow-lg hover:shadow-cyan-500/40 transition-all duration-300 transform hover:scale-105 text-lg px-8 py-6 bg-cyan-500 hover:bg-cyan-600 text-white"
+            className="group relative transform overflow-hidden bg-cyan-500 px-8 py-6 text-lg text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-cyan-600 hover:shadow-cyan-500/40"
           >
             <Link href="/#students">
               Get Started Free
@@ -39,7 +40,7 @@ export function CtaSection() {
           <div className="mt-4">
             <Link
               href="/#teachers"
-              className="inline-flex items-center text-cyan-300 hover:text-cyan-200 underline-offset-4 hover:underline"
+              className="inline-flex items-center text-cyan-300 underline-offset-4 hover:text-cyan-200 hover:underline"
             >
               Are you a teacher? Create for Free →
             </Link>
@@ -47,5 +48,5 @@ export function CtaSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

@@ -10,7 +10,8 @@ import { Toaster } from 'sonner';
 import { Navbar } from '@/components/landing/navbar';
 import { FooterWrapper } from '@/components/landing/footer-wrapper';
 
-import './globals.css';
+// import './globals.css';
+import './temp.css';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
