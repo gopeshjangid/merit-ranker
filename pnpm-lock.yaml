@@ -32,6 +32,9 @@ importers:
       '@auth/prisma-adapter':
         specifier: ^1.6.0
         version: 1.6.0(@prisma/client@6.17.0(prisma@6.17.0(typescript@5.9.2))(typescript@5.9.2))
+      '@aws-amplify/adapter-nextjs':
+        specifier: ^1.6.10
+        version: 1.6.10(aws-amplify@6.15.7)(next@15.5.3(@opentelemetry/api@1.9.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.51.0))
       '@aws-amplify/ui-react':
         specifier: ^6.13.0
         version: 6.13.0(@aws-amplify/core@6.13.3)(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(aws-amplify@6.15.7)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(xstate@4.38.3)
@@ -631,6 +634,12 @@ packages:
     resolution: {integrity: sha512-PQU8/Oi5gfjzb0MkhMGVX0Dg877phPzsQdK54+C7ubukCeZPjyvuSAx1vVtWEYVWp2oQvjgG/C6QiDoeC7S10A==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
+
+  '@aws-amplify/adapter-nextjs@1.6.10':
+    resolution: {integrity: sha512-Ka2khUGg9R4i1pztX830/Nnaoqivm/AhkXjkektF/vvb10+tvpUqHweFtTQF1Kn+eNQeYpZD9ZLyzfjRNdAgyA==}
+    peerDependencies:
+      aws-amplify: ^6.13.1
+      next: '>=13.5.0 <16.0.0'
 
   '@aws-amplify/analytics@7.0.88':
     resolution: {integrity: sha512-KqbLz43m9zopEjyCShGWCNujOng4JmeQVlhe+iN3Gssaoc6e56oFNe5kWJDOAi6xXAzvqewgdkqrPsoZQuClNg==}
@@ -3380,6 +3389,10 @@ packages:
 
   aws-amplify@6.15.7:
     resolution: {integrity: sha512-ikCa5sRsUaZ5UteINjAtlmNsJnSOEtsqid+/Erc60ZbKB9tyF0W1etG4Xiu+azTZatiO5wTncGo7fzLXQZZIYw==}
+
+  aws-jwt-verify@4.0.1:
+    resolution: {integrity: sha512-kzvi71eD3w/mCpYRUY7cz6DX4bfYihGdI2yV3FYQ2JuZZenqAqDPz0gWj0ew6vlAtdEVBNb7p+Dm2TAIxpVYMA==}
+    engines: {node: '>=14.0.0'}
 
   axe-core@4.10.3:
     resolution: {integrity: sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==}
@@ -7243,6 +7256,12 @@ snapshots:
       - '@simplewebauthn/server'
       - nodemailer
 
+  '@aws-amplify/adapter-nextjs@1.6.10(aws-amplify@6.15.7)(next@15.5.3(@opentelemetry/api@1.9.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.51.0))':
+    dependencies:
+      aws-amplify: 6.15.7
+      aws-jwt-verify: 4.0.1
+      next: 15.5.3(@opentelemetry/api@1.9.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.51.0)
+
   '@aws-amplify/analytics@7.0.88(@aws-amplify/core@6.13.3)':
     dependencies:
       '@aws-amplify/core': 6.13.3
@@ -10654,6 +10673,8 @@ snapshots:
     transitivePeerDependencies:
       - '@aws-amplify/react-native'
       - aws-crt
+
+  aws-jwt-verify@4.0.1: {}
 
   axe-core@4.10.3: {}
 
