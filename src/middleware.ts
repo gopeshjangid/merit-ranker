@@ -24,7 +24,16 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  return NextResponse.redirect(new URL("/login", request.url));
+  // Store the original URL (pathname + search params) for redirect after login
+  const loginUrl = new URL("/login", request.url);
+  const redirectPath = request.nextUrl.pathname + request.nextUrl.search;
+  
+  // Only set redirect if it's not already the login page (prevent redirect loops)
+  if (request.nextUrl.pathname !== "/login") {
+    loginUrl.searchParams.set("redirect", redirectPath);
+  }
+  
+  return NextResponse.redirect(loginUrl);
 }
 
 export const config = {
