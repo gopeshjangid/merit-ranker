@@ -1,34 +1,48 @@
-// import { auth } from '@/server/auth';
-import { NextResponse, type NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
+
+import { fetchAuthSession } from "aws-amplify/auth/server";
+
+import { runWithAmplifyServerContext } from "@/lib/amplify-utils";
 
 export async function middleware(request: NextRequest) {
-  // const session = await auth();
-  // const isAuthPage = request.nextUrl.pathname.startsWith('/auth');
+  const response = NextResponse.next();
 
-  // // Always redirect from root to /presentation
-  // if (request.nextUrl.pathname === "/") {
-  //   return NextResponse.redirect(new URL("/presentation", request.url));
-  // }
+  const authenticated = await runWithAmplifyServerContext({
+    nextServerContext: { request, response },
+    operation: async (contextSpec) => {
+      try {
+        const session = await fetchAuthSession(contextSpec, {});
+        return session.tokens !== undefined;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    },
+  });
 
-  // // If user is on auth page but already signed in, redirect to home page
-  // if (isAuthPage && session) {
-  //   return NextResponse.redirect(new URL("/presentation", request.url));
-  // }
+  if (authenticated) {
+    return response;
+  }
 
-  // // If user is not authenticated and trying to access a protected route, redirect to sign-in
-  // if (!session && !isAuthPage && !request.nextUrl.pathname.startsWith("/api")) {
-  //   return NextResponse.redirect(
-  //     new URL(
-  //       `/auth/signin?callbackUrl=${encodeURIComponent(request.url)}`,
-  //       request.url,
-  //     ),
-  //   );
-  // }
-
-  return NextResponse.next();
+  return NextResponse.redirect(new URL("/login", request.url));
 }
 
-// Add routes that should be protected by authentication
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: [
+     /*
+     * Protected routes - require authentication:
+     * - /teacher/* (all teacher routes including dashboard, branding, etc.)
+     * Exclude from matching:
+     * - / (landing page)
+     * - /about, /contact, /faq, /how-it-works, /partners (public pages)
+     * - /teachers and /teachers/* (public teacher listings)
+     * - /buy-esim, /compatibility (public features)
+     * - /privacy-policy, /terms-of-service (legal pages)
+     * - /login (auth page)
+     * - /api/* (API routes)
+     * - /_next/* (Next.js internal)
+     * - /favicon.ico, /sitemap.xml, /robots.txt (static files)
+     */
+    "/teacher/:path*",
+  ],
 };

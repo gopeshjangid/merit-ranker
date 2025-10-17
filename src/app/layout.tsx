@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 
 import localFont from 'next/font/local';
 
-import AuthProvider from '@/provider/AuthProvider';
 import TanStackQueryProvider from '@/provider/TanstackProvider';
 import { ThemeProvider } from '@/provider/theme-provider';
 import { FloatingActionButton } from "@/components/landing/floating-action-button"
@@ -12,6 +11,7 @@ import { FooterWrapper } from '@/components/landing/footer-wrapper';
 
 // import './globals.css';
 import './temp.css';
+import ConfigureAmplifyClientSide from '@/components/ConfigureAmplify';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -142,16 +142,15 @@ export default function RootLayout({
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
+            <ConfigureAmplifyClientSide />
             <TanStackQueryProvider>
-      <AuthProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Navbar />
               {children}
                <FooterWrapper />
               <FloatingActionButton />
               <Toaster />
-            </ThemeProvider>            
-      </AuthProvider>
+            </ThemeProvider>    
     </TanStackQueryProvider>
           </body>
         </html>
