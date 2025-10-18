@@ -23,7 +23,7 @@ export function ListingGrid<T>({
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
        {items.map(item => (
-        <React.Fragment key={item.id}>
+        <React.Fragment key={item.documentId}>
           {renderItem(item)}
         </React.Fragment>
       ))}
