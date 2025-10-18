@@ -87,7 +87,6 @@ function TocSideBarContent({
     rootMargin,
     topOffset,
   });
-  console.log('TocSideBarContent state:', state);
 
   const { navProps, onContentClick } = useTocSideBar(state);
 

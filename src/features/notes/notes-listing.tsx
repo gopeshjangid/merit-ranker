@@ -49,7 +49,6 @@ export default function NotesListing() {
     toast.info('Download feature coming soon!')
   }
 
-  console.log('Documents:', documents)
 
   return (
     <ListingContainer

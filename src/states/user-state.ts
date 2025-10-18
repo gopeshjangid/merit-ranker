@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
 import { AuthUser } from 'aws-amplify/auth'
 
 export interface User {
@@ -29,37 +30,45 @@ interface UserState {
   getUserId: () => string | null
 }
 
-export const useUserStore = create<UserState>((set, get) => ({
-  // Initial state
-  user: null,
-  isLoading: false,
-  
-  // Actions
-  setUser: (user) => set({ user }),
-  setLoading: (loading) => set({ isLoading: loading }),
-  
-  updateUser: (updates) => set((state) => ({
-    user: state.user ? { ...state.user, ...updates } : null
-  })),
-  
-  clearUser: () => set({ 
-    user: null, 
-    isLoading: false 
-  }),
-  
-  setFromAuthUser: (authUser) => {
-    const user: User = {
-      userId: authUser.userId || '',
-      username: authUser.username || '',
-      lastLoginAt: new Date().toISOString()
+export const useUserStore = create<UserState>()(
+  persist(
+    (set, get) => ({
+      // Initial state
+      user: null,
+      isLoading: false,
+      
+      // Actions
+      setUser: (user) => set({ user }),
+      setLoading: (loading) => set({ isLoading: loading }),
+      
+      updateUser: (updates) => set((state) => ({
+        user: state.user ? { ...state.user, ...updates } : null
+      })),
+      
+      clearUser: () => set({ 
+        user: null, 
+        isLoading: false 
+      }),
+      
+      setFromAuthUser: (authUser) => {
+        const user: User = {
+          userId: authUser.userId || '',
+          username: authUser.username || '',
+          lastLoginAt: new Date().toISOString()
+        }
+        set({ user })
+      },
+      
+      // Getters
+      getUserId: () => {
+        const state = get()
+        return state.user?.userId || null
+      },
+    }),
+    {
+      name: 'user-storage',
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({ user: state.user }), // Only persist user, not loading state
     }
-    set({ user })
-  },
-  
-  // Getters
-  getUserId: () => {
-    const state = get()
-    return state.user?.userId || null
-  },
-  
-}))
+  )
+)
