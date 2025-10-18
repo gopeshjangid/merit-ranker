@@ -108,7 +108,7 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
       } else if (mode === 'update' && documentId && currentDocument) {
         // Upload updated content and update document
         const uploadResult = await uploadJsons({
-          location: 'notes',
+          location: 'document',
           data: editorValue,
           fileName: `${finalTitle.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}.json`,
         });
