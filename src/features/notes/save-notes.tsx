@@ -14,6 +14,7 @@ import { useNotesStore } from '@/states/notes-state';
 import { useTocSideBarState } from '@platejs/toc/react';
 import { toast } from 'sonner';
 import { nanoid } from 'nanoid';
+import { useUserStore } from '@/states/user-state';
 
 interface SaveNotesProps {
   mode?: 'create' | 'update';
@@ -43,6 +44,7 @@ export function SaveNotes({ mode = 'create', documentId }: SaveNotesProps) {
 function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
   const { uploadJsons } = useJsonUpload();
   const { createNote, updateNote, currentDocument, isLoading } = useNotesStore();
+  const { getUserId } = useUserStore();
   
   const tocState = useTocSideBarState({ open: true });
   
@@ -63,6 +65,12 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
   const handleSave = async () => {
     if (!tocState.editor) {
       toast.error('Editor not available');
+      return;
+    }
+
+    const userId = getUserId();
+    if (!userId) {
+      toast.error('User ID not available');
       return;
     }
 
@@ -87,7 +95,7 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
             documentId: nanoid(), 
             title: finalTitle,
             s3Key: uploadResult[0].s3key,
-            userId: 'current-user-id', // Replace with actual user ID from auth
+            userId: userId,
             subject: formData.subject,
             tags: formData.tags,
             excerpt: formData.excerpt,

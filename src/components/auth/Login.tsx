@@ -1,5 +1,6 @@
 "use client";
 
+import { useUserStore } from "@/states/user-state";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { AuthUser } from "aws-amplify/auth";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -8,11 +9,12 @@ import { useEffect } from "react";
 function Login({ user }: { user?: AuthUser }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { setFromAuthUser } = useUserStore();
 
   useEffect(() => {
     if (user) {
       console.log(user);
-      
+      setFromAuthUser(user);
       // Get the redirect path from URL params
       const redirectPath = searchParams.get("redirect");
       

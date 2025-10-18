@@ -4,6 +4,7 @@ import { ListingCard } from '@/components/listing/listing-card'
 import { useNotesStore } from '@/states/notes-state'
 import { useEffect } from 'react'
 import { toast } from 'sonner'
+import { useUserStore } from '@/states/user-state'
 
 
 export default function NotesListing() {
@@ -15,9 +16,14 @@ export default function NotesListing() {
     openNoteForViewing 
   } = useNotesStore()
 
+  const { getUserId } = useUserStore()
+
   useEffect(() => {
-    listUserNotes('current-user-id')
-  }, [listUserNotes])
+    const userId = getUserId()
+    if (userId) {
+      listUserNotes(userId)
+    }
+  }, [listUserNotes, getUserId])
 
   const handleView = (documentId: string) => {
     openNoteForViewing(documentId)
