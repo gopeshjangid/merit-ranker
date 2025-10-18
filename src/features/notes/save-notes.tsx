@@ -13,6 +13,7 @@ import { useJsonUpload } from '@/hooks/use-upload';
 import { useNotesStore } from '@/states/notes-state';
 import { useTocSideBarState } from '@platejs/toc/react';
 import { toast } from 'sonner';
+import { nanoid } from 'nanoid';
 
 interface SaveNotesProps {
   mode?: 'create' | 'update';
@@ -83,7 +84,7 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
 
         if (uploadResult[0]?.s3key) {
           await createNote({
-            documentId: 'jdjdndnd', 
+            documentId: nanoid(), 
             title: finalTitle,
             s3Key: uploadResult[0].s3key,
             userId: 'current-user-id', // Replace with actual user ID from auth
