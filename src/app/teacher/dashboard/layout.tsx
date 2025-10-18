@@ -69,7 +69,7 @@ export default function TeacherDashboardLayout({ children }: { children: React.R
           </SidebarMenu>
       </SidebarFooter>
       </Sidebar>
-      <SidebarInset>
+      <SidebarInset className="flex flex-1 flex-col overflow-x-hidden">
         <header className="flex h-12 shrink-0 items-center gap-2 border-b mt-16">
           <SidebarTrigger className="ml-1" />
           <div className="text-sm text-muted-foreground">Teacher Dashboard</div>

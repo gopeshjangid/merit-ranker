@@ -11,11 +11,11 @@ export default function NotesMakerPage() {
     <PlateController>
     <section className="h-[calc(100vh-6rem)]">
       <ResizablePanelGroup direction="horizontal" className="h-full rounded-md border">
-        <ResizablePanel defaultSize={10} className="bg-muted/30">
+        <ResizablePanel defaultSize={15} minSize={10} className="bg-muted/30">
           <TocSideBar />
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={90} >
+        <ResizablePanel defaultSize={85} minSize={85} >
           <PlateEditor />
         </ResizablePanel>
       </ResizablePanelGroup>
