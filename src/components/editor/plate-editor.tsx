@@ -9,11 +9,14 @@ import { EditorKit } from '@/components/editor/editor-kit';
 import { Editor, EditorContainer } from '@/components/ui/editor';
 import { ExcalidrawPlugin } from '@platejs/excalidraw/react';
 import { ExcalidrawElement } from '@/components/ui/excalidraw-node';
+import { useNotesStore } from '@/states/notes-state';
 
 export function PlateEditor() {
+  const editorValue = useNotesStore((state) => state.editorValue);
+
   const editor = usePlateEditor({
     plugins: [...EditorKit, ExcalidrawPlugin.withComponent(ExcalidrawElement)],
-    value,
+    value: editorValue ?? value,
   });
 
   return (

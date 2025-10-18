@@ -9,6 +9,7 @@ import {
   type TDocumentType,
   type TDocumentCreateType,
 } from '@/services/documents-api';
+import type { Value } from 'platejs';
 
 interface NotesState {
   // State
@@ -20,6 +21,8 @@ interface NotesState {
   // Tab state management for notes page
   activeTab: string;
   editingDocumentId: string | null;
+
+  editorValue: Value;
 
   // Actions
   createNote: (noteData: TDocumentCreateType) => Promise<TDocumentType | null>;
@@ -38,6 +41,9 @@ interface NotesState {
   openNoteForEditing: (documentId: string) => void;
   openNoteForViewing: (documentId: string) => void;
   resetNoteState: () => void;
+
+  setEditorValue: (value: Value) => void;
+  setIsLoading: (loading: boolean) => void;
 }
 
 
@@ -53,6 +59,19 @@ export const useNotesStore = create<NotesState>()(
       // Initial tab state
       activeTab: 'notes-list',
       editingDocumentId: null,
+
+      editorValue:[
+    {
+      id: '1',
+      type: 'h1',
+      children: [{ text: 'Untitled Document' }],
+    },
+    {
+      id: '2',
+      type: 'p',
+      children: [{ text: 'initializing...' }],
+    },
+  ],
 
       // ...existing CRUD methods remain the same...
       createNote: async (noteData: TDocumentCreateType) => {
@@ -122,16 +141,15 @@ export const useNotesStore = create<NotesState>()(
       },
 
       loadNote: async (documentId: string) => {
-        set({ isLoading: true, error: null });
+        set({ error: null });
         try {
           const document = await getDocumentById(documentId);
-          set({ currentDocument: document, isLoading: false });
+          set({ currentDocument: document });
           return document;
         } catch (error) {
           set({
             error:
               error instanceof Error ? error.message : 'Failed to load note',
-            isLoading: false,
           });
           return null;
         }
@@ -219,6 +237,8 @@ export const useNotesStore = create<NotesState>()(
           activeTab: 'create-new',
         });
       },
+        setEditorValue: (value) => set({ editorValue: value }),
+        setIsLoading: (loading) => set({ isLoading: loading }),
     }),
     { name: 'notes-store' }
   )

@@ -13,16 +13,17 @@ import { SaveNotes } from '@/features/notes/save-notes';
 import { useNotesStore } from '@/states/notes-state';
 import { downloadData } from 'aws-amplify/storage';
 import { toast } from 'sonner';
+import { normalizeNodeId } from 'platejs';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface CreateNotesProps {
   documentId?: string;
 }
 
 export default function CreateNotes({ documentId }: CreateNotesProps) {
-  const { loadNote, currentDocument } = useNotesStore();
+  const { loadNote, currentDocument, setEditorValue, setIsLoading, isLoading } = useNotesStore();
 
   const actualMode = documentId ? 'edit' : 'create';
-
   useEffect(() => {
     if (actualMode === 'edit' && documentId) {
       loadExistingNote(documentId);
@@ -30,7 +31,9 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
   }, [documentId, actualMode]);
 
   const loadExistingNote = async (noteId: string) => {
+     setEditorValue(normalizeNodeId(getDefaultEditorValue()));
     try {
+      setIsLoading(true);
       const document = await loadNote(noteId);
 
       if (document?.s3Key) {
@@ -61,7 +64,7 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
           console.warn('Invalid editor value structure, using default');
           editorValue = getDefaultEditorValue();
         }
-
+        setEditorValue(normalizeNodeId(editorValue));
         toast.success('Note loaded for editing');
       } else {
         console.warn('Document found but no S3 key available');
@@ -75,6 +78,9 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
           ? error.message
           : 'Failed to load note for editing';
       toast.error(errorMessage);
+     setEditorValue(normalizeNodeId(getDefaultEditorValue()));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -87,7 +93,7 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
     {
       id: '2',
       type: 'p',
-      children: [{ text: 'Start writing your notes...' }],
+      children: [{ text: 'failed to load content...' }],
     },
   ];
 
@@ -120,7 +126,14 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize={85} minSize={85}>
-            <PlateEditor />
+            {isLoading ? (
+              <div className="p-6">
+                <Skeleton className="h-10 w-full mb-4" />
+                <Skeleton className="h-96 w-full" />
+              </div>
+            ) : (
+              <PlateEditor />
+            )}
           </ResizablePanel>
         </ResizablePanelGroup>
       </section>
