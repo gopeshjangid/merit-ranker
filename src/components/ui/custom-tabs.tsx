@@ -3,6 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { LucideIcon } from "lucide-react"
+import { useEffect, useState } from "react"
 
 interface TabItem {
   value: string
@@ -18,6 +19,8 @@ interface CustomTabsProps {
   tabsListClassName?: string
   tabsTriggerClassName?: string
   tabsContentClassName?: string
+  value?: string
+  onValueChange?: (value: string) => void
 }
 
 export function CustomTabs({
@@ -27,10 +30,32 @@ export function CustomTabs({
   tabsListClassName,
   tabsTriggerClassName,
   tabsContentClassName,
+  value: externalValue,
+  onValueChange: externalOnValueChange,
 }: CustomTabsProps) {
+
+  const [internalValue, setInternalValue] = useState(defaultValue)
+  
+  const isControlled = externalValue !== undefined && externalOnValueChange !== undefined
+  const currentValue = isControlled ? externalValue : internalValue
+  
+  const handleValueChange = (newValue: string) => {
+    if (isControlled) {
+      externalOnValueChange!(newValue)
+    } else {
+      setInternalValue(newValue)
+    }
+  }
+
+  useEffect(() => {
+    if (isControlled && externalValue !== internalValue) {
+      setInternalValue(externalValue)
+    }
+  }, [externalValue, isControlled, internalValue])
+
   return (
     <div  className={cn("flex flex-col gap-6", className)}>
-    <Tabs defaultValue={defaultValue}>
+    <Tabs defaultValue={defaultValue} value={currentValue} onValueChange={handleValueChange}>
       <TabsList
         className={cn(
           "rounded-xl p-1 bg-gradient-to-r from-blue-900 via-slate-900 to-blue-800 border border-blue-800",

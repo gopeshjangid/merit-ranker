@@ -47,7 +47,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@root/*": ["./*"]
+      "@root/*": ["./*"],
+      "@/schema": ["../../../AI-tutor-backend/amplify/data/resource"]
     }
   },
   "include": [

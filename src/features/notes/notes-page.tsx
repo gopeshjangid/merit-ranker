@@ -5,6 +5,7 @@ import { LayoutGrid, Plus } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 import NotesListing from "@/features/notes/notes-listing"
 import { CustomTabs } from "@/components/ui/custom-tabs"
+import { useNotesStore } from "@/states/notes-state"
 
 const CreateNotes = dynamic(() => import("@/features/notes/create-notes"), {
   loading: () => (
@@ -18,6 +19,16 @@ const CreateNotes = dynamic(() => import("@/features/notes/create-notes"), {
 })
 
 export default function NotesPage() {
+
+  const { activeTab, setActiveTab, editingDocumentId, resetNoteState } = useNotesStore()
+
+  const handleTabChange = (value: string) => {
+    if (value === 'create-new' && !editingDocumentId) {
+      resetNoteState()
+    }
+    setActiveTab(value)
+  }
+
   const tabs = [
     {
       value: "notes-list",
@@ -27,16 +38,20 @@ export default function NotesPage() {
     },
     {
       value: "create-new",
-      label: "Create New",
+      label:  editingDocumentId ? "Edit Note" : "Create New",
       icon: Plus,
-      content: <CreateNotes />,
+      content: <CreateNotes 
+        documentId={editingDocumentId || undefined}
+      />,
     },
   ]
 
   return (
-    <CustomTabs
+     <CustomTabs
       tabs={tabs}
       defaultValue="notes-list"
+      value={activeTab}
+      onValueChange={handleTabChange}
     />
   )
 }
