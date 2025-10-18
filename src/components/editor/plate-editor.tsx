@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import * as React from 'react';
 
 import { normalizeNodeId } from 'platejs';
@@ -9,25 +8,7 @@ import { Plate, usePlateEditor } from 'platejs/react';
 import { EditorKit } from '@/components/editor/editor-kit';
 import { Editor, EditorContainer } from '@/components/ui/editor';
 import { ExcalidrawPlugin } from '@platejs/excalidraw/react';
-
-const DynamicExcalidrawElement = dynamic(
-  () =>
-    import('@/components/ui/excalidraw-node').then((mod) => ({
-      default: mod.ExcalidrawElement,
-    })),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="text-muted-foreground p-4 text-center">
-        Loading drawing tool...
-      </div>
-    ),
-  }
-);
-
-const ExcalidrawElement: React.FC<any> = (props) => (
-  <DynamicExcalidrawElement {...props} />
-);
+import { ExcalidrawElement } from '@/components/ui/excalidraw-node';
 
 export function PlateEditor() {
   const editor = usePlateEditor({
@@ -280,6 +261,7 @@ const value = normalizeNodeId([
     children: [
       { children: [{ text: 'function hello() {' }], type: 'code_line' },
       {
+        children: [{ text: " console.info('Code blocks are supported!');" }],
         type: 'code_line',
         text: '',
       },

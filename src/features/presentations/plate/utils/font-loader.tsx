@@ -1,14 +1,6 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-
-const FontPicker = dynamic(
-  () =>
-    import('@/components/ui/font-picker').then((mod) => ({
-      default: mod.FontPicker,
-    })),
-  { ssr: false }
-);
+import { FontPicker } from '@/components/ui/font-picker';
 
 export const FontLoader = ({ fontsToLoad }: { fontsToLoad: string[] }) => {
   if (fontsToLoad.length === 0) return null;

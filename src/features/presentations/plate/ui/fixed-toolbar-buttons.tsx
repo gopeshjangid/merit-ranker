@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import {
   ArrowUpToLineIcon,
   BaselineIcon,
@@ -19,6 +18,7 @@ import { useEditorReadOnly } from 'platejs/react';
 import { AIToolbarButton } from '@/components/ui/ai-toolbar-button';
 import { AlignToolbarButton } from '@/components/ui/align-toolbar-button';
 import { CommentToolbarButton } from '@/components/ui/comment-toolbar-button';
+import { EmojiToolbarButton } from '@/components/ui/emoji-toolbar-button';
 import { ExportToolbarButton } from '@/components/ui/export-toolbar-button';
 import { FontColorToolbarButton } from '@/components/ui/font-color-toolbar-button';
 import { FontSizeToolbarButton } from '@/components/ui/font-size-toolbar-button';
@@ -48,14 +48,6 @@ import { TableToolbarButton } from '@/components/ui/table-toolbar-button';
 import { ToggleToolbarButton } from '@/components/ui/toggle-toolbar-button';
 import { ToolbarGroup } from '@/components/ui/toolbar';
 import { TurnIntoToolbarButton } from '@/components/ui/turn-into-toolbar-button';
-
-const EmojiToolbarButton = dynamic(
-  () =>
-    import('@/components/ui/emoji-toolbar-button').then((mod) => ({
-      default: mod.EmojiToolbarButton,
-    })),
-  { ssr: false }
-);
 
 export function FixedToolbarButtons() {
   const readOnly = useEditorReadOnly();

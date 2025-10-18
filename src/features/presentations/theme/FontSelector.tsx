@@ -1,15 +1,7 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import { FontPicker } from '@/components/ui/font-picker';
 import { Label } from '@/components/ui/label';
-
-const FontPicker = dynamic(
-  () =>
-    import('@/components/ui/font-picker').then((mod) => ({
-      default: mod.FontPicker,
-    })),
-  { ssr: false }
-);
 
 interface FontSelectorProps {
   value: string;
