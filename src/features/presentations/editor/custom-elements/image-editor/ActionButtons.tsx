@@ -10,6 +10,7 @@ import { useRef } from 'react';
 import { toast } from 'sonner';
 import { type RootImage as RootImageType } from '../../../utils/parser';
 import { type EditorMode } from '../presentation-image-editor';
+import { getUrl } from 'aws-amplify/storage';
 
 interface ActionButtonsProps {
   currentMode: EditorMode;
@@ -31,24 +32,36 @@ export function ActionButtons({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { uploadFile, isUploading, progress } = useUploadFile({
-    onUploadComplete: (file) => {
-      const { slides, setSlides } = usePresentationState.getState();
-      if (isRootImage) {
-        setSlides(
-          slides.map((slide, index) =>
-            index === slideIndex
-              ? {
-                  ...slide,
-                  rootImage: { ...slide.rootImage!, url: file.ufsUrl },
-                }
-              : slide
-          )
-        );
-      } else {
-        editor.tf.setNodes(
-          { url: file.ufsUrl },
-          { at: editor.api.findPath(element) }
-        );
+    storagePath: 'document',
+    onUploadComplete: async (file) => {
+      try {
+        const { url } = await getUrl({
+          path: file.key,
+          options: { validateObjectExistence: false },
+        });
+        const publicUrl = url.toString();
+
+        const { slides, setSlides } = usePresentationState.getState();
+        if (isRootImage) {
+          setSlides(
+            slides.map((slide, index) =>
+              index === slideIndex
+                ? {
+                    ...slide,
+                    rootImage: { ...slide.rootImage!, url: publicUrl },
+                  }
+                : slide
+            )
+          );
+        } else {
+          editor.tf.setNodes(
+            { url: publicUrl },
+            { at: editor.api.findPath(element) }
+          );
+        }
+      } catch (error) {
+        toast.error('Failed to resolve public URL for uploaded file');
+        console.error(error);
       }
     },
     onUploadError: (error) => {

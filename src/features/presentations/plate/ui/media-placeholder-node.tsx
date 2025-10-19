@@ -18,6 +18,7 @@ import { useFilePicker } from 'use-file-picker';
 
 import { useUploadFile } from '@/hooks/use-upload-file';
 import { cn } from '@/lib/utils';
+import { getUrl } from 'aws-amplify/storage';
 
 const CONTENT: Record<
   string,
@@ -57,7 +58,21 @@ export const PlaceholderElement = withHOC(
     const { api } = useEditorPlugin(PlaceholderPlugin);
 
     const { isUploading, progress, uploadedFile, uploadFile, uploadingFile } =
-      useUploadFile();
+      useUploadFile({
+        storagePath: 'document',
+        onUploadComplete: async (file) => {
+          try {
+            const urlResult = await getUrl({
+              path: file.key,
+              options: { validateObjectExistence: false },
+            });
+            file.url = urlResult.url.toString();
+            file.ufsUrl = urlResult.url.toString();
+          } catch (error) {
+            console.error('Failed to get public URL:', error);
+          }
+        },
+      });
 
     const loading = isUploading && uploadingFile;
 

@@ -17,6 +17,7 @@ import { usePresentationState } from '@/states/presentation-state';
 import { ImageIcon, Loader2, Sparkles, Upload } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
+import { getUrl } from 'aws-amplify/storage';
 
 export interface ImagePlaceholderProps {
   onGenerate?: (prompt: string) => void;
@@ -47,26 +48,42 @@ export default function ImagePlaceholder({
     setStockImageProvider,
   } = usePresentationState();
 
-  const { uploadFile, isUploading, progress } = useUploadFile({
-    onUploadComplete: (file) => {
+const { uploadFile, isUploading, progress } = useUploadFile({
+  storagePath: 'document',
+  onUploadComplete: async (file) => {
+    // Get public URL from S3
+    try {
+      const urlResult = await getUrl({
+        path: file.key,
+        options: {
+          validateObjectExistence: false,
+        },
+      });
+
       if (slideIndex !== undefined) {
         setSlides(
           slides.map((slide, index) =>
             index === slideIndex
               ? {
                   ...slide,
-                  rootImage: { ...slide.rootImage!, url: file.ufsUrl },
+                  rootImage: { 
+                    ...slide.rootImage!, 
+                    url: urlResult.url.toString()
+                  },
                 }
               : slide
           )
         );
       }
-    },
-    onUploadError: (error) => {
-      toast.error('Failed to upload image');
-      console.error(error);
-    },
-  });
+    } catch (error) {
+      console.error('Failed to get public URL:', error);
+    }
+  },
+  onUploadError: (error) => {
+    toast.error('Failed to upload image');
+    console.error(error);
+  },
+});
 
   const handleUploadClick = () => {
     if (!isStatic && fileInputRef.current) {
