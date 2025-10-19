@@ -116,7 +116,7 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
             documentId={documentId}
           />
         </div>
-
+      <div className="h-[calc(100vh-6rem)]">
         <ResizablePanelGroup
           direction="horizontal"
           className="h-full rounded-md border"
@@ -136,6 +136,7 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
             )}
           </ResizablePanel>
         </ResizablePanelGroup>
+        </div>
       </section>
     </PlateController>
   );

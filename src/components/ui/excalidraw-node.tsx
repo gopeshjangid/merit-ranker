@@ -20,6 +20,27 @@ export function ExcalidrawElement(
     element,
   });
 
+  React.useEffect(() => {
+    const fixCollaborators = async () => {
+      if (excalidrawProps?.initialData) {
+        const initialData = await Promise.resolve(excalidrawProps.initialData);
+
+        if (initialData?.appState) {
+          const appState = initialData.appState as any;
+          if (
+            appState.collaborators &&
+            typeof appState.collaborators === 'object' &&
+            !Array.isArray(appState.collaborators)
+          ) {
+            appState.collaborators = [];
+          }
+        }
+      }
+    };
+
+    fixCollaborators();
+  }, [excalidrawProps?.initialData]);
+
   return (
     <PlateElement {...props}>
       <div contentEditable={false}>
