@@ -9,7 +9,8 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
-import { useUploadThing } from '@/hooks/useUploadthing';
+import { useUploadFile } from '@/hooks/use-upload-file';
+import { getUrl } from 'aws-amplify/storage';
 import { themes } from '@/lib/presentation/themes';
 import { Loader2, Plus } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
@@ -41,8 +42,38 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadedLogoUrl, setUploadedLogoUrl] = useState<string | null>(null);
 
-  const { startUpload } = useUploadThing('imageUploader');
+    const { uploadFile, isUploading } = useUploadFile({
+      storagePath: 'document', // Store theme logos under document/
+      onUploadComplete: async (file) => {
+        try {
+          // Get public URL from S3 path
+          const urlResult = await getUrl({
+            path: file.key,
+            options: { validateObjectExistence: false },
+          });
+          const publicUrl = urlResult.url.toString();
+          setUploadedLogoUrl(publicUrl);
+          console.log(`Logo uploaded to S3: ${publicUrl}`);
+        } catch (error) {
+          console.error('Failed to get logo public URL:', error);
+          toast({
+            title: 'Warning',
+            description: 'Logo uploaded but URL resolution failed',
+            variant: 'destructive',
+          });
+        }
+      },
+      onUploadError: (error) => {
+        console.error('Logo upload failed:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to upload logo',
+          variant: 'destructive',
+        });
+      },
+    });
 
   const form = useForm<ThemeFormValues>({
     defaultValues: {
@@ -131,18 +162,18 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
   const handleRemoveLogo = () => {
     setLogoFile(null);
     setLogoPreview(null);
+    setUploadedLogoUrl(null);
   };
 
   const onSubmit = async (data: ThemeFormValues) => {
     try {
       setIsSubmitting(true);
-      let logoUrl;
 
-      if (logoFile) {
-        const uploadResult = await startUpload([logoFile]);
-        if (uploadResult?.[0]?.url) {
-          logoUrl = uploadResult[0].url ?? '';
-        }
+      // Upload logo if selected and not already uploaded
+      if (logoFile && !uploadedLogoUrl) {
+        await uploadFile(logoFile);
+        // Wait for upload to complete before proceeding
+        // The uploadedLogoUrl will be set in onUploadComplete callback
       }
 
       // Separate the basic metadata from the theme styling data
@@ -152,7 +183,7 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
         name,
         description,
         isPublic,
-        logo: logoUrl,
+        logo: uploadedLogoUrl,
         themeData: themeStyleData, // Add the theme styling data as nested themeData field
       };
 
@@ -181,6 +212,7 @@ export function ThemeCreator({ children }: { children?: ReactNode }) {
       setActiveColorTab('light');
       setLogoFile(null);
       setLogoPreview(null);
+      setUploadedLogoUrl(null);
       form.reset();
       setIsThemeCreatorOpen(false);
     }

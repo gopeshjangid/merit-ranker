@@ -1,11 +1,9 @@
 'use server';
 
-import { utapi } from '@/app/api/uploadthing/core';
+import { uploadToS3Server, getPublicUrl } from '@/lib/amplify-server-upload';
 import { env } from '@/env';
-// import { auth } from '@/server/auth';
 import { db } from '@/server/db';
 import Together from 'together-ai';
-import { UTFile } from 'uploadthing/server';
 
 const together = new Together({ apiKey: env.TOGETHER_AI_API_KEY });
 
@@ -20,12 +18,8 @@ export async function generateImageAction(
   prompt: string,
   model: ImageModelList = 'black-forest-labs/FLUX.1-schnell-Free'
 ) {
-  // Get the current session
-  // const session = await auth();
-
   const userId = 'cmgi94l4c0000teq0hejotfen';
 
-  // Check if user is authenticated
   if (!userId) {
     throw new Error('You must be logged in to generate images');
   }
@@ -33,21 +27,19 @@ export async function generateImageAction(
   try {
     console.log(`Generating image with model: ${model}`);
 
-    // Generate the image using Together AI
+    // Generate image via Together AI (unchanged)
     const response = (await together.images.create({
       model: model,
       prompt: prompt,
       width: 1024,
       height: 768,
-      steps: model.includes('schnell') ? 4 : 28, // Fewer steps for schnell models
+      steps: model.includes('schnell') ? 4 : 28,
       n: 1,
     })) as unknown as {
       id: string;
       model: string;
       object: string;
-      data: {
-        url: string;
-      }[];
+      data: { url: string }[];
     };
 
     const imageUrl = response.data[0]?.url;
@@ -58,37 +50,39 @@ export async function generateImageAction(
 
     console.log(`Generated image URL: ${imageUrl}`);
 
-    // Download the image from Together AI URL
+    // Download image from Together AI
     const imageResponse = await fetch(imageUrl);
     if (!imageResponse.ok) {
       throw new Error('Failed to download image from Together AI');
     }
 
     const imageBlob = await imageResponse.blob();
-    const imageBuffer = await imageBlob.arrayBuffer();
 
-    // Generate a filename based on the prompt
+    // Generate filename from prompt
     const filename = `${prompt.substring(0, 20).replace(/[^a-z0-9]/gi, '_')}_${Date.now()}.png`;
 
-    // Create a UTFile from the downloaded image
-    const utFile = new UTFile([new Uint8Array(imageBuffer)], filename);
+    // Upload to S3 via Amplify instead of UploadThing
+    const uploadResult = await uploadToS3Server(
+      imageBlob,
+      filename,
+      'document' // Store generated images under 'document/' prefix
+    );
 
-    // Upload to UploadThing
-    const uploadResult = await utapi.uploadFiles([utFile]);
+    console.log('S3 upload result:', uploadResult);
 
-    if (!uploadResult[0]?.data?.ufsUrl) {
-      console.error('Upload error:', uploadResult[0]?.error);
-      throw new Error('Failed to upload image to UploadThing');
+    if (!uploadResult.success || !uploadResult.path) {
+      console.error('S3 upload error:', uploadResult.error);
+      throw new Error('Failed to upload image to S3');
     }
 
-    console.log(uploadResult);
-    const permanentUrl = uploadResult[0].data.ufsUrl;
-    console.log(`Uploaded to UploadThing URL: ${permanentUrl}`);
+    // Get public URL for the uploaded image
+    const publicUrl = await getPublicUrl(uploadResult.path);
+    console.log(`Uploaded to S3 URL: ${publicUrl}`);
 
-    // Store in database with the permanent URL
+    // Store in database with S3 public URL
     const generatedImage = await db.generatedImage.create({
       data: {
-        url: permanentUrl, // Store the UploadThing URL instead of the Together AI URL
+        url: publicUrl, // Public S3 URL
         prompt: prompt,
         userId: userId,
       },

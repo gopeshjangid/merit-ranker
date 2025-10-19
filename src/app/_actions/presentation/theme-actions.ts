@@ -1,6 +1,6 @@
 'use server';
 
-import { utapi } from '@/app/api/uploadthing/core';
+import { remove } from 'aws-amplify/storage';
 // import { auth } from '@/server/auth';
 import { db } from '@/server/db';
 import { z } from 'zod';
@@ -163,15 +163,23 @@ export async function deleteCustomTheme(themeId: string) {
       return { success: false, message: 'Not authorized to delete this theme' };
     }
 
-    // Delete logo from uploadthing if exists
+    // Delete logo from S3 via Amplify instead of UploadThing
     if (existingTheme.logoUrl) {
       try {
-        const fileKey = existingTheme.logoUrl.split('/').pop();
-        if (fileKey) {
-          await utapi.deleteFiles(fileKey);
+        // Extract S3 path from URL if it's a full URL
+        let s3Path = existingTheme.logoUrl;
+        
+        // If it's a full URL, extract just the path
+        if (s3Path.includes('://')) {
+          const url = new URL(s3Path);
+          s3Path = url.pathname.substring(1); // Remove leading slash
         }
+
+        // Delete from S3 using Amplify Storage
+        await remove({ path: s3Path });
+        console.log(`Deleted logo from S3: ${s3Path}`);
       } catch (deleteError) {
-        console.error('Failed to delete theme logo:', deleteError);
+        console.error('Failed to delete theme logo from S3:', deleteError);
         // Continue with theme deletion even if logo deletion fails
       }
     }
