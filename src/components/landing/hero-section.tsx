@@ -80,24 +80,24 @@ export function HeroSection() {
   if (!mounted) {
     // Basic static fallback for SSR or if JS is disabled (improves LCP)
     return (
-      <section className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden min-h-[90vh] flex items-center bg-darkBlue">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden min-h-screen flex items-center bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             <div className="flex-1 text-center lg:text-left">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-foreground">
                 {headlineText}
               </h1>
-              <p className="text-lg md:text-xl mb-10 text-slate-300 max-w-xl mx-auto lg:mx-0">{subHeadlineText}</p>
+              <p className="text-lg md:text-xl mb-10 text-muted-foreground max-w-xl mx-auto lg:mx-0">{subHeadlineText}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button size="lg" asChild>
-                  <Link href="/#students">
-                    <Zap className="mr-2 h-5 w-5 text-yellow-300" />
+                <Button size="lg" className="btn-primary-gradient hover-lift" asChild>
+                  <Link href="/auth/sign-up?role=student">
+                    <Zap className="mr-2 h-5 w-5 text-white" />
                     Start Learning Free
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/#teachers">
-                    Create for Free
+                <Button size="lg" variant="outline" className="hover-lift border-primary/50 text-primary hover:bg-primary/10" asChild>
+                  <Link href="/about">
+                    Learn More
                     <ChevronRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -116,9 +116,13 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden min-h-[90vh] flex items-center">
-      <AnimatedTechLines className="opacity-70" />
-      <div className="absolute inset-0 hero-gradient opacity-60"></div>
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden min-h-screen flex items-center bg-background">
+      {/* Professional gradient background layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-indigo-500/6"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-violet-500/4 to-blue-500/6"></div>
+      <div className="absolute inset-0 opacity-50 bg-[radial-gradient(ellipse_at_center,_var(--primary)_0%,transparent_50%)] dark:opacity-30"></div>
+      
+      <AnimatedTechLines className="opacity-40" />
       <AnimatedCircle size={250} color="rgba(0, 255, 255, 0.07)" className="top-10 left-5 animate-pulse" />
       <AnimatedCircle
         size={350}
@@ -129,13 +133,13 @@ export function HeroSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           <motion.div
-            className="flex-1 text-center lg:text-left"
+            className="flex-1 text-center lg:text-left animate-fade-in-hero"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-fade-in-heading"
               aria-label={headlineText}
             >
               {headlineWords.map((word, index) => (
@@ -143,7 +147,11 @@ export function HeroSection() {
                   key={index}
                   custom={index}
                   variants={wordVariants}
-                  className={`inline-block mr-2 ${gradientWords.includes(word) ? "gradient-text" : "text-white"}`}
+                  className={`inline-block mr-2 ${
+                    gradientWords.includes(word) 
+                      ? "bg-gradient-to-r from-primary via-violet-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-sm" 
+                      : "text-foreground"
+                  }`}
                 >
                   {word}
                 </motion.span>
@@ -151,24 +159,24 @@ export function HeroSection() {
             </motion.h1>
 
             <motion.div
-              className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-4 py-2 mb-4"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-gradient-to-r from-primary/10 via-primary/5 to-blue-500/10 backdrop-blur-sm px-4 py-2 mb-6 animate-fade-in-badge"
               variants={itemVariants}
             >
-              {/* Highlight performance line as requested */}
-              <span className="text-sm text-cyan-200">
-                faster, Accurate, complex solver more than CHATGPT, specially designed for govt jobs exams
+              {/* Enhanced badge with gradient */}
+              <span className="text-sm bg-gradient-to-r from-primary via-violet-600 to-indigo-600 bg-clip-text text-transparent font-semibold">
+                🚀 AI-Powered Learning Platform for Government Exams
               </span>
             </motion.div>
 
             <motion.p
-              className="text-lg md:text-xl mb-10 text-slate-300 max-w-xl mx-auto lg:mx-0"
+              className="text-lg md:text-xl mb-10 text-muted-foreground max-w-2xl mx-auto lg:mx-0 animate-fade-in-subheading"
               variants={itemVariants}
             >
               {subHeadlineText}
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-buttons"
               variants={itemVariants}
             >
               {/* tabs: Student / Teacher */}
@@ -181,25 +189,25 @@ export function HeroSection() {
                   role="tab"
                   aria-selected={mode === "student"}
                   onClick={() => setMode("student")}
-                  className={`rounded-full px-3 py-1 text-sm border transition ${
+                  className={`rounded-full px-4 py-2 text-sm border transition hover-lift ${
                     mode === "student"
-                      ? "border-cyan-400 text-cyan-200"
-                      : "border-slate-700 text-slate-400 hover:text-slate-200"
+                      ? "border-primary text-primary bg-primary/10 gradient-border"
+                      : "border-border text-muted-foreground hover:text-foreground hover:border-primary/50"
                   }`}
                 >
-                  Student
+                  For Students
                 </button>
                 <button
                   role="tab"
                   aria-selected={mode === "teacher"}
                   onClick={() => setMode("teacher")}
-                  className={`rounded-full px-3 py-1 text-sm border transition ${
+                  className={`rounded-full px-4 py-2 text-sm border transition hover-lift ${
                     mode === "teacher"
-                      ? "border-cyan-400 text-cyan-200"
-                      : "border-slate-700 text-slate-400 hover:text-slate-200"
+                      ? "border-primary text-primary bg-primary/10 gradient-border"
+                      : "border-border text-muted-foreground hover:text-foreground hover:border-primary/50"
                   }`}
                 >
-                  Teacher
+                  For Teachers
                 </button>
               </div>
 
@@ -207,46 +215,35 @@ export function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="group relative overflow-hidden shadow-lg hover:shadow-cyan-500/40 transition-all duration-300 transform hover:scale-105"
+                className="bg-gradient-to-r from-primary via-violet-600 to-indigo-600 hover:from-primary/90 hover:via-violet-600/90 hover:to-indigo-600/90 text-primary-foreground rounded-full px-8 py-6 text-lg font-semibold transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-violet-500/20 border-0"
               >
                 <Link href={mode === "student" ? "/auth/sign-up?role=student" : "/auth/sign-up?role=teacher"}>
-                  <Zap className="mr-2 h-5 w-5 text-yellow-300 group-hover:animate-pulse" />
+                  <Zap className="mr-2 h-5 w-5" />
                   <span className="relative z-10">
-                    {mode === "student" ? "Start Learning Free" : "Create Notes Free"}
+                    {mode === "student" ? "Start Learning Free" : "Create Content Free"}
                   </span>
-                  <motion.div
-                    className="absolute inset-0 bg-white/10"
-                    initial={{ scaleY: 0, originY: "bottom" }}
-                    whileHover={{ scaleY: 1, originY: "bottom" }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                  />
                 </Link>
               </Button>
 
-              {/* secondary CTA keeps the other audience quick link */}
+              {/* secondary CTA */}
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="group relative overflow-hidden border-slate-600 hover:border-cyan-400 text-slate-300 hover:text-cyan-400 transition-all duration-300 transform hover:scale-105 bg-transparent"
+                className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur-sm text-foreground hover:text-primary transition-all duration-200 hover:scale-105 rounded-full px-8 py-6 text-lg font-semibold hover:bg-primary/5"
               >
-                <Link href={mode === "student" ? "/teacher/branding" : "/auth/sign-in"}>
-                  <span className="relative z-10">{mode === "student" ? "Teacher Branding" : "Sign In"}</span>
-                  <ChevronRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  <motion.div
-                    className="absolute inset-0"
-                    initial={{ boxShadow: "inset 0 0 0 0px hsl(var(--primary))" }}
-                    whileHover={{ boxShadow: "inset 0 0 0 2px hsl(var(--primary))" }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                  />
+                <Link href={mode === "student" ? "/about" : "/auth/sign-in"}>
+                  <span className="relative z-10">{mode === "student" ? "Learn More" : "Sign In"}</span>
+                  <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
             </motion.div>
 
             {mode === "teacher" && (
-              <div className="mt-3 text-sm text-slate-400 text-center lg:text-left">
-                <Link href="/teacher/dashboard" className="underline underline-offset-4 hover:text-cyan-300">
-                  Open Teacher Dashboard
+              <div className="mt-3 text-sm text-muted-foreground text-center lg:text-left">
+                <span>Already have an account? </span>
+                <Link href="/auth/sign-in" className="underline underline-offset-4 hover:text-primary">
+                  Sign in here
                 </Link>
               </div>
             )}

@@ -21,7 +21,7 @@ export function StudentsSection() {
     "Attempt Quizzes/Mock Tests with mixed patterns and new questions",
   ]
   return (
-    <section id="students" className="py-20 md:py-28 bg-darkBlue relative overflow-hidden">
+    <section id="students" className="py-20 md:py-28 bg-background relative overflow-hidden">
       <AnimatedTechParticles particleCount={20} className="opacity-30" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -31,17 +31,18 @@ export function StudentsSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-pretty mb-4 text-white">
-              Built for <span className="gradient-text">Students</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-pretty mb-4 text-foreground">
+              Built for <span className="bg-gradient-to-r from-primary via-violet-600 to-indigo-600 bg-clip-text text-transparent">Students</span>
             </h2>
-            <p className="text-slate-300 mb-6">
-              Prepare smarter for SSC, UPSC, Banking, Railways, State PSCs, and more. Everything you need in one app.
+            <p className="text-muted-foreground mb-6 text-lg">
+              Your one-stop AI study platform for SSC, UPSC, Railway, Banking, and all
+              government exams. Prepare smarter - not harder.
             </p>
             <ul className="space-y-3">
               {bullets.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-slate-200">
-                  <CheckCircle2 className="h-5 w-5 text-cyan-400 mt-0.5" />
-                  <span className="leading-relaxed">{b}</span>
+                <li key={b} className="flex items-start gap-3 text-foreground">
+                  <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                  <span className="leading-relaxed text-muted-foreground">{b}</span>
                 </li>
               ))}
             </ul>

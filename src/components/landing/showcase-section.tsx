@@ -6,19 +6,18 @@ import { AnimatedTechParticles } from "./animated-tech-patterns"
 
 export function ShowcaseSection() {
   const cards = [
-    { src: "/images/mocks-and-quizzes.jpg", alt: "Mocks and quizzes", caption: "Mocks & Quizzes" },
-    { src: "/images/notes-and-revision.jpg", alt: "Notes and revision", caption: "Notes & Revision" },
-    { src: "/images/teacher-branding.jpg", alt: "Teacher personal branding", caption: "Teacher Branding" },
+    { src: "/images/mocks-and-quizzes.jpg", alt: "AI Notes & Smart Revisions", caption: "AI Notes & Smart Revisions" },
+    { src: "/images/notes-and-revision.jpg", alt: "Mocks & Quizzes", caption: "Mocks & Quizzes" },
     {
       src: "/images/whatsapp-telegram.jpg",
-      alt: "WhatsApp and Telegram auto replies",
-      caption: "WA/Telegram Auto Replies",
+      alt: "Telegram & WhatsApp Auto Replies",
+      caption: "Telegram & WhatsApp Auto Replies",
     },
-    { src: "/images/youtube-notes.jpg", alt: "YouTube to notes", caption: "YouTube → Notes" },
-    { src: "/images/ai-assistant.jpg", alt: "Intelligence assistant", caption: "Personal Assistant" },
+    { src: "/images/youtube-notes.jpg", alt: "YouTube → Notes Automation", caption: "YouTube → Notes Automation" },
+    { src: "/images/ai-assistant.jpg", alt: "AI Personal Study Assistant", caption: "AI Personal Study Assistant" },
   ]
   return (
-    <section className="py-20 md:py-28 bg-darkBlue relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
       <AnimatedTechParticles particleCount={16} className="opacity-20" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -28,11 +27,11 @@ export function ShowcaseSection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-pretty text-white">
-            What you get in <span className="gradient-text">Meritranker</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-pretty text-foreground">
+            What You Get in <span className="bg-gradient-to-r from-primary via-violet-600 to-indigo-600 bg-clip-text text-transparent">Meritranker</span>
           </h2>
-          <p className="text-slate-300 mt-3 max-w-2xl mx-auto">
-            A glimpse of the all-in-one experience for both students and teachers.
+          <p className="text-muted-foreground mt-3 max-w-2xl mx-auto text-lg">
+            Experience an all-in-one platform for students and teachers.
           </p>
         </motion.div>
 
@@ -44,16 +43,16 @@ export function ShowcaseSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               viewport={{ once: true, amount: 0.2 }}
-              className="rounded-2xl overflow-hidden border border-slate-700/70 bg-slate-800/40 shadow-xl"
+              className="rounded-2xl overflow-hidden bg-card border border-border shadow-xl group transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-primary/20"
             >
               <Image
                 src={card.src || "/placeholder.svg"}
                 alt={card.alt}
                 width={1200}
                 height={800}
-                className="object-cover w-full h-auto"
+                className="object-cover w-full h-auto group-hover:scale-105 transition-transform duration-300"
               />
-              <figcaption className="p-4 text-center text-slate-200">{card.caption}</figcaption>
+              <figcaption className="p-4 text-center text-foreground font-medium">{card.caption}</figcaption>
             </motion.figure>
           ))}
         </div>

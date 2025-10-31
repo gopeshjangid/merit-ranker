@@ -86,8 +86,8 @@ export function TeachersSection() {
   ]
 
   return (
-    <section id="teachers" className="py-20 md:py-28 bg-darkBlue relative overflow-hidden">
-      <AnimatedTechParticles particleCount={20} className="opacity-25" />
+    <section id="teachers" className="py-20 md:py-28 bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
+      <AnimatedTechParticles particleCount={20} className="opacity-20" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* left visual */}
@@ -98,7 +98,7 @@ export function TeachersSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <div className="rounded-2xl border border-slate-700/70 bg-slate-800/40 p-3 shadow-2xl">
+            <div className="rounded-2xl bg-card border border-border p-3 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <Image
                 src="/images/teacher-dashboard.jpg"
                 alt="Meritranker teacher dashboard preview"
@@ -117,12 +117,12 @@ export function TeachersSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-pretty mb-4 text-white">
-              Everything for <span className="gradient-text">Teachers</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-pretty mb-4 text-foreground">
+              Everything for <span className="bg-gradient-to-r from-primary via-violet-600 to-indigo-600 bg-clip-text text-transparent">Teachers</span>
             </h2>
-            <p className="text-slate-300 mb-6">
-              Create notes and slides, build quizzes and mocks, manage students, and sell premium content—powered by
-              Intelligence.
+            <p className="text-muted-foreground mb-6 text-lg">
+              Create notes, quizzes, mock tests, and sell premium content with AI tools for
+              teachers. Automate replies, manage students, and earn online with ease.
             </p>
 
             {/* core features */}
@@ -130,13 +130,13 @@ export function TeachersSection() {
               {items.map((it) => (
                 <div
                   key={it.title}
-                  className="rounded-xl border border-slate-700/70 bg-slate-800/40 p-4 hover:border-cyan-500/40 transition-colors"
+                  className="bg-card border border-border rounded-xl p-4 group transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-primary/20"
                 >
                   <div className="flex items-start gap-3">
-                    <it.icon className="h-5 w-5 text-cyan-400 mt-1" />
+                    <it.icon className="h-5 w-5 text-primary mt-1 group-hover:scale-110 transition-transform duration-300" />
                     <div>
-                      <h3 className="font-semibold text-white">{it.title}</h3>
-                      <p className="text-slate-300 text-sm leading-relaxed">{it.desc}</p>
+                      <h3 className="font-semibold text-foreground">{it.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{it.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -146,16 +146,16 @@ export function TeachersSection() {
             {/* actions */}
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <a
-                href="/#teachers"
-                className="inline-flex items-center justify-center rounded-md bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-3 font-medium transition"
+                href="/auth/sign-up?role=teacher"
+                className="bg-gradient-to-r from-primary via-violet-600 to-indigo-600 hover:from-primary/90 hover:via-violet-600/90 hover:to-indigo-600/90 text-primary-foreground inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-violet-500/20"
               >
                 Create for Free
               </a>
               <a
-                href="/teachers"
-                className="inline-flex items-center justify-center rounded-md border border-slate-600 text-slate-200 hover:text-cyan-300 hover:border-cyan-400 px-5 py-3 font-medium transition"
+                href="/about"
+                className="inline-flex items-center justify-center rounded-full border border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur-sm text-foreground hover:text-primary px-6 py-3 font-semibold transition-all duration-200 hover:scale-105 hover:bg-primary/5"
               >
-                Explore Teachers Marketplace
+                Learn More
               </a>
             </div>
           </motion.div>

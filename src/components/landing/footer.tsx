@@ -14,9 +14,9 @@ export function Footer() {
 
   const quickLinks = [
     { href: "/#features", label: "Features" },
-    { href: "/#students", label: "For Students" },
-    { href: "/#teachers", label: "For Teachers" },
     { href: "/faq", label: "FAQ" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
   ]
 
   const supportLinks = [
@@ -27,14 +27,15 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-card/50 border-t border-border/50">
+    <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-lg font-bold gradient-text">Meritranker</h3>
-            <p className="text-sm text-foreground/70">
-              AI-powered learning platform for Indian government exam preparation. Learn from the best, practice daily,
-              and rank higher.
+            <h3 className="text-lg font-bold bg-gradient-to-r from-primary via-violet-600 to-indigo-600 bg-clip-text text-transparent">Merit Ranker</h3>
+            <p className="text-sm text-muted-foreground">
+              Meritranker - India's smartest AI education app for students and teachers.
+              Prepare for government exams like SSC, UPSC, Banking, and Railway using free AI
+              tools, study materials, and smart study techniques.
             </p>
             <div className="flex space-x-4">
               <Link

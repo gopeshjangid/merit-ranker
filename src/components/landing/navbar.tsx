@@ -9,26 +9,21 @@ import {
   Globe,
   Phone,
   Home,
-  Info,
   CheckCircle,
   HelpCircle,
   Shield,
   FileText,
-  Briefcase,
   ChevronDown,
   Mail,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { cn } from "@/lib/utils"
 
 const mainNavItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/#features", label: "Features", icon: CheckCircle },
-  { href: "/#students", label: "For Students", icon: Info },
-  { href: "/#teachers", label: "For Teachers", icon: Briefcase },
-  { href: "/teachers", label: "Teachers Marketplace", icon: Briefcase }, // marketplace
-  { href: "/teacher/dashboard", label: "Teacher Dashboard", icon: Briefcase },
   { href: "/faq", label: "FAQ", icon: HelpCircle },
   { href: "/contact", label: "Contact", icon: Mail },
 ]
@@ -47,12 +42,14 @@ export function Navbar() {
   const closeMenu = () => setIsOpen(false)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/60">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[96%] max-w-7xl animate-fade-in-nav">
+      <div className="bg-card/95 backdrop-blur-xl border border-border/30 rounded-2xl px-6 py-3 shadow-lg shadow-primary/5 w-full mx-auto">
+        <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center" onClick={closeMenu}>
-              <span className="text-xl font-bold gradient-text">Meritranker</span>
+              <div className="bg-gradient-to-r from-primary via-violet-600 to-indigo-600 bg-clip-text text-transparent text-xl font-bold">
+                Merit Ranker
+              </div>
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-1">
@@ -100,25 +97,16 @@ export function Navbar() {
             <Button
               asChild
               className={cn(
-                "ml-3 bg-cyan-500 hover:bg-cyan-600 text-white",
+                "ml-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 transition-all duration-200 hover:scale-105",
                 pathname === "/auth/sign-up?role=student" &&
-                  "ring-2 ring-offset-2 ring-cyan-500 ring-offset-background",
+                  "ring-2 ring-offset-2 ring-primary ring-offset-background",
               )}
             >
-              <Link href="/auth/sign-up?role=student">student sign up</Link>
+              <Link href="/auth/sign-up?role=student">Get Started</Link>
             </Button>
 
-            <Button
-              asChild
-              variant="outline"
-              className={cn(
-                "ml-2 border-cyan-600 text-cyan-300 hover:text-cyan-200 hover:border-cyan-500 bg-transparent",
-                pathname === "/teacher/branding" && "ring-2 ring-offset-2 ring-cyan-500 ring-offset-background",
-              )}
-            >
-              <Link href="/teacher/branding">teacher branding</Link>
-            </Button>
-
+            <ThemeToggle />
+            
             <Button variant="outline" size="icon" className="ml-2 bg-transparent">
               <Globe className="h-4 w-4" />
               <span className="sr-only">Language</span>
@@ -129,15 +117,12 @@ export function Navbar() {
               asChild
               size="sm"
               className={cn(
-                "mr-2 bg-cyan-500 hover:bg-cyan-600 text-white",
+                "mr-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-4",
                 pathname === "/auth/sign-up?role=student" &&
-                  "ring-2 ring-offset-1 ring-cyan-500 ring-offset-background",
+                  "ring-2 ring-offset-1 ring-primary ring-offset-background",
               )}
             >
-              <Link href="/auth/sign-up?role=student">student sign up</Link>
-            </Button>
-            <Button asChild size="sm" variant="outline" className="mr-2 bg-transparent border-cyan-600 text-cyan-300">
-              <Link href="/teacher/branding">teacher branding</Link>
+              <Link href="/auth/sign-up?role=student">Get Started</Link>
             </Button>
             <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -148,8 +133,8 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-16 inset-x-0 z-40">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-b border-border shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <div className="md:hidden absolute top-20 inset-x-0 z-40 px-4">
+          <div className="bg-card/95 backdrop-blur-xl border border-border rounded-2xl p-4 shadow-2xl max-h-[calc(100vh-6rem)] overflow-y-auto">
             {[...mainNavItems, ...legalNavItems].map((item) => (
               <Link
                 key={item.label}

@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-darkBlue selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <main className="flex-grow">
           <HeroSection />
           <AICapabilitiesSection />
