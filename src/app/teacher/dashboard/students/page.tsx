@@ -1,10 +1,11 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useCallback } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Separator } from "@/components/ui/separator"
+import { Sparkles, Send } from "lucide-react"
 
 type Question = {
   id: string
@@ -20,6 +21,75 @@ const todayQuestionsSeed: Question[] = [
   { id: "q3", student: "Meera", text: "Monsoon mechanism over India?", solution: "", published: false },
 ]
 
+// Stat cards component
+function StatCards({ stats }: { stats: { total: number; askedToday: number; published: number } }) {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <Card>
+        <CardHeader>
+          <CardTitle>Student Count</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-semibold">{stats.total}</div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Total Asked Today</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-semibold">{stats.askedToday}</div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Published Today</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-semibold">{stats.published}</div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
+// Question item component
+function QuestionItem({ 
+  question, 
+  onSolutionChange, 
+  onPublish 
+}: { 
+  question: Question
+  onSolutionChange: (id: string, value: string) => void
+  onPublish: (id: string) => void
+}) {
+  return (
+    <div className="rounded-lg border p-3">
+      <div className="flex items-center justify-between">
+        <div className="text-sm text-muted-foreground">From {question.student}</div>
+        <div className="text-xs">{question.published ? "Published" : "Draft"}</div>
+      </div>
+      <div className="mt-1 font-medium">{question.text}</div>
+      <Separator className="my-2" />
+      <Textarea
+        value={question.solution}
+        onChange={(e) => onSolutionChange(question.id, e.target.value)}
+        placeholder="Write solution (AI can help improve)…"
+      />
+      <div className="mt-2 flex items-center gap-2">
+        <Button size="sm" variant="secondary">
+          <Sparkles className="mr-2 h-4 w-4" />
+          AI Improve
+        </Button>
+        <Button size="sm" onClick={() => onPublish(question.id)} disabled={question.published}>
+          <Send className="mr-2 h-4 w-4" />
+          Publish
+        </Button>
+      </div>
+    </div>
+  )
+}
+
 export default function StudentsPage() {
   const [items, setItems] = useState<Question[]>(todayQuestionsSeed)
 
@@ -30,40 +100,17 @@ export default function StudentsPage() {
     return { total, askedToday, published }
   }, [items])
 
-  const setSolution = (id: string, val: string) =>
+  const setSolution = useCallback((id: string, val: string) => {
     setItems((qs) => qs.map((q) => (q.id === id ? { ...q, solution: val } : q)))
+  }, [])
 
-  const publish = (id: string) => setItems((qs) => qs.map((q) => (q.id === id ? { ...q, published: true } : q)))
+  const publish = useCallback((id: string) => {
+    setItems((qs) => qs.map((q) => (q.id === id ? { ...q, published: true } : q)))
+  }, [])
 
   return (
     <div className="space-y-6">
-      {/* Top analytics */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <CardTitle>Student Count</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-semibold">{stats.total}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Asked Today</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-semibold">{stats.askedToday}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Published Today</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-semibold">{stats.published}</div>
-          </CardContent>
-        </Card>
-      </div>
+      <StatCards stats={stats} />
 
       {/* Questions asked today */}
       <Card>
@@ -72,27 +119,12 @@ export default function StudentsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {items.map((q) => (
-            <div key={q.id} className="rounded-lg border p-3">
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-muted-foreground">From {q.student}</div>
-                <div className="text-xs">{q.published ? "Published" : "Draft"}</div>
-              </div>
-              <div className="mt-1 font-medium">{q.text}</div>
-              <Separator className="my-2" />
-              <Textarea
-                value={q.solution}
-                onChange={(e) => setSolution(q.id, e.target.value)}
-                placeholder="Write solution (AI can help improve)…"
-              />
-              <div className="mt-2 flex items-center gap-2">
-                <Button size="sm" variant="secondary">
-                  AI Improve
-                </Button>
-                <Button size="sm" onClick={() => publish(q.id)} disabled={q.published}>
-                  Publish
-                </Button>
-              </div>
-            </div>
+            <QuestionItem 
+              key={q.id} 
+              question={q} 
+              onSolutionChange={setSolution} 
+              onPublish={publish} 
+            />
           ))}
         </CardContent>
       </Card>
@@ -115,13 +147,13 @@ export default function StudentsPage() {
           </CardHeader>
           <CardContent className="space-y-2">
             <blockquote className="rounded-md border p-2 text-sm">
-              “Your mock tests mirror the exam pattern perfectly.”
+              "Your mock tests mirror the exam pattern perfectly."
             </blockquote>
             <blockquote className="rounded-md border p-2 text-sm">
-              “Short notes plus MCQ practice improved my accuracy.”
+              "Short notes plus MCQ practice improved my accuracy."
             </blockquote>
             <blockquote className="rounded-md border p-2 text-sm">
-              “Daily current affairs and PYQs are a game changer.”
+              "Daily current affairs and PYQs are a game changer."
             </blockquote>
           </CardContent>
         </Card>

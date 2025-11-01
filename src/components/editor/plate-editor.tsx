@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { memo, useMemo } from 'react';
 
 import { normalizeNodeId } from 'platejs';
 import { Plate, usePlateEditor } from 'platejs/react';
@@ -10,10 +11,22 @@ import { Editor, EditorContainer } from '@/components/ui/editor';
 import { ExcalidrawPlugin } from '@platejs/excalidraw/react';
 import { ExcalidrawElement } from '@/components/ui/excalidraw-node';
 
-export function PlateEditor() {
+// Memoized initial value to prevent recreating on every render
+const getInitialValue = () => normalizeNodeId(value);
+
+function PlateEditorComponent() {
+  // Memoize plugins array to prevent recreation
+  const plugins = useMemo(
+    () => [...EditorKit, ExcalidrawPlugin.withComponent(ExcalidrawElement)],
+    []
+  );
+
+  // Memoize initial value
+  const initialValue = useMemo(() => getInitialValue(), []);
+
   const editor = usePlateEditor({
-    plugins: [...EditorKit, ExcalidrawPlugin.withComponent(ExcalidrawElement)],
-    value,
+    plugins,
+    value: initialValue,
   });
 
   return (
@@ -24,6 +37,9 @@ export function PlateEditor() {
     </Plate>
   );
 }
+
+// Export memoized component for better performance
+export const PlateEditor = memo(PlateEditorComponent);
 
 const value = normalizeNodeId([
   {

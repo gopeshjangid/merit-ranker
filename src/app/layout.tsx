@@ -5,10 +5,8 @@ import localFont from 'next/font/local';
 import AuthProvider from '@/provider/AuthProvider';
 import TanStackQueryProvider from '@/provider/TanstackProvider';
 import { ThemeProvider } from '@/provider/theme-provider';
-import { FloatingActionButton } from "@/components/landing/floating-action-button"
 import { Toaster } from 'sonner';
-import { Navbar } from '@/components/landing/navbar';
-import { Footer } from '@/components/landing/footer';
+import { ConditionalLayout } from '@/components/ConditionalLayout';
 
 import './globals.css';
 
@@ -144,10 +142,9 @@ export default function RootLayout({
             <TanStackQueryProvider>
       <AuthProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <Navbar />
-              {children}
-              <Footer />
-              <FloatingActionButton />
+              <ConditionalLayout>
+                {children}
+              </ConditionalLayout>
               <Toaster />
             </ThemeProvider>            
       </AuthProvider>
