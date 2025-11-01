@@ -14,7 +14,7 @@ export default function PartnersError({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error("Partners Page Error:", error)
+    if (process.env.NODE_ENV === "development") console.error("Partners Page Error:", error)
   }, [error])
 
   return (

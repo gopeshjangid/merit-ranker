@@ -62,9 +62,8 @@ export default function ImagePlaceholder({
         );
       }
     },
-    onUploadError: (error) => {
+    onUploadError: () => {
       toast.error('Failed to upload image');
-      console.error(error);
     },
   });
 
@@ -92,7 +91,7 @@ export default function ImagePlaceholder({
   return (
     <div
       className={cn(
-        'relative h-full w-full overflow-hidden rounded-lg border border-border bg-gradient-to-br from-muted/50 to-muted',
+        'border-border from-muted/50 to-muted relative h-full w-full overflow-hidden rounded-lg border bg-gradient-to-br',
         className
       )}
     >
@@ -100,15 +99,15 @@ export default function ImagePlaceholder({
       <div className="relative flex h-full flex-col items-center justify-center gap-6 p-8">
         <div className="flex flex-col items-center gap-4">
           <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-primary/10 blur-xl" />
-            <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-border bg-background shadow-sm">
-              <ImageIcon className="h-10 w-10 text-muted-foreground" />
+            <div className="bg-primary/10 absolute inset-0 rounded-full blur-xl" />
+            <div className="border-border bg-background relative flex h-20 w-20 items-center justify-center rounded-2xl border-2 shadow-sm">
+              <ImageIcon className="text-muted-foreground h-10 w-10" />
             </div>
           </div>
 
           <div className="space-y-1 text-center">
-            <p className="text-sm font-medium text-foreground">No image yet</p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-foreground text-sm font-medium">No image yet</p>
+            <p className="text-muted-foreground text-xs">
               Upload or generate an image
             </p>
           </div>
@@ -151,14 +150,14 @@ export default function ImagePlaceholder({
               <div className="space-y-4 p-6">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-                      <Sparkles className="h-4 w-4 text-primary" />
+                    <div className="bg-primary/10 flex h-8 w-8 items-center justify-center rounded-lg">
+                      <Sparkles className="text-primary h-4 w-4" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-foreground">
+                      <h4 className="text-foreground text-sm font-semibold">
                         Generate Image
                       </h4>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         Describe what you want to create
                       </p>
                     </div>

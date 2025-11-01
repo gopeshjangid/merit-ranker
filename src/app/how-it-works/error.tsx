@@ -13,7 +13,7 @@ export default function HowItWorksError({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error("How It Works Page Error:", error)
+    if (process.env.NODE_ENV === "development") console.error("How It Works Page Error:", error)
   }, [error])
 
   return (

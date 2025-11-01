@@ -122,8 +122,7 @@ export async function POST(req: Request) {
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error) {
-    console.error('Error in outline generation with search:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to generate outline with search' },
       { status: 500 }

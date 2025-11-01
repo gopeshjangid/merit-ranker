@@ -318,8 +318,8 @@ export class PlateJSToPPTXConverter {
 
     try {
       this.currentSlide.addImage(imageOptions);
-    } catch (error) {
-      console.warn('Failed to add root image:', error);
+    } catch (_error) {
+      // console.warn('Failed to add root image:', error);
     }
   }
 
@@ -1498,8 +1498,8 @@ export class PlateJSToPPTXConverter {
             break;
         }
         this.currentSlide.addImage(imageOptions);
-      } catch (error) {
-        console.warn('Failed to add image:', error);
+      } catch {
+        // console.warn('Failed to add image:', error);
       }
     }
 
@@ -1563,8 +1563,8 @@ export class PlateJSToPPTXConverter {
         w,
         h,
       });
-    } catch (error) {
-      console.warn('Failed to add SVG:', error);
+    } catch {
+      // console.warn('Failed to add SVG:', error);
       // Fallback to basic shape if SVG fails
       this.currentSlide?.addShape(this.pptx.ShapeType.rect, {
         x,

@@ -10,7 +10,7 @@ import { PlateElement } from 'platejs/react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-import { EmojiPicker, EmojiPopover } from './emoji-toolbar-button';
+import { EmojiPicker, EmojiPopover } from '@/components/ui/emoji-toolbar-button';
 
 export function CalloutElement({
   attributes,

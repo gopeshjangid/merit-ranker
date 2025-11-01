@@ -77,7 +77,7 @@ import { blockSelectionVariants } from './block-selection';
 import {
   ColorDropdownMenuItems,
   DEFAULT_COLORS,
-} from './font-color-toolbar-button';
+} from '@/components/ui/font-color-toolbar-button';
 import { ResizeHandle } from './resize-handle';
 import {
   BorderAllIcon,

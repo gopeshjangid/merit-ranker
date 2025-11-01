@@ -107,13 +107,12 @@ export function ExportButton({
       } else {
         throw new Error(result.error ?? 'Export failed');
       }
-    } catch (error) {
+    } catch {
       toast({
         title: 'Export Failed',
         description: 'There was an error exporting your presentation.',
         variant: 'destructive',
       });
-      console.error('Export error:', error);
     } finally {
       setIsExporting(false);
     }
@@ -139,7 +138,7 @@ export function ExportButton({
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-sm">
             This will export your current presentation as a PowerPoint (.pptx)
             file, including all slides and elements.
           </p>

@@ -34,7 +34,6 @@ export function ModelPicker({
     if (!hasRestoredFromStorage.current) {
       const savedModel = getSelectedModel();
       if (savedModel) {
-        console.log('Restoring model from localStorage:', savedModel);
         setModelProvider(
           savedModel.modelProvider as 'openai' | 'ollama' | 'lmstudio'
         );
@@ -131,24 +130,20 @@ export function ModelPicker({
 
   // Handle model change
   const handleModelChange = (value: string) => {
-    console.log('Model changed to:', value);
     if (value === 'openai') {
       setModelProvider('openai');
       setModelId('');
       setSelectedModel('openai', '');
-      console.log("Saved to localStorage: openai, ''");
     } else if (value.startsWith('ollama-')) {
       const model = value.replace('ollama-', '');
       setModelProvider('ollama');
       setModelId(model);
       setSelectedModel('ollama', model);
-      console.log('Saved to localStorage: ollama,', model);
     } else if (value.startsWith('lmstudio-')) {
       const model = value.replace('lmstudio-', '');
       setModelProvider('lmstudio');
       setModelId(model);
       setSelectedModel('lmstudio', model);
-      console.log('Saved to localStorage: lmstudio,', model);
     }
   };
 
@@ -184,7 +179,7 @@ export function ModelPicker({
                     <span className="truncate text-sm">
                       Refreshing models...
                     </span>
-                    <span className="truncate text-xs text-muted-foreground">
+                    <span className="text-muted-foreground truncate text-xs">
                       Checking for new models
                     </span>
                   </div>
@@ -201,7 +196,7 @@ export function ModelPicker({
                 <Bot className="h-4 w-4 flex-shrink-0" />
                 <div className="flex min-w-0 flex-col">
                   <span className="truncate text-sm">GPT-4o-mini</span>
-                  <span className="truncate text-xs text-muted-foreground">
+                  <span className="text-muted-foreground truncate text-xs">
                     Cloud-based AI model
                   </span>
                 </div>
@@ -224,7 +219,7 @@ export function ModelPicker({
                         <span className="truncate text-sm">
                           {option.displayLabel}
                         </span>
-                        <span className="truncate text-xs text-muted-foreground">
+                        <span className="text-muted-foreground truncate text-xs">
                           {option.description}
                         </span>
                       </div>
@@ -250,7 +245,7 @@ export function ModelPicker({
                         <span className="truncate text-sm">
                           {option.displayLabel}
                         </span>
-                        <span className="truncate text-xs text-muted-foreground">
+                        <span className="text-muted-foreground truncate text-xs">
                           {option.description}
                         </span>
                       </div>
@@ -276,7 +271,7 @@ export function ModelPicker({
                         <span className="truncate text-sm">
                           {option.displayLabel}
                         </span>
-                        <span className="truncate text-xs text-muted-foreground">
+                        <span className="text-muted-foreground truncate text-xs">
                           {option.description}
                         </span>
                       </div>

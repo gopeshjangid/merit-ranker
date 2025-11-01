@@ -18,7 +18,7 @@ import { useQuery } from '@tanstack/react-query';
 import debounce from 'lodash.debounce';
 import { useTheme } from 'next-themes';
 import { useParams } from 'next/navigation';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { LoadingState } from './Loading';
 import { PresentationLayout } from './PresentationLayout';
 import { PresentationSlidesView } from './PresentationSlidesView';
@@ -46,7 +46,7 @@ export default function PresentationPage() {
   const setPresentationStyle = usePresentationState(
     (s) => s.setPresentationStyle
   );
-  const currentSlideIndex = usePresentationState((s) => s.currentSlideIndex);
+  // const currentSlideIndex = usePresentationState((s) => s.currentSlideIndex);
   const setLanguage = usePresentationState((s) => s.setLanguage);
   const theme = usePresentationState((s) => s.theme);
   // Track the theme value as it exists in the database to avoid redundant saves on hydration
@@ -57,10 +57,6 @@ export default function PresentationPage() {
       setSetShouldFetchData(false);
     }
   }, [isGeneratingPresentation]);
-
-  useEffect(() => {
-    console.log('Current Slide Index', currentSlideIndex);
-  }, [currentSlideIndex]);
 
   // Use React Query to fetch presentation data
   const { data: presentationData, isLoading } = useQuery({
@@ -76,21 +72,17 @@ export default function PresentationPage() {
   });
 
   // Create a debounced function to update the theme in the database
-  const debouncedThemeUpdate = useCallback(
-    debounce((presentationId: string, newTheme: string) => {
+  const debouncedThemeUpdate = debounce(
+    (presentationId: string, newTheme: string) => {
       updatePresentationTheme(presentationId, newTheme)
         .then((result) => {
           if (result.success) {
-            console.log('Theme updated in database');
           } else {
-            console.error('Failed to update theme:', result.message);
           }
         })
-        .catch((error) => {
-          console.error('Error updating theme:', error);
-        });
-    }, 600),
-    []
+        .catch(() => {});
+    },
+    600
   );
 
   // Update presentation state when data is fetched
@@ -193,12 +185,10 @@ export default function PresentationPage() {
                 setTheme(themeId, themeData as unknown as ThemeProperties);
               } else {
                 // Fallback to default theme if custom theme not found
-                console.warn('Custom theme not found:', themeId);
                 setTheme('mystique');
               }
             })
-            .catch((error) => {
-              console.error('Failed to load custom theme:', error);
+            .catch(() => {
               // Fallback to default theme on error
               setTheme('mystique');
             });
@@ -233,6 +223,8 @@ export default function PresentationPage() {
     setImageModel,
     setPresentationStyle,
     setLanguage,
+    setThumbnailUrl,
+    setImageSource,
   ]);
 
   // Update theme when it changes (but not on initial hydration)

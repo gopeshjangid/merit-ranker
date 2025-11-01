@@ -21,18 +21,26 @@ const eslintConfig = [
     },
     rules: {
       '@next/next/no-html-link-for-pages': 'off',
-      '@next/next/no-img-element': 'off',
+      '@next/next/no-img-element': 'warn',
       '@typescript-eslint/no-empty-object-type': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-expressions': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
       'import/no-anonymous-default-export': 'off',
       'linebreak-style': ['error', 'unix'],
       'no-case-declarations': 'off',
-      'no-duplicate-imports': 'off',
+      'no-duplicate-imports': 'warn',
       'no-empty-function': 'off',
       'no-prototype-builtins': 'off',
       'no-unused-vars': 'off',
+      'prefer-const': 'warn',
       'react/display-name': 'off',
       'react/jsx-curly-brace-presence': [
         'warn',
@@ -59,7 +67,14 @@ const eslintConfig = [
         },
       ],
       'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': 'off',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
     },
   },
 ];

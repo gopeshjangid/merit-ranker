@@ -149,7 +149,7 @@ export default function FontPicker({
         );
         fontsLoaded(!results.some((res) => !res));
       } catch (e) {
-        console.error('Error checking if font families loaded', e);
+        // console.error('Error checking if font families loaded', e);
         fontsLoaded(false);
       }
     };

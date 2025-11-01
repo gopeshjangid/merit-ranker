@@ -311,8 +311,7 @@ export async function POST(req: Request) {
     });
 
     return result.toUIMessageStreamResponse();
-  } catch (error) {
-    console.error('Error in presentation generation:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to generate presentation slides' },
       { status: 500 }

@@ -31,6 +31,7 @@ import {
   IndentToolbarButton,
   OutdentToolbarButton,
 } from '@/components/ui/indent-toolbar-button';
+
 import { InsertToolbarButton } from '@/components/ui/insert-toolbar-button';
 import { LineHeightToolbarButton } from '@/components/ui/line-height-toolbar-button';
 import { LinkToolbarButton } from '@/components/ui/link-toolbar-button';

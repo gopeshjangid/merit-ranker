@@ -84,7 +84,7 @@ export function usePlateEditor<
         if (ctx.isAsync && isMountedRef.current) {
           forceRender({});
         }
-        options.onReady?.(ctx);
+        options.onReady?.(ctx as any);
       },
     });
 

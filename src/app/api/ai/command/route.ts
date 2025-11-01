@@ -212,13 +212,13 @@ Priority rules:
 
 Return only one enum value with no explanation.`;
 
-const commentSystem = `You are a document review assistant.  
-You will receive an MDX document wrapped in <block id="..."> content </block> tags.  
+const commentSystem = `You are a document review assistant.
+You will receive an MDX document wrapped in <block id="..."> content </block> tags.
 <Selection> is the text highlighted by the user.
 
-Your task:  
-- Read the content of all blocks and provide comments.  
-- For each comment, generate a JSON object:  
+Your task:
+- Read the content of all blocks and provide comments.
+- For each comment, generate a JSON object:
   - blockId: the id of the block being commented on.
   - content: the original document fragment that needs commenting.
   - comments: a brief comment or explanation for that fragment.
@@ -227,8 +227,8 @@ Rules:
 - IMPORTANT: If a comment spans multiple blocks, use the id of the **first** block.
 - The **content** field must be the original content inside the block tag. The returned content must not include the block tags, but should retain other MDX tags.
 - IMPORTANT: The **content** field must be flexible:
-  - It can cover one full block, only part of a block, or multiple blocks.  
-  - If multiple blocks are included, separate them with two \\n\\n.  
+  - It can cover one full block, only part of a block, or multiple blocks.
+  - If multiple blocks are included, separate them with two \\n\\n.
   - Do NOT default to using the entire block—use the smallest relevant span instead.
 - At least one comment must be provided.
 - If a <Selection> exists, Your comments should come from the <Selection>, and if the <Selection> is too long, there should be more than one comment.
@@ -278,12 +278,12 @@ ${systemCommon}
 `;
 
 const editSystemSelecting = `\
-- <Block> shows the full sentence or paragraph, only for context. 
-- <Selection> is the exact span of text inside <Block> that must be replaced. 
-- Your output MUST be only the replacement string for <Selection>, with no tags. 
-- Never output <Block> or <Selection> tags, and never output surrounding text. 
-- The replacement must be grammatically correct when substituted back into <Block>. 
-- Ensure the replacement fits seamlessly so the whole <Block> reads naturally. 
+- <Block> shows the full sentence or paragraph, only for context.
+- <Selection> is the exact span of text inside <Block> that must be replaced.
+- Your output MUST be only the replacement string for <Selection>, with no tags.
+- Never output <Block> or <Selection> tags, and never output surrounding text.
+- The replacement must be grammatically correct when substituted back into <Block>.
+- Ensure the replacement fits seamlessly so the whole <Block> reads naturally.
 - Output must be limited to the replacement string itself.
 - Do not remove the \\n in the original text
 `;
@@ -310,12 +310,12 @@ const commentPromptSelecting = `
 Comment on the content within the <Selection>.
 Never write <Selection>.
 {prompt}:
-        
+
 {blockWithBlockId}
 `;
 
 const commentPromptDefault = `{prompt}:
-        
+
 {editorWithBlockId}
 `;
 

@@ -47,7 +47,7 @@ export async function createCustomTheme(formData: ThemeFormData) {
       message: 'Theme created successfully',
     };
   } catch (error) {
-    console.error('Failed to create custom theme:', error);
+    // console.error('Failed to create custom theme:', error);
 
     // Log the actual error but return a generic message
     if (error instanceof z.ZodError) {
@@ -116,7 +116,7 @@ export async function updateCustomTheme(
       message: 'Theme updated successfully',
     };
   } catch (error) {
-    console.error('Failed to update custom theme:', error);
+    // console.error('Failed to update custom theme:', error);
 
     // Log the actual error but return a generic message
     if (error instanceof z.ZodError) {
@@ -170,8 +170,8 @@ export async function deleteCustomTheme(themeId: string) {
         if (fileKey) {
           await utapi.deleteFiles(fileKey);
         }
-      } catch (deleteError) {
-        console.error('Failed to delete theme logo:', deleteError);
+      } catch {
+        // console.error('Failed to delete theme logo:', deleteError);
         // Continue with theme deletion even if logo deletion fails
       }
     }
@@ -184,8 +184,8 @@ export async function deleteCustomTheme(themeId: string) {
       success: true,
       message: 'Theme deleted successfully',
     };
-  } catch (error) {
-    console.error('Failed to delete custom theme:', error);
+  } catch {
+    // console.error('Failed to delete custom theme:', error);
     return {
       success: false,
       message:
@@ -220,8 +220,8 @@ export async function getUserCustomThemes() {
       success: true,
       themes,
     };
-  } catch (error) {
-    console.error('Failed to fetch custom themes:', error);
+  } catch {
+    // console.error('Failed to fetch custom themes:', error);
     return {
       success: false,
       message: 'Unable to load themes at this time. Please try again later.',
@@ -253,8 +253,8 @@ export async function getPublicCustomThemes() {
       success: true,
       themes,
     };
-  } catch (error) {
-    console.error('Failed to fetch public themes:', error);
+  } catch {
+    // console.error('Failed to fetch public themes:', error);
     return {
       success: false,
       message:
@@ -286,8 +286,8 @@ export async function getCustomThemeById(themeId: string) {
       success: true,
       theme,
     };
-  } catch (error) {
-    console.error('Failed to fetch theme:', error);
+  } catch {
+    // console.error('Failed to fetch theme:', error);
     return {
       success: false,
       message: 'Unable to load the theme at this time. Please try again later.',

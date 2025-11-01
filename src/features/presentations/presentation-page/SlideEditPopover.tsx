@@ -71,7 +71,9 @@ export function SlideEditPopover({ index }: SlideEditPopoverProps) {
   };
 
   const handleImageDelete = () => {
-    updateSlide({ rootImage: { ...currentSlide?.rootImage!, url: undefined } });
+    if (currentSlide?.rootImage) {
+      updateSlide({ rootImage: { ...currentSlide.rootImage, url: undefined } });
+    }
   };
 
   return (
@@ -82,7 +84,7 @@ export function SlideEditPopover({ index }: SlideEditPopoverProps) {
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-80 rounded-md border border-border bg-background"
+        className="border-border bg-background w-80 rounded-md border"
         side="bottom"
       >
         <div className="space-y-2">

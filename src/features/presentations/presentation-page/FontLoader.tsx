@@ -1,7 +1,15 @@
 'use client';
 
-import { FontPicker } from '@/components/ui/font-picker';
+import dynamic from 'next/dynamic';
 import { type ThemeProperties } from '@/lib/presentation/themes';
+
+const FontPicker = dynamic(
+  () =>
+    import('@/components/ui/font-picker').then((mod) => ({
+      default: mod.FontPicker,
+    })),
+  { ssr: false }
+);
 
 // Component to load fonts for custom themes
 export function CustomThemeFontLoader({

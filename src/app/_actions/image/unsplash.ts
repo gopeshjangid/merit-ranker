@@ -79,7 +79,7 @@ export async function getImageFromUnsplash(
       imageUrl: firstImage.urls.regular,
     };
   } catch (error) {
-    console.error('Error getting Unsplash image:', error);
+    // console.error('Error getting Unsplash image:', error);
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Failed to get image',

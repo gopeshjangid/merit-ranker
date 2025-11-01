@@ -3,11 +3,10 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ChevronRight, Zap } from "lucide-react"
 import { AnimatedCircle } from "./animated-shapes"
 import { AnimatedTechLines } from "./animated-tech-patterns"
-import Link from "next/link" // Import Link
-import { Smartphone } from "lucide-react"
+import Link from "next/link"
+import { ChevronRight, Smartphone, Zap } from "lucide-react"
 
 const MODES = ["student", "teacher"] as const
 type Mode = (typeof MODES)[number]

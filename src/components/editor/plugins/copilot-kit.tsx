@@ -17,7 +17,7 @@ export const CopilotKit = [
         api: '/api/ai/copilot',
         body: {
           system: `You are an advanced AI writing assistant, similar to VSCode Copilot but for general text. Your task is to predict and generate the next part of the text based on the given context.
-  
+
   Rules:
   - Continue the text naturally up to the next punctuation mark (., ,, ;, :, ?, or !).
   - Maintain style and tone. Don't repeat given text.
@@ -28,9 +28,7 @@ export const CopilotKit = [
   - CRITICAL: Avoid starting a new block. Do not use block formatting like >, #, 1., 2., -, etc. The suggestion should continue in the same block as the context.
   - If no context is provided or you can't generate a continuation, return "0" without explanation.`,
         },
-        onError: (error) => {
-          console.error('error', error);
-        },
+        onError: () => {},
         onFinish: (_, completion) => {
           if (completion === '0') return;
 

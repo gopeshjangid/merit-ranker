@@ -10,7 +10,7 @@ export function PresentationInput({
 }: {
   handleGenerate: () => void;
 }) {
-  const { presentationInput, setPresentationInput, setShowTemplates } =
+  const { presentationInput, setPresentationInput } =
     usePresentationState();
 
   return (
