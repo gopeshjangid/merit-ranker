@@ -1,13 +1,22 @@
+await import('./src/env.js');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async redirects() {
-    return [
+  images: {
+    remotePatterns: [
       {
-        destination: '/editor',
-        permanent: false,
-        source: '/',
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
       },
-    ];
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.ufs.sh",
+      },
+    ],
   },
 };
 

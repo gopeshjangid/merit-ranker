@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
   const openai = createOpenAI({ apiKey });
 
   try {
-    const result = await generateText({
+    const { text } = await generateText({
       abortSignal: req.signal,
       maxOutputTokens: 50,
       model: openai(model),
@@ -32,8 +32,7 @@ export async function POST(req: NextRequest) {
       system,
       temperature: 0.7,
     });
-
-    return NextResponse.json(result);
+    return NextResponse.json({ text });
   } catch (error) {
     if (error instanceof Error && error.name === 'AbortError') {
       return NextResponse.json(null, { status: 408 });
