@@ -71,7 +71,10 @@ export function SlideEditPopover({ index }: SlideEditPopoverProps) {
   };
 
   const handleImageDelete = () => {
-    updateSlide({ rootImage: { ...currentSlide?.rootImage!, url: undefined } });
+    const existingRootImage = currentSlide?.rootImage;
+    if (existingRootImage) {
+      updateSlide({ rootImage: { ...existingRootImage, url: undefined } });
+    }
   };
 
   return (

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { HeroSection } from "@/components/landing/hero-section"
-import { CtaSection } from "@/components/landing/cta-section" 
+import { CtaSection } from "@/components/landing/cta-section"
 import { AICapabilitiesSection } from "@/components/landing/ai-capabilities-section"
 import { StudentsSection } from "@/components/landing/students-section"
 import { TeachersSection } from "@/components/landing/teachers-section"
@@ -39,15 +39,15 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-background selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-background selection:bg-brand selection:text-white">
       <main className="flex-grow">
-          <HeroSection />
-          <AICapabilitiesSection />
-          <StudentsSection />
-          <TeachersSection />
-          <WhyTeachersChooseSection />
-          <ShowcaseSection />
-          <CtaSection />
+        <HeroSection />
+        <AICapabilitiesSection />
+        <StudentsSection />
+        <TeachersSection />
+        <WhyTeachersChooseSection />
+        <ShowcaseSection />
+        <CtaSection />
       </main>
     </div>
   )

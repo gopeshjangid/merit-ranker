@@ -84,12 +84,12 @@ export function HeroSection() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             <div className="flex-1 text-center lg:text-left">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-foreground">
                 {headlineText}
               </h1>
-              <p className="text-lg md:text-xl mb-10 text-slate-300 max-w-xl mx-auto lg:mx-0">{subHeadlineText}</p>
+              <p className="text-lg md:text-xl mb-10 text-muted-foreground max-w-xl mx-auto lg:mx-0">{subHeadlineText}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button size="lg" asChild>
+                <Button size="lg" asChild className="shadow-lg shadow-primary/20">
                   <Link href="/#students">
                     <Zap className="mr-2 h-5 w-5 text-yellow-300" />
                     Start Learning Free
@@ -105,7 +105,7 @@ export function HeroSection() {
             </div>
             <div className="flex-1 relative mt-12 lg:mt-0">
               {/* Simplified phone for no-JS, or could be a static image */}
-              <div className="relative z-10 w-64 h-[500px] mx-auto rounded-[40px] border-[8px] border-card overflow-hidden bg-slate-700 flex items-center justify-center">
+              <div className="relative z-10 w-64 h-[500px] mx-auto rounded-[40px] border-[8px] border-card overflow-hidden bg-muted flex items-center justify-center">
                 <Smartphone className="h-24 w-24 text-primary" />
               </div>
             </div>
@@ -117,15 +117,34 @@ export function HeroSection() {
 
   return (
     <section className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden min-h-[90vh] flex items-center">
-      <AnimatedTechLines className="opacity-70" />
-      <div className="absolute inset-0 hero-gradient opacity-60"></div>
-      <AnimatedCircle size={250} color="rgba(0, 255, 255, 0.07)" className="top-10 left-5 animate-pulse" />
-      <AnimatedCircle
-        size={350}
-        color="rgba(0, 255, 255, 0.04)"
-        className="bottom-10 right-5 animate-pulse"
-        delay={1.5}
+      {/* Enhanced Background Effects */}
+      <div className="absolute inset-0 hero-gradient" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+
+      {/* Animated Background Elements */}
+      <AnimatedTechLines className="opacity-50" />
+
+      {/* Floating Orbs */}
+      <motion.div
+        className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary/10 blur-3xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3]
+        }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
+      <motion.div
+        className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-primary/8 blur-3xl"
+        animate={{
+          scale: [1.2, 1, 1.2],
+          opacity: [0.2, 0.4, 0.2]
+        }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+
+      {/* Pulse circles */}
+      <AnimatedCircle size={200} color="hsl(var(--primary) / 0.12)" className="top-20 left-5" />
+      <AnimatedCircle size={300} color="hsl(var(--primary) / 0.06)" className="bottom-10 right-5" delay={1.5} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           <motion.div
@@ -151,17 +170,25 @@ export function HeroSection() {
             </motion.h1>
 
             <motion.div
-              className="inline-flex items-center gap-2 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-4 py-2 mb-4"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-5 py-2.5 mb-5 backdrop-blur-sm shadow-lg shadow-primary/5"
               variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
             >
-              {/* Highlight performance line as requested */}
-              <span className="text-sm text-cyan-200">
-                faster, Accurate, complex solver more than CHATGPT, specially designed for govt jobs exams
-              </span>
+              <motion.span
+                className="text-sm font-semibold text-primary"
+                animate={{ opacity: [1, 0.7, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                ⚡ AI-Powered
+              </motion.span>
+              <span className="text-primary/50">•</span>
+              <span className="text-sm font-medium text-primary">Govt Exam Specialist</span>
+              <span className="text-primary/50">•</span>
+              <span className="text-sm font-medium text-primary">Faster than ChatGPT</span>
             </motion.div>
 
             <motion.p
-              className="text-lg md:text-xl mb-10 text-slate-300 max-w-xl mx-auto lg:mx-0"
+              className="text-lg md:text-xl mb-10 text-muted-foreground max-w-xl mx-auto lg:mx-0"
               variants={itemVariants}
             >
               {subHeadlineText}
@@ -181,11 +208,10 @@ export function HeroSection() {
                   role="tab"
                   aria-selected={mode === "student"}
                   onClick={() => setMode("student")}
-                  className={`rounded-full px-3 py-1 text-sm border transition ${
-                    mode === "student"
-                      ? "border-cyan-400 text-cyan-200"
-                      : "border-slate-700 text-slate-400 hover:text-slate-200"
-                  }`}
+                  className={`rounded-full px-3 py-1 text-sm border transition ${mode === "student"
+                    ? "border-brand text-brand"
+                    : "border-muted-foreground/30 text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   Student
                 </button>
@@ -193,11 +219,10 @@ export function HeroSection() {
                   role="tab"
                   aria-selected={mode === "teacher"}
                   onClick={() => setMode("teacher")}
-                  className={`rounded-full px-3 py-1 text-sm border transition ${
-                    mode === "teacher"
-                      ? "border-cyan-400 text-cyan-200"
-                      : "border-slate-700 text-slate-400 hover:text-slate-200"
-                  }`}
+                  className={`rounded-full px-3 py-1 text-sm border transition ${mode === "teacher"
+                    ? "border-brand text-brand"
+                    : "border-muted-foreground/30 text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   Teacher
                 </button>
@@ -207,7 +232,7 @@ export function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="group relative overflow-hidden shadow-lg hover:shadow-cyan-500/40 transition-all duration-300 transform hover:scale-105"
+                className="group relative overflow-hidden shadow-lg hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105"
               >
                 <Link href={mode === "student" ? "/auth/sign-up?role=student" : "/auth/sign-up?role=teacher"}>
                   <Zap className="mr-2 h-5 w-5 text-yellow-300 group-hover:animate-pulse" />
@@ -228,7 +253,7 @@ export function HeroSection() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="group relative overflow-hidden border-slate-600 hover:border-cyan-400 text-slate-300 hover:text-cyan-400 transition-all duration-300 transform hover:scale-105 bg-transparent"
+                className="group relative overflow-hidden text-muted-foreground hover:text-primary transition-all duration-300 transform hover:scale-105 bg-transparent"
               >
                 <Link href={mode === "student" ? "/teacher/branding" : "/auth/sign-in"}>
                   <span className="relative z-10">{mode === "student" ? "Teacher Branding" : "Sign In"}</span>
@@ -244,8 +269,8 @@ export function HeroSection() {
             </motion.div>
 
             {mode === "teacher" && (
-              <div className="mt-3 text-sm text-slate-400 text-center lg:text-left">
-                <Link href="/teacher/dashboard" className="underline underline-offset-4 hover:text-cyan-300">
+              <div className="mt-3 text-sm text-muted-foreground text-center lg:text-left">
+                <Link href="/teacher/dashboard" className="underline underline-offset-4 hover:text-primary">
                   Open Teacher Dashboard
                 </Link>
               </div>

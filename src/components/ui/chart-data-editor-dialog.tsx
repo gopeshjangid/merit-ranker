@@ -157,7 +157,6 @@ export function ChartDataEditorDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className="ignore-click-outside/toolbar flex max-h-[80vh] max-w-2xl flex-col overflow-hidden"
-        showCloseButton={true}
       >
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>

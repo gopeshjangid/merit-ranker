@@ -10,7 +10,7 @@ export function FloatingActionButton() {
       <Button
         asChild
         size="lg"
-        className="rounded-full shadow-lg bg-cyan-500 hover:bg-cyan-600 text-white w-16 h-16 sm:w-auto sm:h-auto sm:px-6 sm:py-3"
+        className="rounded-full shadow-lg bg-brand hover:bg-brand/90 text-white w-16 h-16 sm:w-auto sm:h-auto sm:px-6 sm:py-3"
         aria-label="Buy eSIM"
       >
         <Link href="/buy-esim">

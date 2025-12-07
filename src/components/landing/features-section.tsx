@@ -118,14 +118,14 @@ export function FeaturesSection() {
         >
           {features.map((feature, index) => (
             <motion.div key={index} variants={cardVariants} className="h-full">
-              <Card className="h-full transform border-slate-700/70 bg-slate-800/50 shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/50 hover:shadow-cyan-500/20">
+              <Card className="h-full transform border-border bg-card shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-brand/20">
                 <CardHeader className="pb-4">
                   <motion.div
-                    className="mb-5 flex h-14 w-14 items-center justify-center rounded-lg border border-cyan-500/30 bg-gradient-to-br from-cyan-500/20 to-teal-500/30 shadow-inner"
+                    className="mb-5 flex h-14 w-14 items-center justify-center rounded-lg border border-brand/30 bg-gradient-to-br from-brand/20 to-primary/30 shadow-inner"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <feature.icon className="h-7 w-7 text-cyan-400" />
+                    <feature.icon className="h-7 w-7 text-brand" />
                   </motion.div>
                   <CardTitle className="text-xl text-slate-100">
                     {feature.title}

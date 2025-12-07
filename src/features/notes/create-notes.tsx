@@ -24,6 +24,7 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
   const { loadNote, currentDocument, setEditorValue, setIsLoading, isLoading } = useNotesStore();
 
   const actualMode = documentId ? 'edit' : 'create';
+
   useEffect(() => {
     if (actualMode === 'edit' && documentId) {
       loadExistingNote(documentId);
@@ -31,7 +32,7 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
   }, [documentId, actualMode]);
 
   const loadExistingNote = async (noteId: string) => {
-     setEditorValue(normalizeNodeId(getDefaultEditorValue()));
+    setEditorValue(normalizeNodeId(getDefaultEditorValue()));
     try {
       setIsLoading(true);
       const document = await loadNote(noteId);
@@ -42,7 +43,6 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
         }).result;
 
         const blob = downloadResult.body;
-
         const textContent = await blob.text();
 
         if (!textContent || textContent.trim() === '') {
@@ -55,9 +55,7 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
         } catch (parseError) {
           console.error('JSON parse error:', parseError);
           console.error('Raw content received:', textContent);
-          throw new Error(
-            'Failed to parse document content - invalid JSON format'
-          );
+          throw new Error('Failed to parse document content - invalid JSON format');
         }
 
         if (!Array.isArray(editorValue) || editorValue.length === 0) {
@@ -72,13 +70,9 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
       }
     } catch (error) {
       console.error('Failed to load note:', error);
-
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : 'Failed to load note for editing';
+      const errorMessage = error instanceof Error ? error.message : 'Failed to load note for editing';
       toast.error(errorMessage);
-     setEditorValue(normalizeNodeId(getDefaultEditorValue()));
+      setEditorValue(normalizeNodeId(getDefaultEditorValue()));
     } finally {
       setIsLoading(false);
     }
@@ -93,21 +87,22 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
     {
       id: '2',
       type: 'p',
-      children: [{ text: 'failed to load content...' }],
+      children: [{ text: 'Start writing your content here...' }],
     },
   ];
 
   return (
     <PlateController>
-      <section className="h-full">
-        <div className="flex items-center justify-between border-b p-4">
+      <section className="h-full flex flex-col">
+        {/* Header Bar */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border/50 bg-card/50">
           <div>
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-base font-medium text-foreground">
               {actualMode === 'edit' ? 'Edit Note' : 'Create New Note'}
             </h2>
             {actualMode === 'edit' && currentDocument && (
-              <p className="text-sm text-muted-foreground">
-                Editing: {currentDocument.title || 'Untitled'}
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {currentDocument.title || 'Untitled'}
               </p>
             )}
           </div>
@@ -116,28 +111,33 @@ export default function CreateNotes({ documentId }: CreateNotesProps) {
             documentId={documentId}
           />
         </div>
-      <div className="h-[calc(100vh-6rem)]">
-        <ResizablePanelGroup
-          direction="horizontal"
-          className="h-full rounded-md border"
-        >
-          <ResizablePanel defaultSize={15} minSize={10} className="bg-muted/30">
-            <TocSideBar />
-          </ResizablePanel>
-          <ResizableHandle withHandle />
-          <ResizablePanel defaultSize={85} minSize={85}>
-            {isLoading ? (
-              <div className="p-6">
-                <Skeleton className="h-10 w-full mb-4" />
-                <Skeleton className="h-96 w-full" />
-              </div>
-            ) : (
-              <PlateEditor />
-            )}
-          </ResizablePanel>
-        </ResizablePanelGroup>
+
+        {/* Editor Area */}
+        <div className="flex-1 min-h-0">
+          <ResizablePanelGroup
+            direction="horizontal"
+            className="h-full"
+          >
+            <ResizablePanel defaultSize={18} minSize={12} maxSize={25} className="bg-muted/20">
+              <TocSideBar />
+            </ResizablePanel>
+            <ResizableHandle withHandle />
+            <ResizablePanel defaultSize={82} minSize={60}>
+              {isLoading ? (
+                <div className="p-6 space-y-4">
+                  <Skeleton className="h-8 w-3/4" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                  <Skeleton className="h-64 w-full" />
+                </div>
+              ) : (
+                <PlateEditor />
+              )}
+            </ResizablePanel>
+          </ResizablePanelGroup>
         </div>
       </section>
     </PlateController>
   );
 }
+

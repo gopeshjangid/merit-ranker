@@ -18,8 +18,18 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 // Dummy session object for testing
-const dummySession = {
-  status: 'authenticated' as const,
+const dummySession: {
+  status: 'authenticated' | 'loading' | 'unauthenticated';
+  data: {
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      image: string;
+    };
+  } | null;
+} = {
+  status: 'authenticated',
   data: {
     user: {
       id: 'test-user-123',
@@ -82,11 +92,11 @@ export function UserDetail() {
       )}
       {(session.status === 'loading' ||
         session.status === 'unauthenticated') && (
-        <div className="grid gap-0.5 px-2 py-1.5">
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-2 w-full" />
-        </div>
-      )}
+          <div className="grid gap-0.5 px-2 py-1.5">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-2 w-full" />
+          </div>
+        )}
     </div>
   );
 }

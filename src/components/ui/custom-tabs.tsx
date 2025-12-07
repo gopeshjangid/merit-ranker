@@ -35,10 +35,10 @@ export function CustomTabs({
 }: CustomTabsProps) {
 
   const [internalValue, setInternalValue] = useState(defaultValue)
-  
+
   const isControlled = externalValue !== undefined && externalOnValueChange !== undefined
   const currentValue = isControlled ? externalValue : internalValue
-  
+
   const handleValueChange = (newValue: string) => {
     if (isControlled) {
       externalOnValueChange!(newValue)
@@ -54,43 +54,43 @@ export function CustomTabs({
   }, [externalValue, isControlled, internalValue])
 
   return (
-    <div  className={cn("flex flex-col gap-6", className)}>
-    <Tabs defaultValue={defaultValue} value={currentValue} onValueChange={handleValueChange}>
-      <TabsList
-        className={cn(
-          "rounded-xl p-1 bg-gradient-to-r from-blue-900 via-slate-900 to-blue-800 border border-blue-800",
-          tabsListClassName
-        )}
-      >
-        {tabs.map((tab) => {
-          const Icon = tab.icon
-          return (
-            <TabsTrigger
-              key={tab.value}
-              value={tab.value}
-              className={cn(
-                "flex items-center gap-2 rounded-xl px-8 text-lg font-medium transition-colors",
-                "data-[state=active]:bg-blue-700 data-[state=active]:text-white",
-                "data-[state=inactive]:bg-transparent data-[state=inactive]:text-blue-200",
-                tabsTriggerClassName
-              )}
-            >
-              {Icon && <Icon className="w-5 h-5 mr-2" />}
-              {tab.label}
-            </TabsTrigger>
-          )
-        })}
-      </TabsList>
-      {tabs.map((tab) => (
-        <TabsContent
-          key={tab.value}
-          value={tab.value}
-          className={cn("mt-6", tabsContentClassName)}
+    <div className={cn("flex flex-col gap-4", className)}>
+      <Tabs defaultValue={defaultValue} value={currentValue} onValueChange={handleValueChange}>
+        <TabsList
+          className={cn(
+            "inline-flex h-10 items-center justify-start rounded-lg bg-muted p-1 gap-1",
+            tabsListClassName
+          )}
         >
-          {tab.content}
-        </TabsContent>
-      ))}
-    </Tabs>
+          {tabs.map((tab) => {
+            const Icon = tab.icon
+            return (
+              <TabsTrigger
+                key={tab.value}
+                value={tab.value}
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all",
+                  "data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+                  "data-[state=inactive]:text-muted-foreground hover:data-[state=inactive]:text-foreground",
+                  tabsTriggerClassName
+                )}
+              >
+                {Icon && <Icon className="h-4 w-4" />}
+                {tab.label}
+              </TabsTrigger>
+            )
+          })}
+        </TabsList>
+        {tabs.map((tab) => (
+          <TabsContent
+            key={tab.value}
+            value={tab.value}
+            className={cn("mt-4", tabsContentClassName)}
+          >
+            {tab.content}
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
   )
 }

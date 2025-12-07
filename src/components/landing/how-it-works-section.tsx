@@ -64,7 +64,7 @@ export function HowItWorksSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <Settings2 className="mx-auto h-12 w-12 text-cyan-400 mb-4" />
+          <Settings2 className="mx-auto h-12 w-12 text-brand mb-4" />
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             How It <span className="gradient-text">Works</span>
           </h2>
@@ -82,7 +82,7 @@ export function HowItWorksSection() {
         >
           {/* Connection line - enhanced with animation */}
           <motion.div
-            className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-cyan-500/30 hidden md:block"
+            className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-brand/30 hidden md:block"
             initial={{ height: 0 }}
             whileInView={{ height: "100%" }}
             transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
@@ -98,12 +98,12 @@ export function HowItWorksSection() {
                 className="relative md:flex items-center group"
               >
                 <div className={`md:w-1/2 ${index % 2 === 0 ? "md:pr-10 lg:pr-16" : "md:pl-10 lg:pl-16 md:order-2"}`}>
-                  <div className="bg-slate-800/70 backdrop-blur-md p-6 rounded-lg border border-slate-700 shadow-lg transition-all duration-300 group-hover:border-cyan-500/70 group-hover:shadow-cyan-500/20">
-                    <div className="flex items-center mb-3">
+                  <div className="bg-card backdrop-blur-md p-6 rounded-lg border border-border shadow-lg transition-all duration-300 group-hover:border-brand/70 group-hover:shadow-brand/20">
+                    <div className="flex items-center mb-4 md:mb-0">
                       <div
-                        className={`h-10 w-10 rounded-full bg-cyan-500/20 border-2 border-cyan-500/50 flex items-center justify-center mr-4 transition-all duration-300 group-hover:bg-cyan-500/30 group-hover:scale-105 ${index % 2 !== 0 && "md:ml-auto md:mr-0 md:order-2"}`}
+                        className={`h-10 w-10 rounded-full bg-brand/20 border-2 border-brand/50 flex items-center justify-center mr-4 transition-all duration-300 group-hover:bg-brand/30 group-hover:scale-105 ${index % 2 !== 0 && "md:ml-auto md:mr-0 md:order-2"}`}
                       >
-                        <step.icon className="h-5 w-5 text-cyan-400" />
+                        <step.icon className="h-5 w-5 text-brand" />
                       </div>
                       <h3 className={`text-xl font-semibold text-slate-100 ${index % 2 !== 0 && "md:text-right"}`}>
                         {step.title}
@@ -114,7 +114,7 @@ export function HowItWorksSection() {
                 </div>
                 {/* Central Step Number Circle - enhanced */}
                 <div
-                  className={`absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-background border-4 border-cyan-500 text-cyan-400 font-bold text-lg shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-cyan-500/40 ${index % 2 === 0 ? "md:-right-6" : "md:-left-6"}`}
+                  className={`absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-background border-4 border-brand text-brand font-bold text-lg shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-brand/40 ${index % 2 === 0 ? "md:-right-6" : "md:-left-6"}`}
                 >
                   {index + 1}
                 </div>

@@ -77,10 +77,10 @@ export function AICapabilitiesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
               viewport={{ once: true, amount: 0.2 }}
-              className="rounded-xl border border-slate-700/70 bg-slate-800/40 p-6 shadow-xl transition-all hover:shadow-cyan-500/20"
+              className="rounded-xl border border-border bg-card p-6 shadow-xl transition-all hover:shadow-brand/20"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-cyan-500/30 bg-gradient-to-br from-cyan-500/20 to-teal-500/30">
-                <it.icon className="h-6 w-6 text-cyan-400" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg border border-brand/30 bg-gradient-to-br from-brand/20 to-primary/30">
+                <it.icon className="h-6 w-6 text-brand" />
               </div>
               <h3 className="mb-2 text-xl font-semibold">{it.title}</h3>
               <p className="text-sm leading-relaxed text-slate-300">

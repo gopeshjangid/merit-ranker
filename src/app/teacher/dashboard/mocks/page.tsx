@@ -7,7 +7,7 @@ import MockTestList from "@/components/mock-test/mock-test-list"
 import { Skeleton } from "@/components/ui/skeleton"
 
 const QuizList = dynamic(() => import("@/components/mock-test/quiz-list"), {
- loading: () => (
+  loading: () => (
     <div className="space-y-4">
       <Skeleton className="h-12 w-full" />
       <Skeleton className="h-64 w-full" />
@@ -37,6 +37,7 @@ export default function MocksPage() {
     <CustomTabs
       tabs={tabs}
       defaultValue="mock-list"
+      className="mt-2"
     />
   )
 }

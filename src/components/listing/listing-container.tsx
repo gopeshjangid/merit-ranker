@@ -1,9 +1,9 @@
 'use client'
 import { ListingFilters } from './listing-filters'
 import { ListingSearch } from './listing-search'
-import { ListingGrid } from './listing-grid'
+import { ListingGrid, type ListItem } from './listing-grid'
 
-export interface ListingContainerProps<T> {
+export interface ListingContainerProps<T extends ListItem> {
   header?: string
   subheader?: string
   items: T[]
@@ -15,35 +15,36 @@ export interface ListingContainerProps<T> {
   renderItem: (item: T) => React.ReactNode
 }
 
-export function ListingContainer<T>({
-  header = 'My Slides',
-  subheader = 'View and manage all your created presentations',
+export function ListingContainer<T extends ListItem>({
+  header = 'My Notes',
+  subheader = 'View and manage your content',
   items,
   isLoading,
   filters,
-  searchPlaceholder,
+  searchPlaceholder = 'Search...',
   onSearch,
   onFilterChange,
   renderItem,
 }: ListingContainerProps<T>) {
   return (
-    <section className="w-full py-8">
-      <h2 className="text-2xl font-bold mb-2">{header}</h2>
-      <p className="mb-6 text-muted-foreground">
-        {subheader}
-      </p>
-<div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6 border border-slate-700 rounded-lg px-4 py-3 bg-background shadow-sm">
-  {/* Search Input - Full width on mobile, flex-1 on desktop */}
-  <div className="w-full md:flex-1">
-    <ListingSearch placeholder={searchPlaceholder} onSearch={onSearch} />
-  </div>
-  
-  {/* Filters Section - Full width on mobile, fixed width on desktop */}
-  <div className="w-full md:w-auto flex items-center gap-2 min-w-fit">
-    {filters ?? <ListingFilters onChange={onFilterChange} />}
-  </div>
-</div>
+    <section className="w-full">
+      {/* Header */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold gradient-text">{header}</h2>
+        <p className="text-sm text-muted-foreground mt-1">{subheader}</p>
+      </div>
 
+      {/* Search & Filters Bar */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6 p-1 rounded-lg border border-border dark:border-cyan-500/20 bg-card/50 dark:bg-slate-800/50 backdrop-blur-sm">
+        <div className="flex-1">
+          <ListingSearch placeholder={searchPlaceholder} onSearch={onSearch} />
+        </div>
+        <div className="flex items-center gap-2">
+          {filters ?? <ListingFilters onChange={onFilterChange} />}
+        </div>
+      </div>
+
+      {/* Grid */}
       <ListingGrid isLoading={isLoading} items={items} renderItem={renderItem} />
     </section>
   )

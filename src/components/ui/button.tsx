@@ -11,7 +11,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        default: 'btn-gradient shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]',
         success: 'bg-green-500 text-primary-foreground hover:bg-green-400/90',
         destructive:
           'text-destructive-foreground bg-destructive hover:bg-destructive/90',
@@ -46,7 +46,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 
@@ -56,8 +56,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // If loading, only render Spinner as the single child
     const content =
       variant === 'loading' ||
-      variant === 'outlineLoading' ||
-      variant === 'noBackgroundLoading'
+        variant === 'outlineLoading' ||
+        variant === 'noBackgroundLoading'
         ? <Spinner className="h-4 w-4" />
         : children;
 

@@ -38,20 +38,21 @@ export default function NotesPage() {
     },
     {
       value: "create-new",
-      label:  editingDocumentId ? "Edit Note" : "Create New",
+      label: editingDocumentId ? "Edit Note" : "Create New",
       icon: Plus,
-      content: <CreateNotes 
+      content: <CreateNotes
         documentId={editingDocumentId || undefined}
       />,
     },
   ]
 
   return (
-     <CustomTabs
+    <CustomTabs
       tabs={tabs}
       defaultValue="notes-list"
       value={activeTab}
       onValueChange={handleTabChange}
+      className="mt-2"
     />
   )
 }

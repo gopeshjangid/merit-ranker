@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { AnimatedTechParticles } from './animated-tech-patterns';
@@ -101,7 +102,7 @@ export function TeachersSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <div className="rounded-2xl border border-slate-700/70 bg-slate-800/40 p-3 shadow-2xl">
+            <div className="rounded-2xl border border-border bg-card p-3 shadow-2xl">
               <Image
                 src="/images/teacher-dashboard.jpg"
                 alt="Meritranker teacher dashboard preview"
@@ -120,10 +121,10 @@ export function TeachersSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <h2 className="mb-4 text-3xl font-bold text-pretty text-white md:text-4xl">
+            <h2 className="mb-4 text-3xl font-bold text-pretty text-foreground md:text-4xl">
               Everything for <span className="gradient-text">Teachers</span>
             </h2>
-            <p className="mb-6 text-slate-300">
+            <p className="mb-6 text-muted-foreground">
               Create notes and slides, build quizzes and mocks, manage students,
               and sell premium content—powered by Intelligence.
             </p>
@@ -131,37 +132,38 @@ export function TeachersSection() {
             {/* core features */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {items.map((it) => (
-                <div
+                <motion.div
                   key={it.title}
-                  className="rounded-xl border border-slate-700/70 bg-slate-800/40 p-4 transition-colors hover:border-cyan-500/40"
+                  whileHover={{ y: -5 }}
+                  className="rounded-xl border border-border bg-card p-4 transition-colors hover:border-brand/40"
                 >
-                  <div className="flex items-start gap-3">
-                    <it.icon className="mt-1 h-5 w-5 text-cyan-400" />
-                    <div>
-                      <h3 className="font-semibold text-white">{it.title}</h3>
-                      <p className="text-sm leading-relaxed text-slate-300">
-                        {it.desc}
-                      </p>
-                    </div>
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-muted/50">
+                    <it.icon className="mt-1 h-5 w-5 text-brand" />
                   </div>
-                </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">{it.title}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {it.desc}
+                    </p>
+                  </div>
+                </motion.div>
               ))}
             </div>
 
             {/* actions */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
-                href="/#teachers"
-                className="inline-flex items-center justify-center rounded-md bg-cyan-500 px-5 py-3 font-medium text-white transition hover:bg-cyan-600"
+                href="/auth/sign-up?role=teacher"
+                className="inline-flex items-center justify-center rounded-md bg-brand px-5 py-3 font-medium text-white transition hover:bg-brand/90"
               >
-                Create for Free
+                Join as Educator Free
               </a>
-              <a
-                href="/teachers"
-                className="inline-flex items-center justify-center rounded-md border border-slate-600 px-5 py-3 font-medium text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300"
+              <Link
+                href="/teacher/branding"
+                className="inline-flex items-center justify-center rounded-md border border-border px-5 py-3 font-medium text-muted-foreground transition hover:border-brand hover:text-brand"
               >
-                Explore Teachers Marketplace
-              </a>
+                Learn about Branding Kit
+              </Link>
             </div>
           </motion.div>
         </div>

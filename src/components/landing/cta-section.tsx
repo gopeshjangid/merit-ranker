@@ -30,7 +30,7 @@ export function CtaSection() {
           <Button
             asChild
             size="lg"
-            className="group relative transform overflow-hidden bg-cyan-500 px-8 py-6 text-lg text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-cyan-600 hover:shadow-cyan-500/40"
+            className="group relative transform overflow-hidden px-8 py-6 text-lg shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-brand/40"
           >
             <Link href="/#students">
               Get Started Free
@@ -40,7 +40,7 @@ export function CtaSection() {
           <div className="mt-4">
             <Link
               href="/#teachers"
-              className="inline-flex items-center text-cyan-300 underline-offset-4 hover:text-cyan-200 hover:underline"
+              className="inline-flex items-center text-brand underline-offset-4 hover:text-brand/80 hover:underline"
             >
               Are you a teacher? Create for Free →
             </Link>

@@ -73,7 +73,7 @@ export function ProvidersSection() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          <Building2 className="mx-auto mb-4 h-12 w-12 text-cyan-400" />
+          <Building2 className="mx-auto mb-4 h-12 w-12 text-brand" />
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             Choose Your <span className="gradient-text">Provider</span>
           </h2>
@@ -92,7 +92,7 @@ export function ProvidersSection() {
         >
           {providers.map((provider, index) => (
             <motion.div key={index} variants={cardVariants} className="h-full">
-              <Card className="flex h-full transform flex-col overflow-hidden border-slate-700/80 bg-slate-800/60 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-cyan-500/60 hover:shadow-cyan-500/30">
+              <Card className="flex h-full transform flex-col overflow-hidden border-border bg-card shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-brand/60 hover:shadow-brand/30">
                 <div className={`h-2.5 ${provider.color}`}></div>
                 <CardContent className="flex flex-grow flex-col items-center px-6 pt-8 pb-6 text-center">
                   <div className="mb-5">
@@ -107,13 +107,13 @@ export function ProvidersSection() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="group relative mt-auto overflow-hidden border-slate-600 text-slate-300 transition-colors duration-300 hover:border-cyan-400 hover:text-cyan-400"
+                    className="group relative mt-auto overflow-hidden border-border text-muted-foreground transition-colors duration-300 hover:border-brand hover:text-brand"
                   >
                     <span className="relative z-10">View Plans</span>
                     <ChevronRight className="relative z-10 ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     <motion.div
-                      className="absolute inset-0 bg-cyan-400/10"
-                      initial={{ scaleX: 0, originLeft: 0 }}
+                      className="absolute inset-0 bg-brand/10"
+                      initial={{ scaleX: 0, originX: 0 }}
                       whileHover={{ scaleX: 1 }}
                       transition={{ duration: 0.3, ease: 'easeOut' }}
                     />

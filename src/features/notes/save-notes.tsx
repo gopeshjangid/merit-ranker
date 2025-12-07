@@ -45,18 +45,19 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
   const { uploadJsons } = useJsonUpload();
   const { createNote, updateNote, currentDocument, isLoading } = useNotesStore();
   const { getUserId } = useUserStore();
-  
+
   const tocState = useTocSideBarState({ open: true });
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     subject: '',
     tags: [] as string[],
     excerpt: '',
+    sourceUrl: '',
   });
   const [newTag, setNewTag] = useState('');
-  
+
   const getAutoTitle = () => {
     const headings = tocState.headingList || [];
     return headings.length > 0 ? headings[0].title : '';
@@ -78,7 +79,7 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
       const editorValue = tocState.editor.children;
       const autoTitle = getAutoTitle();
       const finalTitle = formData.title || autoTitle || 'Untitled Note';
-      
+
       const contentString = JSON.stringify(editorValue);
       const contentSize = new Blob([contentString]).size;
 
@@ -92,7 +93,7 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
 
         if (uploadResult[0]?.s3key) {
           await createNote({
-            documentId: nanoid(), 
+            documentId: nanoid(),
             title: finalTitle,
             s3Key: uploadResult[0].s3key,
             userId: userId,
@@ -101,7 +102,7 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
             excerpt: formData.excerpt,
             contentSize,
           });
-          
+
           toast.success('Note saved successfully!');
           setIsOpen(false);
         }
@@ -122,7 +123,7 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
             excerpt: formData.excerpt,
             contentSize,
           });
-          
+
           toast.success('Note updated successfully!');
           setIsOpen(false);
         }
@@ -167,14 +168,14 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
           {mode === 'create' ? 'Save Note' : 'Update Note'}
         </Button>
       </DialogTrigger>
-      
+
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
             {mode === 'create' ? 'Save New Note' : 'Update Note'}
           </DialogTitle>
         </DialogHeader>
-        
+
         <div className="space-y-4">
           <div>
             <Label htmlFor="title">Title</Label>
@@ -185,7 +186,7 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
               onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
             />
           </div>
-          
+
           <div>
             <Label htmlFor="subject">Subject</Label>
             <Input
@@ -195,7 +196,18 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
               onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
             />
           </div>
-          
+
+          <div>
+            <Label htmlFor="sourceUrl">Source URL (Optional)</Label>
+            <Input
+              id="sourceUrl"
+              placeholder="YouTube or Google Drive link..."
+              value={formData.sourceUrl}
+              onChange={(e) => setFormData(prev => ({ ...prev, sourceUrl: e.target.value }))}
+            />
+            <p className="text-xs text-muted-foreground mt-1">Import from YouTube video or Google Drive PDF</p>
+          </div>
+
           <div>
             <Label>Tags</Label>
             <div className="flex gap-2 mb-2">
@@ -213,15 +225,15 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
               {formData.tags.map(tag => (
                 <Badge key={tag} variant="secondary" className="flex items-center gap-1">
                   {tag}
-                  <X 
-                    className="w-3 h-3 cursor-pointer" 
+                  <X
+                    className="w-3 h-3 cursor-pointer"
                     onClick={() => removeTag(tag)}
                   />
                 </Badge>
               ))}
             </div>
           </div>
-          
+
           <div>
             <Label htmlFor="excerpt">Excerpt (Optional)</Label>
             <Textarea
@@ -232,7 +244,7 @@ function SaveNotesContent({ mode = 'create', documentId }: SaveNotesProps) {
               rows={3}
             />
           </div>
-          
+
           <Button onClick={handleSave} disabled={isSaveDisabled} className="w-full">
             {isLoading ? (
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />

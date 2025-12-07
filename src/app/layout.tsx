@@ -4,13 +4,11 @@ import localFont from 'next/font/local';
 
 import TanStackQueryProvider from '@/provider/TanstackProvider';
 import { ThemeProvider } from '@/provider/theme-provider';
-import { FloatingActionButton } from "@/components/landing/floating-action-button"
 import { Toaster } from 'sonner';
 import { Navbar } from '@/components/landing/navbar';
 import { FooterWrapper } from '@/components/landing/footer-wrapper';
 
-// import './globals.css';
-import './temp.css';
+import './globals.css';
 import ConfigureAmplifyClientSide from '@/components/ConfigureAmplify';
 
 const geistSans = localFont({
@@ -124,7 +122,7 @@ export const metadata: Metadata = {
     // Canonical URL
     canonical: "https://meritranker.com/",
   },
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -133,26 +131,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-        <html lang="en" suppressHydrationWarning>
-          <head>
+    <html lang="en" suppressHydrationWarning>
+      <head>
         {/* JSON-LD Schema */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
         {/* Any other critical head elements */}
       </head>
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-            <ConfigureAmplifyClientSide />
-            <TanStackQueryProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <Navbar />
-              {children}
-               <FooterWrapper />
-              <FloatingActionButton />
-              <Toaster />
-            </ThemeProvider>    
-    </TanStackQueryProvider>
-          </body>
-        </html>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ConfigureAmplifyClientSide />
+        <TanStackQueryProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Navbar />
+            {children}
+            <FooterWrapper />
+            <Toaster />
+          </ThemeProvider>
+        </TanStackQueryProvider>
+      </body>
+    </html>
   );
 }

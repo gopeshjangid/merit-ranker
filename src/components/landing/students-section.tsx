@@ -44,7 +44,7 @@ export function StudentsSection() {
             <ul className="space-y-3">
               {bullets.map((b) => (
                 <li key={b} className="flex items-start gap-3 text-slate-200">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 text-cyan-400" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 text-brand" />
                   <span className="leading-relaxed">{b}</span>
                 </li>
               ))}
